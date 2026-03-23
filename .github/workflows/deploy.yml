@@ -1,14 +1,9 @@
-name: Deploy to EC2
+name: Deploy
 
 on:
 push:
 branches:
 - main
-
-env:
-DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-API_IMAGE: oneportalv2-api
-UI_IMAGE: oneportalv2-ui
 
 jobs:
 deploy:
@@ -24,17 +19,17 @@ steps:
       username: ${{ secrets.DOCKER_HUB_USERNAME }}
       password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-  - name: Build & Push API
+  - name: Build API
     run: |
-      docker build -t $DOCKER_HUB_USERNAME/$API_IMAGE:latest ./API
-      docker push $DOCKER_HUB_USERNAME/$API_IMAGE:latest
+      docker build -t subashpixous/oneportalv2-api:latest ./API
+      docker push subashpixous/oneportalv2-api:latest
 
-  - name: Build & Push UI
+  - name: Build UI
     run: |
-      docker build -t $DOCKER_HUB_USERNAME/$UI_IMAGE:latest ./UI
-      docker push $DOCKER_HUB_USERNAME/$UI_IMAGE:latest
+      docker build -t subashpixous/oneportalv2-ui:latest ./UI
+      docker push subashpixous/oneportalv2-ui:latest
 
-  - name: Deploy to EC2
+  - name: Deploy EC2
     uses: appleboy/ssh-action@v1.0.3
     with:
       host: ${{ secrets.EC2_HOST }}
@@ -42,7 +37,7 @@ steps:
       key: ${{ secrets.EC2_SSH_KEY }}
       script: |
         cd /home/ubuntu/app
-        docker pull $DOCKER_HUB_USERNAME/$API_IMAGE:latest
-        docker pull $DOCKER_HUB_USERNAME/$UI_IMAGE:latest
+        docker pull subashpixous/oneportalv2-api:latest
+        docker pull subashpixous/oneportalv2-ui:latest
         docker-compose down
         docker-compose up -d

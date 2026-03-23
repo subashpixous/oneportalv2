@@ -1,0 +1,114 @@
+<!-- <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+    <div class="p-formgrid grid ">
+        <div class="col-12">
+            <h5 class="divhighligher">உறுப்பினர் வங்கி கணக்கு விவரங்கள் / Member bank Account Details</h5>
+            <div class="col-12 row ">
+
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.accountHolderName)">
+                    <span>கணக்கு வைத்திருப்பவரின் பெயர் / Account Holder Name:
+                    </span>{{this.personalDetail?.accountHolderName }}
+                </div>
+               <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.accountNumber)">
+                    <span>கணக்கு எண் / Account Number:
+                    </span>{{this.personalDetail?.accountNumber}}
+                </div>
+                                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.ifsc)">
+                    <span>IFSC குறியீடு / IFSC Code :
+                    </span>{{this.personalDetail?.ifsc}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.branchName)">
+                    <span>கிளையின் பெயர் / Branch Name:
+                    </span>{{this.personalDetail?.branchName}}
+                </div>
+                                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.bankName)">
+                    <span>வங்கியின் பெயர் / Name of the Bank:
+                    </span>{{this.personalDetail?.bankName }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="bank-section">
+  <!-- <div class="bank-header">
+    வங்கி விவரங்கள் / Bank details
+  </div> -->
+  <div class="bank-header">
+  {{ bankHeader }}
+</div>
+
+  <div class="bank-note">
+    <div class="note-icon-section">
+      <i class="pi pi-file-edit"></i>
+      <span class="note-title">NOTE :</span>
+    </div>
+
+    <div class="note-content-grid">
+      <div class="note-question">
+        உங்கள் வங்கி கணக்கு ஆதாருடன் இணைக்கப்பட்டுள்ளதா? /<br>
+        Is your bank account linked with Aadhaar?
+      </div>
+      <div class="note-instruction">
+        • திட்ட நலன்களை பெற, உங்கள் வங்கி கணக்கு ஆதாருடன் இணைக்கப்பட்டிருக்க வேண்டும். இல்லையெனில், கீழ்கண்ட படிகளை பின்பற்றவும். / <br>
+        To receive scheme benefits, your bank account must be linked with Aadhaar. If not, follow these steps.
+      </div>
+    </div>
+  </div>
+
+  <div class="bank-grid">
+    <div class="bank-field">
+      <div class="bank-label">IFSC எண் / IFSC Code</div>
+      <div class="bank-colon">:</div>
+           <!-- <div class="bank-value">{{ personalDetail?.ifsc }}</div> -->
+            <div class="bank-value"
+[ngClass]="{'changed-field': isChanged('ifsc')}">
+{{ getValue('ifsc') }}
+</div>
+    </div>
+
+    <div class="bank-field">
+      <div class="bank-label">வங்கியின் பெயர் / Name of the Bank</div>
+      <div class="bank-colon">:</div>
+      <!-- <div class="bank-value">{{ personalDetail?.bankName }}</div> -->
+              <div class="bank-value"
+[ngClass]="{'changed-field': isChanged('bankName')}">
+{{ getValue('bankName') }}
+</div>
+    </div>
+
+    <div class="bank-field">
+      <div class="bank-label">கிளையின் பெயர் / Branch Name</div>
+      <div class="bank-colon">:</div>
+      <!-- <div class="bank-value">{{ personalDetail?.branchName }}</div> -->
+        <div class="bank-value"
+[ngClass]="{'changed-field': isChanged('branchName')}">
+{{ getValue('branchName') }}
+</div>
+    </div>
+
+    <div class="bank-field">
+      <div class="bank-label">கணக்கு எண் / Account Number</div>
+      <div class="bank-colon">:</div>
+      <!-- <div class="bank-value">{{ personalDetail?.accountNumber }}</div> -->
+       <div class="bank-value"
+[ngClass]="{'changed-field': isChanged('accountNumber')}">
+{{ getValue('accountNumber') }}
+</div>
+    </div>
+
+    <div class="bank-field">
+      <div class="bank-label">கணக்கு வைத்திருப்பவர் / Account Holder</div>
+      <div class="bank-colon">:</div>
+      <!-- <div class="bank-value">{{ personalDetail?.accountHolderName }}</div> -->
+       <div class="bank-value"
+[ngClass]="{'changed-field': isChanged('accountHolderName')}">
+{{ getValue('accountHolderName') }}
+</div>
+    </div>
+  </div>
+</div>

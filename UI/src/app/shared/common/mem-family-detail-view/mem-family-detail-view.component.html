@@ -1,0 +1,382 @@
+<!-- <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+    <div class="p-formgrid grid ">
+        <div class="col-12">
+
+            <h5 class="divhighligher">குடும்ப உறுப்பினர் விவரங்கள் / Family Member Details</h5>
+            <div class="col-12" style="overflow-x: auto;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>வ.எண் / S.No
+                            </th>
+                            <th>பெயர் / Name
+                            </th>
+                            <th>உறவு / Relationship
+                            </th>
+                            <th>பாலினம் / Gender
+                            </th>
+                            <th>DOB
+                            </th>
+                            <th>வயது / Age
+                            </th>
+                            <th>தொலைபேசி எண் / Phone number
+                            </th>
+                            <th>ஆதார் எண் / Aadhar Number
+                            </th>
+                            <th>கல்வி / Education
+                            </th>
+                            <th>கல்வி விவரங்கள் / Education Details
+                            </th>
+                            <th>தொழில் / Occupation
+                            </th>
+                            <th>மாற்றுத் திறனாளி / Differently Abled
+                            </th>
+                            <th> அனைத்து ஆவணங்களும் / All Documents
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itemrow of familyMemberList; let i=index;let l=last">
+                            <td>{{ i+1 }} </td>
+                            <td>{{ itemrow.name }} </td>
+                            <td>{{ itemrow.relationShip }}
+                            </td>
+                            <td>{{ itemrow.gender }}
+                            </td>
+                            <td>{{ dc(itemrow.date_of_birth) }}
+                            </td>
+                            <td>{{ itemrow.age }}
+                            </td>
+                            <td>{{ itemrow.phone_number }}
+                            </td>
+                            <td>{{ itemrow.aadharNumber }}
+                            </td>
+                            <td>{{ itemrow.education }}
+                            </td>
+                            <td>
+                                <div *ngIf="itemrow.education == 'COLLEGE'">
+                                    <p>Course : <span class="font-bold">{{itemrow.college.course}}</span></p>
+                                    <p>Degree Name : <span class="font-bold">{{itemrow.college.degreName}}</span></p>
+                                    <p>Education Status / படிப்பின் நிலை : <span
+                                            class="font-bold">{{itemrow.college.educationalStatus}}</span></p>
+                                    <p *ngIf="itemrow.college.educationalStatus == 'Completed'">Completed Year
+                                        : <span class="font-bold">{{itemrow.college.completedYear}}</span>
+                                    </p>
+                                    <p *ngIf="itemrow.college.educationalStatus == 'Discontinued'">Discontinued Year
+                                        : <span class="font-bold">{{itemrow.college.discontinuedYear}}</span>
+                                    </p>
+                                    <p *ngIf="itemrow.college.educationalStatus == 'Studying'">Studying Year
+                                        : <span class="font-bold">{{itemrow.college.educationalYear}}</span>
+                                    </p>
+                                    <p>Name & Address of
+                                        College/Institution: <span
+                                            class="font-bold">{{itemrow.college.nameandAddressofCollege}}</span></p>
+                                </div>
+                                <div *ngIf="itemrow.education == 'SCHOOL'">
+                                    <p>Standard : <span class="font-bold">{{itemrow.school.standard}}</span></p>
+                                    <p>Education Status / படிப்பின் நிலை : <span
+                                            class="font-bold">{{itemrow.school.educationalStatus}}</span></p>
+                                    <p *ngIf="itemrow.college.educationalStatus == 'Completed'">Completed Year
+                                        : <span class="font-bold">{{itemrow.school.completedYear}}</span>
+                                    </p>
+                                    <p *ngIf="itemrow.college.educationalStatus == 'Discontinued'">Discontinued Year
+                                        : <span class="font-bold">{{itemrow.school.discontinuedYear}}</span>
+                                    </p>
+                                    <p *ngIf="itemrow.college.educationalStatus == 'Studying'">EMIS No
+                                        : <span class="font-bold">{{itemrow.school.eMISNo}}</span>
+                                    </p>
+                                    <p>Name & Address of the school: <span
+                                            class="font-bold">{{itemrow.school.nameandAddressofSchool}}</span>
+                                    </p>
+                                </div>
+                                <div *ngIf="itemrow.education == 'NA'">
+                                    <p>NIL</p>
+                                </div>
+                            </td>
+                            <td>{{ itemrow.occupation }}
+                            </td>
+                            <td>{{ itemrow.differentlyAbled }}
+                            </td>
+                            <td>
+                                <div *ngIf="itemrow.mandatoryDocuments">
+                                    <div *ngFor="let item of getCategories(itemrow.mandatoryDocuments)">
+                                        <p style="color: blue;text-decoration: underline;cursor: pointer;"
+                                            (click)="downloadFile(item.id ,item.originalFileName)">
+                                            {{item.documentCategory}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div *ngIf="itemrow.nonMandatoryDocuments">
+                                    <div *ngFor="let item of getCategories(itemrow.nonMandatoryDocuments)">
+                                        <p style="color: blue;text-decoration: underline;cursor: pointer;"
+                                            (click)="downloadFile(item.id ,item.originalFileName)">
+                                            {{item.documentCategory}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- 
+<div class="card p-fluid figma-card-container"> -->
+    <!-- <div class="p-formgrid grid">
+        <div class="col-12">
+            <h5 class="figma-header">குடும்ப விவரங்கள் / <span class="highlight-yellow">Family</span> Member Details</h5>
+            
+            <div class="col-12" style="overflow-x: auto;">
+                <table class="figma-table">
+                    <thead>
+                        <tr>
+                            <th>வ.எண் / S.No</th>
+                            <th>பெயர் / Name</th>
+                            <th>உறவு / Relationship</th>
+                            <th>பாலினம் / Gender</th>
+                            <th>DOB</th>
+                            <th>வயது / Age</th>
+                            <th>தொலைபேசி எண் / Phone number</th>
+                            <th>ஆதார் எண் / Aadhar Number</th>
+                            <th>கல்வி / Education</th>
+                            <th>கல்வி விவரங்கள் / Education Details</th>
+                            <th>தொழில் / Occupation</th>
+                            <th>மாற்றுத் திறனாளி / Differently Abled</th>
+                            <th>அனைத்து ஆவணங்களும் / All Documents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itemrow of familyMemberList; let i=index; let l=last">
+                            <td><div class="data-pill">{{ i+1 }}</div></td>
+                            <td><div class="data-pill">{{ itemrow.name }}</div></td>
+                            <td><div class="data-pill">{{ itemrow.relationShip }}</div></td>
+                            <td><div class="data-pill">{{ itemrow.gender }}</div></td>
+                            <td><div class="data-pill">{{ dc(itemrow.date_of_birth) }}</div></td>
+                            <td><div class="data-pill">{{ itemrow.age }}</div></td>
+                            <td><div class="data-pill">{{ itemrow.phone_number }}</div></td>
+                            <td><div class="data-pill">{{ itemrow.aadharNumber }}</div></td>
+                            <td><div class="data-pill">{{ itemrow.education }}</div></td>
+                            
+                            <td>
+                                <button type="button" class="more-btn" (click)="eduPanel.toggle($event)">
+                                    More <i class="pi pi-ellipsis-v" style="font-size: 11px; margin-left: 5px;"></i>
+                                </button>
+
+                                <p-overlayPanel #eduPanel [style]="{width: '350px'}" [showCloseIcon]="true">
+                                    <div class="details-pill" style="background: none; border: none; padding: 0;">
+                                        <div *ngIf="itemrow.education == 'COLLEGE'">
+                                            <p>Course : <span class="font-bold">{{itemrow.college?.course}}</span></p>
+                                            <p>Degree Name : <span class="font-bold">{{itemrow.college?.degreName}}</span></p>
+                                            <p>Education Status / படிப்பின் நிலை : <span class="font-bold">{{itemrow.college?.educationalStatus}}</span></p>
+                                            <p *ngIf="itemrow.college?.educationalStatus == 'Completed'">Completed Year : <span class="font-bold">{{itemrow.college?.completedYear}}</span></p>
+                                            <p *ngIf="itemrow.college?.educationalStatus == 'Discontinued'">Discontinued Year : <span class="font-bold">{{itemrow.college?.discontinuedYear}}</span></p>
+                                            <p *ngIf="itemrow.college?.educationalStatus == 'Studying'">Studying Year : <span class="font-bold">{{itemrow.college?.educationalYear}}</span></p>
+                                            <p>Name & Address of College: <span class="font-bold">{{itemrow.college?.nameandAddressofCollege}}</span></p>
+                                        </div>
+                                        <div *ngIf="itemrow.education == 'SCHOOL'">
+                                            <p>Standard : <span class="font-bold">{{itemrow.school?.standard}}</span></p>
+                                            <p>Education Status / படிப்பின் நிலை : <span class="font-bold">{{itemrow.school?.educationalStatus}}</span></p>
+                                            <p *ngIf="itemrow.school?.educationalStatus == 'Completed'">Completed Year : <span class="font-bold">{{itemrow.school?.completedYear}}</span></p>
+                                            <p *ngIf="itemrow.school?.educationalStatus == 'Discontinued'">Discontinued Year : <span class="font-bold">{{itemrow.school?.discontinuedYear}}</span></p>
+                                            <p *ngIf="itemrow.school?.educationalStatus == 'Studying'">EMIS No : <span class="font-bold">{{itemrow.school?.eMISNo}}</span></p>
+                                            <p>Name & Address of the school: <span class="font-bold">{{itemrow.school?.nameandAddressofSchool}}</span></p>
+                                        </div>
+                                        <div *ngIf="itemrow.education == 'NA'">
+                                            <p>NIL</p>
+                                        </div>
+                                    </div>
+                                </p-overlayPanel>
+                            </td>
+                            
+                            <td><div class="data-pill">{{ itemrow.occupation }}</div></td>
+                            <td><div class="data-pill">{{ itemrow.differentlyAbled }}</div></td>
+                            
+                            <td>
+                                <button type="button" class="more-btn" (click)="docPanel.toggle($event)">
+                                    More <i class="pi pi-ellipsis-v" style="font-size: 11px; margin-left: 5px;"></i>
+                                </button>
+
+                                <p-overlayPanel #docPanel [style]="{width: '250px'}" [showCloseIcon]="true">
+                                    <div class="details-pill" style="background: none; border: none; padding: 0;">
+                                        <div *ngIf="itemrow.mandatoryDocuments">
+                                            <div *ngFor="let item of getCategories(itemrow.mandatoryDocuments)">
+                                                <p class="download-link" (click)="downloadFile(item.id ,item.originalFileName)">
+                                                    {{item.documentCategory}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="itemrow.nonMandatoryDocuments">
+                                            <div *ngFor="let item of getCategories(itemrow.nonMandatoryDocuments)">
+                                                <p class="download-link" (click)="downloadFile(item.id ,item.originalFileName)">
+                                                    {{item.documentCategory}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p-overlayPanel>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> -->
+    <!-- </div> -->
+            <div class="family-card">
+
+  <div class="family-header">
+    குடும்ப விவரங்கள் / Family Member Details
+  </div>
+
+  <table class="family-table">
+
+    <thead>
+      <tr>
+        <th>Name /<br>பெயர்</th>
+        <th>Aadhaar Number /<br>ஆதார் எண்</th>
+        <th>Mobile Number /<br>கைப்பேசி எண் எண்</th>
+        <th>Relationship /<br>உறவு</th>
+        <th>Gender /<br>பாலினம்</th>
+        <th>Age /<br>வயது</th>
+        <th>School / College<br>பள்ளி / கல்லூரி</th>
+        <th>Details /<br>விவரங்கள்</th>
+        <th>Differently Abled?<br>இவர் மாற்றுத்திறனாளி?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let member of familyMemberList">
+
+        <td><span class="pill">{{member.name}}</span></td>
+
+        <td><span class="pill">{{member.aadharNumber || '-'}}</span></td>
+
+        <td><span class="pill">{{member.phone_number || '-'}}</span></td>
+
+        <td><span class="pill">{{member.relationShip || '-'}}</span></td>
+
+        <td><span class="pill">{{member.gender || '-'}}</span></td>
+
+        <td><span class="pill">{{member.age}}</span></td>
+
+        <td>
+          <span class="pill">
+            {{member.education}}
+          </span>
+        </td>
+
+        <td>
+          <button class="more-btn" (click)="openMore(member,$event)">
+            More :
+          </button>
+   
+        </td>
+
+        <td>
+          <span class="pill">{{member.differentlyAbled || 'No'}}</span>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+
+   <div class="education-popover"
+  *ngIf="showMorePopup"
+  [style.top.px]="popupPosition.top" [style.left.px]="popupPosition.left">
+  <div class="popover-title">
+    Education Details
+    <span style="padding-left: 140px" (click)="closeMore()">
+      <i class="bi bi-x"></i>
+    </span>
+  </div>
+
+  <!-- SCHOOL DETAILS -->
+  <ng-container *ngIf="selectedMember?.school?.educationalStatus.toUpperCase() === 'SCHOOL'">
+
+    <div class="popover-field">
+      <label>EMIS Number</label>
+      <div class="value">
+        {{ selectedMember?.school?.emisNo || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>Education Status</label>
+      <div class="value">
+        {{ selectedMember?.school?.educationalStatus || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>Standard</label>
+      <div class="value">
+        {{ selectedMember?.school?.standard || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>School Name</label>
+      <div class="value">
+        {{ selectedMember?.school?.school_Name || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>School Address</label>
+      <div class="value">
+        {{ selectedMember?.school?.nameandAddressofSchool || "-" }}
+      </div>
+    </div>
+
+  </ng-container>
+
+
+  <!-- COLLEGE DETAILS -->
+  <ng-container *ngIf="selectedMember?.college?.educationalStatus.toUpperCase() === 'COLLEGE'">
+
+    <div class="popover-field">
+      <label>Course</label>
+      <div class="value">
+        {{ selectedMember?.college?.course || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>Degree</label>
+      <div class="value">
+        {{ selectedMember?.college?.degreName || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>Education Status</label>
+      <div class="value">
+        {{ selectedMember?.college?.educationalStatus || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>College Name</label>
+      <div class="value">
+        {{ selectedMember?.college?.college_Name || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>College Address</label>
+      <div class="value">
+        {{ selectedMember?.college?.college_Address || "-" }}
+      </div>
+    </div>
+
+  </ng-container>
+
+</div>

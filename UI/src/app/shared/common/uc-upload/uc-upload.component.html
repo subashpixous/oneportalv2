@@ -1,0 +1,90 @@
+<div class="mb-3 mt-3">
+
+    <div class="row" *ngIf="privilegemodel?.ucUpload &&  canshowform3">
+        <form [formGroup]=" ucForm" (ngSubmit)="submit()" class="col-12">
+            <div class=" p-fluid">
+                <div class="flex grid formgrid">
+                    <div class="field  col-12  md:col-6  lg:col-6">
+                        <label htmlFor="nameAndAddress">Name and Address</label>
+                        <input pInputText formControlName="nameAndAddress" type="text" />
+                        <app-error-msg [control]="ucForm.get('nameAndAddress')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-6  lg:col-6">
+                        <label htmlFor="nameOfTrade">Name of the Trade</label>
+                        <input pInputText formControlName="nameOfTrade" type="text" />
+                        <app-error-msg [control]="ucForm.get('nameOfTrade')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="nodalNumber">Nodal Number</label>
+                        <input pInputText formControlName="nodalNumber" type="text" />
+                        <app-error-msg [control]="ucForm.get('nodalNumber')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="subsidy">Subsidy (Rs)</label>
+                        <input pInputText formControlName="subsidy" type="text" />
+                        <app-error-msg [control]="ucForm.get('subsidy')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="promotorContribution">Promotor Contribution (Rs)</label>
+                        <input pInputText formControlName="promotorContribution" type="text" />
+                        <app-error-msg [control]="ucForm.get('promotorContribution')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="bankLoan">Bank Loan (Rs)</label>
+                        <input pInputText formControlName="bankLoan" type="text" />
+                        <app-error-msg [control]="ucForm.get('bankLoan')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="loanAccountNumber">Loan Account Number</label>
+                        <input pInputText formControlName="loanAccountNumber" type="text" />
+                        <app-error-msg [control]="ucForm.get('loanAccountNumber')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="totalAmountReleased">Total Amount Released (Rs)</label>
+                        <input pInputText formControlName="totalAmountReleased" type="text" />
+                        <app-error-msg [control]="ucForm.get('totalAmountReleased')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="dateOfAssetCreated">Date of Asset Created</label>
+                        <p-calendar [showIcon]="true" [maxDate]="defaultDate" formControlName="dateOfAssetCreated"
+                            dateFormat="dd-mm-yy" inputId="icon"></p-calendar>
+                        <app-error-msg [control]="ucForm.get('dateOfAssetCreated')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="dateOfAssetVerified">Date of Asset Verified</label>
+                        <p-calendar [showIcon]="true" [minDate]="ucForm.get('dateOfAssetCreated')?.value"
+                            dateFormat="dd-mm-yy" [maxDate]="defaultDate " formControlName="dateOfAssetVerified"
+                            inputId="icon"></p-calendar>
+                        <app-error-msg [control]="ucForm.get('dateOfAssetVerified')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="dateOfLoanSanction">Date of Loan Sanction</label>
+                        <p-calendar [showIcon]="true" [minDate]="ucForm.get('dateOfAssetVerified')?.value"
+                            dateFormat="dd-mm-yy" [maxDate]="defaultDate" formControlName="dateOfLoanSanction"
+                            inputId="icon"></p-calendar>
+                        <app-error-msg [control]="ucForm.get('dateOfLoanSanction')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="dateOfDisbursement">Date of Disbursement</label>
+                        <p-calendar [showIcon]="true" [minDate]="ucForm.get('dateOfLoanSanction')?.value"
+                            dateFormat="dd-mm-yy" [maxDate]="defaultDate" formControlName="dateOfDisbursement"
+                            inputId="icon"></p-calendar>
+                        <app-error-msg [control]="ucForm.get('dateOfDisbursement')"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-3 mt-1" style="justify-content: end;">
+                <p-button label="Submit" type="submit" />
+                <p-button label="Reset" (onClick)="resetUc()" class="p-button-secondary" />
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <app-datatable [records]="ucs" [defaultSortField]="defaultSortField" [defaultSortOrder]="defaultSortOrder"
+            [cols]="cols" [fileName]="'UC'" [rows]="10" [total]="ucs ? ucs.length : 0" [actions]="actions"
+            [searchableColumns]="searchableColumns" [hasActiveInactive]="false" (invokeAction)="actioInvoked($event)"
+            [canShowAction]="privilegemodel?.ucUpload?? false&&  canshowform3">
+        </app-datatable>
+    </div>
+</div>

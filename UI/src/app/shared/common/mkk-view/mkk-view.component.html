@@ -1,0 +1,532 @@
+<div class="mkk-figma-wrapper">
+
+  <div class="f-card">
+    <div class="f-header">திட்டத்தின் விவரங்கள் / Scheme Details</div>
+    
+<div class="scheme-top-bar">
+      <div><span class="t-lbl">ID : </span><span class="t-val">{{ schemeDetails?.memberId  }}</span></div>
+      <div><span class="t-lbl">திட்டம் / Scheme : </span><span class="t-val">{{ schemeDetails?.schemeGroupName }}</span></div>
+      <div class="text-right"><span class="t-lbl">துணைத் திட்டம் / Sub-Scheme : </span><span class="t-val">{{ schemeDetails?.scheme }}</span></div>
+    </div>
+
+    <div class="f-body">
+      <div class="grid-layout-3">
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(schemeDetails?.applicantName)">
+          <div class="lbl">விண்ணப்பதாரர் பெயர்<br>/ Applicant Name</div><div class="colon">:</div>
+          <div class="val-dark">{{ schemeDetails?.memberName }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(schemeDetails?.beneficiaryName)">
+          <div class="lbl">BeneficiaryName/<br>பயனாளர் பெயர்</div><div class="colon">:</div>
+          <div class="val-dark">{{ schemeDetails?.beneficiaryName }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(schemeDetails?.relationship)">
+          <div class="lbl">Relationship/<br>உறவுமுறை</div><div class="colon">:</div>
+          <div class="val-dark">{{ schemeDetails?.relationship }}</div>
+        </div>
+      </div>
+      
+      <div class="grid-layout-3 mt-compact">
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(schemeDetails?.amount)">
+          <div class="lbl">தொகை /<br>Amount</div><div class="colon">:</div>
+          <div class="val-dark">{{ schemeDetails?.amount }}</div>
+        </div>
+        <div class="kv-pair span-2">
+          <div class="lbl">Total amount in<br>words</div><div class="colon">:</div>
+          <div class="val-dark">{{ schemeDetails?.amountInWords | titlecase }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="f-card">
+  <div class="f-header">ஆவண விவரங்கள் / Documents details</div>
+  <div class="f-body">
+    
+    <div class="doc-grid-container" *ngIf="documentsList && documentsList.length > 0; else noDocs">
+      <div class="doc-item" *ngFor="let doc of documentsList">
+        
+        <div class="doc-label mb-2">
+          {{ doc?.value?.documentCategoryName || doc?.documentCategoryName || doc?.category }} 
+          <span *ngIf="doc?.value?.isRequired || doc?.isRequired" class="req">*</span>
+        </div>
+        
+        <div class="doc-box-item">
+          <ng-container *ngIf="(doc?.value?.originalFileName || doc?.originalFileName); else noFile">
+            
+            <ng-container *ngIf="getDocumentIcon(doc?.value?.originalFileName || doc?.originalFileName) === 'pi pi-image'; else showPdfBox">
+              <div class="doc-image-preview">
+                <img [src]="getDocumentImageUrl(doc)" onerror="this.style.display='none'">
+              </div>
+            </ng-container>
+            
+            <ng-template #showPdfBox>
+              <div class="pdf-uploaded-state">
+                <i class="pi pi-check"></i>
+                <span>Uploaded</span>
+              </div>
+            </ng-template>
+            
+            <div class="doc-action-bar">
+              <div class="flex align-items-center gap-1">
+                <i class="pi" [ngClass]="(doc?.value?.isVerified || doc?.isVerified) ? 'pi-check-circle text-green' : 'pi-info-circle text-gray-500'" style="font-size: 11px;"></i>
+                <span class="status-text-small" [ngClass]="(doc?.value?.isVerified || doc?.isVerified) ? 'text-green' : 'text-gray-500'">
+                  {{ (doc?.value?.isVerified || doc?.isVerified) ? 'Verified' : 'Pending' }}
+                </span>
+              </div>
+              <i class="pi pi-download cursor-pointer text-blue-500" style="font-size: 13px;" 
+                 (click)="downloadFile(doc?.value?.id || doc?.id, doc?.value?.originalFileName || doc?.originalFileName)" 
+                 title="Download"></i>
+            </div>
+
+          </ng-container>
+          <ng-template #noFile><span class="no-data-small">Not Uploaded</span></ng-template>
+        </div>
+
+      </div>
+    </div>
+    <ng-template #noDocs><div class="no-data">No documents uploaded yet.</div></ng-template>
+  </div>
+</div>
+
+  <div class="f-card relative-card">
+    <div class="profile-avatar">
+      <img [src]="getProfileImageUrl()" alt="Profile" onerror="this.src='https://www.w3schools.com/howto/img_avatar.png'">
+    </div>
+    
+    <div class="f-header">உங்கள் விவரங்கள் / Your Details</div>
+    
+    <div class="f-body">
+      <div class="grid-layout-2 mb-compact align-center">
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.aadharNumber)">
+          <div class="lbl bold-lbl">ஆதார் எண் / Aadhaar Number</div><div class="colon">:</div>
+          <div class="val-blue flex align-center gap-1">{{ personalDetail?.aadharNumber }} <i class="pi pi-check-circle text-green"></i></div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.phoneNumber)">
+          <div class="lbl bold-lbl">கைப்பேசி எண் / Mobile Number</div><div class="colon">:</div>
+          <div class="val-blue flex align-center gap-1">{{ personalDetail?.phoneNumber }} <i class="pi pi-check-circle text-green"></i></div>
+        </div>
+      </div>
+
+      <div class="grid-layout-3">
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.firstName)">
+          <div class="lbl">முதல் பெயர் / First Name</div><div class="colon">:</div><div class="val-blue">{{ personalDetail?.firstName }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.lastName)">
+          <div class="lbl">கடைசி பெயர் / Last Name</div><div class="colon">:</div><div class="val-blue">{{ personalDetail?.lastName }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.fathersName)">
+          <div class="lbl">தந்தை / பாதுகாவலர் /<br>Father / Guardian</div><div class="colon">:</div><div class="val-blue">{{ personalDetail?.fathersName }}</div>
+        </div>
+        
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.gender)">
+          <div class="lbl">பாலினம் / Gender</div><div class="colon">:</div><div class="val-blue">{{ personalDetail?.gender }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.dob)">
+          <div class="lbl">பிறந்த தேதி / Date Of Birth</div><div class="colon">:</div><div class="val-blue">{{ personalDetail?.dob }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.maritalStatus)">
+          <div class="lbl">திருமண நிலை / Marital Status</div><div class="colon">:</div><div class="val-blue">{{ personalDetail?.maritalStatus }}</div>
+        </div>
+
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.community)">
+          <div class="lbl">சமூகம் / Community</div><div class="colon">:</div><div class="val-blue">{{ personalDetail?.community }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.caste)">
+          <div class="lbl">சாதி / Caste</div><div class="colon">:</div><div class="val-blue">{{ personalDetail?.caste }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(personalDetail?.education)">
+          <div class="lbl">கல்வி / Education</div><div class="colon">:</div><div class="val-blue">{{ personalDetail?.education }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-layout-2 align-stretch">
+    <div class="f-card m-0">
+      <div class="f-header">உங்களுடைய நிரந்தர முகவரி / Permanent Address</div>
+      <div class="f-body">
+        <div class="blue-tick-box">
+          <i class="pi pi-check-square"></i> இது உங்களுடைய நிரந்தர முகவரியா? / Is this your permanent address?
+        </div>
+        <div class="kv-pair mt-compact" *ngIf="CheckNullorEmpty(permanentAddress?.address) || CheckNullorEmpty(permanentAddress?.doorNo)">
+          <div class="lbl long-lbl">முகவரியை உள்ளிடவும் /<br>Enter your address</div><div class="colon">:</div>
+          <div class="val-blue">
+            {{ permanentAddress?.doorNo ? permanentAddress?.doorNo + ', ' : '' }}
+            {{ permanentAddress?.streetName ? permanentAddress?.streetName + ', ' : '' }}
+            {{ permanentAddress?.villageorCity || '-' }}
+          </div>
+        </div>
+        <div class="kv-pair mt-compact" *ngIf="CheckNullorEmpty(permanentAddress?.district)">
+          <div class="lbl long-lbl">மாவட்டம் / District</div><div class="colon">:</div>
+          <div class="val-blue">{{ permanentAddress?.district }}</div>
+        </div>
+        <div class="kv-pair mt-compact" *ngIf="CheckNullorEmpty(permanentAddress?.pincode)">
+          <div class="lbl long-lbl">அஞ்சல் குறியீடு / Pincode</div><div class="colon">:</div>
+          <div class="val-blue">{{ permanentAddress?.pincode }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-card m-0">
+      <div class="f-header">உங்களுடைய தற்போதைய முகவரி / Your Current Address</div>
+      <div class="f-body">
+        <div class="blue-tick-box">
+          <i class="pi pi-check-square"></i> இது உங்களுடைய தற்போதைய முகவரியா? / Is this your current address?
+        </div>
+        <div class="kv-pair mt-compact" *ngIf="CheckNullorEmpty(temporaryAddress?.address) || CheckNullorEmpty(temporaryAddress?.doorNo)">
+          <div class="lbl long-lbl">முகவரியை உள்ளிடவும் /<br>Enter your address</div><div class="colon">:</div>
+          <div class="val-blue">
+            {{ temporaryAddress?.doorNo ? temporaryAddress?.doorNo + ', ' : '' }}
+            {{ temporaryAddress?.streetName ? temporaryAddress?.streetName + ', ' : '' }}
+            {{ temporaryAddress?.villageorCity || '-' }}
+          </div>
+        </div>
+        <div class="kv-pair mt-compact" *ngIf="CheckNullorEmpty(temporaryAddress?.district)">
+          <div class="lbl long-lbl">மாவட்டம் / District</div><div class="colon">:</div>
+          <div class="val-blue">{{ temporaryAddress?.district }}</div>
+        </div>
+        <div class="kv-pair mt-compact" *ngIf="CheckNullorEmpty(temporaryAddress?.pincode)">
+          <div class="lbl long-lbl">அஞ்சல் குறியீடு / Pincode</div><div class="colon">:</div>
+          <div class="val-blue">{{ temporaryAddress?.pincode }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="f-card">
+    <div class="f-header">வங்கி விவரங்கள் / Bank details</div>
+    <div class="f-body">
+      <div class="blue-note-box">
+        <div class="n-badge"><i class="pi pi-file"></i> NOTE :</div>
+        <div class="n-content">
+          <div class="n-title">உங்கள் வங்கி கணக்கு ஆதாருடன் இணைக்கப்பட்டுள்ளதா? / Is your bank account linked with Aadhaar?</div>
+          <div class="n-desc">திட்ட நலன்களை பெற, உங்கள் வங்கி கணக்கு ஆதாருடன் இணைக்கப்பட்டிருக்க வேண்டும். இல்லையெனில், கீழ்க்கண்ட படிகளை பின்பற்றவும்.</div>
+        </div>
+      </div>
+
+      <div class="grid-layout-3 mt-compact">
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(bankDetail?.ifsc)">
+          <div class="lbl">IFSC எண் / IFSC</div><div class="colon">:</div><div class="val-blue">{{ bankDetail?.ifsc }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(bankDetail?.bankName)">
+          <div class="lbl">வங்கியின் பெயர் / Bank Name</div><div class="colon">:</div><div class="val-blue">{{ bankDetail?.bankName }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(bankDetail?.branchName)">
+          <div class="lbl">கிளையின் பெயர் / Branch</div><div class="colon">:</div><div class="val-blue">{{ bankDetail?.branchName }}</div>
+        </div>
+        <div class="kv-pair" *ngIf="CheckNullorEmpty(bankDetail?.accountNumber)">
+          <div class="lbl">கணக்கு எண்/ Acc No</div><div class="colon">:</div><div class="val-blue">{{ bankDetail?.accountNumber }}</div>
+        </div>
+        <div class="kv-pair span-2" *ngIf="CheckNullorEmpty(bankDetail?.accountHolderName)">
+          <div class="lbl">கணக்கு வைத்திருப்பவர் / Holder</div><div class="colon">:</div><div class="val-blue">{{ bankDetail?.accountHolderName }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="f-card">
+    <div class="f-header">குடும்ப விவரங்கள் / Family Member Details</div>
+    <div class="f-body p-0">
+      <div class="table-scroll">
+        <table class="figma-tbl">
+          <thead>
+            <tr>
+              <th>Name / பெயர்</th>
+              <th>Aadhaar Number / ஆதார் எண்</th>
+              <th>Mobile Number / கைப்பேசி எண்</th>
+              <th>Relationship / உறவு</th>
+              <th>Gender / பாலினம்</th>
+              <th>Age / வயது</th>
+              <th>School/ College</th>
+              <th>Details / விவரங்கள்</th>
+              <th>Differently abled?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let fam of familyMemberList">
+              <td class="text-dark">{{ fam.name || '-' }}</td>
+              <td>{{ fam.aadharNumber || fam.aadharNumber || '-' }}</td>
+              <td>{{ fam.phone_number || '-' }}</td>
+              <td>{{ fam.relationShip || fam.relation || '-' }}</td>
+              <td>{{ fam.gender || fam.sex || '-' }}</td>
+              <td>{{ fam.age || '-' }}</td>
+              <td>{{ fam.education || '-' }}</td>
+<td>
+      <button type="button" class="more-btn" (click)="openMore(fam, $event)">
+        More <i class="pi pi-ellipsis-v"></i>
+      </button>
+    </td>
+              <td>{{ fam.differentlyAbled || fam.disability || 'No' }}</td>
+            </tr>
+            <tr *ngIf="!familyMemberList || familyMemberList.length === 0">
+              <td colspan="9" class="no-data">No family members found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<div class="f-card">
+    <div class="f-header">நிறுவன விவரங்கள் / Organization Details</div>
+    <div class="f-body">
+      
+      <div class="grid-layout-3">
+        <div class="f-input">
+          <label>உங்கள் வேலை வகை/ Type of work</label>
+          <div class="box">{{ orgDetail?.typeOfWork || orgDetail?.type_of_Work || '-' }}</div>
+        </div>
+        <div class="f-input" *ngIf="isCoreSanitaryWorker">
+          <label>முக்கிய சுகாதார பணியாளர்களின் வகை / Type of Core Sanitory Workers</label>
+          <div class="box">{{ orgDetail?.typeOfCoreSanitoryWorker || orgDetail?.core_Sanitary_Worker_Type || '-' }}</div>
+        </div>
+        <div class="f-input" *ngIf="isHealthWorker">
+          <label>சுகாதார பணியாளர்களின் வகை / Type of Health Workers</label>
+          <div class="box">{{ orgDetail?.typeOfHealthWorker || orgDetail?.health_Worker_Type || '-' }}</div>
+        </div>
+        <div class="f-input">
+          <label>நிறுவன வகை / Organization Type</label>
+          <div class="box">{{ orgDetail?.organizationType || orgDetail?.organization_Type || '-' }}</div>
+        </div>
+        <div class="f-input">
+          <label>வேலை கொடுப்பவர் வகை / Type of employer</label>
+          <div class="box">{{ orgDetail?.employerType || orgDetail?.employer_Type || '-' }}</div>
+        </div>
+        <div class="f-input">
+          <label>நிரந்தரம் / தற்காலிகம் / Permanent / Temporary</label>
+          <div class="box">{{ orgDetail?.natureOfJob || orgDetail?.nature_of_Job || '-' }}</div>
+        </div>
+        <div class="f-input">
+          <label>நீங்கள் வேலைக்கு செல்லும் அலுவலகம் / Which office do you work in?</label>
+          <div class="box">{{ orgDetail?.officeType || orgDetail?.work_Office || '-' }}</div>
+        </div>
+      </div>
+
+      <div class="sub-heading mt-4">உள்ளாட்சி அமைப்பு / Local Body</div>
+      <div class="grid-layout-3">
+        <div class="f-input">
+          <label>நீங்கள் வேலை செய்யும் மாவட்டம் / District Name</label>
+          <div class="box">{{ orgDetail?.distritName || orgDetail?.districtString || '-' }}</div>
+        </div>
+        <div class="f-input">
+          <label>உள்ளாட்சி அமைப்பு / Local Body</label>
+          <div class="box">{{ orgDetail?.localBody || orgDetail?.local_Body || '-' }}</div>
+        </div>
+
+        <div class="f-input" *ngIf="isUrban">
+          <label>உள்ளாட்சி அமைப்பின் பெயர் / Name of the Local Body</label>
+          <div class="box">{{ orgDetail?.nameoftheLocalBody || orgDetail?.name_of_Local_Body || '-' }}</div>
+        </div>
+
+        <div class="f-input" *ngIf="isRural">
+          <label>தொகுதி / Block</label>
+          <div class="box">{{ orgDetail?.blockString || orgDetail?.block || '-' }}</div>
+        </div>
+        <div class="f-input" *ngIf="isRural">
+          <label>பஞ்சாயத்து / Village Panchayat</label>
+          <div class="box">{{ orgDetail?.villagePanchayatString || orgDetail?.village_Panchayat || '-' }}</div>
+        </div>
+
+        <div class="f-input" *ngIf="isCorporation">
+          <label>கழகம் / Corporation</label>
+          <div class="box">{{ orgDetail?.corporationString || orgDetail?.corporation || '-' }}</div>
+        </div>
+        <div class="f-input" *ngIf="isMunicipality">
+          <label>நகராட்சி / Municipality</label>
+          <div class="box">{{ orgDetail?.municipalityString || orgDetail?.municipality || '-' }}</div>
+        </div>
+        <div class="f-input" *ngIf="isTownPanchayat">
+          <label>டவுன் பஞ்சாயத்து / Town Panchayat</label>
+          <div class="box">{{ orgDetail?.townPanchayatString || orgDetail?.town_Panchayat || '-' }}</div>
+        </div>
+        <div class="f-input" *ngIf="isGccOrCmws">
+          <label>மண்டலம் / Zone</label>
+          <div class="box">{{ orgDetail?.zoneString || orgDetail?.zone || '-' }}</div>
+        </div>
+
+        <div class="f-input">
+          <label>பாராளுமன்ற தொகுதி / MP Constituency</label>
+          <div class="box">{{ orgDetail?.mpConstituency || orgDetail?.mP_Constituency || '-' }}</div>
+        </div>
+        <div class="f-input">
+          <label>சட்டமன்ற தொகுதி / MLA Constituency</label>
+          <div class="box">{{ orgDetail?.mlaConstituency || orgDetail?.mLA_Constituency || '-' }}</div>
+        </div>
+
+        <div class="f-input">
+          <label>சுகாதார அட்டை எண் / Health Id</label>
+          <div class="box">{{ orgDetail?.healthId || orgDetail?.health_Id || '-' }}</div>
+        </div>
+        <div class="f-input">
+          <label>மஞ்சள் அட்டை எண் / Yellow Card Number</label>
+          <div class="box">{{ orgDetail?.yellowCardNumber || orgDetail?.new_Yellow_Card_Number || '-' }}</div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="isPrivateOrg">
+        <div class="sub-heading mt-4">பணியிடம் முகவரி / Work Place Details</div>
+        <div class="grid-layout-3">
+          <div class="f-input">
+            <label>அமைப்பின் பெயர் / Organisation Name</label>
+            <div class="box">{{ orgDetail?.private_Organisation_Name || orgDetail?.organisation_Name || '-' }}</div>
+          </div>
+          <div class="f-input">
+            <label>பதவி / Designation</label>
+            <div class="box">{{ orgDetail?.private_Designation || orgDetail?.designation || '-' }}</div>
+          </div>
+          <div class="f-input">
+            <label>முகவரி / Address</label>
+            <div class="box">{{ orgDetail?.private_Address || orgDetail?.address || '-' }}</div>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+<div class="f-card">
+  <div class="f-header">உறுப்பினர் ஆவணங்கள் / Member Documents</div>
+  <div class="f-body">
+    <div class="doc-grid-container" *ngIf="(memberDocuments && memberDocuments.length > 0) || (memberNonMandatoryDocuments && memberNonMandatoryDocuments.length > 0); else noMemDocs">
+      
+      <ng-container *ngFor="let doc of memberDocuments">
+        <div class="doc-item">
+          <div class="doc-label mb-2">{{ doc.documentCategory }} <span class="req">*</span></div>
+          <div class="doc-box-item">
+            <ng-container *ngIf="doc.originalFileName; else noMemFile">
+              
+              <div class="doc-image-preview" *ngIf="getDocumentImageUrl(doc)">
+                <img [src]="getDocumentImageUrl(doc)" onerror="this.style.display='none'">
+              </div>
+              <div class="pdf-uploaded-state" *ngIf="!getDocumentImageUrl(doc)">
+                <i class="pi pi-check"></i>
+                <span>Uploaded</span>
+              </div>
+              
+              <div class="doc-action-bar">
+                <div class="flex align-items-center gap-1">
+                  <i class="pi" [ngClass]="doc.isVerified ? 'pi-check-circle text-green' : 'pi-info-circle text-gray-500'" style="font-size: 11px;"></i>
+                  <span class="status-text-small" [ngClass]="doc.isVerified ? 'text-green' : 'text-gray-500'">
+                    {{ doc.isVerified ? 'Verified' : 'Pending' }}
+                  </span>
+                </div>
+                <i class="pi pi-download cursor-pointer text-blue-500" style="font-size: 13px;" (click)="downloadFile(doc.id, doc.originalFileName)" title="Download"></i>
+              </div>
+
+            </ng-container>
+            <ng-template #noMemFile><span class="no-data-small">Not Uploaded</span></ng-template>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngFor="let doc of memberNonMandatoryDocuments">
+        <div class="doc-item">
+          <div class="doc-label mb-2">{{ doc.documentCategory }}</div>
+          <div class="doc-box-item">
+            <ng-container *ngIf="doc.originalFileName; else noMemFile">
+              
+              <div class="doc-image-preview" *ngIf="getDocumentImageUrl(doc)">
+                <img [src]="getDocumentImageUrl(doc)" onerror="this.style.display='none'">
+              </div>
+              <div class="pdf-uploaded-state" *ngIf="!getDocumentImageUrl(doc)">
+                <i class="pi pi-check"></i>
+                <span>Uploaded</span>
+              </div>
+              
+              <div class="doc-action-bar">
+                <div class="flex align-items-center gap-1">
+                  <i class="pi" [ngClass]="doc.isVerified ? 'pi-check-circle text-green' : 'pi-info-circle text-gray-500'" style="font-size: 11px;"></i>
+                  <span class="status-text-small" [ngClass]="doc.isVerified ? 'text-green' : 'text-gray-500'">
+                    {{ doc.isVerified ? 'Verified' : 'Pending' }}
+                  </span>
+                </div>
+                <i class="pi pi-download cursor-pointer text-blue-500" style="font-size: 13px;" (click)="downloadFile(doc.id, doc.originalFileName)" title="Download"></i>
+              </div>
+
+            </ng-container>
+            <ng-template #noMemFile><span class="no-data-small">Not Uploaded</span></ng-template>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+    <ng-template #noMemDocs><div class="no-data">No member documents uploaded.</div></ng-template>
+  </div>
+</div>
+
+<div class="dec-box mt-3 mb-2">
+    <div class="dec-badge"><i class="pi pi-file"></i> Declaration</div>
+    <div class="dec-list">
+      <p>1. நான் மத்திய அரசு, மாநில அரசு அல்லது உள்ளாட்சி அமைப்புகளின் கீழ் நிரந்தர அரசுப் பணியில் பணியாற்றவில்லை என்று இதன்மூலம் அறிவிக்கிறேன் / I hereby declare that I am not employed in a permanent Government post under Central, State, or Local Body services.</p>
+      <p>2. நிரந்தர அரசுப் பணியில் உள்ளவர்கள் தமிழ்நாடு தூய்மைப் பணியாளர் நல வாரியம் (TNCWWB) உறுப்பினராக சேர தகுதி இல்லை என்பதை நான் புரிந்துகொள்கிறேன் / I understand that permanent Government employees are not eligible for membership under the Tamil Nadu Cleanliness Workers Welfare Board (TNCWWB).</p>
+      <p>3. நான் வழங்கிய தகவல்கள் அனைத்தும் உண்மையானவை மற்றும் சரியானவை என்பதை உறுதிப்படுத்துகிறேன். இதில் ஏதேனும் தவறான தகவல் இருப்பது கண்டறியப்பட்டால், எனது உறுப்பினர் பதிவு மற்றும் பெற்ற நலன்கள் ரத்து செய்யப்படலாம் என்பதை ஏற்றுகொள்கிறேன் / I further confirm that the information provided by me is true and correct. If found otherwise, my membership and any benefits availed are liable to be cancelled.</p>
+    </div>
+<div class="dec-agree">
+      <i *ngIf="declarationChecked" class="pi pi-check-square orange-tick"></i>
+      
+      <i *ngIf="!declarationChecked" class="pi pi-stop disabled-box"></i>
+      
+      <span>நான் ஒப்புக்கொள்கிறேன் / I agree</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="education-popover" *ngIf="showMorePopup"
+     [style.top.px]="popupPosition.top"
+     [style.left.px]="popupPosition.left">
+  
+  <div class="popover-title flex justify-content-between align-items-center">
+    <span>Education Details</span>
+    <i class="pi pi-times cursor-pointer text-gray-500" (click)="closeMore()"></i>
+  </div>
+
+  <ng-container *ngIf="selectedMember?.education === 'SCHOOL'">
+    <div class="popover-field">
+      <label>EMIS Number</label>
+      <div class="value">{{ selectedMember?.school?.eMISNo || '-' }}</div>
+    </div>
+    <div class="popover-field">
+      <label>Education Status</label>
+      <div class="value">{{ selectedMember?.school?.educationalStatus || '-' }}</div>
+    </div>
+    <div class="popover-field">
+      <label>Standard</label>
+      <div class="value">{{ selectedMember?.school?.standard || '-' }}</div>
+    </div>
+    <div class="popover-field">
+      <label>School Name</label>
+      <div class="value">{{ selectedMember?.school?.nameandAddressofSchool || '-' }}</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedMember?.education === 'COLLEGE'">
+    <div class="popover-field">
+      <label>UMIS / EMIS Number</label>
+      <div class="value">{{ selectedMember?.college?.eMISNo || selectedMember?.college?.umiS_No || '-' }}</div>
+    </div>
+    <div class="popover-field">
+      <label>Education Status</label>
+      <div class="value">{{ selectedMember?.college?.educationalStatus || '-' }}</div>
+    </div>
+    <div class="popover-field">
+      <label>Course</label>
+      <div class="value">{{ selectedMember?.college?.course || '-' }}</div>
+    </div>
+    <div class="popover-field">
+      <label>Degree Name</label>
+      <div class="value">{{ selectedMember?.college?.degreName || '-' }}</div>
+    </div>
+    <div class="popover-field">
+      <label>College Name</label>
+      <div class="value">{{ selectedMember?.college?.nameandAddressofCollege || selectedMember?.college?.nameandAddressofSchool || '-' }}</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedMember?.education !== 'SCHOOL' && selectedMember?.education !== 'COLLEGE'">
+    <div class="popover-field">
+      <label>Info</label>
+      <div class="value text-gray-500">No education details required.</div>
+    </div>
+  </ng-container>
+
+</div>

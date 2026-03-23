@@ -1,0 +1,140 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}
+            </h4>
+        </div>
+    </div>
+    <div class="grid formgrid mb-3" *ngIf="obj">
+        <div class="col-12">
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Urban Districts</label>
+                <div class="col-6">
+                    <p-multiSelect [options]="districts" [(ngModel)]="obj.urbanDistricts" optionLabel="text"
+                        [style]="{'width':'100%'}" placeholder="Select a district" optionValue="value"></p-multiSelect>
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="saveUrbanDistricts()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Rural Districts</label>
+                <div class="col-6">
+                    <p-multiSelect [options]="districts" [(ngModel)]="obj.ruralDistricts" optionLabel="text"
+                        [style]="{'width':'100%'}" placeholder="Select a district" optionValue="value"></p-multiSelect>
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="saveRuralDistricts()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Application Expiry Days</label>
+                <div class="col-6">
+                    <input pInputText [(ngModel)]="obj.applicationExpiryDays" [style]="{'width':'100%'}"
+                        type="number" />
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="saveDays()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Mandatory Member Document Categories </label>
+                <div class="col-6">
+                    <p-multiSelect [options]="docCategories" [(ngModel)]="obj.memberDocumentCategories"
+                        optionLabel="text" (ngModelChange)="cler()" [style]="{'width':'100%'}"
+                        placeholder="Select a Category" optionValue="value"></p-multiSelect>
+                    <p style="color: red;">{{manError}}</p>
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="savedoc()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Non Mandatory Member Document Categories </label>
+                <div class="col-6">
+                    <p-multiSelect [options]="docCategories" [(ngModel)]="obj.memberNonMandatoryDocumentCategories"
+                        (ngModelChange)="cler()" optionLabel="text" [style]="{'width':'100%'}"
+                        placeholder="Select a Category" optionValue="value"></p-multiSelect>
+                    <p style="color: red;">{{nonManError}}</p>
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="saveNMdoc()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Familty Member Mandatory Document Categories
+                </label>
+                <div class="col-6">
+                    <p-multiSelect [options]="docCategories" [(ngModel)]="obj.familyMemberMandatoryDocumentCategories"
+                        optionLabel="text" (ngModelChange)="cler()" [style]="{'width':'100%'}"
+                        placeholder="Select a Category" optionValue="value"></p-multiSelect>
+                    <p style="color: red;">{{fammanError}}</p>
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="saveFamdoc()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Familty Member Non Mandatory Document Categories
+                </label>
+                <div class="col-6">
+                    <p-multiSelect [options]="docCategories"
+                        [(ngModel)]="obj.familyMemberNonMandatoryDocumentCategories" (ngModelChange)="cler()"
+                        optionLabel="text" [style]="{'width':'100%'}" placeholder="Select a Category"
+                        optionValue="value"></p-multiSelect>
+                    <p style="color: red;">{{famnonManError}}</p>
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="saveFamNMdoc()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Member Can Request Card </label>
+                <div class="col-6">
+                    <p-inputSwitch [(ngModel)]="cansendCard" />
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="saveReqCard()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Contact Name </label>
+                <div class="col-6">
+                    <input pInputText [(ngModel)]="obj.quickContactName" type="text" [style]="{'width':'100%'}" />
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="savecontactCard()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Contact Phone </label>
+                <div class="col-6">
+                    <input pInputText [(ngModel)]="obj.quickContactPhone" type="text" [style]="{'width':'100%'}" />
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="savecontactCard()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-4 col-form-label">Contact Email </label>
+                <div class="col-6">
+                    <input pInputText [(ngModel)]="obj.quickContactEmail" type="text" [style]="{'width':'100%'}" />
+                </div>
+                <div class="col-2">
+                    <button type="button" *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                        (click)="savecontactCard()" pButton class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

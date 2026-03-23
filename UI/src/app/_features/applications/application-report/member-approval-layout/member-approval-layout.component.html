@@ -1,0 +1,1478 @@
+<div class="approval-container grid">
+  <div class="col-12 lg:col-9">
+    <div class="approval-header">
+      <h4 style="margin-bottom: 20px">Application Approval</h4>
+      <div class="approval-meta">
+        <div class="meta-left">
+          <span class="meta-id"> ID : {{ memberDetail?.memberId }} </span>
+
+          <span class="meta-name">
+            Applicant name : {{ memberDetail?.firstName }}
+            {{ memberDetail?.lastName }}
+          </span>
+        </div>
+
+        <button class="view-details-btn" (click)="Viewdwtails()">
+          <i class="bi bi-eye-fill"></i> View Profile
+        </button>
+      </div>
+
+      <div class="note-box">
+        <div class="note-text">
+          Note : DM Needs To Check And Confirm That All The Given Details Are
+          Correct Before Approval
+        </div>
+
+        <button class="verification-btn" (click)="verificationDetails()">
+          Verification Details
+        </button>
+      </div>
+    </div>
+
+
+    
+       <app-mem-family-detail-view
+          [familyMemberList]="memberDetails?.familyMembers"
+        ></app-mem-family-detail-view>
+    
+    
+    
+    
+    
+    <div class="family-card"  *ngIf="hasTemp(MemberDiffViewModel?.familyMembersWithEducation_Temp) && this.changedDetailRecord === 'MEMBER_FAMILY'">
+      <div class="family-header">Updated Family Member Details</div>
+
+      <table class="family-table">
+        <thead>
+          <tr>
+            <th>Name /<br />பெயர்</th>
+            <th>Aadhaar Number /<br />ஆதார் எண்</th>
+            <th>Mobile Number /<br />கைப்பேசி எண்</th>
+            <th>Relationship /<br />உறவு</th>
+            <th>Gender /<br />பாலினம்</th>
+            <th>Age /<br />வயது</th>
+            <th>School / College<br />பள்ளி / கல்லூரி</th>
+            <th>Details /<br />விவரங்கள்</th>
+            <th>Differently Abled?<br />இவர் மாற்றுத்திறனாளி?</th>
+          </tr>
+        </thead>
+
+        <tbody>
+         <tr *ngFor="let member of MemberDiffViewModel?.familyMembersWithEducation_Temp; let i = index">
+     
+            <td>
+              <span class="pill"
+[ngClass]="{'changed-field': isFamilyMemberChanged(i,'name')}">
+{{ member.name }}
+</span>
+            </td>
+
+            <td>
+              <span class="pill"
+[ngClass]="{'changed-field': isFamilyMemberChanged(i,'aadharNumber')}">
+{{ member.aadharNumber }}
+</span>
+            </td>
+
+            <td>
+                   <span class="pill"
+[ngClass]="{'changed-field': isFamilyMemberChanged(i,'phone_number')}">
+{{ member.phone_number }}
+</span>
+            </td>
+
+            <td>
+              <span class="pill"
+[ngClass]="{'changed-field': isFamilyMemberChanged(i,'relationShip')}">
+{{ member.relationShip }}
+</span>
+            </td>
+
+            <td>
+                <span class="pill"
+[ngClass]="{'changed-field': isFamilyMemberChanged(i,'gender')}">
+{{ member.gender }}
+</span>
+            </td>
+
+            <td>
+              <span class="pill"
+[ngClass]="{'changed-field': isFamilyMemberChanged(i,'age')}">
+{{ member.age }}
+</span>
+            </td>
+
+            <td>
+              <span class="pill"
+[ngClass]="{'changed-field': isFamilyMemberChanged(i,'education')}">
+{{ member.education }}
+</span>
+            </td>
+
+            <td>
+            
+              <button class="more-btn"
+(click)="openMore(member, i, false, $event)">
+More :
+</button>
+            </td>
+
+            <td>
+               <span class="pill"
+[ngClass]="{'changed-field': isFamilyMemberChanged(i,'differentlyAbled')}">
+{{ member.differentlyAbled }}
+</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="org-card">
+  <div class="org-header">நிறுவனம் விவரங்கள் / Organization Details</div>
+
+  <div class="org-body">
+    <div class="org-row">
+
+      <!-- TYPE OF WORK -->
+      <div class="org-item">
+        <div class="org-label">உங்கள் வேலை வகை /<br />Type of work</div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.typeOfWork || "-" }}
+        </div>
+      </div>
+
+      <!-- ORGANIZATION TYPE -->
+      <div class="org-item">
+        <div class="org-label">
+          நிறுவனம் வகை/<br />Organization Type
+        </div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.organizationType || "-" }}
+        </div>
+      </div>
+
+      <!-- CORE SANITARY WORKER -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.typeOfWork?.includes('Core Sanitary Workers')">
+
+        <div class="org-label">
+          சுகாதாரப் பணியாளர்<br />வகை/Type of Core<br />Sanitary Workers
+        </div>
+
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.typeOfCoreSanitoryWorker || "-" }}
+        </div>
+      </div>
+
+      <!-- HEALTH WORKER -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.typeOfWork?.includes('Health Workers')">
+
+        <div class="org-label">
+          சுகாதார பணியாளர்களின் வகை /<br />
+          Type of Health Workers
+        </div>
+
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.healthWorkerType || "-" }}
+        </div>
+      </div>
+
+      <!-- EMPLOYER TYPE -->
+      <div class="org-item">
+        <div class="org-label">
+          வேலை கொடுப்பவர்<br />வகை/Type of employer
+        </div>
+        <div class="org-value">
+          {{ memberDetails?.organizationalDetail?.employer_type || "-" }}
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="org-row">
+
+      <!-- NATURE OF JOB -->
+      <div class="org-item">
+        <div class="org-label">
+          நிரந்தரம் / தற்காலிகம் /<br />Permanent / Temporary
+        </div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.natureOfJob || "-" }}
+        </div>
+      </div>
+
+      <!-- WORK OFFICE -->
+      <div class="org-item">
+        <div class="org-label">
+          நீங்கள் வேலைக்கு செல்லும்<br />அலுவலகம் எது? /<br />
+          Which office do you go to work in?
+        </div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.workOffice || "-" }}
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="org-subtitle">
+      <b><u>உள்ளாட்சி அமைப்பு / Local Body</u></b>
+    </div>
+
+
+    <div class="org-row">
+
+      <!-- DISTRICT -->
+      <div class="org-item">
+        <div class="org-label">
+          நீங்கள் வேலை செய்யும்<br />மாவட்டம் /<br />
+          District where you work
+        </div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.distritName || "-" }}
+        </div>
+      </div>
+
+      <!-- LOCAL BODY -->
+      <div class="org-item">
+        <div class="org-label">
+          உள்ளாட்சி அமைப்பு /<br />Local Body
+        </div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.localBody || "-" }}
+        </div>
+      </div>
+
+      <!-- NAME OF LOCAL BODY -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.localBody === 'URBAN'">
+
+        <div class="org-label">
+          உள்ளாட்சி அமைப்பின் பெயர் /<br />
+          Name of the Local Body
+        </div>
+
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.nameoftheLocalBody || "-" }}
+        </div>
+      </div>
+
+
+      <!-- CORPORATION -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.nameoftheLocalBody === 'CORPORATION'">
+
+        <div class="org-label">
+          கழகம் / Corporation
+        </div>
+
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.corporation || "-" }}
+        </div>
+      </div>
+
+
+      <!-- MUNICIPALITY -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.nameoftheLocalBody === 'MUNICIPALITY'">
+
+        <div class="org-label">
+          நகராட்சி / Municipality
+        </div>
+
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.municipality || "-" }}
+        </div>
+      </div>
+
+
+      <!-- ZONE -->
+      <div class="org-item"
+        *ngIf="
+        memberDetails?.organizationalDetail?.nameoftheLocalBody === 'GCC' ||
+        memberDetails?.organizationalDetail?.nameoftheLocalBody === 'CMWS'
+      ">
+
+        <div class="org-label">
+          மண்டலம் / Zone
+        </div>
+
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.zone || "-" }}
+        </div>
+      </div>
+
+
+      <!-- BLOCK -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.localBody === 'RURAL'">
+
+        <div class="org-label">
+          தொகுதி / Block
+        </div>
+
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.block || "-" }}
+        </div>
+      </div>
+
+
+      <!-- VILLAGE PANCHAYAT -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.localBody === 'RURAL'">
+
+        <div class="org-label">
+          பஞ்சாயத்து / Village Panchayat
+        </div>
+
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.villagePanchayat || "-" }}
+        </div>
+      </div>
+
+
+      <!-- TOWN PANCHAYAT -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.nameoftheLocalBody === 'TOWNPANCHAYAT'">
+
+        <div class="org-label">
+          டவுன் பஞ்சாயத்து /<br />Town Panchayat
+        </div>
+
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.townPanchayat || "-" }}
+        </div>
+      </div>
+
+
+      <!-- MP -->
+      <div class="org-item">
+        <div class="org-label">
+          பாராளுமன்ற தொகுதி /<br />MP Constituency
+        </div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.mpConstituency || "-" }}
+        </div>
+      </div>
+
+
+      <!-- MLA -->
+      <div class="org-item">
+        <div class="org-label">
+          சட்டமன்ற தொகுதி /<br />MLA Constituency
+        </div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.mlaConstituency || "-" }}
+        </div>
+      </div>
+
+
+      <!-- HEALTH ID -->
+      <div class="org-item">
+        <div class="org-label">
+          சுகாதார அட்டை எண் / Health Id
+        </div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.healthId || "-" }}
+        </div>
+      </div>
+
+
+      <!-- YELLOW CARD -->
+      <div class="org-item">
+        <div class="org-label">
+          மஞ்சள் அட்டை எண் / Yellow Card Number
+        </div>
+        <div class="org-value">
+          :     {{ memberDetails?.organizationalDetail?.yellowCardNumber || "-" }}
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- PRIVATE SECTION -->
+
+    <div class="org-subtitle"
+      *ngIf="memberDetails?.organizationalDetail?.organizationType === 'Private / தனியார்'">
+
+      <b><u>பணியிடம் முகவரி / Work Address</u></b>
+
+      <div class="org-row">
+
+        <div class="org-item">
+          <div class="org-label">
+            நிறுவனம் பெயர் / Name of the Organization
+          </div>
+
+          <div class="org-value">
+            :     {{ memberDetails?.organizationalDetail?.private_Organisation_Name || "-" }}
+          </div>
+        </div>
+
+
+        <div class="org-item">
+          <div class="org-label">
+            பதவி / Designation
+          </div>
+
+          <div class="org-value">
+            :     {{ memberDetails?.organizationalDetail?.private_Designation || "-" }}
+          </div>
+        </div>
+
+
+        <div class="org-item">
+          <div class="org-label">
+            முகவரி / Address
+          </div>
+
+          <div class="org-value">
+            :     {{ memberDetails?.organizationalDetail?.private_Address || "-" }}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="org-card"
+*ngIf="hasTemp(MemberDiffViewModel?.organizationalDetail_Temp) && changedDetailRecord === 'MEMBER_ORGANIZATION'">
+
+<div class="org-header">நிறுவனம் விவரங்கள் / Organization Details</div>
+
+<div class="org-body">
+
+<div class="org-row">
+
+<!-- TYPE OF WORK -->
+<div class="org-item">
+<div class="org-label">
+உங்கள் வேலை வகை /<br />Type of work
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('typeOfWork')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.typeOfWork || "-" }}
+
+</div>
+</div>
+
+<!-- CORE SANITARY WORKER -->
+<div class="org-item"
+*ngIf="MemberDiffViewModel?.organizationalDetail_Temp?.typeOfWork?.includes('Core Sanitary Workers')">
+
+<div class="org-label">
+சுகாதாரப் பணியாளர்<br/>வகை / Type of Core<br/>Sanitary Workers
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('typeOfCoreSanitoryWorker')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.typeOfCoreSanitoryWorker || "-" }}
+
+</div>
+</div>
+
+<!-- HEALTH WORKER -->
+<div class="org-item"
+*ngIf="MemberDiffViewModel?.organizationalDetail_Temp?.typeOfWork?.includes('Health Workers')">
+
+<div class="org-label">
+சுகாதார பணியாளர்களின் வகை /<br/>Type of Health Workers
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('healthWorkerType')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.healthWorkerType || "-" }}
+
+</div>
+</div>
+
+<!-- ORGANIZATION TYPE -->
+<div class="org-item">
+<div class="org-label">
+நிறுவனம் வகை /<br />Organization Type
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('organizationType')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.organizationType || "-" }}
+
+</div>
+</div>
+
+
+
+<!-- EMPLOYER TYPE -->
+<div class="org-item">
+<div class="org-label">
+வேலை கொடுப்பவர்<br/>வகை / Type of employer
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('employer_type')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.employer_type || "-" }}
+
+</div>
+</div>
+
+</div>
+
+
+<div class="org-row">
+
+<!-- NATURE OF JOB -->
+<div class="org-item">
+<div class="org-label">
+நிரந்தரம் / தற்காலிகம் /<br/>Permanent / Temporary
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('natureOfJob')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.natureOfJob || "-" }}
+
+</div>
+</div>
+
+<!-- WORK OFFICE -->
+<div class="org-item">
+<div class="org-label">
+நீங்கள் வேலைக்கு செல்லும்<br/>அலுவலகம் எது? /<br/>
+Which office do you go to work in?
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('workOffice')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.workOffice || "-" }}
+
+</div>
+</div>
+
+</div>
+
+
+<div class="org-subtitle">
+<b><u>உள்ளாட்சி அமைப்பு / Local Body</u></b>
+</div>
+
+
+<div class="org-row">
+
+<!-- DISTRICT -->
+<div class="org-item">
+<div class="org-label">
+நீங்கள் வேலை செய்யும்<br/>மாவட்டம் / District
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('districtName')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.distritName || "-" }}
+
+</div>
+</div>
+
+
+<!-- LOCAL BODY -->
+<div class="org-item">
+<div class="org-label">
+உள்ளாட்சி அமைப்பு /<br/>Local Body
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('localBody')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.localBody || "-" }}
+
+</div>
+</div>
+
+
+<!-- NAME OF LOCAL BODY -->
+<div class="org-item"
+*ngIf="MemberDiffViewModel?.organizationalDetail_Temp?.localBody === 'URBAN'">
+
+<div class="org-label">
+உள்ளாட்சி அமைப்பின் பெயர் /<br/>Name of Local Body
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('nameoftheLocalBody')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.nameoftheLocalBody || "-" }}
+
+</div>
+</div>
+
+
+<!-- CORPORATION -->
+<div class="org-item"
+*ngIf="MemberDiffViewModel?.organizationalDetail_Temp?.nameoftheLocalBody === 'CORPORATION'">
+
+<div class="org-label">
+கழகம் / Corporation
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('corporation')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.corporation || "-" }}
+
+</div>
+</div>
+
+
+<!-- MUNICIPALITY -->
+<div class="org-item"
+*ngIf="MemberDiffViewModel?.organizationalDetail_Temp?.nameoftheLocalBody === 'MUNICIPALITY'">
+
+<div class="org-label">
+நகராட்சி / Municipality
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('municipality')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.municipality || "-" }}
+
+</div>
+</div>
+
+
+<!-- ZONE -->
+<div class="org-item"
+*ngIf="
+MemberDiffViewModel?.organizationalDetail_Temp?.nameoftheLocalBody === 'GCC' ||
+MemberDiffViewModel?.organizationalDetail_Temp?.nameoftheLocalBody === 'CMWS'
+">
+
+<div class="org-label">
+மண்டலம் / Zone
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('zone')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.zone || "-" }}
+
+</div>
+</div>
+
+
+<!-- BLOCK -->
+<div class="org-item"
+*ngIf="MemberDiffViewModel?.organizationalDetail_Temp?.localBody === 'RURAL'">
+
+<div class="org-label">
+தொகுதி / Block
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('block')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.block || "-" }}
+
+</div>
+</div>
+
+
+<!-- VILLAGE PANCHAYAT -->
+<div class="org-item"
+*ngIf="MemberDiffViewModel?.organizationalDetail_Temp?.localBody === 'RURAL'">
+
+<div class="org-label">
+பஞ்சாயத்து / Village Panchayat
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('villagePanchayat')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.villagePanchayat || "-" }}
+
+</div>
+</div>
+
+
+<!-- TOWN PANCHAYAT -->
+<div class="org-item"
+*ngIf="MemberDiffViewModel?.organizationalDetail_Temp?.nameoftheLocalBody === 'TOWNPANCHAYAT'">
+
+<div class="org-label">
+டவுன் பஞ்சாயத்து / Town Panchayat
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('townPanchayat')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.townPanchayat || "-" }}
+
+</div>
+</div>
+
+
+<!-- MP -->
+<div class="org-item">
+<div class="org-label">
+பாராளுமன்ற தொகுதி / MP Constituency
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('mpConstituency')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.mpConstituency || "-" }}
+
+</div>
+</div>
+
+
+<!-- MLA -->
+<div class="org-item">
+<div class="org-label">
+சட்டமன்ற தொகுதி / MLA Constituency
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('mlaConstituency')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.mlaConstituency || "-" }}
+
+</div>
+</div>
+
+
+<!-- HEALTH ID -->
+<div class="org-item">
+<div class="org-label">
+சுகாதார அட்டை எண் / Health Id
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('healthId')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.healthId || "-" }}
+
+</div>
+</div>
+
+
+<!-- YELLOW CARD -->
+<div class="org-item">
+<div class="org-label">
+மஞ்சள் அட்டை எண் / Yellow Card Number
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('yellowCardNumber')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.yellowCardNumber || "-" }}
+
+</div>
+</div>
+
+</div>
+
+
+<!-- PRIVATE SECTION -->
+
+<div class="org-subtitle"
+*ngIf="MemberDiffViewModel?.organizationalDetail_Temp?.organizationType === 'Private / தனியார்'">
+
+<b><u>பணியிடம் முகவரி / Work Address</u></b>
+
+<div class="org-row">
+
+<div class="org-item">
+<div class="org-label">
+நிறுவனம் பெயர் / Name of the Organization
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('private_Organisation_Name')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.private_Organisation_Name || "-" }}
+
+</div>
+</div>
+
+
+<div class="org-item">
+<div class="org-label">
+பதவி / Designation
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('private_Designation')}">
+
+{{ MemberDiffViewModel?.organizationalDetail_Temp?.private_Designation || "-" }}
+
+</div>
+</div>
+
+
+<div class="org-item">
+<div class="org-label">
+முகவரி / Address
+</div>
+
+<div class="org-value"
+[ngClass]="{'changed-field': isOrgChanged('private_Address')}">
+
+:     {{ MemberDiffViewModel?.organizationalDetail_Temp?.private_Address || "-" }}
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+    <div class="doc-card">
+      <div class="f-card">
+        <div class="doc-header">ஆவணங்கள் / Document Details</div>
+        <div class="f-body">
+          <div
+            class="doc-grid-container"
+            *ngIf="
+              memberDetails && memberDetails.memberDocuments.length > 0;
+              else noMemDocs
+            "
+          >
+            <ng-container *ngFor="let doc of memberDetails.memberDocuments">
+              <div class="doc-item">
+                <div class="doc-label mb-2">{{ doc.documentCategory }}</div>
+  <div class="doc-box-item">
+
+  <ng-container *ngIf="doc.savedFileName; else noMemFile">
+
+    <!-- IMAGE PREVIEW -->
+    <div
+      class="doc-image-preview"
+      *ngIf="isImage(doc.savedFileName)"
+      (click)="openPreview(doc)"
+    >
+      <img [src]="getDocumentImageUrl(doc)" />
+    </div>
+
+    <!-- FILE PREVIEW (PDF / DOC / OTHER) -->
+    <div
+      class="file-preview-box"
+      *ngIf="!isImage(doc.savedFileName)"
+      (click)="openPreview(doc)"
+    >
+      <i class="pi pi-file"></i>
+      <span>View</span>
+    </div>
+
+    <!-- ACTION BAR -->
+    <div class="doc-action-bar">
+
+      <i
+        class="pi pi-download cursor-pointer text-blue-500"
+        (click)="downloadFile(doc.id, doc.originalFileName)"
+      ></i>
+
+    </div>
+
+  </ng-container>
+
+  <ng-template #noMemFile>
+    <span class="no-data-small">Not Uploaded</span>
+  </ng-template>
+
+</div>
+              </div>
+            </ng-container>
+          </div>
+          <ng-template #noMemDocs
+            ><div class="no-data">
+              No member documents uploaded.
+            </div></ng-template>
+
+            <!-- DOCUMENT PREVIEW MODAL -->
+
+<div class="doc-preview-overlay" *ngIf="showPreview">
+
+  <div class="doc-preview-modal">
+
+    <div class="doc-preview-header">
+      Document Preview
+      <i class="pi pi-times close-btn" (click)="closePreview()"></i>
+    </div>
+
+    <div class="doc-preview-body">
+
+      <!-- IMAGE -->
+      <img
+        *ngIf="isImage(selectedDoc?.savedFileName)"
+        [src]="getDocumentImageUrl(selectedDoc)"
+      />
+
+      <!-- PDF -->
+<iframe
+  *ngIf="!isImage(selectedDoc?.savedFileName)"
+  [src]="pdfBlobUrl">
+</iframe>
+
+    </div>
+
+  </div>
+
+</div>
+        </div>
+
+      
+
+       <div class="declaration-box">
+          <div class="declaration-title">Declaration</div>
+
+          <ol class="declaration-list">
+            <li>
+              நான் மத்திய அரசு, மாநில அரசு அல்லது உள்ளாட்சி அமைப்புகளின் கீழ்
+              நிரந்தர அரசு பணியில் பணிபுரிவதில்லை என்று இதன்மூலம் அறிவிக்கிறேன்
+              / I hereby declare that I am not employed in a permanent
+              Government post under Central, State, or Local Body services.
+            </li>
+
+            <li>
+              நிரந்தர அரசு பணியில் உள்ளவர்கள் தமிழ்நாடு துப்புரவு பணியாளர் நல
+              வாரியம் (TNCWWB) உறுப்பினராக சேர தகுதி இல்லை என்பதை
+              புரிந்துகொள்கிறேன் / I understand that permanent Government
+              employees are not eligible for membership under the Tamil Nadu
+              Cleanliness Workers Welfare Board (TNCWWB).
+            </li>
+
+            <li>
+              நான் வழங்கிய தகவல்கள் அனைத்தும் உண்மை மற்றும் சரியானவை என்பதை
+              உறுதிப்படுத்துகிறேன். தவறான தகவல் இருப்பின் என் உறுப்பினர் பதிவு
+              மற்றும் பெறும் நலன்கள் ரத்து செய்யப்படும் என்பதை ஒப்புக்கொள்கிறேன்
+              / I further confirm that the information provided by me is true
+              and correct.
+            </li>
+          </ol>
+
+          <div class="agree-row">
+            <span style="color: red;">*</span>
+            <input type="checkbox" (change)="verfied($event)" />
+            <span> நான் ஒப்புக்கொள்கிறேன் / I agree </span>
+          </div>
+          <small *ngIf="declarationError" style="color:red">
+Please agree to the declaration before verifying
+</small>
+        </div> 
+
+          <div class="verify-button-row">
+          <button
+            *ngIf="!buttoncliked"
+            class="verify-btn"
+            (click)="buttonclicked()">
+            Verify
+          </button>
+
+          <button *ngIf="buttoncliked" class="verify-success-btn" disabled>
+            <i class="bi bi-check-circle-fill"></i> Verified
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 lg:col-3">
+    <form [formGroup]="approvalForm" class="approval-form">
+      <div class="approval-card">
+        <h3 class="approval-title">APPROVAL [ {{ user.lastName }} ]</h3>
+        <hr class="approval-divider" />
+
+        <div class="field">
+          <label>Application status</label>
+          <input
+            pInputText
+            formControlName="status"
+            readonly
+            class="full-width"
+          />
+        </div>
+        <label>Approve/Reject status</label>
+        <p-dropdown
+          [options]="approvalformDetail.statusList"
+          optionLabel="text"
+          optionValue="value"
+          formControlName="approvalRejectedstatus"
+          (onChange)="onStatusChange($event.value)"
+          placeholder="Select a status"
+          [showClear]="true"
+          class="full-width"
+          [style]="{ width: '100%' }"
+        >
+        </p-dropdown>
+     <app-error-msg
+  [control]="approvalForm.get('approvalRejectedstatus')"
+  [customMessages]="{ required: 'Select a status' }">
+</app-error-msg>
+
+        <div class="field" style="margin-top: 15px; margin-bottom: 0px">
+          <label
+            >Comments
+            <span
+              *ngIf="
+                approvalForm.get('comments')?.hasValidator(Validators.required)
+              "
+              class="text-danger"
+              >*</span
+            ></label
+          >
+          <textarea
+            pInputTextarea
+            formControlName="comments"
+            placeholder="Type comments..."
+            class="full-width"
+          >
+          </textarea>
+          <app-error-msg
+            [control]="approvalForm.get('comments')"
+          ></app-error-msg>
+        </div>
+
+        <div class="field" *ngIf="canshowreason">
+          <label>Reason <span class="text-danger">*</span></label>
+          <p-dropdown
+            [options]="approvalformDetail?.reasonList"
+            optionLabel="text"
+            optionValue="text"
+            formControlName="reason"
+            placeholder="Select Reason"
+            [showClear]="true"
+            class="full-width"
+            [style]="{ width: '100%' }"
+          >
+          </p-dropdown>
+         <app-error-msg
+  [control]="approvalForm.get('reason')"
+  [customMessages]="{ required: 'Select a reason' }">
+</app-error-msg>
+        </div>
+
+        <div class="approval-buttons">
+          <button
+            pButton
+            type="button"
+            label="back"
+            class="p-button-warning"
+            (click)="back()"
+          ></button>
+          <!-- <button pButton type="button" label="Preview" class="p-button-secondary" (click)="togglePreview()"></button> -->
+          <button
+            pButton
+            type="button"
+            label="Submit"
+            class="p-button-success submit-btn"
+            (click)="submit()"
+            [disabled]="!buttoncliked"
+          ></button>
+          <button
+            *ngIf="!canshowApproval"
+            pButton
+            type="button"
+            label="Submit Delete"
+            class="p-button-danger"
+            (click)="submit()"
+          ></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="popup-overlay" *ngIf="showRejectConfirm">
+  <div class="popup-box">
+    <div class="icon reject">!</div>
+
+    <h3>Do you want to reject this application?</h3>
+
+    <div class="popup-buttons">
+      <button class="btn cancel" (click)="cancelReject()">Cancel</button>
+      <button class="btn confirm" (click)="confirmReject()">Reject</button>
+    </div>
+  </div>
+</div>
+
+<div class="popup-overlay" *ngIf="showReturnConfirm">
+  <div class="popup-box">
+    <div class="icon return">↩</div>
+
+    <h3>Do you want to return the selected application?</h3>
+
+    <div class="popup-buttons">
+      <button class="btn cancel" (click)="cancelReturn()">Cancel</button>
+      <button class="btn confirm" (click)="confirmReturn()">Return</button>
+    </div>
+  </div>
+</div>
+
+<div class="popup-overlay" *ngIf="showSuccessPopup && !isHQ" >
+  <div class="popup-box success">
+    <div class="icon success-icon">✔</div>
+
+    <h3>{{ successMessage }}</h3>
+
+    <button class="btn home" (click)="goHome()">← Back</button>
+  </div>
+</div> 
+
+
+<div class="popup-overlay" *ngIf="showSuccessPopup&& isHQ">
+  <div class="popup-box success large">
+
+    <!-- SUCCESS ICON -->
+    <div class="icon success-icon">✔</div>
+
+    <!-- TITLE -->
+    <h2 class="success-title">{{ successMessage }}</h2>
+
+    <!-- CARD PREVIEW -->
+    <div class="card-preview-wrapper landscape" *ngIf="memberCardData">
+      <app-member-id-card
+        [memberCardData]="memberCardData"
+        [isFromOutside]="true">
+      </app-member-id-card>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-buttons">
+      <button class="btn cancel" (click)="goHome()">Close</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="education-popover"
+  *ngIf="showMorePopup"
+  [style.top.px]="popupPosition.top"
+  [style.left.px]="popupPosition.left"
+>
+  <div class="popover-title">
+    Education Details
+    <span style="padding-left: 140px" (click)="closeMore()">
+      <i class="bi bi-x"></i>
+    </span>
+  </div>
+
+  <!-- SCHOOL DETAILS -->
+  <ng-container *ngIf="selectedMember?.educationalStatus?.toUpperCase() === 'SCHOOL'">
+
+    <div class="popover-field">
+      <label>EMIS Number</label>
+      <!-- <div class="value">
+        {{ selectedMember?.emisNo || "-" }}
+      </div> -->
+      <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('emisNo')}">
+{{ selectedMember?.emisNo || "-" }}
+</div>
+    </div>
+
+    <div class="popover-field">
+      <label>Education Status</label>
+      <!-- <div class="value">
+        {{ selectedMember?.educationalStatus || "-" }}
+      </div> -->
+      <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('educationalStatus')}">
+{{ selectedMember?.educationalStatus || "-" }}
+</div>
+    </div>
+
+    <div class="popover-field">
+      <label>Standard</label>
+      <!-- <div class="value">
+        {{ selectedMember?.standard || "-" }}
+      </div> -->
+       <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('standard')}">
+{{ selectedMember?.standard || "-" }}
+</div>
+    </div>
+
+    <div class="popover-field">
+      <label>School Name</label>
+      <!-- <div class="value">
+        {{ selectedMember?.nameandAddressofSchool || "-" }}
+      </div> -->
+      <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('nameandAddressofSchool')}">
+{{ selectedMember?.school_Name || "-" }}
+</div>
+    </div>
+
+    <div class="popover-field">
+      <label>School Address</label>
+      <!-- <div class="value">
+        {{ selectedMember?.nameandAddressofSchool || "-" }}
+      </div> -->
+       <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('nameandAddressofSchool')}">
+{{ selectedMember?.nameandAddressofSchool || "-" }}
+</div>
+    </div>
+
+  </ng-container>
+
+
+  <!-- COLLEGE DETAILS -->
+  <ng-container *ngIf="selectedMember?.educationalStatus?.toUpperCase() === 'COLLEGE'">
+
+    <div class="popover-field">
+      <label>Course</label>
+      <!-- <div class="value">
+        {{ selectedMember?.course || "-" }}
+      </div> -->
+      <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('course')}">
+{{ selectedMember?.course || "-" }}
+</div>
+    </div>
+
+    <div class="popover-field">
+      <label>Degree</label>
+      <!-- <div class="value">
+        {{ selectedMember?.degreName || "-" }}
+      </div> -->
+       <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('degreName')}">
+{{ selectedMember?.degreName || "-" }}
+</div>
+    </div>
+
+    <div class="popover-field">
+      <label>Education Status</label>
+      <!-- <div class="value">
+        {{ selectedMember?.educationalStatus || "-" }}
+      </div> -->
+       <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('educationalStatus')}">
+{{ selectedMember?.educationalStatus || "-" }}
+</div>
+    </div>
+
+    <div class="popover-field">
+      <label>College Name</label>
+      <!-- <div class="value">
+        {{ selectedMember?.nameandAddressofCollege || "-" }}
+      </div> -->
+      <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('nameandAddressofCollege')}">
+{{ selectedMember?.college_Name || "-" }}
+</div>
+    </div>
+
+    <div class="popover-field">
+      <label>College Address</label>
+      <!-- <div class="value">
+        {{ selectedMember?.nameandAddressofCollege || "-" }}
+      </div> -->
+        <div class="value"
+[ngClass]="{'changed-field': isEducationChanged('nameandAddressofCollege')}">
+{{ selectedMember?.college_Address || "-" }}
+</div>
+    </div>
+
+  </ng-container>
+
+</div>
+
+
+<div class="profile-overlay" *ngIf="showProfilePopup">
+  <div class="profile-popup">
+    <div class="profile-header">
+      <span>உங்கள் விவரங்கள் / Your Details</span>
+
+    </div>
+
+
+<div class="profile-body">
+  <app-mem-personal-detail-view
+    [personalDetail]="memberDetails?.memberDetail">
+  </app-mem-personal-detail-view>
+</div>
+
+<div
+  class="profile-body"
+  *ngIf="hasTemp(MemberDiffViewModel?.memberDetail_Temp)  && this.changedDetailRecord === 'MEMBER_DETAIL'"
+>
+ <div>
+      <span> Updated Member Details</span>
+    </div>
+<app-mem-personal-detail-view
+  [personalDetail]="MemberDiffViewModel?.memberDetail_Temp"
+  [oldDetail]="MemberDiffViewModel?.memberDetail"
+  [tempDetail]="MemberDiffViewModel?.memberDetail_Temp">
+</app-mem-personal-detail-view>
+</div>
+
+      <div class="address-section">
+        <div class="address-header">
+          <div class="address-header-col">
+            உங்கள் நிரந்தர முகவரி / Permanent Address
+          </div>
+
+          <div class="address-header-col">
+            உங்கள் தற்போதைய முகவரி / Your Current Address
+          </div>
+        </div>
+
+        <div class="address-body" >
+          <div class="address-col">
+            <app-mem-permanent-address-view
+              [addressDetail]="memberDetails?.permanentAddress"
+            >
+            </app-mem-permanent-address-view>
+          </div>
+
+          <div class="address-col">
+            <app-mem-temp-address-view
+              [addressDetail]="memberDetails?.temproraryAddress"
+            >
+            </app-mem-temp-address-view>
+          </div>
+        </div>
+
+            <div class="address-body" *ngIf="hasTemp(MemberDiffViewModel?.permanentAddress_Temp) || hasTemp(MemberDiffViewModel?.temproraryAddress_Temp)  && this.changedDetailRecord === 'MEMBER_ADDRESS'">
+          <div class="address-col">
+            <div class="address-header">
+          <div class="address-header-col">
+           Updated Permanent Address
+          </div>
+
+          <div class="address-header-col">
+            Updated Current Address
+          </div>
+        </div>
+            <app-mem-permanent-address-view
+              [addressDetail]="MemberDiffViewModel?.permanentAddress_Temp"
+              [oldDetail]="MemberDiffViewModel?.permanentAddress"
+              [tempDetail]="MemberDiffViewModel?.permanentAddress_Temp">
+            </app-mem-permanent-address-view>
+          </div>
+
+          <div class="address-col">
+            <app-mem-temp-address-view
+              [addressDetail]="MemberDiffViewModel?.temproraryAddress_Temp"
+              [oldDetail]="MemberDiffViewModel?.temproraryAddress"
+              [tempDetail]="MemberDiffViewModel?.temproraryAddress_Temp"
+            >
+            </app-mem-temp-address-view>
+          </div>
+        </div>
+      </div>
+
+     <div> <app-mem-bank-detail-view [personalDetail]="memberDetails?.bankDetails">
+      </app-mem-bank-detail-view></div>
+
+      <div *ngIf="hasTemp(MemberDiffViewModel?.bankDetails_Temp) && this.changedDetailRecord === 'MEMBER_BANK'"> 
+      <app-mem-bank-detail-view [personalDetail]="MemberDiffViewModel?.bankDetails_Temp"   
+      [oldDetail]="MemberDiffViewModel?.bankDetails"
+    [tempDetail]="MemberDiffViewModel?.bankDetails_Temp">
+      </app-mem-bank-detail-view></div>
+    </div>
+  </div>
+
+
+<!-- OVERLAY -->
+<div
+  class="profile-overlay"
+  *ngIf="showVerificationPopup"
+  [style.top.px]="popupPosition.top"
+  [style.left.px]="popupPosition.left"
+>
+  <div class="profile-popup">
+    <div class="verify-info">
+      <div class="verify-row">
+        <span class="label">Role:</span>
+        <span class="value">District manager(DM)</span>
+      </div>
+
+      <div class="verify-row">
+        <span class="label">Purpose:</span>
+        <span class="value">
+          DM needs to check and confirm that all the given details are correct
+          before approval
+        </span>
+      </div>
+    </div>
+
+    <div class="verify-box">
+      <div class="verify-title">
+        DM Data Verification–Before approval, the DM should verify:
+      </div>
+
+      <ul>
+        <li>
+          Personal Details – Check the applicant’s name, Aadhaar number, mobile
+          number, and address.
+        </li>
+        <li>
+          Organisation Details – Verify the organisation name, registration
+          details, and related information.
+        </li>
+        <li>
+          Family Members – Review the listed family members’ names and
+          relationship with the applicant.
+        </li>
+        <li>Documents – Check all uploaded documents.</li>
+      </ul>
+    </div>
+
+    <div class="verify-box verify-flex">
+      <div class="verify-left">
+        <div class="verify-title">DM Verification Checklist:</div>
+
+        <p>Kindly verify the following documents:</p>
+
+        <ul>
+          <li>வேலை ஆதார ஆவணம் / Work Proof Document</li>
+        </ul>
+      </div>
+
+      <div class="verify-right">
+        <div class="verify-title">• Reference Document</div>
+
+        <!-- <div class="doc-preview">
+          <img src="assets/reference-doc.png" />
+        </div> -->
+
+        <div class="doc-preview">
+          <img src="assets/worker-login-front.png" />
+          <img src="assets/worker-login-proof.png" />
+</div>
+      </div>
+    </div>
+
+    <div class="verify-warning">
+      <div class="verify-warning-title">Action Required:</div>
+
+      <p>Please verify whether the member is not a permanent employee.</p>
+
+      <p>
+        After verifying the uploaded documents and eligibility criteria, kindly
+        approve or return the application with remarks.
+      </p>
+    </div>
+  </div>
+</div>

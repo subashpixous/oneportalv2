@@ -1,0 +1,314 @@
+/* ==============================================================
+   MKK VIEW COMPONENT - 100% COMPACT FIGMA MATCH
+   ============================================================== */
+
+/* Modal Background Override */
+::ng-deep .mkk-popup .p-dialog-content {
+  background-color: #F4F2F2 !important;
+  padding: 1.5rem !important;
+}
+
+.mkk-figma-wrapper {
+  font-family: 'Poppins', sans-serif;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Perfect spacing between cards */
+
+  /* Global Classes */
+  .req { color: #d32f2f; }
+  .text-right { text-align: right; }
+  .text-green { color: #28a745; font-size: 13px; }
+  .no-data { text-align: center; color: #888; font-size: 11px; padding: 15px; }
+
+  /* Grid Layouts (Custom to avoid prime-flex padding issues) */
+  .grid-layout-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+  .grid-layout-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+  .grid-layout-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+  .align-center { align-items: center; }
+  .align-stretch { align-items: stretch; }
+  .span-2 { grid-column: span 2; }
+  .mt-compact { margin-top: 10px; }
+  .mb-compact { margin-bottom: 10px; }
+
+  /* CARDS */
+  .f-card {
+    background: #FFF;
+    border: 1px solid #D4D4D4;
+    border-radius: 5px;
+    margin: 0; /* Margin handled by wrapper gap */
+    
+    .f-header {
+      background: #F4F2F2;
+      color: #595959;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 10px 15px;
+      border-bottom: 1px solid #D4D4D4;
+      text-transform: uppercase;
+    }
+    .f-body {
+      padding: 15px 20px;
+    }
+  }
+
+  /* 1. Scheme Top Bar */
+  .scheme-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #D4D4D4;
+    font-size: 11.5px;
+    background: #FFF;
+
+    .t-lbl { color: #467C88; font-weight: 500; }
+    .t-val { color: #467C88; font-weight: 700; }
+  }
+
+  /* 2. Key Value Pairs */
+  .kv-pair {
+    display: flex;
+    align-items: flex-start;
+    font-size: 11.5px;
+    line-height: 1.4;
+
+    .lbl { color: #242424; width: 120px; flex-shrink: 0; }
+    .long-lbl { width: 160px; } /* For address section */
+    .bold-lbl { font-weight: 500; }
+    .colon { color: #535353; margin: 0 8px; flex-shrink: 0; }
+    
+    .val-dark { color: #525252; font-weight: 400; flex-grow: 1; word-break: break-word; }
+    .val-blue { color: #0F5169; font-weight: 700; flex-grow: 1; word-break: break-word; }
+  }
+
+ /* 3. Document Layouts (Main & Member) */
+  .doc-list-container {
+    width: 100%;
+  }
+  .doc-row-wrapper {
+    &.border-bottom-1 {
+      border-bottom: 1px dashed #D4D4D4;
+    }
+  }
+  
+  .doc-title-text {
+    font-size: 11px;
+    color: #242424;
+    font-weight: 500;
+    min-height: 28px; /* Alignment fix for double lines */
+  }
+
+  /* Big Dashed Boxes for Main Docs */
+  .ref-image-dashed-box, .upload-dashed-box {
+    border: 1px dashed #034772;
+    border-radius: 5px;
+    background: #FDFDFD;
+    height: 110px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .doc-img {
+    height: 80px;
+    width: auto;
+    max-width: 45%;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid #E3E0E0;
+    padding: 2px;
+  }
+
+  .uploaded-file-name {
+    color: #0F5169;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+  }
+
+  /* Small Grid for Member Docs */
+  .member-docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+  }
+  
+  .small-dashed-box {
+    border: 1px dashed #034772;
+    border-radius: 4px;
+    background: #FDFDFD;
+    height: 70px;
+    padding: 8px 10px;
+    width: 100%;
+  }
+
+  .file-name-truncate {
+    font-size: 10.5px;
+    color: #0F5169;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Utilities for Documents */
+  .status-text { font-size: 11px; font-weight: 500; }
+  .status-text-small { font-size: 9px; font-weight: 500; }
+  .text-gray-500 { color: #888 !important; }
+  .no-data-small { font-size: 10px; color: #999; }
+  .btn-download { width: 26px !important; height: 26px !important; }
+
+  /* 4. Profile Picture (Top Right Overlap) */
+  .relative-card {
+    position: relative;
+    margin-top: 30px !important; /* Space for the floating image */
+  }
+  .profile-avatar {
+    position: absolute;
+    top: -35px; /* Overlaps header perfectly */
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid #FFF;
+    background: #FFF;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 10;
+    overflow: hidden;
+    img { width: 100%; height: 100%; object-fit: cover; }
+  }
+
+  /* 5. Note & Tick Boxes */
+  .blue-tick-box {
+    background: #E6F1F5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 12px;
+    i { color: #069CCA; margin-right: 5px; font-size: 12px; }
+  }
+  .blue-note-box {
+    background: #E6F1F5;
+    padding: 12px 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    
+    .n-badge { color: #467C88; font-weight: 600; font-size: 10px; margin-right: 8px; margin-top: 1px; }
+    .n-title { font-size: 10px; font-weight: 500; color: #000; }
+    .n-desc { font-size: 9.5px; color: #000; margin-top: 3px; }
+  }
+
+  /* 6. Family Table */
+  .table-scroll { overflow-x: auto; }
+  .figma-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    th {
+      background: #E3E0E0;
+      color: #000;
+      font-size: 10.5px;
+      font-weight: 500;
+      padding: 10px;
+      border: 1px solid #CBCBCB;
+      text-align: center;
+    }
+    td {
+      padding: 10px;
+      border: 1px solid #CBCBCB;
+      color: #888;
+      font-size: 10.5px;
+      text-align: center;
+    }
+    .text-dark { color: #525252 !important; font-weight: 500; }
+.badge-more {
+    background: #90A0A4;
+    color: #FFF;
+    padding: 3px 6px 3px 12px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto;
+
+    i {
+      font-size: 10px;
+      margin-top: 1px;
+    }
+  }
+  }
+
+  /* 7. Organization Inputs */
+  .sub-heading {
+    font-weight: 600;
+    font-size: 12px;
+    color: #000;
+    text-decoration: underline;
+    margin: 15px 0 10px 0;
+  }
+/* Make empty f-inputs still take up grid space properly */
+  .f-input {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    label { 
+      font-size: 10.5px; 
+      color: #000; 
+      min-height: 28px; /* Added to align double-line labels properly */
+    }
+    .box {
+      border: 1px solid #A0A0A0;
+      border-radius: 3px;
+      padding: 6px 10px;
+      font-size: 10.5px;
+      color: #525252;
+      background: #FFF;
+      min-height: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      i { color: #888; font-size: 10px; }
+    }
+  }
+
+  /* 8. Declaration Box */
+  .dec-box {
+    background: #FFF9E6;
+    border: 1px solid #E6D087;
+    border-radius: 5px;
+    padding: 15px;
+    .dec-badge {
+      background: #D9A027;
+      color: #FFF;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .dec-list p { font-size: 10px; color: #9C701B; margin: 6px 0 0 0; line-height: 1.5; }
+    .dec-agree {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 11px;
+      color: #467C88;
+      font-weight: 600;
+    }
+  }
+}

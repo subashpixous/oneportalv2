@@ -1,0 +1,70 @@
+<div>
+<div class="flex gap-2 mt-3" *ngxPermissionsOnly="[privleges.MEMBER_BULK_APPROVE]">
+ <button
+  *ngIf="showBulkApproveButton()"
+  pButton
+  label="Approve Selected"
+  icon="pi pi-check"
+  class="p-button-success"
+  style="margin: 5px; font-size: 12px;"
+  (click)="multiApprove()">
+</button>
+</div>
+   <div  *ngxPermissionsExcept="['MEMBER_BULK_APPROVE']">
+  <app-datatable-pagination
+    [records]="configurationList"
+    [defaultSortField]="defaultSortField"
+    [defaultSortOrder]="defaultSortOrder"
+    [cols]="cols"
+    [fileName]="'Applications'"
+    [rows]="rows"
+    [total]="total"
+    [actions]="actions"
+    (invokeAction)="actioInvoked($event)"
+    [defaultstatus]="!currentStatus"
+    (changeStatus)="changeStatus($event)"
+    [searchableColumns]="searchableColumns"
+    [hasActiveInactive]="false"
+    [canShowAction]="true"
+    (changefilter)="changefilter($event)"
+    (actionalAction)="actionalAction($event)"
+    [exportedData]="exportedData"
+  [exportCols]="exportCols"
+  [isCalledFromApplication]="isCalledFromApplication"
+  [excelExport]="true"
+  (exportRequest)="onExportRequest($event)"
+  >
+  </app-datatable-pagination>
+  </div>
+
+    <div  *ngxPermissionsOnly="[privleges.MEMBER_BULK_APPROVE]">
+  <app-datatable-pagination
+  [records]="configurationList"
+  [defaultSortField]="defaultSortField"
+  [defaultSortOrder]="defaultSortOrder"
+  [cols]="cols"
+  [fileName]="'Applications'"
+  [rows]="rows"
+  [total]="total"
+  [actions]="actions"
+  (invokeAction)="actioInvoked($event)"
+  [defaultstatus]="!currentStatus"
+  (changeStatus)="changeStatus($event)"
+  [searchableColumns]="searchableColumns"
+  [hasActiveInactive]="false"
+  [canShowAction]="true"
+  (changefilter)="changefilter($event)"
+  (actionalAction)="actionalAction($event)"
+
+  [canShowCheckbox]="true"
+  [selectedRows]="selectedRows"
+  (selectedApplications)="onSelectedApplications($event)"
+
+  [exportedData]="exportedData"
+  [exportCols]="exportCols"
+  [excelExport]="true"
+  (exportRequest)="onExportRequest($event)">
+</app-datatable-pagination>
+</div>
+<p-toast></p-toast>
+</div>

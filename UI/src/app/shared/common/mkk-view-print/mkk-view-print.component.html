@@ -1,0 +1,567 @@
+<div>
+    <div class="row" style="border-bottom: 4px #1B729D solid;">
+        <div class="col-3 imagediv">
+            <img src="../../../assets/LogoImages/logo_tn_govt.png" class="img-responsive imgsize">
+        </div>
+        <div class="logo_txt col-6">
+            <div style="text-align: center;">
+                <h5 style=" margin-bottom: 2px !important; margin-top: 2px !important;">
+                    முன்னாள் படைவீரர்&nbsp;நலத்துறை, தமிழ்நாடு அரசு</h5>
+                <h6 class=" " style="margin-bottom: 2px !important; margin-top: 2px !important;">
+                    DEPARTMENT OF
+                    EX-SERVICEMEN’S WELFARE</h6>
+                <h6 style="margin-bottom: 2px !important; margin-top: 2px !important;">
+                    GOVERNMENT OF TAMILNADU
+                </h6>
+            </div>
+        </div>
+        <div class="col-3 imagediv"><img src="../../../assets/LogoImages/tncwwblogo.png" class="img-responsive imgsize">
+        </div>
+    </div>
+    <div class="col-lg-12 col-xs-12">
+        <br>
+        <div style="display: flex; flex-wrap: wrap;justify-content:center;">
+            <div [class]="getclass(item) " *ngFor="let item of schemeDetails.statusFlow" [style]="getStyle(item)"
+                [title]="item.status">
+                <div>{{item.number}}</div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="row no-gutters">
+        <div class="col" style="text-align: center;margin-top: 25px;">
+            <img [src]="url" height="100" alt="logotipo" class="imgsd">
+        </div>
+    </div>
+    <h5>General Information / பொதுவான தகவல்</h5>
+    <div class="col-12" style="display: flex; flex-wrap: wrap;">
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.applicationNumber)">
+            <p>Application Number / எண்: <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.applicationNumber
+                    ?this.schemeDetails.applicationNumber:this.schemeDetails.temporaryNumber}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.firstName)">
+            <p>Ex-Service Man First Name / முன்னாள் ராணுவ வீரரின் முதல் பெயர்
+
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.firstName
+                    ?this.schemeDetails.firstName:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.lastName)">
+            <p>Ex-Service Man Last Name / முன்னாள் ராணுவ வீரரின் கடைசி பெயர்
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.lastName
+                    ?this.schemeDetails.lastName:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.servedInString)">
+            <p>Served In / பணியாற்றிய படைப்பிரிவு
+
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.servedInString
+                    ?this.schemeDetails.servedInString:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.serviceNumber)">
+            <p>Service Number / படை எண்:
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.serviceNumber
+                    ?this.schemeDetails.serviceNumber:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.rank_String)">
+            <p>Rank / தரம்
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.rank_String
+                    ?this.schemeDetails.rank_String:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0">
+            <p>Self / Dependent / தனக்கு/சார்ந்தோர்:
+                : <span style="font-weight: bold;">{{this.schemeDetails && !this.schemeDetails.isSelf
+                    ?"SELF":"DEPENDENT"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.dependentType)">
+            <p>Dependent / சார்ந்தோர்
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.dependentType ?
+                    this.schemeDetails.dependentType: '-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.dependentName)">
+            <p>Dependent Name / சார்ந்திருப்பவரின் பெயர்
+                : <span style="font-weight: bold;">{{this.schemeDetails&& this.schemeDetails.dependentName
+                    ?this.schemeDetails.dependentName:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.dependentDob)">
+            <p>Dependent DOB / சார்ந்தோர் பிறந்த தேதி
+                : <span style="font-weight: bold;">{{dc(this.schemeDetails.dependentDob)}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.dependentDob)">
+            <p>Dependent Age / சார்ந்தோர் வயது
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.dependentDob
+                    ?calculateAge(this.schemeDetails.dependentDob):''}}</span> </p>
+        </div>
+        <!-- <div class="col-6 p-0 p-0">
+            <p>Are you a first-generation entrepreneur? / நீங்கள் முதல் தலைமுறை தொழில்முனைவோரா?
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.isFirstEntrepreneur ?'YES':'NO'}}</span> </p>
+        </div> -->
+        <!-- <div class="col-6 p-0 p-0">
+            <p>Are you a native of Tamil Nadu? /
+                நீங்கள் தமிழகத்தை பூர்வீகமாக கொண்டவரா?
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.isNativeTamilNadu ?'YES':'NO'}}</span> </p>
+        </div> -->
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.maritalStatusString)">
+            <p>Marital Status / திருமண நிலை
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.maritalStatusString
+                    ?this.schemeDetails.maritalStatusString:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.dob)">
+            <p>Ex-Service Man's D.O.B /முன்னாள்
+                ராணுவ வீரரின் பிறந்த தேதி
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.dob
+                    ?dc(this.schemeDetails.dob):''}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.dob)">
+            <p>Ex-Service Man's Age / முன்னாள்
+                ராணுவ வீரரின் வயது
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.dob
+                    ?calculateAge(this.schemeDetails.dob):''}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.sexString)">
+            <p>Gender / பாலினம்
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.sexString
+                    ?this.schemeDetails.sexString:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.mobile)">
+            <p>Mobile / கைபேசி
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.mobile
+                    ?this.schemeDetails.mobile:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.projectAddress?.districtString)">
+            <p>Project District / திட்டத்தின் மாவட்டம்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.projectAddress?.districtString?
+                    this.schemeDetails.projectAddress?.districtString: ''}}</span> </p>
+        </div>
+    </div>
+    <h5>Personal Information / தனிப்பட்ட தகவல்
+    </h5>
+
+    <div class="col-12" style="display: flex; flex-wrap: wrap;">
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.aadharNo)">
+            <p>Aadhar No / ஆதார் எண்
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.aadharNo
+                    ?this.schemeDetails.aadharNo:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.email)">
+            <p>Email / மின்னஞ்சல்
+                : <span style="font-weight: bold;">{{this.schemeDetails && this.schemeDetails.email
+                    ?this.schemeDetails.email:''}}</span> </p>
+        </div>
+        <!-- <div class="col-6 p-0 p-0">
+            <p>Are you re-employed? / நீங்கள்
+                மீண்டும் பணியமர்த்தப்பட்டுள்ளீர்களா?
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.isReEmployed ?'YES':'NO'}}</span> </p>
+        </div> -->
+        <!-- <div class="col-6 p-0 p-0">
+            <p>Residing continuously for the last three years in the area from where loan is applied: <span
+                    style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.residinginSameArea
+                    ?"YES":'NO'}}</span> </p>
+        </div> -->
+        <div class="col-6 p-0 p-0">
+            <p>Training Undergone / பயிற்சி முடிந்த விவரம்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.isTrainingUndergone
+                    ?"YES":'NO'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Whether the applicant is presently employed / விண்ணப்பதாரரின் தற்போதைய பணி நிலை
+
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.isEmployed
+                    ?"YES":"NO"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0"
+            *ngIf="this.schemeDetails.isEmployed && CheckNullorEmpty(this.schemeDetails?.employeementType)">
+            <p>Employment Type / பணியின் வகை
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.employeementType
+                    ?this.schemeDetails.employeementType:''}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0"
+            *ngIf="this.schemeDetails.isEmployed && CheckNullorEmpty(this.schemeDetails?.employementOthers)">
+            <p>Employment Type Other / பணியின் மற்ற வகை
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.employementOthers
+                    ?this.schemeDetails.employementOthers:''}}</span> </p>
+        </div>
+    </div>
+    <h5>Residential Address / குடியிருப்பு முகவரி
+    </h5>
+
+    <div class="col-12" style="display: flex; flex-wrap: wrap;">
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.residentialAddress?.doorNo)">
+            <p>Address / முகவரி
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.residentialAddress?.doorNo
+                    ?this.schemeDetails.residentialAddress?.doorNo:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.residentialAddress?.streetName)">
+            <p>Street Name / தெரு பெயர்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.residentialAddress?.streetName
+                    ?this.schemeDetails.residentialAddress?.streetName:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.residentialAddress?.districtString)">
+            <p>District / மாவட்டம்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.residentialAddress?.districtString
+                    ?this.schemeDetails.residentialAddress?.districtString:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.residentialAddress?.talukString)">
+            <p>Taluk / தாலுக்கா
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.residentialAddress?.talukString
+                    ?this.schemeDetails.residentialAddress?.talukString:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.residentialAddress?.villlageTownCity)">
+            <p>Village / கிராமம்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.residentialAddress?.villlageTownCity
+                    ?this.schemeDetails.residentialAddress?.villlageTownCity:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.residentialAddress?.pincode)">
+            <p>Pincode / பின்கோடு
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.residentialAddress?.pincode
+                    ?this.schemeDetails.residentialAddress?.pincode:'-'}}</span> </p>
+        </div>
+    </div>
+    <h5>Correspondence Address / கடிதத்தொடர்பு முகவரி
+
+    </h5>
+
+    <div class="col-12" style="display: flex; flex-wrap: wrap;">
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.correspondenceAddress?.doorNo)">
+            <p>Address / முகவரி
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.correspondenceAddress?.doorNo
+                    ?this.schemeDetails.correspondenceAddress?.doorNo:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.correspondenceAddress?.streetName)">
+            <p>Street Name / தெரு பெயர்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.correspondenceAddress?.streetName
+                    ?this.schemeDetails.correspondenceAddress?.streetName:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.correspondenceAddress?.districtString)">
+            <p>District / மாவட்டம்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.correspondenceAddress?.districtString
+                    ?this.schemeDetails.correspondenceAddress?.districtString:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.correspondenceAddress?.talukString)">
+            <p>Taluk / தாலுக்கா
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.correspondenceAddress?.talukString
+                    ?this.schemeDetails.correspondenceAddress?.talukString:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0"
+            *ngIf="CheckNullorEmpty(this.schemeDetails?.correspondenceAddress?.villlageTownCity)">
+            <p>Village / கிராமம்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.correspondenceAddress?.villlageTownCity
+                    ?this.schemeDetails.correspondenceAddress?.villlageTownCity:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.correspondenceAddress?.pincode)">
+            <p>Pincode / பின்கோடு
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.correspondenceAddress?.pincode
+                    ?this.schemeDetails.correspondenceAddress?.pincode:'-'}}</span> </p>
+        </div>
+    </div>
+    <h5>Educational Qualification / கல்வித் தகுதி
+    </h5>
+    <div class="col-12">
+        <table class="">
+            <thead>
+                <tr>
+                    <th style="width: 10%">S.No / வ.எண்
+                    </th>
+                    <th style="width: 30%">Educational Qualification / கல்வித் தகுதி
+                    </th>
+                    <th style="width: 20%">Course Details / படிப்பு விவரங்கள்
+                    </th>
+                    <th style="width: 30%">Institution / நிறுவனம்
+                    </th>
+                    <th style="width: 10%">Year of Passing / கடந்த ஆண்டு
+                    </th>
+                </tr>
+            </thead>
+            <tbody
+                *ngIf="schemeDetails && schemeDetails.educationalQualification && schemeDetails.educationalQualification.length>0; else norecwords">
+                <tr *ngFor="let itemrow of schemeDetails.educationalQualification ; let i=index;let l=last">
+                    <td>{{i+1}}</td>
+                    <td>{{itemrow.educationalQualification}}</td>
+                    <td>{{itemrow.courseDetails}}</td>
+                    <td>{{itemrow.institution}}</td>
+                    <td>{{itemrow.yearOfPassing}}</td>
+                </tr>
+            </tbody>
+            <ng-template #norecwords>
+                <p style="padding-top: 20px;">No records</p>
+            </ng-template>
+        </table>
+    </div>
+    <h5 *ngIf="this.schemeDetails.isTrainingUndergone == true">Training Details / பயிற்சி விவரங்கள்
+    </h5>
+    <div class="col-12" *ngIf="this.schemeDetails.isTrainingUndergone == true">
+        <table class="">
+            <thead>
+                <tr>
+                    <th style="width: 10%">S.No / வ.எண்
+                    </th>
+                    <th style="width: 30%">Name of Institution /
+                        நிறுவனத்தின் பெயர்
+                    </th>
+                    <th style="width: 15%">Training Duration From / பயிற்சி
+                        காலம்
+                    </th>
+                    <th style="width: 15%"> Training Duration To / பயிற்சி
+                        காலம்
+                    </th>
+                    <th style="width: 30%">Type of Training / பயிற்சியின்
+                        வகை
+                    </th>
+                </tr>
+            </thead>
+            <tbody
+                *ngIf="schemeDetails && schemeDetails.typeOfTrainingList && schemeDetails.typeOfTrainingList.length>0; else norecwords">
+                <tr *ngFor="let itemrow of schemeDetails.typeOfTrainingList ; let i=index;let l=last">
+                    <td>{{i+1}}</td>
+                    <td>{{itemrow.nameOfTheInstitution}}</td>
+                    <td>{{dc( itemrow.fromDate)}}</td>
+                    <td>{{dc(itemrow.toDate)}}</td>
+                    <td>{{itemrow.typeOfTraining}}</td>
+                </tr>
+            </tbody>
+            <ng-template #norecwords>
+                <p style="padding-top: 20px;">No records</p>
+            </ng-template>
+        </table>
+    </div>
+
+    <h5>Project Information / திட்ட விவரங்கள்
+    </h5>
+
+    <div class="col-12" style="display: flex; flex-wrap: wrap;">
+
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.activityLaneString)">
+            <p>Venture Category / தொழில் வகை
+
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.activityLaneString
+                    ?this.schemeDetails.activityLaneString:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.activityLaneString)">
+            <p>Activity Lane / செயல்பாட்டு வகை
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.activityLaneString
+                    ?this.schemeDetails.activityLaneString:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="this.schemeDetails?.activityLaneString?.toLocaleLowerCase()=='other'">
+            <p>Activity Lane Other / செயல்பாட்டு வகை மற்றவை
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.activityLaneOther
+                    ?this.schemeDetails.activityLaneOther:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.projectAddress?.doorNo)">
+            <p>Address / முகவரி
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.projectAddress?.doorNo
+                    ?this.schemeDetails.projectAddress?.doorNo:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.projectAddress?.streetName)">
+            <p>Street Name / தெரு பெயர்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.projectAddress?.streetName
+                    ?this.schemeDetails.projectAddress?.streetName:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.projectAddress?.districtString)">
+            <p>District / மாவட்டம்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.projectAddress?.districtString
+                    ?this.schemeDetails.projectAddress?.districtString:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.projectAddress?.talukString)">
+            <p>Taluk / தாலுக்கா
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.projectAddress?.talukString
+                    ?this.schemeDetails.projectAddress?.talukString:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.projectAddress?.villlageTownCity)">
+            <p>Village / கிராமம்
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.projectAddress?.villlageTownCity
+                    ?this.schemeDetails.projectAddress?.villlageTownCity:'-'}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.projectAddress?.pincode)">
+            <p>Pincode / பின்கோடு
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.projectAddress?.pincode
+                    ?this.schemeDetails.projectAddress?.pincode:'-'}}</span> </p>
+        </div>
+
+        <!-- <div class="col-6 p-0 p-0">
+            <p>Project Outlay Cost (Rs) / திட்டச் தொகை (ரூ)
+                : <span style="font-weight: bold;"> {{this.schemeDetails &&
+                    this.schemeDetails.projectOutlayCost ?
+                    this.schemeDetails.projectOutlayCost: '0'}}</span></p>
+        </div> -->
+        <div class="col-6 p-0 p-0"
+            *ngIf="canShowthisProjectField('LAND_COST')&& CheckZero(this.schemeDetails?.landCost)">
+            <p>
+                Land Cost (Rs) / நிலத்தின் தொகை (ரூ): <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.landCost ?
+                    this.schemeDetails.landCost: '0'}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0"
+            *ngIf="canShowthisProjectField('BUILDING_COST')&& CheckZero(this.schemeDetails?.buildingCost)">
+            <p>Building Cost (Rs) / கட்டிட தொகை (ரூ)
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.buildingCost ?
+                    this.schemeDetails.buildingCost: '0'}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0"
+            *ngIf="canShowthisProjectField('MACHINERY_EQUIPMENT_COST')&& CheckZero(this.schemeDetails?.equipmentCost)">
+            <p>Plant and Machinery Costs (Rs) / தொழிற்சாலை மற்றும் இயந்திரச் செலவுகள் (ரூ)
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.equipmentCost ?
+                    this.schemeDetails.equipmentCost: '0'}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="canShowthisProjectField('WORKING_COST')">
+            <p>Working Capital Cost (Rs) / பணி மூலதனச் செலவு (ரூ)
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.workingCost ?
+                    this.schemeDetails.workingCost: '0'}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0"
+            *ngIf="canShowthisProjectField('PRE_OPERTAIVE_EXPENSE')&& CheckZero(this.schemeDetails?.preopertaiveExpense)">
+            <p>Preliminary & Pre-Opertaive Expenses (Rs)
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.preopertaiveExpense ?
+                    this.schemeDetails.preopertaiveExpense: '0'}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0"
+            *ngIf="canShowthisProjectField('OTHER_EXPENSE')&& CheckZero(this.schemeDetails?.otherExpense)">
+            <p>Other Expenses (Rs)
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.otherExpense ?
+                    this.schemeDetails.otherExpense: '0'}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0"
+            *ngIf="canShowthisProjectField('BENEFICIARY_CONTRIBUTION')&& CheckZero(this.schemeDetails?.beneficiaryCost)">
+            <p>Promoter Contribution / ஊக்குவிப்பாளரின் பங்களிப்பு (ரூ)
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.beneficiaryCost ?
+                    this.schemeDetails.beneficiaryCost: '0'}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Total Project Cost (Rs) / மொத்த திட்டத் தொகை (ரூ)
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.totalCost ?
+                    this.schemeDetails.totalCost: '0'}}</span></p>
+        </div>
+        <!-- <div class="col-6 p-0 p-0" *ngIf="canShowthisProjectField('SUBSIDY_COST')">
+            <p>Subsidy Cost / மானியத் தொகை
+
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.subsidyCost ?
+                    this.schemeDetails.subsidyCost: '0'}}</span></p>
+        </div> -->
+        <!-- <div class="col-6 p-0 p-0">
+            <p>Loan Amount (Rs) / கடன் தொகை (ரூ)
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.loanCost ?
+                    this.schemeDetails.loanCost: '0'}}</span></p>
+        </div> -->
+        <div class="lg:col-12 md:col-12 sm:col-12 boldlabelinsiderow">
+            <p>Total Project Cost in Words (Rs) / மொத்த திட்டத் தொகை எழுத்தால் (ரூ)
+
+                : <span style="font-weight: bold;">{{convertoWordsd(this.schemeDetails.totalCost??0)}}</span></p>
+        </div>
+        <!-- <div class="col-6 p-0 p-0">
+            <p>Loan Cost in Words (Rs) / மொத்த தொகை எழுத்தால் (ரூ)
+                : <span style="font-weight: bold;">{{convertoWordsd(this.schemeDetails.loanCost??0)}}</span></p>
+        </div> -->
+        <div class="col-12">
+        </div>
+
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.ifsc)">
+            <p>IFSC
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.ifsc ?
+                    this.schemeDetails.ifsc: ''}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.bankName)">
+            <p>Bank / வங்கி
+
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.bankName ?
+                    this.schemeDetails.bankName: ''}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.branchName)">
+            <p>Branch / கிளை
+
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.branchName ?
+                    this.schemeDetails.branchName: ''}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.address)">
+            <p>Address / முகவரி
+
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.address ?
+                    this.schemeDetails.address: ''}}</span></p>
+        </div>
+        <div class="col-6 p-0 p-0" *ngIf="CheckNullorEmpty(this.schemeDetails?.accountNumber)">
+            <p>Account Number / கணக்கு எண்
+
+                : <span style="font-weight: bold;">{{this.schemeDetails &&
+                    this.schemeDetails.accountNumber ?
+                    this.schemeDetails.accountNumber: ''}}</span></p>
+        </div>
+    </div>
+    <h5>Documents / ஆவணங்கள்</h5>
+
+    <div class="col-12 row">
+        <div *ngFor="let grp of schemeDetails.applicationDocument" style="margin-top: 20px;">
+            <div class="">
+                <h6 class="">{{grp.documentGroupName}}</h6>
+            </div>
+            <div class="col-12 " style="flex-wrap: wrap;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S.No / வ.எண்
+                            </th>
+                            <th style="min-width: 200px">Document Category / ஆவண வகை
+                            </th>
+                            <th style="min-width: 100px">Document Type / ஆவண வகை
+                            </th>
+                            <th>File Name / கோப்பு பதிவேற்றம்
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itemrow of grp.documents; let i=index;let l=last">
+                            <td>{{i+1}} </td>
+                            <td>{{itemrow.documentCategory}}</td>
+                            <td>{{itemrow.acceptedDocumentType}}</td>
+                            <td>
+                                <a target="_blank" [title]="itemrow.originalFileName" href="#">
+                                    {{itemrow.originalFileName}}
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

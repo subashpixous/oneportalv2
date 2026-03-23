@@ -1,0 +1,27 @@
+<div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;">
+    <div class="flex align-items-center  mr-4">
+        <p class="fw-bold">All Schemes</p>
+    </div>
+    <div class="flex align-items-center  mr-4">
+        <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+        <p-button *ngIf="isLoggedin"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            label="Logout" (onClick)="Logout()" />
+    </div>
+</div>
+<div class="flex justify-content-center mt-4 mb-4 flex-wrap ">
+    <div class="parentDiv m-3" *ngFor="let item of configurationList">
+        <div class="groupinfo">
+            <h4 class="text-center ss">{{item.schemeName}}</h4>
+            <div style="text-align: center;margin-top: 15px;">
+                <p-button severity="primary" styleClass="bcbtn" label="Apply"
+                    (onClick)="movetoSchemeList(item.schemeId)" />
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="flex mb-2 imagediv justify-content-center">
+    <p-button severity="secondary" styleClass="bcbtn" (onClick)="bckClick()" label="Back" />
+</div>

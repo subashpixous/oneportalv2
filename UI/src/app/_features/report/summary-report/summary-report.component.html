@@ -1,0 +1,110 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="col-12 md:col-6 lg:col-3">
+            <h4>{{title}}</h4>
+        </div>
+
+        <div class="col-12 row  lg:col-12 md:col-12 flex">
+
+            <div class="field col-12 lg:col-3 md:col-3 ">
+                <p-dropdown [options]="financialYearsfilter" optionLabel="text" [style]="{'width': '100%'}"
+                    optionValue="value" placeholder="Select from year" [showClear]="false"
+                    (ngModelChange)="generatefinancialYearsfromfilter($event)"
+                    [(ngModel)]="props.selectedfinancialYearfromfilter"></p-dropdown>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 ">
+                <p-dropdown [options]="financialYearsfilter" optionLabel="text" [style]="{'width': '100%'}"
+                    optionValue="value" placeholder="Select to year" [showClear]="false"
+                    (ngModelChange)="generatefinancialYearstofilter($event)"
+                    [(ngModel)]="props.selectedfinancialYeartofilter"></p-dropdown>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 ">
+
+                <p-multiSelect [options]="districts" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a District" [showClear]="false" (ngModelChange)="generatedistricts($event)"
+                    [(ngModel)]="props.selectedDistricts"></p-multiSelect>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 ">
+                <p-multiSelect [options]="schemes" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a Scheme" (ngModelChange)="changescheme($event)" [showClear]="false"
+                    [(ngModel)]="props.selectedSchemes"></p-multiSelect>
+            </div>
+        </div>
+
+        <div class="col-12 row mb-3 mt-3"
+            *ngIf="totalDet && totalDet.applicationAllStatusCount && totalDet.applicationAllStatusCount">
+            <div class="row">
+                <app-datatable [canshowExport]="true" [records]="configurationList"
+                    [defaultSortField]="defaultSortField" [defaultSortOrder]="defaultSortOrder" [cols]="cols"
+                    [fileName]="'Summary_Report'" [rows]="rows" [total]="total" [actions]="actions"
+                    (invokeAction)="actioInvoked($event)" [defaultstatus]="!currentStatus"
+                    (changeStatus)="changeStatus($event)" [displaySize]="'LARGE'"
+                    [searchableColumns]="searchableColumns" (actionalAction)="actionalAction($event)"
+                    [hasActiveInactive]="false" [canShowAction]="false">
+                </app-datatable>
+
+            </div>
+        </div>
+
+        <div class="col-12 mb-5"
+            *ngIf="totalDet && totalDet.applicationReceived && totalDet.applicationReceived.length>0">
+            <div class="chartContainer">
+
+                <h5>Application Received Count by District</h5>
+            </div>
+            <div class="card chartCard">
+                <app-chart [chartopt]="applicationReceivedchartoption"></app-chart>
+            </div>
+        </div>
+        <div class="col-12 mb-5"
+            *ngIf="totalDet && totalDet.taskForceCommittee && totalDet.taskForceCommittee.length>0">
+            <div class="chartContainer">
+
+                <h5>Task Force Committee Approved Count by District</h5>
+            </div>
+            <div class="card chartCard">
+                <app-chart [chartopt]="taskForceCommitteechartoption"></app-chart>
+            </div>
+        </div>
+        <div class="col-12 mb-5"
+            *ngIf="totalDet && totalDet.forwardedToLendingBank && totalDet.forwardedToLendingBank.length>0">
+            <div class="chartContainer">
+
+                <h5>Forwarded to Lending Bank Count by District</h5>
+            </div>
+            <div class="card chartCard">
+                <app-chart [chartopt]="forwardedToLendingBankchartoption"></app-chart>
+            </div>
+        </div>
+        <div class="col-12 mb-5"
+            *ngIf="totalDet && totalDet.approvedByLendingBank && totalDet.approvedByLendingBank.length>0">
+            <div class="chartContainer">
+
+                <h5>Approved by Lending Bank Count by District</h5>
+            </div>
+            <div class="card chartCard">
+                <app-chart [chartopt]="approvedByLendingBankchartoption"></app-chart>
+            </div>
+        </div>
+        <div class="col-12 mb-5"
+            *ngIf="totalDet && totalDet.subsidyReleasedToLendingBank && totalDet.subsidyReleasedToLendingBank.length>0">
+            <div class="chartContainer">
+
+                <h5>Subsidy Released to Lending Bank Count by District</h5>
+            </div>
+            <div class="card chartCard">
+                <app-chart [chartopt]="subsidyReleasedToLendingBankchartoption"></app-chart>
+            </div>
+        </div>
+        <div class="col-12 mb-5"
+            *ngIf="totalDet && totalDet.subsidyReleasedByHq && totalDet.subsidyReleasedByHq.length>0">
+            <div class="chartContainer">
+
+                <h5>Subsidy Released by HQ Count by District</h5>
+            </div>
+            <div class="card chartCard">
+                <app-chart [chartopt]="subsidyReleasedByHqchartoption"></app-chart>
+            </div>
+        </div>
+    </div>
+</div>

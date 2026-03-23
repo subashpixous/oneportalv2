@@ -1,0 +1,227 @@
+<div class=" formgrid mb-3" *ngIf="dropdown">
+    <form [formGroup]="generalForm" (ngSubmit)="submit()" class="col-12">
+        <div class="card p-fluid" style="padding-bottom: 10px;">
+            <div class="p-formgrid grid">
+                <div class="field col-12  md:col-6   lg:col-4">
+                    <label htmlFor="isActive">Is Acitve</label>
+                    <p-inputSwitch formControlName="isActive" [style]="{'display':'flex'}" />
+                    <app-error-msg [control]="generalForm.get('isActive')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6   lg:col-4">
+                    <label htmlFor="isSelfOrFamilyMember">Applicable for?</label>
+                    <div class=" flex">
+                        <div class="flex flex-wrap gap-3">
+                            <div class="flex align-items-center">
+                                <p-radioButton name="isSelfOrFamilyMember" value="SELF"
+                                    formControlName="isSelfOrFamilyMember" inputId="SELF" />
+                                <label for="Self" class="ml-2">
+                                    Self
+                                </label>
+                            </div>
+
+                            <div class="flex align-items-center">
+                                <p-radioButton name="isSelfOrFamilyMember" value="DEPENDENT"
+                                    formControlName="isSelfOrFamilyMember" inputId="DEPENDENT" />
+                                <label for="FamilyMember" class="ml-2">
+                                    Family Member
+                                </label>
+                            </div>
+
+                            <div class="flex align-items-center">
+                                <p-radioButton name="isSelfOrFamilyMember" value="BOTH"
+                                    formControlName="isSelfOrFamilyMember" inputId="BOTH" />
+                                <label for="ingredient3" class="ml-2">
+                                    Both
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <app-error-msg [control]="generalForm.get('isSelfOrFamilyMember')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6   lg:col-4">
+                    <label htmlFor="isAlreadyAvailed">Is Only Once</label>
+                    <p-inputSwitch formControlName="isAlreadyAvailed" [style]="{'display':'flex'}" />
+                    <app-error-msg [control]="generalForm.get('isAlreadyAvailed')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6   lg:col-4">
+                    <label htmlFor="isSingleCategorySelect">Is Only one category selection</label>
+                    <p-inputSwitch formControlName="isSingleCategorySelect" [style]="{'display':'flex'}" />
+                    <app-error-msg [control]="generalForm.get('isSingleCategorySelect')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6   lg:col-4">
+                    <label htmlFor="showAdditionalFields">Need to show Additional Fields?</label>
+                    <p-inputSwitch formControlName="showAdditionalFields" [style]="{'display':'flex'}" />
+                    <app-error-msg [control]="generalForm.get('showAdditionalFields')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6   lg:col-4">
+                    <label htmlFor="showBankFields">Need to show Bank Fields?</label>
+                    <p-inputSwitch formControlName="showBankFields" [style]="{'display':'flex'}" />
+                    <app-error-msg [control]="generalForm.get('showBankFields')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-12  lg:col-12">
+                    <label htmlFor="description">Scheme Description</label>
+                    <textarea rows="5" cols="30" pInputTextarea formControlName="description"
+                        [style]="{'display':'flex'}"></textarea>
+                    <app-error-msg [control]="generalForm.get('description')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="gendersList">Genders </label>
+                    <p-multiSelect [options]="dropdown.genders" optionLabel="text" optionValue="value" display="chip"
+                        placeholder="Select a Gender" formControlName="gendersList" [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('gendersList')"></app-error-msg>
+                </div>
+
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="districtsList">Districts </label>
+                    <p-multiSelect [options]="dropdown.districts" optionLabel="text" optionValue="value" display="chip"
+                        placeholder="Select a District" formControlName="districtsList" [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('districtsList')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="religionsList">Religions </label>
+                    <p-multiSelect [options]="dropdown.religions" optionLabel="text" optionValue="value" display="chip"
+                        placeholder="Select a Religion" formControlName="religionsList" [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('religionsList')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="communityList">Community </label>
+
+                    <p-multiSelect [options]="dropdown.communityGrouped" placeholder="Select a Community"
+                        optionLabel="text" optionValue="value" formControlName="communityList"
+                        class="multiselect-custom" ngClass="dd" [group]="true"
+                        [ngStyle]="{'width': '100%', 'margin':'0px 20px 0px 0px '}">
+
+                        <ng-template let-castes pTemplate="item">
+                            <div class="flex align-items-center">
+                                <span class="ml-2">{{ castes.text }}</span>
+                            </div>
+                        </ng-template>
+
+                        <ng-template let-group pTemplate="group">
+                            <div class="flex align-items-center font-bold">
+                                {{ group.text }}
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('communityList')"></app-error-msg>
+                </div>
+                <!-- <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="casteList">Caste </label>
+                    <p-multiSelect [options]="dropdown.castes" formControlName="casteList" placeholder="Select a Caste"
+                        optionLabel="text" optionValue="value" class="multiselect-custom" ngClass="dd" [group]="true"
+                        [ngStyle]="{'width': '100%', 'margin':'0px 20px 0px 0px '}">
+
+                        <ng-template let-castes pTemplate="item">
+                            <div class="flex align-items-center">
+                                <span class="ml-2">{{ castes.text }}</span>
+                            </div>
+                        </ng-template>
+
+                        <ng-template let-group pTemplate="group">
+                            <div class="flex align-items-center font-bold">
+                                {{ group.text }}
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('casteList')"></app-error-msg>
+                </div> -->
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="callLetterStatusIdsList">Call Letter Status</label>
+                    <p-multiSelect [options]="dropdown.statusList" optionLabel="text" optionValue="value" display="chip"
+                        placeholder="Select a Call Letter" formControlName="callLetterStatusIdsList" [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('callLetterStatusIdsList')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4"
+                    *ngIf="generalForm.get('isSelfOrFamilyMember')?.value=='DEPENDENT' || generalForm.get('isSelfOrFamilyMember')?.value=='BOTH'">
+                    <label htmlFor="familyMemberCategorysList">Family Members</label>
+                    <p-multiSelect [options]="dropdown.familyMemberCategorys" optionLabel="text" optionValue="value"
+                        display="chip" placeholder="Select a status" formControlName="familyMemberCategorysList"
+                        [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('familyMemberCategorysList')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="organizationTypeList">Organization Type</label>
+                    <p-multiSelect [options]="dropdown.organizationTypeList" optionLabel="text" optionValue="value"
+                        display="chip" placeholder="Select a Organization Type" formControlName="organizationTypeList"
+                        [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('organizationTypeList')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="memberEducationList">Education</label>
+                    <p-multiSelect [options]="dropdown.memberEducationList" optionLabel="text" optionValue="value"
+                        display="chip" placeholder="Select a Education" formControlName="memberEducationList"
+                        [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('memberEducationList')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4"
+                    *ngIf="generalForm.get('isSelfOrFamilyMember')?.value=='DEPENDENT' || generalForm.get('isSelfOrFamilyMember')?.value=='BOTH'">
+                    <label htmlFor="familyMemberEducationList">Family Member Education</label>
+                    <p-multiSelect [options]="dropdown.familyMemberEducationList" optionLabel="text" optionValue="value"
+                        display="chip" placeholder="Select a Education" formControlName="familyMemberEducationList"
+                        [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('familyMemberEducationList')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="maritalStatusList">Marital Status</label>
+                    <p-multiSelect [options]="dropdown.maritalStatusList" optionLabel="text" optionValue="value"
+                        display="chip" placeholder="Select a Marital Status" formControlName="maritalStatusList"
+                        [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('maritalStatusList')"></app-error-msg>
+                </div>
+                <!-- <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="docRequiredStatusIdsList">Mandatory Document Status</label>
+                    <p-multiSelect [options]="statusList" optionLabel="text" optionValue="value" display="chip"
+                        placeholder="Select a status" formControlName="docRequiredStatusIdsList" [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="generalForm.get('docRequiredStatusIdsList')"></app-error-msg>
+                </div> -->
+                <div class="field col-12  md:col-4  lg:col-4">
+                    <label htmlFor="minimumAge"> Age </label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">
+                            <input pInputText [placeholder]="'Minimum'" formControlName="minimumAge" type="text" />
+                        </span>
+                        <span class="p-inputgroup-addon">
+                            <input pInputText [placeholder]="'Maximum'" formControlName="maximumAge" type="text" />
+                        </span>
+                    </div>
+                    <app-error-msg [control]="generalForm.get('minimumAge')"></app-error-msg>
+                    <app-error-msg [control]="generalForm.get('maximumAge')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-4  lg:col-4">
+                    <label htmlFor="fromDate">From
+                    </label>
+                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true" [showButtonBar]="true"
+                        [maxDate]="generalForm.controls['toDate'].value" dateFormat="dd-mm-yy" [readonlyInput]="true"
+                        formControlName="fromDate" inputId="icon"></p-calendar>
+                    <app-error-msg [control]="generalForm.get('fromDate')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-4  lg:col-4">
+                    <label htmlFor="toDate">To
+                    </label>
+                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true" [showButtonBar]="true"
+                        [minDate]="generalForm.controls['fromDate'].value" dateFormat="dd-mm-yy" [readonlyInput]="true"
+                        formControlName="toDate" inputId="icon"></p-calendar>
+                    <app-error-msg [control]="generalForm.get('toDate')"></app-error-msg>
+                </div>
+                <div class="col-12 md:col-6 flex  lg:col-2" style="margin-top: 25px">
+                    <div class="col">
+                        <button pButton type="submit"
+                            *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                            [disabled]="!generalForm.valid" label="Save"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p-toast></p-toast>
+</div>

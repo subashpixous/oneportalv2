@@ -1,0 +1,14 @@
+<div class="header" style="padding: 0px 0px;margin-bottom:10px;">
+
+    <div class="logo-div">
+        <div class="">
+            <app-homeheader  (languageChange)="onLanguageChanged($event)"></app-homeheader>
+            <div style="">
+                <router-outlet ></router-outlet>
+
+            </div>
+            <app-homefooter  [language]="selectedLanguage"></app-homefooter>
+        </div>
+    </div>
+
+</div>

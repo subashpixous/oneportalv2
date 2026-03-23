@@ -1,0 +1,201 @@
+.imagediv {
+  display: flex;
+  justify-content: center;
+}
+
+.imgsize {
+  width: 350px;
+  height: 75px;
+}
+
+/* Footer layout */
+.footer-section {
+  background-color: #F1F1F1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* ensures left and right separation */
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  position: relative;
+}
+
+/* Left side - Query */
+.footer-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+.rights-card{
+    color:  #467C88;
+    font-family: 'Poppins';
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+/* Button styling */
+::ng-deep .bcbtn {
+  border-radius: 18px;
+  padding: 5px 45px;
+  margin-right: 0;
+}
+
+/* Registration query styles */
+// .registration-query {
+//   padding-left: 50px;
+//   font-weight: 600;
+//   color: #034772;
+//   font-size: 1.1rem;
+//   line-height: 1.3;
+// }
+
+// .registration-query .query-title {
+//   display: block;
+//   margin-bottom: 2px;
+//   color: #034772;
+//   font-weight: bold;
+// }
+
+.query-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.query-link {
+  color:#467C88;
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.query-link:hover {
+  color:#467C88;
+}
+
+.query-number {
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.query-number:hover {
+  text-decoration: underline;
+}
+
+/* ✅ Responsive layout */
+@media (max-width: 768px) {
+  .footer-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-left {
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* ✅ Force footer section full width */
+.align-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px 10px 20px; /* left-right balance */
+}
+
+/* Center-align the Form Registrations Query */
+.align-footer .footer-center {
+  flex: 1; /* take up available space */
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center;
+  text-align: center;
+}
+
+
+/* Registration query text styling */
+.registration-query {
+  font-weight: 600;
+  color: #034772;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.registration-query .query-title {
+  display: block;
+  margin-bottom: 2px;
+  color: #034772;
+  font-weight: bold;
+}
+
+.query-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.query-link {
+  color: #2286e3;
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.query-link:hover {
+  color: #0056b3;
+}
+
+.query-number {
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.query-number:hover {
+  text-decoration: underline;
+}
+
+/* Button styling */
+::ng-deep .bcbtn {
+  border-radius: 18px;
+  padding: 5px 45px;
+  margin-right: 0;
+}
+
+/* ✅ Responsive layout */
+@media (max-width: 768px) {
+  .align-footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 20px;
+  }
+
+  .align-footer .footer-center {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+}
+
+
+.rights-container {
+  margin-top: 20px;
+}
+
+.rights-line {
+  border: none;
+  border-top: 3px solid #c8c8c8;
+  margin-bottom: 15px;
+}
+
+.rights-card {
+  text-align: center;
+  padding: 10px 0;
+}

@@ -1,0 +1,328 @@
+// .table>:not(caption)>*>*{
+    
+//     background-color: aliceblue;
+// }.p-inputtext{
+//     border-radius: 20px;
+// }::ng-deep .p-dropdown{
+    
+//     border-radius: 20px;
+// }
+// .field{
+//     margin-bottom: 0rem;
+// }.boldlabelinsiderow>span{
+//     font-weight: 700;
+// }
+// .divhighligher {
+//   background-color: #bec0fd;
+//   padding: 10px;
+//   border-radius: 5px;
+// }
+
+
+
+
+.home{
+  background:#f1f1f1;
+  color:#555;
+  margin-top:15px;
+}
+
+/* CARD */
+.family-card{
+  border:1px solid #d9d9d9;
+  border-radius:6px;
+  background:#fff;
+  overflow:visible;
+  margin-bottom:20px;
+  position:relative;
+}
+
+/* HEADER */
+.family-header{
+  background:#f3f3f3;
+  padding:10px 14px;
+  font-weight:600;
+  font-size:13px;
+  border-bottom:1px solid #ddd;
+}
+
+/* TABLE */
+.family-table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+
+/* HEADER CELLS */
+.family-table th{
+  background:#f7f7f7;
+  font-weight:600;
+  font-size:10px;
+  text-align:center;
+  padding:10px 8px;
+  border-right:1px solid #e2e2e2;
+  border-bottom:1px solid #e2e2e2;
+  line-height:1.4;
+}
+
+/* BODY CELLS */
+.family-table td{
+  padding:10px 8px;
+  border-right:1px solid #e2e2e2;
+  border-bottom:1px solid #e2e2e2;
+  font-size:12px;
+  text-align:center;
+  vertical-align:middle;
+  position:relative;
+}
+
+/* REMOVE LAST COLUMN BORDER */
+.family-table th:last-child,
+.family-table td:last-child{
+  border-right:none;
+}
+
+/* PILLS */
+.pill{
+  background:#eeeeee;
+  padding:6px 10px;
+  border-radius:6px;
+  font-size:10px;
+  display:inline-block;
+  min-width:60px;
+  text-align:center;
+}
+
+/* MORE BUTTON */
+.more-btn{
+  background:#8ea2a5;
+  color:#fff;
+  border:none;
+  border-radius:20px;
+  padding:5px 10px;
+  font-size:10px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.more-btn:hover{
+  background:#6e858a;
+}
+
+/* ================= POPUP ================= */
+
+// .education-popover{
+//   position:absolute;
+//   width:300px;
+//   background:#fff;
+//   border:1px solid #dcdcdc;
+//   border-radius:10px;
+//   padding:16px;
+//   box-shadow:0 8px 25px rgba(0,0,0,0.18);
+//   z-index:10000;
+//   animation:fadeIn .18s ease-in-out;
+// }
+.education-popover{
+  position:absolute;
+  width:300px;
+  background:#fff;
+  border:1px solid #dcdcdc;
+  border-radius:10px;
+  padding:16px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.18);
+  z-index:9999;
+}
+
+.education-popover::before{
+  content:"";
+  position:absolute;
+  top:16px;
+  left:-6px;
+  width:12px;
+  height:12px;
+  background:#fff;
+  border-left:1px solid #dcdcdc;
+  border-top:1px solid #dcdcdc;
+  transform:rotate(45deg);
+}
+/* POPUP ARROW */
+// .education-popover::before{
+//   content:"";
+//   position: absolute;
+//   top:-6px;
+//   left:40px;
+//   width:12px;
+//   height:12px;
+//   background:#fff;
+//   border-left:1px solid #dcdcdc;
+//   border-top:1px solid #dcdcdc;
+//   transform:rotate(45deg);
+// }
+
+/* TITLE */
+.popover-title{
+  font-weight:600;
+  font-size:14px;
+  margin-bottom:12px;
+  border-bottom:1px solid #eee;
+  padding-bottom:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* FIELD */
+.popover-field{
+  margin-bottom:10px;
+}
+
+/* LABEL */
+.popover-field label{
+  font-size:11px;
+  color:#555;
+  display:block;
+  margin-bottom:4px;
+}
+
+/* VALUE BOX */
+.value{
+  background:#efefef;
+  padding:8px 10px;
+  border-radius:6px;
+  font-size:11px;
+}
+
+/* POPUP ANIMATION */
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(-5px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// .home {
+//   background: #f1f1f1;
+//   color: #555;
+//   margin-top: 15px;
+// }
+
+// .family-card{
+//   border:1px solid #d9d9d9;
+//   border-radius:6px;
+//   background:#fff;
+//   overflow:hidden;
+//   margin-bottom: 20px;
+// }
+
+// /* HEADER BAR */
+// .family-header{
+//   background:#f3f3f3;
+//   padding:10px 14px;
+//   font-weight:600;
+//   font-size:13px;
+//   border-bottom:1px solid #ddd;
+// }
+
+// /* TABLE */
+// .family-table{
+//   width:100%;
+//   border-collapse:collapse;
+//   table-layout:fixed;
+// }
+
+// /* HEADER CELLS */
+// .family-table th{
+//   background:#f7f7f7;
+//   font-weight:600;
+//   font-size:10px;
+//   text-align:center;
+//   padding:10px 8px;
+//   border-right:1px solid #e2e2e2;
+//   border-bottom:1px solid #e2e2e2;
+//   line-height:1.4;
+// }
+
+// /* BODY CELLS */
+// .family-table td{
+//   padding:10px 8px;
+//   border-right:1px solid #e2e2e2;
+//   border-bottom:1px solid #e2e2e2;
+//   font-size:12px;
+//   text-align:center;
+//   vertical-align:middle;
+// }
+
+// /* REMOVE LAST COLUMN BORDER */
+// .family-table th:last-child,
+// .family-table td:last-child{
+//   border-right:none;
+// }
+
+// /* PILLS */
+// .pill{
+//   background:#eeeeee;
+//   padding:6px 10px;
+//   border-radius:6px;
+//   font-size:9px;
+//   display:inline-block;
+//   min-width:60px;
+//   text-align:center;
+// }
+
+// /* CENTER ALIGN */
+// .center{
+//   display:flex;
+//   justify-content:center;
+//   align-items:center;
+// }
+
+// /* MORE BUTTON */
+// .more-btn{ background:#8ea2a5; color:#fff; border:none; border-radius:20px; padding:4px 8px; font-size:8px; font-weight:400; cursor:pointer; display:inline-flex; align-items:center; gap:4px; }
+
+// .more-btn:hover{
+//   background:#6e858a;
+// }
+// .education-popover{
+//   position:absolute;
+//   width:300px;
+//   background:white;
+//   border:1px solid #dcdcdc;
+//   border-radius:8px;
+//   padding:16px;
+//   box-shadow:0 6px 16px rgba(0,0,0,0.15);
+//   z-index:9999;
+// }
+
+// /* Arrow effect (optional) */
+// .education-popover::before{
+//   content:"";
+//   position:absolute;
+//   top:-6px;
+//   left:30px;
+//   width:12px;
+//   height:12px;
+//   background:white;
+//   border-left:1px solid #dcdcdc;
+//   border-top:1px solid #dcdcdc;
+//   transform:rotate(45deg);
+// }
+// // .education-popover{ position:absolute; width:300px; background:white; border:1px solid #dcdcdc; border-radius:8px; padding:16px; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:999; }
+// .popover-title{ font-weight:600; margin-bottom:12px; border-bottom:1px solid #eee; padding-bottom:6px; } 
+// .popover-field{ margin-bottom:12px; } 
+// .popover-field label{ font-size:10px; color:#444; display:block; margin-bottom:4px; } 
+// .value{ background:#efefef; padding:8px 10px; border-radius:6px; font-size:10px; }

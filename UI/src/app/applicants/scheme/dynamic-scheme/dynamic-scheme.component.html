@@ -1,0 +1,667 @@
+<div class="tncwwb-main-container p-4">
+  <div
+    class="top-info-row flex justify-content-between align-items-center mb-4 responsive-info-row"
+  >
+    <div class="info-block text-left" style="flex: 1">
+      <span class="info-label">ID : </span>
+      <span class="info-val">{{ memberDetail?.memberDetail?.memberId }}</span>
+    </div>
+
+    <div class="info-block text-center" style="flex: 1">
+      <span class="info-label">Scheme : </span>
+      <span class="info-val">{{ schemeDetails?.schemeGroupName }}</span>
+    </div>
+
+    <div class="info-block text-right" style="flex: 1.5">
+      <span class="info-label">Sub Scheme : </span>
+      <span class="info-val">{{ schemeDetails?.scheme }}</span>
+    </div>
+  </div>
+  <div class="main-wrapper-box" *ngIf="isSchemeApplicantEdit">
+    <form [formGroup]="schemeForm" *ngIf="schemeFormsList">
+      <div class="figma-grey-header first-header">
+        திட்டத்தின் விவரங்கள் / Scheme Details
+      </div>
+
+      <div class="figma-doc-content-area p-fluid">
+        <div class="grid m-0">
+          <div
+            class="col-12 md:col-4 mb-4 flex align-items-start"
+            *ngIf="CheckNullorEmpty(this.schemeDetails?.name)"
+          >
+            <span class="detail-label"
+              >விண்ணப்பதாரர் பெயர்<br />/ Applicant Name</span
+            >
+            <span class="colon-mark">:</span>
+            <span class="detail-value">{{ schemeDetails?.memberName }}</span>
+          </div>
+
+          <div
+            class="col-12 md:col-4 mb-4 flex align-items-start"
+            *ngIf="CheckNullorEmpty(this.schemeDetails?.beneficiaryName)"
+          >
+            <span class="detail-label"
+              >BeneficiaryName/<br />பயனாளர் பெயர்</span
+            >
+            <span class="colon-mark">:</span>
+            <span class="detail-value">{{
+              this.schemeDetails?.beneficiaryName
+            }}</span>
+          </div>
+
+          <div
+            class="col-12 md:col-4 mb-4 flex align-items-start"
+            *ngIf="CheckNullorEmpty(this.schemeDetails?.relationship)"
+          >
+            <span class="detail-label">Relationship/<br />உறவுமுறை</span>
+            <span class="colon-mark">:</span>
+            <span class="detail-value">{{
+              this.schemeDetails?.relationship
+            }}</span>
+          </div>
+
+          <div class="col-12 md:col-4 mb-4 flex align-items-start">
+            <span class="detail-label">தொகை /<br />Amount</span>
+            <span class="colon-mark">:</span>
+            <span class="detail-value">{{ getAmount() }}</span>
+          </div>
+
+          <div class="col-12 md:col-8 mb-4 flex align-items-start">
+            <span class="detail-label" style="width: 21%"
+              >Total amount in<br />words</span
+            >
+            <span class="colon-mark">:</span>
+            <span class="detail-value" *ngIf="getAmount() > 0; else zeroAmount">
+              {{ CtoWords(getAmount()) }}
+            </span>
+            <ng-template #zeroAmount>
+              <span class="detail-value">-</span>
+            </ng-template>
+          </div>
+          <ng-container *ngIf="this.schemeDetails?.showAdditionalFields">
+            <div class="field col-12 md:col-6 lg:col-4 mt-3">
+              <label class="form-label"
+                >விபத்து நடைபெற்ற இடம் / Place of Accident</label
+              >
+              <input
+                pInputText
+                formControlName="placeOfAccident"
+                type="text"
+                class="custom-input"
+              />
+            </div>
+            <div class="field col-12 md:col-6 lg:col-4 mt-3">
+              <label class="form-label"
+                >விபத்துக்குண்டான உறவுமுறை / Relationship</label
+              >
+              <input
+                pInputText
+                formControlName="relationshipToTheAccident"
+                type="text"
+                class="custom-input"
+              />
+            </div>
+            <div class="field col-12 md:col-6 lg:col-4 mt-3">
+              <label class="form-label"
+                >மருத்துவ காப்பீடு பதிவு எண் / Insurance No.</label
+              >
+              <input
+                pInputText
+                formControlName="medicalInsurancePlanRegistrationNumber"
+                type="text"
+                class="custom-input"
+              />
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="figma-grey-header border-top-1 border-gray-300">
+        துணை திட்டம் / Sub Schemes
+      </div>
+
+      <div class="figma-doc-content-area p-fluid">
+        <div
+          *ngIf="schemeDetail"
+          class="mb-4 p-3 border-round bg-gray-100 flex align-items-center gap-2"
+        >
+          <i class="pi pi-info-circle text-gray-600 text-xl"></i>
+          <div>
+            <span class="font-semibold text-gray-700">குறிப்பு / Note:</span>
+            <span
+              class="text-gray-600 ml-2"
+              *ngIf="schemeDetail.isSingleCategorySelect"
+            >
+              Please choose one option from this category. Multiple selections
+              are not allowed.
+            </span>
+            <span
+              class="text-gray-600 ml-2"
+              *ngIf="!schemeDetail.isSingleCategorySelect"
+            >
+              இந்த வகையிலிருந்து பல விருப்பங்களைத் தேர்ந்தெடுக்கவும். / Please
+              choose multiple options from this category.
+            </span>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="figma-doc-table w-full">
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 10%">
+                  {{ canApplicantEdit ? "Action" : "Selected" }}
+                </th>
+                <th class="text-left" style="width: 30%">வகை / Category</th>
+                <th class="text-left" style="width: 15%">இனம் / Community</th>
+                <th class="text-left" style="width: 15%">தொகை / Amount</th>
+                <th class="text-left" style="width: 15%">
+                  மறுநிகழ்வு / Reccurrence
+                </th>
+                <th class="text-left" style="width: 15%">
+                  நிகழ்வு / Occurrence
+                </th>
+              </tr>
+            </thead>
+            <tbody formArrayName="scategories">
+              <tr
+                *ngFor="let itemrow of schemeFormArray.controls; let i = index"
+                [formGroupName]="i"
+              >
+                <td class="text-center">
+                  <p-checkbox
+                    formControlName="isSelected"
+                    *ngIf="canApplicantEdit"
+                    [binary]="true"
+                    inputId="binary"
+                    (ngModelChange)="chengerestInputs(i)"
+                  ></p-checkbox>
+                  <span
+                    *ngIf="!canApplicantEdit"
+                    class="font-semibold text-gray-700"
+                  >
+                    {{ itemrow.get("isSelected")?.value ? "YES" : "NO" }}
+                  </span>
+                </td>
+
+                <td class="font-medium text-gray-800">
+                  {{ itemrow.get("subCategory")?.value }}
+                </td>
+                <td class="text-gray-700">
+                  {{ itemrow.get("community")?.value }}
+                </td>
+                <td class="text-gray-700 font-bold">
+                  ₹ {{ itemrow.get("amount")?.value }}
+                </td>
+                <td class="text-gray-700">
+                  {{ itemrow.get("recurrence")?.value }}
+                </td>
+                <td class="text-gray-700">
+                  {{ itemrow.get("occurrence")?.value }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+
+    <form [formGroup]="documentsForm" *ngIf="documentGroups">
+      <div *ngFor="let grp of documentGroups">
+        <div
+          class="figma-grey-header border-top-1 border-bottom-1 border-gray-300"
+        >
+          ஆவண விவரங்கள் / Documents details
+        </div>
+
+        <div class="table-responsive" formArrayName="documents">
+          <table class="figma-doc-table w-full">
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 8%">வ.எண் / S.No</th>
+                <th class="text-left" style="width: 32%">
+                  ஆவணங்கள் / Documents
+                </th>
+                <th class="text-center" style="width: 30%">
+                  சான்று ஆவணப் படம் / Reference document image
+                </th>
+                <th class="text-center" style="width: 30%">
+                  ஆவணங்களை பதிவேற்றவும் / Upload Document
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let itemrow of getGrpItems(grp); let i = index"
+                [formGroupName]="getFormGrp(itemrow.get('id')?.value)"
+              >
+                <td class="text-center sr-num">{{ i + 1 }}</td>
+
+                <td class="doc-name-col">
+                  {{
+                    itemrow.get("documentCategoryName")?.value ||
+                      "Member Birth & Death Certificate"
+                  }}
+                  <span
+                    *ngIf="itemrow.get('isRequired')?.value"
+                    class="text-red-500 font-bold"
+                    >*</span
+                  >
+                </td>
+
+                <td class="text-center">
+                  <div
+                    class="flex justify-content-center align-items-center gap-2"
+                  >
+                    <ng-container
+                      *ngIf="
+                        previewImages[itemrow.get('id')?.value];
+                        else defaultOrServerImages
+                      "
+                    >
+                      <img
+                        *ngIf="
+                          previewImages[itemrow.get('id')?.value] !== 'PDF'
+                        "
+                        [src]="previewImages[itemrow.get('id')?.value]"
+                        alt="Uploaded Preview"
+                        style="
+                          width: 80px;
+                          height: 80px;
+                          object-fit: cover;
+                          border-radius: 8px;
+                          border: 1px solid #ccc;
+                          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        "
+                      />
+
+                      <div
+                        *ngIf="
+                          previewImages[itemrow.get('id')?.value] === 'PDF'
+                        "
+                        class="flex flex-column align-items-center justify-content-center"
+                        style="
+                          width: 80px;
+                          height: 80px;
+                          background: #ffebee;
+                          border-radius: 8px;
+                          color: #d32f2f;
+                          border: 1px solid #ffcdd2;
+                        "
+                      >
+                        <i class="pi pi-file-pdf" style="font-size: 2rem"></i>
+                        <span
+                          style="
+                            font-size: 10px;
+                            font-weight: bold;
+                            margin-top: 5px;
+                          "
+                          >PDF File</span
+                        >
+                      </div>
+                    </ng-container>
+
+                    <ng-template #defaultOrServerImages>
+                      <ng-container
+                        *ngIf="
+                          itemrow.get('originalFileName')?.value;
+                          else showPlaceholders
+                        "
+                      >
+                        <div
+                          class="flex flex-column align-items-center justify-content-center"
+                          style="
+                            width: 80px;
+                            height: 80px;
+                            background: #e8f5e9;
+                            border-radius: 8px;
+                            color: #2e7d32;
+                            border: 1px solid #c8e6c9;
+                          "
+                        >
+                          <i
+                            class="pi pi-check-circle"
+                            style="font-size: 2rem"
+                          ></i>
+                          <span
+                            style="
+                              font-size: 10px;
+                              font-weight: bold;
+                              margin-top: 5px;
+                            "
+                            >Uploaded</span
+                          >
+                        </div>
+                      </ng-container>
+
+                      <ng-template #showPlaceholders>
+                        <img
+                          src="assets/worker-reference-image.png"
+                          alt="Doc"
+                          class="doc-img"
+                          style="max-height: 80px"
+                        />
+                        <img
+                          src="assets/worker-reference-second.jpg"
+                          alt="Doc"
+                          class="doc-img"
+                          style="max-height: 80px"
+                        />
+                      </ng-template>
+                    </ng-template>
+                  </div>
+                </td>
+
+                <td class="text-center">
+                  <div
+                    class="upload-dashed-box flex flex-column justify-content-center align-items-center m-auto"
+                  >
+                    <ng-container
+                      *ngIf="!itemrow.get('originalFileName')?.value"
+                    >
+                      <div class="cloud-icon-wrapper mb-2">
+                        <svg
+                          width="46"
+                          height="34"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="cloud-svg"
+                        >
+                          <path
+                            d="M17.5 19C20.5 19 22 17 22 14.5C22 12 20.5 10 18 10C18 7 16 4 12 4C8.5 4 6.5 6.5 6 9C3.5 9 2 10.5 2 13C2 15.5 3.5 18 6.5 18"
+                            stroke="#088586"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M12 20V12M12 12L9 15M12 12L15 15"
+                            stroke="#088586"
+                            stroke-width="2.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+
+                      <div class="upload-text-wrapper text-center">
+                        <p class="drag-drop-text mb-1">
+                          Drag & drop files or
+                          <span class="browse-link position-relative">
+                            Browse
+                            <p-fileUpload
+                              mode="basic"
+                              chooseLabel=""
+                              class="invisible-upload"
+                              [disabled]="
+                                !itemrow.get('acceptedDocumentTypeId')?.value
+                              "
+                              [maxFileSize]="2000000"
+                              [auto]="true"
+                              [customUpload]="true"
+                              accept=".pdf,.jpeg,.png,.jpg"
+                              (uploadHandler)="
+                                onSelectDocumentFile(
+                                  $event,
+                                  itemrow.get('id')?.value
+                                )
+                              "
+                            >
+                            </p-fileUpload>
+                          </span>
+                        </p>
+                        <p class="supported-formats-text">
+                          Supported formates: JPEG, PNG, PDF
+                        </p>
+                      </div>
+                    </ng-container>
+
+                    <ng-container
+                      *ngIf="itemrow.get('originalFileName')?.value"
+                    >
+                      <p class="uploaded-file-name text-center px-2 mb-2">
+                        {{ itemrow.get("originalFileName")?.value }}
+                      </p>
+                      <div
+                        class="flex gap-3 align-items-center justify-content-center"
+                      >
+                        <div class="flex align-items-center gap-2">
+                          <p-checkbox
+                            formControlName="isVerified"
+                            (ngModelChange)="
+                              verifiedClicked($event, itemrow.get('id')?.value)
+                            "
+                            [binary]="true"
+                          ></p-checkbox>
+                          <span class="text-sm font-semibold">Verified</span>
+                        </div>
+                        <button
+                          pButton
+                          pRipple
+                          icon="pi pi-download"
+                          class="p-button-rounded p-button-outlined p-button-sm p-button-success"
+                          (click)="
+                            downloadFile(
+                              itemrow.get('id')?.value,
+                              itemrow.get('originalFileName')?.value
+                            )
+                          "
+                          title="Download"
+                        ></button>
+                        <!-- <button *ngIf="canApplicantEdit" pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-outlined p-button-sm p-button-danger" (click)="removeFile(itemrow.get('documentCategoryId')?.value)" title="Delete"></button> -->
+                        <button
+                          *ngIf="canApplicantEdit"
+                          pButton
+                          pRipple
+                          icon="pi pi-times"
+                          class="p-button-rounded p-button-outlined p-button-sm p-button-danger"
+                          (click)="
+                            removeFile(
+                              itemrow.get('documentCategoryId')?.value,
+                              itemrow.get('id')?.value
+                            )
+                          "
+                          title="Delete"
+                        ></button>
+                      </div>
+                    </ng-container>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+
+    <div *ngIf="bankForm">
+      <div
+        class="figma-grey-header border-top-1 border-bottom-1 border-gray-300"
+      >
+        சேகரிப்பவர் விவரங்கள் / Collected By Details
+      </div>
+      <div class="figma-doc-content-area p-fluid">
+        <form [formGroup]="bankForm">
+          <div class="grid m-0 pb-3">
+            <div class="field col-12 md:col-4 mt-2">
+              <label class="form-label" htmlFor="collectedByName"
+                >Collected By Name</label
+              >
+              <input
+                pInputText
+                formControlName="collectedByName"
+                type="text"
+                readonly
+                class="custom-input"
+              />
+            </div>
+
+            <div class="field col-12 md:col-4 mt-2">
+              <label class="form-label" htmlFor="collectedByPhoneNumber"
+                >Collected By Phone Number</label
+              >
+              <input
+                pInputText
+                formControlName="collectedByPhoneNumber"
+                maxlength="10"
+                type="text"
+                readonly
+                class="custom-input"
+              />
+            </div>
+
+            <div class="field col-12 md:col-4 mt-2">
+              <label class="form-label" htmlFor="collectedOn"
+                >Collected On</label
+              >
+              <input
+                pInputText
+                formControlName="collectedOn"
+                type="text"
+                readonly
+                class="custom-input bg-gray-100"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="mt-4 mb-4 px-4" *ngIf="canApplicantEdit">
+      <div class="declaration-box">
+        <div class="dec-badge mb-3">
+          <i class="pi pi-file"></i>
+          <span>Declaration</span>
+        </div>
+
+        <ol class="dec-list m-0 p-0 pl-3">
+          <li>
+            நான் மத்திய அரசு, மாநில அரசு அல்லது உள்ளூராட்சி அமைப்புகளின் கீழ்
+            நிரந்தர அரசுப் பணியில் பணியாற்றவில்லை என்று இதன்மூலம் அறிவிக்கிறேன்
+            / I hereby declare that I am not employed in a permanent Government
+            post under Central, State, or Local Body services.
+          </li>
+          <li>
+            நிரந்தர அரசுப் பணியில் உள்ளவர்கள் தமிழ்நாடு தூய்மை பணியாளர் நல
+            வாரியம் (TNCWWB) உறுப்பினராக சேர தகுதி இல்லை என்பதை நான்
+            புரிந்துகொள்கிறேன் / I understand that permanent Government
+            employees are not eligible for membership under the Tamil Nadu
+            Cleanliness Workers Welfare Board (TNCWWB).
+          </li>
+          <li>
+            நான் வழங்கிய தகவல்கள் அனைத்தும் உண்மையானவை மற்றும் சரியானவை என்பதை
+            உறுதிப்படுத்துகிறேன். இதில் ஏதேனும் தவறான தகவல் இருப்பது
+            கண்டறியப்பட்டால், எனது உறுப்பினர் பதிவு மற்றும் பெற்ற நலன்கள் ரத்து
+            செய்யப்படலாம் என்பதை ஏற்றுக்கொள்கிறேன் / I further confirm that the
+            information provided by me is true and correct. If found otherwise,
+            my membership and any benefits availed are liable to be cancelled.
+          </li>
+        </ol>
+
+        <div class="flex align-items-center gap-3 mt-4 ml-1">
+          <p-checkbox
+            [(ngModel)]="checked"
+            [ngModelOptions]="{ standalone: true }"
+            [binary]="true"
+            (ngModelChange)="updateError()"
+            inputId="declarationCheck"
+            class="custom-dec-checkbox"
+          ></p-checkbox>
+          <label
+            for="declarationCheck"
+            class="dec-agree-text cursor-pointer m-0"
+          >
+            நான் ஒப்புக்கொள்கிறேன் / I agree
+          </label>
+        </div>
+
+        <p
+          class="text-red-500 text-sm mt-3 ml-3 mb-0 font-medium"
+          *ngIf="showDecError"
+        >
+          Declaration is Required
+        </p>
+      </div>
+    </div>
+
+    <p-messages
+      [(value)]="messages"
+      [enableService]="false"
+      [closable]="false"
+      class="px-4"
+    ></p-messages>
+    <div *ngIf="errorMessage != ''" class="figma-error-box mt-3 mx-4">
+      <p>
+        Error: <span class="pl-2">{{ errorMessage }}</span>
+      </p>
+    </div>
+
+    <div
+      class="figma-action-buttons flex justify-content-end align-items-center mt-3 pb-4 pr-4"
+    >
+      <button class="figma-btn-back" (click)="back()">Back</button>
+
+      <button
+        pButton
+        type="button"
+        class="figma-btn-preview flex align-items-center justify-content-center gap-2"
+        icon="pi pi-eye"
+        label="Preview"
+        iconPos="left"
+        (click)="togglePreview()"
+      ></button>
+
+      <button
+        *ngIf="canApplicantEdit"
+        class="figma-btn-submit flex align-items-center justify-content-center gap-2"
+        (click)="submit()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+  <p-toast></p-toast>
+  <p-confirmDialog
+    [style]="{ width: '30vw' }"
+    [rejectVisible]="true"
+    [closable]="false"
+    rejectButtonStyleClass="p-button-secondary"
+    [acceptLabel]="'Accept'"
+    [rejectLabel]="'Remove'"
+  >
+  </p-confirmDialog>
+
+  <p-dialog
+    [(visible)]="showSubmitPopup"
+    [modal]="true"
+    [closable]="false"
+    [showHeader]="false"
+    styleClass="success-submit-dialog"
+  >
+    <div class="success-popup-container">
+      <div
+        class="status-icon-circle"
+        [ngClass]="popupType === 'success' ? 'bg-success' : 'bg-error'"
+      >
+        <i
+          class="pi"
+          [ngClass]="popupType === 'success' ? 'pi-check' : 'pi-times'"
+        ></i>
+      </div>
+
+      <div
+        class="status-message"
+        [ngClass]="popupType === 'success' ? 'text-success' : 'text-error'"
+        [innerHTML]="popupMessage"
+      ></div>
+
+      <button class="back-home-btn" (click)="closeSubmitPopup()">
+        <i
+          class="pi"
+          [ngClass]="popupType === 'success' ? 'pi-arrow-left' : 'pi-times'"
+        ></i>
+        {{ popupType === "success" ? "Back to Home" : "Close" }}
+      </button>
+    </div>
+  </p-dialog>
+</div>

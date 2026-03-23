@@ -1,0 +1,722 @@
+<div
+  class="flex justify-content-between"
+  style="background-color: #e5fffe; padding: 8px"
+>
+  <div class="flex align-items-center mr-4">
+    <p class="fw-bold"></p>
+  </div>
+  <!-- <div class="flex align-items-center mr-4">
+   <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb> -->
+
+     <!-- <p-button
+      *ngIf="isLoggedin"
+      [style]="{
+        'border-radius': '18px; !important',
+        padding: '5px 15px',
+        'margin-left': '10px',
+        background:
+          'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)',
+      }"
+      label="Logout"
+      (onClick)="Logout()"
+    />
+  </div> -->
+</div>
+<app-current-user-time
+  *ngIf="memberDetails?.memberId"
+  [memberID]="
+    memberDetails.memberId != '' ? memberDetails.memberId : memberDetails.name
+  "
+></app-current-user-time>
+<!-- ===================== STEP HEADER ===================== -->
+<div class="stepper-container">
+  <div class="step-line"></div>
+
+  <div class="step-item" [ngClass]="getStepClass(1)">
+    <div class="step-circle">
+      <ng-container *ngIf="isStepCompleted(1); else step1Number">
+        ✓
+      </ng-container>
+      <ng-template #step1Number>01</ng-template>
+    </div>
+    <div class="step-label">
+      தனிப்பட்ட விவரங்கள் <br />
+      <span>PERSONAL DETAILS</span>
+    </div>
+  </div>
+
+  <div class="step-item" [ngClass]="getStepClass(2)">
+    <div class="step-circle">
+      <ng-container *ngIf="isStepCompleted(2); else step2Number">
+        ✓
+      </ng-container>
+      <ng-template #step2Number>02</ng-template>
+    </div>
+    <div class="step-label">
+      குடும்ப விவரங்கள் <br />
+      <span>FAMILY DETAILS</span>
+    </div>
+  </div>
+
+  <div class="step-item" [ngClass]="getStepClass(3)">
+    <div class="step-circle">
+      <ng-container *ngIf="isStepCompleted(3); else step3Number">
+        ✓
+      </ng-container>
+      <ng-template #step3Number>03</ng-template>
+    </div>
+    <div class="step-label">
+      நிறுவன விவரங்கள் <br />
+      <span>ORGANIZATION DETAILS</span>
+    </div>
+  </div>
+</div>
+<!-- <div class="row" style="margin-top: 10px; background-color: white" *ngIf="(isLoggedin && allDet) || !isLoggedin">
+      <div class="col-12 justify-content-center mb-2" style="padding-top: 10px; padding-bottom: 0px; flex-wrap: wrap">
+    <p-accordion [multiple]="true" [activeIndex]="activeIndex" [style]="{ width: '90%' }"> -->
+<!-- <p-accordionTab header="உறுப்பினர் பதிவு / Member registration" *ngIf="!isLoggedin">
+        <app-mem-pre-req></app-mem-pre-req>
+      </p-accordionTab> -->
+
+<!--   <p-accordionTab header="உறுப்பினர் தனிப்பட்ட விவரங்கள் / Member Personal Details" [disabled]="!isLoggedin">
+        <app-mem-personal-detail (formSaved)="movetoNext($event)" [memPersonalInfo]="allDet?.memberDetails"
+          [formDetail]="allDet?.memberDetailsForm" [hideAadhaar]="hideAadhaar" [member_Id]="memberId"></app-mem-personal-detail>
+
+          <br>
+          <div header="முகவரி / Address">
+             <app-mem-permanent-address (formSaved)="movetoNext($event)" [formDetail]="allDet?.permanentAddressDetailForm"
+          [formtempDetail]="allDet?.temporaryAddressDetailForm" [addressDetail]="allDet?.temprorayAddress"
+          [addressPermDetail]="allDet?.permanentAddress" [member_Id]="memberId"></app-mem-permanent-address>
+
+          </div>
+                 
+          <br>
+             <div header="உறுப்பினர் வங்கி கணக்கு விவரங்கள் / Member bank Account Details" >
+                  <app-mem-bank-detail [memPersonalInfo]="allDet?.bankDetail" (formSaved)="movetoNext($event)"
+          [member_Id]="memberId"></app-mem-bank-detail>
+          </div>
+      </p-accordionTab>
+  
+      <p-accordionTab header="குடும்ப உறுப்பினர்களின் விவரங்கள் / Family Members Details" [disabled]="!isLoggedin">
+        <app-mem-family-detail [familyMemberList]="allDet?.familyMembers" [formDetail]="allDet?.familyMemberForm"
+          (formSaved)="movetoNext($event)" [member_Id]="memberId"></app-mem-family-detail>
+        </p-accordionTab>
+
+        <p-accordionTab header="அமைப்பு தகவல் / Organization Information" [disabled]="!isLoggedin">
+        <app-organization-detail (formSaved)="movetoNext($event)" [orgDetail]="allDet?.organizationDetail" (typeOfWorkChanged)="onTypeOfWorkChanged($event)"
+          [formDetail]="allDet?.organizationDetailForm" [member_Id]="memberId "></app-organization-detail>
+
+          <br>
+          <div header="ஆவண விவரங்கள் / Document Details">
+                 <app-mem-document-detail [memPersonalInfo]="allDet?.memberDocuments" [ismandatory]="true" [hideAadhaar]="hideAadhaar"
+          [member_Id]="memberId"></app-mem-document-detail>
+          </div>
+          <br>
+                 <div header="கூடுதல் ஆவண விவரங்கள் / Additional Document Details"><app-mem-document-detail [memPersonalInfo]="allDet?.memberNonMandatoryDocuments" [ismandatory]="false" [hideAadhaar]="hideAadhaar"
+          [member_Id]="memberId">
+        </app-mem-document-detail>
+        </div> 
+          </p-accordionTab>-->
+
+<!-- </p-accordion> -->
+<!-- <div class="col-12 justify-content-center flex mb-2">
+      <div *ngIf="errorMessage != ''" style="
+          width: 80%;
+          margin: 20px;
+          color: red;
+          margin-top: 5px;
+          font-size: 14px;
+          background-color: #f0f0f0;
+          padding: 10px;
+          border-radius: 10px;
+        ">
+        <p>
+          Error:
+          <span style="padding-left: 20px; line-height: 1.6">
+            {{ errorMessage }}
+          </span>
+        </p>
+      </div>
+    </div> -->
+<!-- <div class="p-fluid justify-content-center flex"> -->
+<!-- <form [formGroup]="bankForm" class="col-12" style="width: 80%">
+        <div class="p-fluid">
+          <div class="p-formgrid grid">
+            <div class="col-12 flex md:col-12 lg:col-12" style="flex-wrap: wrap">
+              <div class="field col-12 md:col-4 lg:col-4 pb-0">
+                <label htmlFor="branch">Collected By Name</label>
+                <input pInputText formControlName="collectedByName" type="text" />
+
+                <app-error-msg [control]="bankForm.get('collectedByName')"></app-error-msg>
+              </div>
+              <div class="field col-12 md:col-4 lg:col-4 pb-0">
+                <label htmlFor="branch">Collected By Phone Number</label>
+                <input pInputText formControlName="collectedByPhoneNumber" type="text" />
+                <app-error-msg [control]="bankForm.get('collectedByPhoneNumber')"></app-error-msg>
+              </div>
+              <div class="field col-12 md:col-4 lg:col-4 pb-0">
+                <label htmlFor="branch">Collected on</label>
+                <input pInputText formControlName="collectedOn" type="text" readonly />
+                <app-error-msg [control]="bankForm.get('collectedOn')"></app-error-msg>
+              </div>
+            </div>
+          </div>
+        </div>
+         </form> -->
+<!-- </div>
+
+  </div> 
+</div> -->
+
+<!-- 
+<div *ngIf="isLoggedin">
+
+<div *ngIf="currentStep === 1" class="step-content">
+
+  <div class="section-header">
+    தனிப்பட்ட விவரங்கள் / PERSONAL DETAILS
+  </div>
+
+  <app-mem-personal-detail
+    (formSaved)="completeStep(1)"
+    [memPersonalInfo]="allDet?.memberDetails"
+    [formDetail]="allDet?.memberDetailsForm"
+    [hideAadhaar]="hideAadhaar"
+    [member_Id]="memberId">
+  </app-mem-personal-detail>
+
+
+
+<div class="address-two-column">
+
+  <div class="address-col">
+   <app-mem-permanent-address
+    (formSaved)="completeStep(1)"
+    [formDetail]="allDet?.permanentAddressDetailForm"
+    [formtempDetail]="allDet?.temporaryAddressDetailForm"
+    [addressDetail]="allDet?.temprorayAddress"
+    [addressPermDetail]="allDet?.permanentAddress"
+    [member_Id]="memberId">
+  </app-mem-permanent-address>
+  </div>
+
+  <div class="address-col">
+    <app-mem-temp-address
+      [formDetail]="allDet?.temporaryAddressDetailForm"
+      [addressDetail]="allDet?.temprorayAddress">
+    </app-mem-temp-address>
+  </div>
+
+</div>
+
+  <app-mem-bank-detail
+    (formSaved)="completeStep(1)"
+    [memPersonalInfo]="allDet?.bankDetail"
+    [member_Id]="memberId">
+  </app-mem-bank-detail>
+
+  <div class="btn-area">
+    <button class="next-btn" (click)="goNext()">Next</button>
+  </div>
+
+</div>
+
+
+
+<div *ngIf="currentStep === 2" class="step-content">
+
+  <div class="section-header">
+    குடும்ப உறுப்பினர் விவரங்கள் / FAMILY DETAILS
+  </div>
+
+  <app-mem-family-detail
+    [familyMemberList]="allDet?.familyMembers"
+    [formDetail]="allDet?.familyMemberForm"
+    (formSaved)="completeStep(2)"
+    [member_Id]="memberId">
+  </app-mem-family-detail>
+
+  <div class="btn-area">
+    <button class="back-btn" (click)="goBack()">Back</button>
+    <button class="next-btn" (click)="goNext()">Next</button>
+  </div>
+
+</div>
+
+
+
+<div *ngIf="currentStep === 3" class="step-content">
+
+  <div class="section-header">
+    நிறுவனம் விவரங்கள் / ORGANIZATION DETAILS
+  </div>
+
+  <app-organization-detail
+    (formSaved)="completeStep(3)"
+    [orgDetail]="allDet?.organizationDetail"
+    [formDetail]="allDet?.organizationDetailForm"
+    [member_Id]="memberId">
+  </app-organization-detail>
+
+  <app-mem-document-detail
+    [memPersonalInfo]="allDet?.memberDocuments"
+    [ismandatory]="true"
+    [member_Id]="memberId">
+  </app-mem-document-detail>
+
+  <app-mem-document-detail
+    [memPersonalInfo]="allDet?.memberNonMandatoryDocuments"
+    [ismandatory]="false"
+    [member_Id]="memberId">
+  </app-mem-document-detail>
+
+  <div class="btn-area">
+    <button class="back-btn" (click)="goBack()">Back</button>
+    <button class="submit-btn" (click)="submit()">Submit</button>
+  </div>
+
+</div>
+     <div class="col-12 flex" style="justify-content: center; padding-bottom: 0px" *ngIf="isLoggedin">
+       <div style="margin-right: 10px">
+        <p-button label="Submit" [style]="{
+            'border-radius': '18px; !important',
+            padding: '5px 15px',
+            'margin-left': '10px',
+            background:
+              'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'
+          }" severity="secondary" (onClick)="submit()" />
+      </div>
+    </div>
+</div> -->
+
+<!-- 
+
+
+
+
+<div class="whole-section" >
+
+  
+  <div *ngIf="currentStep === 1" class="step-content">
+
+
+    <div class="inner-heading">
+      உங்கள் விவரங்கள் / Your Details
+    </div>
+  <div class="section-box">
+
+    <app-mem-personal-detail
+      (formSaved)="completeStep(1)"
+      [memPersonalInfo]="allDet?.memberDetails"
+      [formDetail]="allDet?.memberDetailsForm"
+      [hideAadhaar]="hideAadhaar"
+      [member_Id]="memberId">
+    </app-mem-personal-detail>
+
+ 
+    <div class="inner-heading">
+      முகவரி விவரங்கள் / ADDRESS DETAILS
+    </div>
+
+
+    <div class="address-two-column">
+
+      <div class="address-col">
+        <app-mem-permanent-address
+          (formSaved)="completeStep(1)"
+          [formDetail]="allDet?.permanentAddressDetailForm"
+          [formtempDetail]="allDet?.temporaryAddressDetailForm"
+          [addressDetail]="allDet?.temprorayAddress"
+          [addressPermDetail]="allDet?.permanentAddress"
+          [member_Id]="memberId">
+        </app-mem-permanent-address>
+      </div>
+
+      <div class="address-col">
+        <app-mem-temp-address
+          [formDetail]="allDet?.temporaryAddressDetailForm"
+          [addressDetail]="allDet?.temprorayAddress">
+        </app-mem-temp-address>
+      </div>
+
+    </div>
+
+
+    <div class="inner-heading">
+      வங்கி விவரங்கள் / BANK DETAILS
+    </div>
+
+  
+    <app-mem-bank-detail
+      (formSaved)="completeStep(1)"
+      [memPersonalInfo]="allDet?.bankDetail"
+      [member_Id]="memberId">
+    </app-mem-bank-detail>
+</div>
+
+    <div class="btn-area">
+      <button class="next-btn" (click)="goNext()">Next</button>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="currentStep === 2" class="step-content">
+
+    <div class="inner-heading">
+      குடும்ப உறுப்பினர் விவரங்கள் / FAMILY DETAILS
+    </div>
+  <div class="section-box">
+     <app-mem-family-detail
+      [familyMemberList]="allDet?.familyMembers"
+      [formDetail]="allDet?.familyMemberForm"
+      (formSaved)="completeStep(2)"
+      [member_Id]="memberId">
+      </app-mem-family-detail>
+</div>
+    <div class="btn-area">
+      <button class="back-btn" (click)="goBack()">Back</button>
+      <button class="next-btn" (click)="goNext()">Next</button>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="currentStep === 3" class="step-content">
+
+    <div class="inner-heading">
+      நிறுவனம் விவரங்கள் / ORGANIZATION DETAILS
+    </div>
+  <div class="section-box">
+    <app-organization-detail
+      (formSaved)="completeStep(3)"
+      [orgDetail]="allDet?.organizationDetail"
+      [formDetail]="allDet?.organizationDetailForm"
+      [member_Id]="memberId">
+    </app-organization-detail>
+
+    <app-mem-document-detail
+      [memPersonalInfo]="allDet?.memberDocuments"
+      [ismandatory]="true"
+      [member_Id]="memberId">
+    </app-mem-document-detail>
+
+</div>
+    <div class="btn-area">
+      <button class="back-btn" (click)="goBack()">Back</button>
+      <button class="submit-btn" (click)="submit()">Submit</button>
+    </div>
+
+  </div>
+
+</div> -->
+
+<div class="whole-section">
+  <!-- ===================== STEP 1 ===================== -->
+  <div *ngIf="currentStep === 1" class="step-content">
+    <div class="inner-heading">உங்கள் விவரங்கள் / Your Details</div>
+
+    <div class="section-box">
+      <!-- PERSONAL DETAIL COMPONENT -->
+      <app-mem-personal-detail
+        (formSaved)="completeStep(1)"
+        (formDataChange)="
+          personalData = $event.value; personalValid = $event.valid
+        "
+        [memPersonalInfo]="allDet?.memberDetails"
+        [orgInfo]="allDet?.organizationDetail"
+        [formDetail]="allDet?.memberDetailsForm"
+        [hideAadhaar]="hideAadhaar"
+        [member_Id]="memberId"
+          [isOfficerSave]="isOfficerSave" 
+      >
+      </app-mem-personal-detail>
+      <!-- <div *ngIf="!personalValid" class="error-message">{{ errorMessage }}</div> -->
+
+      <!-- ADDRESS HEADING -->
+      <!-- <div class="inner-heading">
+        முகவரி விவரங்கள் / ADDRESS DETAILS
+      </div> -->
+      <div class="address-main-header">
+        <div class="address-header-left">
+          உங்களுடைய நிரந்தர முகவரி / Permanent address
+        </div>
+
+        <div class="address-header-right">
+          உங்களுடைய தற்போதைய முகவரி / Your Current Address
+        </div>
+      </div>
+
+      <div class="address-two-column">
+        <div class="address-col">
+          <app-mem-permanent-address
+            (formSaved)="completeStep(1)"
+            (formDataChange)="
+              permanentData = $event.value; permanentValid = $event.valid
+            "
+            [formDetail]="allDet?.permanentAddressDetailForm"
+            [formtempDetail]="allDet?.temporaryAddressDetailForm"
+            [addressDetail]="allDet?.temprorayAddress"
+            [addressPermDetail]="allDet?.permanentAddress"
+            [member_Id]="memberId"
+            [aadhaarJson]="allDet?.memberDetails?.aadhaar_json || ''"
+          >
+          </app-mem-permanent-address>
+        </div>
+
+        <div class="address-col">
+          <app-mem-temp-address
+            (formDataChange)="tempData = $event.value; tempValid = $event.valid"
+            [formDetail]="allDet?.temporaryAddressDetailForm"
+            [addressDetail]="allDet?.temprorayAddress"
+            [permaddressDetail]="allDet?.permanentAddress"
+            [permanentAddressData]="permanentData"
+            [member_Id]="memberId"
+          >
+          </app-mem-temp-address>
+        </div>
+      </div>
+
+      <!-- BANK HEADING -->
+      <div class="inner-heading">வங்கி விவரங்கள் / BANK DETAILS</div>
+
+      <app-mem-bank-detail
+        (formSaved)="completeStep(1)"
+        (formDataChange)="bankData = $event.value; bankValid = $event.valid"
+        [memPersonalInfo]="allDet?.bankDetail"
+        [member_Id]="memberId"
+      >
+      </app-mem-bank-detail>
+      <div class="col-12 justify-content-center flex mb-2">
+        <div
+          *ngIf="errorMessage != ''"
+          style="
+            width: 80%;
+            margin: 20px;
+            color: red;
+            margin-top: 5px;
+            font-size: 14px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 10px;
+          "
+        >
+          <p>
+            Error:
+            <span style="padding-left: 20px; line-height: 1.6">
+              {{ errorMessage }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step3-btn-wrapper">
+      <button class="step3-back-btn" (click)="Logout()">Back</button>
+      <button class="step3-submit-btn" (click)="goNext()">Next</button>
+    </div>
+  </div>
+
+  <!-- ===================== STEP 2 ===================== -->
+  <div *ngIf="currentStep === 2" class="step-content">
+    <div class="inner-heading">
+      குடும்ப உறுப்பினர் விவரங்கள் / FAMILY DETAILS
+    </div>
+
+    <div class="section-box">
+      <app-mem-family-detail
+        (formSaved)="completeStep(2)"
+        (formDataChange)="familyData = $event.value; familyValid = $event.valid"
+        [familyMemberList]="allDet?.familyMembers"
+        [formDetail]="allDet?.familyMemberForm"
+        [member_Id]="memberId"
+      >
+      </app-mem-family-detail>
+    </div>
+    <div class="col-12 justify-content-center flex mb-2">
+      <div
+        *ngIf="errorMessage != ''"
+        style="
+          width: 80%;
+          margin: 20px;
+          color: red;
+          margin-top: 5px;
+          font-size: 14px;
+          background-color: #f0f0f0;
+          padding: 10px;
+          border-radius: 10px;
+        "
+      >
+        <p>
+          Error:
+          <span style="padding-left: 20px; line-height: 1.6">
+            {{ errorMessage }}
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="step3-btn-wrapper">
+      <button class="step3-back-btn" (click)="goBack()">Back</button>
+      <button class="step3-submit-btn" (click)="goNext()">Next</button>
+    </div>
+  </div>
+
+  <!-- ===================== STEP 3 ===================== -->
+  <div *ngIf="currentStep === 3" class="step-content">
+    <div class="inner-heading">நிறுவனம் விவரங்கள் / ORGANIZATION DETAILS</div>
+
+    <div class="section-box">
+      <app-organization-detail
+        (formSaved)="completeStep(3)"
+        (formDataChange)="
+          organizationData = $event.value; organizationValid = $event.valid
+        "
+        [orgDetail]="allDet?.organizationDetail"
+        [formDetail]="allDet?.organizationDetailForm"
+        [member_Id]="memberId"
+         (workOfficeChange)="onWorkOfficeChange($event)"
+      >
+      </app-organization-detail>
+
+      <app-mem-document-detail
+        (formDataChange)="
+          documentData = $event.value; documentValid = $event.valid
+        "
+        [memPersonalInfo]="allDet?.memberDocuments"
+        [ismandatory]="true"
+        [member_Id]="memberId"
+          [isHouseMaid]="isHouseMaid"
+      >
+      </app-mem-document-detail>
+      <div
+        class="p-fluid justify-content-center flex"
+        *ngIf="IsFormCreate || allDet.memberDetails?.collectedByName"
+      >
+        <form [formGroup]="bankForm" class="col-12" style="width: 80%">
+          <div class="p-fluid">
+            <div class="p-formgrid grid">
+              <div
+                class="col-12 flex md:col-12 lg:col-12"
+                style="flex-wrap: wrap"
+              >
+                <div class="field col-12 md:col-4 lg:col-4 pb-0">
+                  <label htmlFor="branch">Collected By Name</label>
+                  <input
+                    pInputText
+                    formControlName="collectedByName"
+                    type="text"
+                    readonly
+                  />
+
+                  <app-error-msg
+                    [control]="bankForm.get('collectedByName')"
+                  ></app-error-msg>
+                </div>
+                <div class="field col-12 md:col-4 lg:col-4 pb-0">
+                  <label htmlFor="branch">Collected By Phone Number</label>
+                  <input
+                    pInputText
+                    formControlName="collectedByPhoneNumber"
+                    type="text"
+                    readonly
+                  />
+                  <app-error-msg
+                    [control]="bankForm.get('collectedByPhoneNumber')"
+                  ></app-error-msg>
+                </div>
+                <div class="field col-12 md:col-4 lg:col-4 pb-0">
+                  <label htmlFor="branch">Collected on</label>
+                  <input
+                    pInputText
+                    formControlName="collectedOn"
+                    type="text"
+                    readonly
+                  />
+                  <app-error-msg
+                    [control]="bankForm.get('collectedOn')"
+                  ></app-error-msg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- ================= DECLARATION SECTION ================= -->
+      <div class="declaration-box">
+        <div class="declaration-title">Declaration</div>
+
+        <ol class="declaration-list">
+          <li>
+            நான் மத்திய அரசு, மாநில அரசு அல்லது உள்ளாட்சி அமைப்புகளின் கீழ்
+            நிரந்தர அரசு பணியில் பணியாற்றவில்லை என்று இத்துடன் அறிவிக்கிறேன் / I
+            hereby declare that I am not employed in a permanent Government post
+            under Central, State, or Local Body services.
+          </li>
+
+          <li>
+            நிரந்தர அரசு பணியில் உள்ளவர்கள் தமிழ்நாடு தூய்மை பணியாளர் நல வாரியம்
+            (TNCWWB) உறுப்பினராக சேர தகுதி இல்லை என்பதை நான் புரிந்துகொண்டேன் /
+            I understand that permanent Government employees are not eligible
+            for membership under the Tamil Nadu Cleanliness Workers Welfare
+            Board (TNCWWB).
+          </li>
+
+          <li>
+            நான் வழங்கிய தகவல்கள் அனைத்தும் உண்மையானவை மற்றும் சரியானவை என்பதை
+            உறுதிப்படுத்துகிறேன் / I further confirm that the information
+            provided by me is true and correct.
+          </li>
+        </ol>
+
+        <div class="agree-section">
+          <input type="checkbox" [(ngModel)]="isAgreed" />
+          <label>நான் ஒப்புக்கொள்கிறேன் / I agree</label>
+        </div>
+      </div>
+      <div class="col-12 justify-content-center flex mb-2">
+        <div
+          *ngIf="errorMessage != ''"
+          style="
+            width: 80%;
+            margin: 20px;
+            color: red;
+            margin-top: 5px;
+            font-size: 14px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 10px;
+          "
+        >
+          <p>
+            Error:
+            <span style="padding-left: 20px; line-height: 1.6">
+              {{ errorMessage }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="btn-area">
+      <button class="back-btn" (click)="goBack()">Back</button> -->
+    <!-- <button class="submit-btn" (click)="submit()">Submit</button> -->
+    <!-- <button class="submit-btn"
+        [disabled]="!isAgreed"
+        (click)="submit()">
+  Submit
+</button>
+    </div> -->
+
+    <div class="step3-btn-wrapper">
+      <button class="step3-back-btn" (click)="goBack()">Back</button>
+
+      <button
+        class="step3-submit-btn"
+        [disabled]="!isAgreed"
+        (click)="submit()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

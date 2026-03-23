@@ -1,0 +1,185 @@
+.figma-form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #FFFFFF;
+}
+
+/* === EXACT FIGMA RECTANGLE 2446 === */
+.form-border-box {
+  box-sizing: border-box;
+  width: 767px; /* Strict Figma width */
+  border: 0.5px solid #000000;
+  border-radius: 5px;
+  /* Left padding matches Figma diff (45px label start - 23px rect start = 22px) */
+  padding: 20px 25px 20px 22px; 
+  margin-bottom: 25px;
+  background: #FFFFFF;
+}
+
+/* === EXACT COLUMN SPACING === */
+.form-columns {
+  display: flex;
+  /* Gap between Col 1 Input end (384.75px) and Col 2 Label start (421px) = 36.25px */
+  gap: 36.25px; 
+}
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* === EXACT FIELD SPACING === */
+.figma-field {
+  display: flex;
+  align-items: center; 
+  /* Space between rows based on Figma Y-coords (112px - 64px = 48px diff - 31.93px input height = ~16px gap) */
+  margin-bottom: 16px; 
+  min-height: 37px;
+}
+
+/* === EXACT LABEL WIDTH === */
+.figma-field label {
+  /* Distance between Label start (45px) and Input start (176px) = 131px */
+  width: 131px; 
+  flex-shrink: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 11.46px; /* Strict Figma Font Size */
+  line-height: 18px;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+.figma-field label .required {
+  color: #E80000;
+}
+
+/* === STRICT PRIMENG INPUT OVERRIDES === */
+::ng-deep .p-inputtext, 
+::ng-deep .p-dropdown,
+::ng-deep .p-calendar {
+  width: 208.75px !important; /* Strict Figma Width */
+  height: 31.93px !important; /* Strict Figma Height */
+  background: #FFFFFF;
+  border: 0.5px solid #747474 !important; /* Rounded up from 0.245px for browser rendering visibility */
+  border-radius: 2.45px !important;
+  box-shadow: none !important;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11.46px;
+  color: #000000;
+  box-sizing: border-box;
+}
+
+/* Inner Textbox adjustments */
+::ng-deep input.p-inputtext {
+  padding: 0 10px !important;
+}
+
+::ng-deep input.readonly-input {
+  background-color: #F8F9FA !important;
+  color: #888 !important;
+  pointer-events: none;
+}
+
+/* Inner Dropdown adjustments */
+::ng-deep .p-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .p-dropdown .p-dropdown-label {
+  padding: 0 10px !important;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border: none !important;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11.46px;
+}
+
+::ng-deep .p-dropdown .p-dropdown-trigger {
+  width: 30px !important;
+  background: transparent !important;
+}
+
+::ng-deep .p-dropdown .p-dropdown-trigger-icon {
+  font-size: 12px;
+  color: #575757;
+}
+
+/* Calendar adjustments */
+::ng-deep .p-calendar {
+  display: flex;
+}
+
+::ng-deep .p-calendar input {
+  width: calc(100% - 35px) !important;
+  border: none !important;
+  height: 100% !important;
+  border-radius: 2.45px 0 0 2.45px !important;
+}
+
+::ng-deep .p-calendar .p-datepicker-trigger {
+  width: 35px !important;
+  height: 31.93px !important;
+  background-color: #064E5E !important; 
+  border: none !important;
+  border-radius: 0 2.45px 2.45px 0 !important;
+  color: #fff !important;
+}
+
+/* Error state */
+::ng-deep .ng-invalid.ng-touched {
+  border-color: #E80000 !important;
+}
+/* === BUTTONS (COMPONENTS 110/111) === */
+.figma-actions {
+  display: flex;
+  justify-content: flex-end; 
+  gap: 20px;
+  width: 767px; /* Constrains buttons to align exactly with the right side of the inner form box */
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.figma-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 127.14px;
+  height: 37.68px;
+  border-radius: 8.3642px; /* Updated to exact Figma radius */
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16.7284px; /* Updated to exact Figma size */
+  line-height: 25px; /* Added exact Figma line-height */
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.figma-actions button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.figma-btn-cancel {
+  background: #DFDFDF;
+  color: #585858;
+}
+
+.figma-btn-add {
+  background: #DC8F36; /* Updated exact Figma background color */
+  color: #FFFFFF;
+  box-shadow: 1.67284px 0.83642px 9.70247px rgba(0, 0, 0, 0.31); /* Added exact Figma drop shadow */
+}
+
+/* Updated PrimeNG Spinner to match Figma */
+.figma-spinner {
+  margin-right: 8px;
+  font-size: 20px; /* Sized to fit well inside the button */
+  color: #3AE180; /* Updated to Figma Green color */
+}

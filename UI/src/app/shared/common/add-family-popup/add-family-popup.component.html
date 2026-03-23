@@ -1,0 +1,218 @@
+<form [formGroup]="popupForm" (ngSubmit)="submitPopup()" class="figma-form-container">
+  
+  <div class="form-border-box">
+    <div class="form-columns">
+      
+      <div class="form-col">
+<div class="figma-field">
+  <label>
+    குடும்ப உறுப்பினர் பெயர் / Family Member Name <span class="required">*</span>
+  </label>
+
+  <input 
+    pInputText 
+    formControlName="name" 
+    placeholder="Enter the family member name"
+    (keypress)="allowOnlyLetters($event)" 
+  />
+</div>
+
+        <div class="figma-field">
+          <label>Mobile Number /<br>கைப்பேசி எண் <span class="required">*</span></label>
+          <input pInputText formControlName="phone_number" maxlength="10" placeholder="Enter Mobile Number" (keypress)="allowOnlyNumbers($event)" />
+        </div>
+
+        <div class="figma-field">
+          <label>Gender /<br>பாலினம் <span class="required">*</span></label>
+          <p-dropdown [options]="formDetail?.gender_SelectList ?? []" optionLabel="text" optionValue="value" formControlName="sex" placeholder="Select Gender" appendTo="body"></p-dropdown>
+        </div>
+
+        <div class="figma-field">
+          <label>School/ College<br>பள்ளி / கல்லூரி <span class="required">*</span></label>
+          <p-dropdown [options]="formDetail?.education_2_SelectList ?? []" optionLabel="text" optionValue="value" formControlName="education" placeholder="Select" appendTo="body"></p-dropdown>
+        </div>
+
+<div class="figma-field" *ngIf="popupForm.get('education')?.value === 'SCHOOL' || popupForm.get('education')?.value === 'COLLEGE'">
+          <label>கல்வி நிலை<br>Education Status <span class="required">*</span></label>
+          <p-dropdown [options]="formDetail?.education_Status_SelectList ?? []" optionLabel="text" optionValue="value" formControlName="educationalStatus" placeholder="Select Status" appendTo="body"></p-dropdown>
+        </div>
+        <ng-container *ngIf="popupForm.get('education')?.value === 'COLLEGE'">
+          <div class="figma-field">
+            <label>பட்டப்படிப்பு<br>Degree course <span class="required">*</span></label>
+            <input pInputText formControlName="degreName" placeholder="Enter Degree Course" (keypress)="allowOnlyLetters($event)" />
+          </div>
+          <div class="figma-field">
+            <label>கல்லூரி முகவரி<br>College Address <span class="required">*</span></label>
+            <input pInputText formControlName="School_Address" placeholder="Enter Address" />
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="popupForm.get('education')?.value === 'SCHOOL'">
+          <div class="figma-field">
+            <label>பள்ளியின் பெயர்<br>School Name <span class="required">*</span></label>
+            <input pInputText formControlName="nameandAddressofSchool" placeholder="Enter School Name" />
+          </div>
+          <div class="figma-field">
+            <label>பள்ளி முகவரி<br>School Address <span class="required">*</span></label>
+            <input pInputText formControlName="School_Address" placeholder="Enter Address" />
+          </div>
+        </ng-container>
+
+        <div class="figma-field">
+          <label>Are they differently<br>abled? / இவர்<br>மாற்றுத்திறனாளியா? <span class="required">*</span></label>
+          <p-dropdown [options]="formDetail?.disability_SelectList ?? []" optionLabel="text" optionValue="value" formControlName="disability" placeholder="No" appendTo="body"></p-dropdown>
+        </div>
+      </div>
+
+      <div class="form-col">
+        
+<div class="figma-field">
+          <label>Aadhaar Number/<br>ஆதார் எண் <span class="required">*</span></label>
+          <div class="p-inputgroup">
+            <input pInputText formControlName="aadharNumber" maxlength="12" placeholder="Enter Aadhaar Number" (keypress)="allowOnlyNumbers($event)" />
+            <button type="button" pButton icon="pi pi-arrow-right" class="p-button-success" (click)="onAadhaarEnter()" [disabled]="popupForm.get('aadharNumber')?.invalid"></button>
+          </div>
+        </div>
+
+        <div class="figma-field">
+          <label>Relationship /<br>உறவு <span class="required">*</span></label>
+          <p-dropdown [options]="formDetail?.family_Member_SelectList ?? []" optionLabel="text" optionValue="value" formControlName="relation" placeholder="Select Relationship" appendTo="body"></p-dropdown>
+        </div>
+<div class="figma-field">
+          <label>DOB <span class="required">*</span></label>
+          <p-calendar 
+             formControlName="date_of_birth" 
+             placeholder="Select DOB" 
+             [showIcon]="true" 
+             appendTo="body" 
+             dateFormat="dd-mm-yy"
+             [maxDate]="maxDate"> </p-calendar>
+        </div>
+        <div class="figma-field">
+          <label>Age /<br>வயது <span class="required">*</span></label>
+          <input pInputText formControlName="age" placeholder="Auto calculated" class="readonly-input" readonly />
+        </div>
+
+<ng-container *ngIf="popupForm.get('education')?.value === 'COLLEGE'">
+  <ng-container *ngIf="popupForm.get('educationalStatus')?.value === 'STUDYING'">
+            
+            <div class="figma-field">
+              <label>படிக்கும் ஆண்டு<br>Study Year <span class="required">*</span></label>
+              <p-dropdown 
+                 [options]="studyYearList" 
+                 optionLabel="text" 
+                 optionValue="value" 
+                 formControlName="year" 
+                 placeholder="Select Year" 
+                 appendTo="body">
+              </p-dropdown>
+            </div>
+
+            <div class="figma-field" *ngIf="popupForm.get('year')?.value !== '5'">
+              <label>முடிக்கும் ஆண்டு<br>Year of Completion <span class="required">*</span></label>
+              <input pInputText formControlName="year_Of_Completion" placeholder="Enter Year (e.g. 2026)" maxlength="4" (keypress)="allowOnlyNumbers($event)" />
+            </div>
+
+          </ng-container>
+          <div class="figma-field">
+            <label>UMIS எண்<br>UMIS Number <span class="required">*</span></label>
+            <input pInputText formControlName="eMISNo" maxlength="10" placeholder="Enter UMIS/EMIS Number" (blur)="onUMISEnter()" (keypress)="allowOnlyNumbers($event)" />
+          </div>
+<div class="figma-field">
+            <label>பாடநெறி<br>Course <span class="required">*</span></label>
+            <p-dropdown 
+               [options]="formDetail?.education_SelectList ?? []" 
+               optionLabel="text" 
+               optionValue="value" 
+               formControlName="course" 
+               placeholder="Select Course" 
+               appendTo="body">
+            </p-dropdown>
+          </div>
+          <div class="figma-field">
+            <label>கல்லூரி பெயர்<br>College Name <span class="required">*</span></label>
+            <input pInputText formControlName="nameandAddressofSchool" placeholder="Enter College Name" />
+          </div>
+          <div class="figma-field">
+            <label>கல்லூரி மாவட்டம்<br>College District <span class="required">*</span></label>
+            <input pInputText formControlName="School_District" placeholder="Enter District" />
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="popupForm.get('education')?.value === 'SCHOOL'">
+          <div class="figma-field">
+            <label>EMIS எண்<br>EMIS Number <span class="required">*</span></label>
+            <input pInputText formControlName="eMISNo" maxlength="10" placeholder="Enter EMIS Number" (blur)="onEMISEnter()" />
+          </div>
+          <div class="figma-field">
+            <label>தரம்<br>Standard <span class="required">*</span></label>
+            <p-dropdown [options]="formDetail?.education_Standard_SelectList ?? []" optionLabel="text" optionValue="value" formControlName="standard" placeholder="Select Standard" appendTo="body"></p-dropdown>
+          </div>
+<div class="figma-field">
+  <label>பள்ளி மாவட்டம்<br>School District <span class="required">*</span></label>
+  <p-dropdown 
+     [options]="formDetail?.district_SelectList ?? []" 
+     optionLabel="text" 
+     optionValue="value" 
+     formControlName="School_District" 
+     placeholder="Select District" 
+     appendTo="body">
+  </p-dropdown>
+</div>
+        </ng-container>
+
+
+
+      </div>
+    </div>
+  </div>
+<div class="figma-actions">
+  <button type="button" class="figma-btn-cancel" [disabled]="isLoading" (click)="closePopup()">Cancel</button>
+  
+  <button type="button" class="figma-btn-add" [disabled]="isLoading" (click)="submitPopup()">
+    <i *ngIf="isLoading" class="pi pi-spinner pi-spin figma-spinner" style="margin-right: 8px;"></i>
+    {{ isLoading ? 'Adding...' : 'Add' }}
+  </button>
+</div>
+
+</form>
+
+
+<p-dialog [(visible)]="showOtpDialog" [modal]="true" [closable]="false" [draggable]="false" [style]="{width:'400px'}">
+  <div class="otp-section" style="padding: 20px; text-align: center;">
+    <div class="otp-title" style="margin-bottom: 15px; font-weight: bold;">
+      Please enter the OTP sent to {{ maskedAadhaar }}
+    </div>
+
+    <div class="otp-container" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+<input *ngFor="let digit of otpDigits; let i = index; trackBy: trackByIndex"
+  type="text" inputmode="numeric" maxlength="1"
+  style="width: 40px; height: 45px; text-align: center; font-size: 1.5rem; border: 1px solid #ccc; border-radius: 5px;"
+  [value]="otpDigits[i]"
+  [disabled]="otpTimer === 0"
+  (input)="onOtpInput($event, i)"
+  (keydown)="onOtpKeyDown($event, i)"
+  (keydown.enter)="verifyOtp()" 
+  (keypress)="allowOnlyNumbers($event)" />
+    </div>
+
+    <div class="otp-footer" style="margin-bottom: 20px;">
+      <div class="timer" style="font-weight: bold; margin-bottom: 5px;">
+        0:{{ otpTimer < 10 ? '0' + otpTimer : otpTimer }}
+      </div>
+      <small *ngIf="otpErrorMessage" style="color: red; display: block; margin-bottom: 10px;">
+        {{ otpErrorMessage }}
+      </small>
+      <div class="resend" [class.disabled]="otpTimer > 0" (click)="otpTimer === 0 ? resendOtp() : null" 
+           [style.cursor]="otpTimer > 0 ? 'not-allowed' : 'pointer'" 
+           [style.color]="otpTimer > 0 ? 'grey' : '#007ad9'">
+        Resend OTP?
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <button pButton label="Verify OTP" (click)="verifyOtp()" [disabled]="otpTimer === 0 || otpDigits.join('').length !== 6" class="p-button-primary"></button>
+      <button pButton label="Cancel" (click)="closeOtpDialog()" class="p-button-secondary"></button>
+    </div>
+  </div>
+</p-dialog>

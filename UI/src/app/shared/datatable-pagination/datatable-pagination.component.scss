@@ -1,0 +1,181 @@
+::ng-deep  p-columnfilter{
+    input{
+        min-width: 100px;
+    }
+}
+::ng-deep .p-datatable-header{
+    display: flex;
+}
+
+
+/* Base p-tag override */
+::ng-deep .p-tag {
+
+  border-radius: 20px !important;
+  font-weight: 500 !important;
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+
+}
+
+
+/* VERIFIED BADGE */
+::ng-deep .p-tag.verified-badge,
+::ng-deep .verified-badge.p-tag,
+::ng-deep .p-tag-success {
+
+  background-color: #d1fae5 !important;
+  color: #059669 !important;
+  border: none !important;
+
+}
+
+
+/* TO BE VERIFIED BADGE */
+::ng-deep .p-tag.tobeverified-badge,
+::ng-deep .tobeverified-badge.p-tag,
+::ng-deep .p-tag-danger {
+
+  background-color: #fee2e2 !important;
+  color: #dc2626 !important;
+  border: none !important;
+
+}
+
+
+/* Badge icons spacing */
+::ng-deep .p-tag .pi {
+
+  font-size: 12px !important;
+
+}
+
+
+
+/* ===============================
+   ACTION BUTTON STYLING
+   =============================== */
+
+/* Action column alignment */
+.action-cell {
+
+  text-align: center;
+  vertical-align: middle;
+
+}
+
+
+/* VERIFY BUTTON (GREEN) */
+.verify-btn {
+
+  background-color: #16a34a !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 18px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: white !important;
+  box-shadow: none !important;
+
+}
+
+.cardview-btn {
+
+  background-color: #16a1a3 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: white !important;
+  box-shadow: none !important;
+
+}
+
+.verify-btn:hover {
+
+  background-color: #15807e !important;
+
+}
+
+
+/* REVIEW BUTTON (BLUE) */
+.review-btn {
+
+  background-color: #3b82f6 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 18px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: white !important;
+  box-shadow: none !important;
+
+}
+
+.review-btn:hover {
+
+  background-color: #2563eb !important;
+
+}
+
+
+
+/* ===============================
+   TABLE GENERAL CLEANUP
+   =============================== */
+
+::ng-deep .p-datatable-tbody > tr > td {
+
+  vertical-align: middle;
+
+}
+
+::ng-deep .p-datatable-thead > tr > th {
+
+  white-space: nowrap;
+
+}
+
+
+/* Remove PrimeNG default blue background completely */
+::ng-deep .p-tag.p-tag-success,
+::ng-deep .p-tag.p-tag-danger,
+::ng-deep .p-tag.p-tag-info {
+
+  background-image: none !important;
+
+}/* UPDATE BUTTON (GREEN) */
+.update-btn {
+  background-color: #16a34a !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 18px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+.update-btn:hover {
+  background-color: #15803d !important;
+}
+
+.view-btn {
+  background-color: #c8c6b6 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 6px 18px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+.view-btn:hover {
+  background-color: #babdb7 !important;
+}

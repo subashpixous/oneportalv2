@@ -1,0 +1,222 @@
+<div class="card noborderRad">
+  <div class="grid formgrid">
+    <div class="col-12 lg:col-4 md:col-4 mb-2">
+      <h4>{{ title }}</h4>
+    </div>
+  </div>
+ 
+  <!-- 🔹 Top Buttons (Export / Update) -->
+  <div class="card p-3 mb-3">
+    <div class="flex flex-wrap justify-end gap-2">
+      <p-button
+        label="Export Member Print Data"
+        icon="pi pi-file-excel"
+        class="p-button-success"
+        (onClick)="downloadReport()"
+      ></p-button>
+ 
+      <!-- <p-button
+        label="Update Status"
+        icon="pi pi-check-circle"
+        class="p-button-primary"
+        (onClick)="confirmUpdateStatus()"
+      ></p-button> -->
+    </div>
+ 
+    <!-- 🔹 History Dropdown -->
+    <div class="mt-4">
+      <label class="block text-gray-600 font-medium mb-2">
+        Re-download previous file:
+      </label>
+      <p-dropdown
+        [options]="history"
+        optionLabel="originalFileName"
+        optionValue="id"
+        placeholder="Select a file"
+        (onChange)="redownload($event)"
+      ></p-dropdown>
+    </div>
+  </div>
+ 
+  <!-- 🔹 Action Buttons + Table in the same card -->
+  <div class="card p-3">
+    <div class="flex flex-wrap items-end justify-between gap-3 mb-3">
+      <div class="flex-1 min-w-[200px]">
+        <label class="block text-gray-600 font-medium mb-2"> District </label>
+         <p-multiSelect
+          [options]="districts"
+          optionLabel="text"
+          
+          optionValue="value"
+          placeholder="Select a District"
+          [showClear]="true"
+          [(ngModel)]="selectedDistricts"
+          (onChange)="onDistrictChange()"
+            (onClear)="onClearDistricts()"
+           
+        ></p-multiSelect>
+      </div>
+ 
+      <!-- <div class="flex gap-3">
+        <p-button
+          label="Approve"
+          class="p-button-secondary"
+          severity="primary"
+          (onClick)="bulkApprove()"
+        ></p-button>
+ 
+        <p-button
+          label="Return"
+          class="p-button-secondary"
+          severity="primary"
+          (onClick)="bulkreturn()"
+        ></p-button>
+      </div> -->
+    </div>
+ 
+    <!-- Data Table -->
+    <app-datatable-pagination
+      [records]="configurationList"
+      [defaultSortField]="defaultSortField"
+      [defaultSortOrder]="defaultSortOrder"
+      [cols]="cols"
+      [fileName]="'Print In Progress'"
+      [rows]="rows"
+      [total]="total"
+      [actions]="actions"
+          [selectedRows]="selectedRows"
+      (changefilter)="changefilter($event)"
+      (onPageChangeEvent)="onPageChange($event)"
+      (actionalAction)="actionalAction($event)"
+      [canShowCheckbox]="true"
+      (selectedApplications)="onSelectedApplications($event)"
+      [searchableColumns]="searchableColumns"
+      [hasActiveInactive]="false"
+      [canShowAction]="false"
+      [excelExport]="true"
+      (exportRequest)="onExportRequest($event)"
+    ></app-datatable-pagination>
+     <!-- modified by Sivasankar on 06-11-2025 for export functionality -->
+
+      
+  </div>
+  <div class="mb-3 mt-3">
+    <div class="card">
+      <h5>Approval Form</h5>
+      <form [formGroup]="approvalForm" (ngSubmit)="submit()" class="col-12">
+        <div class="p-fluid">
+          <div class="flex grid formgrid">
+            <div class="field col-12 md:col-12 lg:col-12">
+              <label htmlFor="applicationIdsText">Applications</label>
+              <p-chips
+                formControlName="applicationIdsText"
+                [disabled]="true"
+              ></p-chips>
+              <app-error-msg
+                [control]="approvalForm.get('applicationIds')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6">
+              <label htmlFor="status">Status</label>
+              <input
+                pInputText
+                formControlName="status"
+                [readOnly]="true"
+                type="text"
+              />
+              <app-error-msg
+                [control]="approvalForm.get('status')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6">
+              <label htmlFor="date">Date</label>
+              <input
+                pInputText
+                formControlName="date"
+                [readOnly]="true"
+                type="text"
+              />
+              <app-error-msg
+                [control]="approvalForm.get('date')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6">
+              <label htmlFor="name">Name</label>
+              <input
+                pInputText
+                formControlName="name"
+                [readOnly]="true"
+                type="text"
+              />
+              <app-error-msg
+                [control]="approvalForm.get('name')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6">
+              <label htmlFor="jobTitle">Role</label>
+              <input
+                pInputText
+                formControlName="jobTitle"
+                [readOnly]="true"
+                type="text"
+              />
+              <app-error-msg
+                [control]="approvalForm.get('jobTitle')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6">
+              <label htmlFor="dob">Approve/ Return Status</label>
+              <p-dropdown
+                [options]="approvalStatuses"
+                optionLabel="statusName"
+                optionValue="statusId"
+                placeholder="Select a status"
+                formControlName="approvalRejectedstatus"
+                [showClear]="true"
+              ></p-dropdown>
+              <app-error-msg
+                [control]="approvalForm.get('approvalRejectedstatus')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6" *ngIf="canshowreason">
+              <label htmlFor="reason">Reason</label>
+              <p-dropdown
+                [options]="reasons"
+                optionLabel="text"
+                optionValue="value"
+                placeholder="Select a reason"
+                formControlName="reason"
+                [showClear]="true"
+              ></p-dropdown>
+              <app-error-msg
+                [control]="approvalForm.get('reason')"
+              ></app-error-msg>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6">
+              <label htmlFor="comments">Comments</label>
+              <input pInputText formControlName="comments" type="text" />
+              <app-error-msg
+                [control]="approvalForm.get('comments')"
+              ></app-error-msg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-1" style="justify-content: end">
+          <p-button label="Submit" type="submit" />
+         <p-button 
+  label="Cancel" 
+  class="p-button-secondary" 
+  (click)="resetApprovalForm()" 
+/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+ 
+<!-- 🔹 Dialogs and Notifications -->
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>
+ 
+ 

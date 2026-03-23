@@ -1,0 +1,79 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="col-12 md:col-6 lg:col-3">
+            <h4>{{title}}</h4>
+        </div>
+
+        <div class="col-12 row  lg:col-12 md:col-12 flex">
+
+            <div class="field col-12 lg:col-3 md:col-3 ">
+                <p-dropdown [options]="financialYearsfilter" optionLabel="text" [style]="{'width': '100%'}"
+                    optionValue="value" placeholder="Select from year" [showClear]="false"
+                    (ngModelChange)="generatefinancialYearsfromfilter($event)"
+                    [(ngModel)]="props.selectedfinancialYearfromfilter"></p-dropdown>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 ">
+                <p-dropdown [options]="financialYearsfilter" optionLabel="text" [style]="{'width': '100%'}"
+                    optionValue="value" placeholder="Select to year" [showClear]="false"
+                    (ngModelChange)="generatefinancialYearstofilter($event)"
+                    [(ngModel)]="props.selectedfinancialYeartofilter"></p-dropdown>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 ">
+
+                <p-multiSelect [options]="districts" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a District" [showClear]="false" (ngModelChange)="generatedistricts($event)"
+                    [(ngModel)]="props.selectedDistricts"></p-multiSelect>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 ">
+                <p-multiSelect [options]="schemes" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a Scheme" (ngModelChange)="changescheme($event)" [showClear]="false"
+                    [(ngModel)]="props.selectedSchemes"></p-multiSelect>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 ">
+                <p-multiSelect [options]="statuses" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a Status" [showClear]="false" (ngModelChange)="generatestatuses($event)"
+                    [(ngModel)]="props.selectedStatuses"></p-multiSelect>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 ">
+                <p-dropdown [options]="reportOutput" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a report type" [showClear]="false"
+                    (ngModelChange)="generatereportOutput($event)"
+                    [(ngModel)]="props.selectedreportOutput"></p-dropdown>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 " *ngIf="props.selectedreportOutput =='chart'">
+                <p-multiSelect [options]="chartreportList" optionLabel="text" [style]="{'width': '100%'}"
+                    optionValue="value" placeholder="Select a report" (ngModelChange)="generatechartreportList($event)"
+                    [showClear]="false" [(ngModel)]="props.selectedchartreport"></p-multiSelect>
+            </div>
+            <div class="field col-12 lg:col-3 md:col-3 " *ngIf="props.selectedreportOutput =='table'">
+                <p-multiSelect [options]="tablereportList" optionLabel="text" [style]="{'width': '100%'}"
+                    optionValue="value" placeholder="Select a report" [showClear]="false"
+                    [(ngModel)]="props.selectedtablereport"
+                    (ngModelChange)="generatetablereportList($event)"></p-multiSelect>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 10px;" *ngIf="props.selectedreportOutput =='chart'">
+        <app-report-charts></app-report-charts>
+    </div>
+    <div style="margin-top: 10px;"
+        *ngIf="props.selectedreportOutput =='table' && props.selectedtablereport.includes('application_info')">
+        <app-report-tables></app-report-tables>
+    </div>
+    <div style="margin-top: 10px;"
+        *ngIf="props.selectedreportOutput =='table' && props.selectedtablereport.includes('application_document')">
+        <app-report-documents></app-report-documents>
+    </div>
+    <div style="margin-top: 10px;"
+        *ngIf="props.selectedreportOutput =='table' && props.selectedtablereport.includes('application_status')">
+        <app-report-status></app-report-status>
+    </div>
+    <div style="margin-top: 10px;"
+        *ngIf="props.selectedreportOutput =='table' && props.selectedtablereport.includes('form3')">
+        <app-report-formthree></app-report-formthree>
+    </div>
+    <div style="margin-top: 10px;"
+        *ngIf="props.selectedreportOutput =='table' && props.selectedtablereport.includes('uc')">
+        <app-report-uc></app-report-uc>
+    </div>
+</div>

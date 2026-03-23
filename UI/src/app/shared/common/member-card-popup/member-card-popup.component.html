@@ -1,0 +1,155 @@
+   <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;" *ngIf="memberCardData">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher">உறுப்பினர் அடையாள அட்டை / Member Identity Card</h5>
+                <!-- ID Card Design -->
+                <div id="id-card-container" class="id-card-wrapper">
+                    <!-- Front Side of the ID Card -->
+                    <div class="id-card text-white">
+
+                        <!-- Member details section -->
+                        <div class="row mt-4 front-side-content">
+                            <div class="col-md-3 text-center">
+                                <div class="photo-container">
+                                    <img [src]=" url && url !='' ? url : 'https://www.w3schools.com/howto/img_avatar.png'" alt="Person"
+                                        class="person-image">
+
+                                </div>
+            <div class="local-body-details">     
+                          <div class="detail-row">
+<div class="label" *ngIf="memberCardData.nameOfLocalBody === 'GCC' || memberCardData.nameOfLocalBody === 'CMWS'">
+        <span class="label">மண்டலம் / Zone</span>
+      <br>
+            <span class="value">
+                {{ memberCardData.nameOfLocalBody }} - {{ memberCardData.zone }}
+            </span>
+    
+    </div>
+    </div>
+    </div>
+                            
+                            </div>
+                            <div class="col-md-9 front-page-section">
+                                <div class="member-details">
+                                    <div class="detail-row">
+                                        <span class="label">பெயர் / NAME</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.nameEnglish">{{
+                                                    memberCardData.nameEnglish }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.nameEnglish && memberCardData.nameTamil"><br></ng-container>
+                                                <ng-container *ngIf="memberCardData.nameTamil">{{
+                                                    memberCardData.nameTamil }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">தந்தை / கணவர்<br>FATHER / HUSBAND</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.fatherNameEnglish">{{
+                                                    memberCardData.fatherNameEnglish }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.fatherNameEnglish && memberCardData.fatherNameTamil"><br></ng-container>
+                                                <ng-container *ngIf="memberCardData.fatherNameTamil">{{
+                                                    memberCardData.fatherNameTamil }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">உறுப்பினர் எண்<br>MEMBER ID</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">{{memberCardData.memberId }}</span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">பிறந்த தேதி / DOB</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">{{memberCardData.dateOfBirth | date:
+                                                'dd-MM-yyyy'}}</span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">மாவட்டம் / DISTRICT</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.districtTamil">{{
+                                                    memberCardData.districtTamil }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.districtTamil && memberCardData.districtEnglish">
+                                                    / </ng-container>
+                                                <ng-container *ngIf="memberCardData.districtEnglish">{{
+                                                    memberCardData.districtEnglish }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+    
+
+    <!-- QR Code Row -->
+    <div class="detail-row">
+  
+            <span class="value">
+                <img [src]="'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(trimmedApiUrl + '/#/member-qr-view/' + (this.memberId)) +'&size=80x80'"
+                    alt="QR Code" class="qr-code">
+            </span>
+       
+    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Back Side of the ID Card -->
+                    <div class="id-card-back">
+                        <!-- Member details section -->
+                        <div class="row mt-4 back-side-content">
+                            <div class="col-md-12">
+                                <div class="back-details">
+                                    <div class="detail-row">
+                                        <span class="label">குடும்பத்தினர்/FAMILY MEMBERS</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container
+                                                    *ngIf="getCommaSeparatedNamesFromFamily(memberCardData.familyMember, 'Tamil') as tamilNames">
+                                                    {{ tamilNames }}
+                                                    <ng-container
+                                                        *ngIf="getCommaSeparatedNamesFromFamily(memberCardData.familyMember, 'English')">
+                                                        <br>
+                                                    </ng-container>
+                                                </ng-container>
+                                                {{ getCommaSeparatedNamesFromFamily(memberCardData.familyMember,
+                                                'English') }}
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">முகவரி/ADDRESS</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <!-- <span class="value">
+                                                {{ getFormattedAddress(memberCardData) }}
+                                            </span> -->
+                                            <span class="value">
+  {{ getFormattedAddressTamil(memberCardData) }}
+  <ng-container *ngIf="getFormattedAddressTamil(memberCardData) && getFormattedAddress(memberCardData)">
+    <br>
+  </ng-container>
+  {{ getFormattedAddress(memberCardData) }}
+</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

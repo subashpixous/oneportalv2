@@ -1,0 +1,221 @@
+<div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;">
+    <div class="flex align-items-center  mr-4">
+        <p class="fw-bold"> உறுப்பினர் சேர்க்கை விவரங்கள் / MEMBER REGISTRATION DETAILS</p>
+    </div>
+    <div class="flex align-items-center  mr-4">
+        <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+        <p-button *ngIf="isLoggedin"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            label="Logout" (onClick)="Logout()" />
+    </div>
+</div>
+<app-current-user-time *ngIf="memberDetails"
+    [memberID]="memberDetails.memberId !='' ? memberDetails.memberId :memberDetails.name"></app-current-user-time>
+<div class="p-formgrid flex p-fluid col-12 pt-0 pb-0 justify-content-space-between align-items-center"
+    *ngIf="this.allDet">
+    <div class="field col-6 ">
+        <label for="">Select Detail to Change / மாற்ற விவரங்களைத் தேர்ந்தெடுக்கவும்* </label>
+        <p-dropdown [options]="types" [(ngModel)]="selectedValue" optionLabel="text" optionValue="value"
+            placeholder="Select a Detail to Change" (ngModelChange)="checkisApprovalPending()"
+            [showClear]="true"></p-dropdown>
+    </div>
+    <div class="field col-6 ">
+        <button pButton pRipple label="Back to Home Page" class="p-button-secondary"
+            [style]="{'float': 'right','width': 'fit-content'}" icon="pi pi-arrow-left" (click)="bckClick()"></button>
+    </div>
+</div>
+<div class="col-12  pt-0" style="margin: 0px 20px;" *ngIf="isApprovalPending">
+    <div style="margin-top:5px;font-size:20px;background-color: #fff5bc;padding: 10px;border-radius: 10px;">
+        <h5 class="m-0">{{selectedValueText}} </h5>
+    </div>
+</div>
+<div class="p-formgrid p-fluid col-12 pt-0 " *ngIf="selectedValue=='ORGANIZATION_DETAILS'">
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="memberDetail">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <app-organization-detail-view
+                    [orgDetail]="memberDetail.organizationalDetail"></app-organization-detail-view>
+            </div>
+        </div>
+    </div>
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="!isApprovalPending">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher" style="width: inherit;">நிறுவன விவரங்கள் மாற்றம் / Organization details
+                    change </h5>
+                <app-organization-detail [isReadonly]="false" [showNextButton]="false"
+                    [orgDetail]="allDet?.organizationDetail" [formDetail]="allDet?.organizationDetailForm"
+                    [member_Id]="memberId"></app-organization-detail>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-formgrid p-fluid col-12 pt-0 " *ngIf="selectedValue=='PERSONAL_DETAILS'">
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="memberDetail">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <app-mem-personal-detail-view
+                    [personalDetail]="memberDetail.memberDetail"></app-mem-personal-detail-view>
+            </div>
+        </div>
+    </div>
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="!isApprovalPending">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher" style="width: inherit;">தனிப்பட்ட விவரங்கள் மாற்றம் / Personal details change
+                    change </h5>
+                <app-mem-personal-detail [memPersonalInfo]="allDet?.memberDetails" [isReadonly]="true"
+                    [showNextButton]="false" [formDetail]="allDet?.memberDetailsForm"
+                    [member_Id]="memberId"></app-mem-personal-detail>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-formgrid p-fluid col-12 pt-0 " *ngIf="selectedValue=='PERMANENT_ADDRESS'">
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="memberDetail">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <app-mem-temp-address-view [addressDetail]="memberDetail.permanentAddress"></app-mem-temp-address-view>
+            </div>
+        </div>
+    </div>
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="!isApprovalPending">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher" style="width: inherit;">நிரந்தர முகவரி மாற்றம் / Permanent Address change
+                </h5>
+                <app-mem-temp-address [addressDetail]="allDet?.permanentAddress"
+                    [formDetail]="allDet?.permanentAddressDetailForm" [member_Id]="memberId"></app-mem-temp-address>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-formgrid p-fluid col-12 pt-0 " *ngIf="selectedValue=='TEMPORARY_ADDRESS'">
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="memberDetail">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <app-mem-temp-address-view [addressDetail]="memberDetail.temproraryAddress"></app-mem-temp-address-view>
+            </div>
+        </div>
+    </div>
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="!isApprovalPending">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher" style="width: inherit;">தற்காலிக முகவரி மாற்றம் / Temporary Address change
+                </h5>
+                <app-mem-temp-address [addressDetail]="allDet?.temprorayAddress"
+                    [formDetail]="allDet?.temporaryAddressDetailForm" [member_Id]="memberId"></app-mem-temp-address>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="p-formgrid p-fluid col-12 pt-0 " *ngIf="selectedValue=='BANK_CHANGES'">
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="memberDetail">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <app-mem-bank-detail-view [personalDetail]="memberDetail?.bankDetails"></app-mem-bank-detail-view>
+            </div>
+        </div>
+    </div>
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="!isApprovalPending">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher" style="width: inherit;">வங்கி விவரம் மாற்றம் / Bank Detail Change
+                </h5>
+                <app-mem-bank-detail [isReadonly]="false" [showNextButton]="false"
+                    [memPersonalInfo]="allDet?.bankDetail" [member_Id]="memberId"></app-mem-bank-detail>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="p-formgrid p-fluid col-12 pt-0 " *ngIf="selectedValue=='FAMILY_MEMBER'">
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="memberDetail">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <app-mem-family-detail-view
+                    [familyMemberList]="memberDetail?.familyMembers"></app-mem-family-detail-view>
+            </div>
+        </div>
+    </div>
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="!isApprovalPending">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher" style="width: inherit;">குடும்ப உறுப்பினர் மாற்றம் / Family Member Change
+                </h5>
+                <app-mem-family-detail [isReadonly]="false" [showNextButton]="false"
+                    [familyMemberList]="allDet?.familyMembers" [formDetail]="allDet?.familyMemberForm"
+                    [member_Id]="memberId"></app-mem-family-detail>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="p-formgrid p-fluid col-12 pt-0 " *ngIf="selectedValue=='DOCUMENT'">
+
+    <div class="col-12" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="memberDetail">
+        <app-mem-document-detail-view [memPersonalInfo]="memberDetail.memberDocuments"
+            [ismandatory]="true"></app-mem-document-detail-view>
+    </div>
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="!isApprovalPending">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher" style="width: inherit;">ஆவணங்கள் மாற்றம் / Document Change
+                </h5>
+                <app-mem-document-detail [memPersonalInfo]="allDet?.memberDocuments" [ismandatory]="true"
+                    [showNextButton]="false" [member_Id]="memberId"></app-mem-document-detail>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-formgrid p-fluid col-12 pt-0 " *ngIf="selectedValue=='DOCUMENT'">
+
+    <div class="col-12" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="memberDetail">
+        <app-mem-document-detail-view [memPersonalInfo]="memberDetail.memberNonMandatoryDocuments"
+            [ismandatory]="false"></app-mem-document-detail-view>
+    </div>
+    <div class="card p-fluid" style="margin: 20px; padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="!isApprovalPending">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher" style="width: inherit;">ஆவணங்கள் மாற்றம் / Document Change
+                </h5>
+                <app-mem-document-detail [memPersonalInfo]="allDet?.memberNonMandatoryDocuments" [ismandatory]="false"
+                    [showNextButton]="false" [member_Id]="memberId"></app-mem-document-detail>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-12 flex mb-4" style="justify-content: center;padding-bottom: 0px;"
+    *ngIf="!isApprovalPending && selectedValue !='DOCUMENT' &&selectedValue !='FAMILY_MEMBER' && selectedValue!='' ">
+    <div style="margin-right: 10px;">
+        <p-button label="Submit"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            severity="secondary" (onClick)="submit()" />
+    </div>
+</div>
+<div class="col-12 flex mb-4" style="justify-content: center;padding-bottom: 0px;"
+    *ngIf="isApprovalPending && isAbleToCancelRequest">
+    <div style="margin-right: 10px;">
+        <p-button label="Cancel Approval Request"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            severity="secondary" (onClick)="cancelREquest()" />
+    </div>
+</div>

@@ -1,0 +1,325 @@
+<!-- src/app/features/report/shared/report-viewer/report-viewer.component.html -->
+<div class="card noborderRad p-3">
+  <!-- Header -->
+  <div class="grid formgrid mb-3">
+    <div class="col-12 lg:col-4 md:col-4">
+      <h4>{{ title }}</h4>
+    </div>
+  </div>
+
+  <!-- Filter Section -->
+  <div class="p-fluid" style="padding: 0">
+    <div class="p-formgrid grid" style="align-items: end">
+      <!-- District -->
+      <div class="col-12 lg:col-3 md:col-3">
+        <p-multiSelect
+          [options]="districts"
+          placeholder="Select District"
+          [(ngModel)]="selectedDistrict"
+          [showClear]="true"
+          (onChange)="applyFilter()"
+          [disabled]="loading"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Block (for block and village reports) -->
+      <div
+        class="col-12 lg:col-3 md:col-3"
+        *ngIf="reportType === 'block' || reportType === 'village'"
+      >
+        <!-- <label>Block</label> -->
+        <p-multiSelect
+          [options]="blocks"
+          placeholder="Select Block"
+          [(ngModel)]="selectedBlock"
+          [showClear]="true"
+          (onChange)="applyFilter()"
+          [disabled]="loading"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Corporation (for corporation reports) -->
+      <div
+        class="col-12 lg:col-3 md:col-3"
+        *ngIf="reportType === 'corporation'"
+      >
+        <!-- <label>Corporation</label> -->
+        <p-multiSelect
+          [options]="corporations"
+          placeholder="Select Corporation"
+          [(ngModel)]="selectedCorporation"
+          [showClear]="true"
+          (onChange)="applyFilter()"
+          [disabled]="loading"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Village (for village reports) -->
+      <div class="col-12 lg:col-3 md:col-3" *ngIf="reportType === 'village'">
+        <!-- <label>Village Panchayat</label> -->
+        <p-multiSelect
+          [options]="villages"
+          placeholder="Select Village"
+          [(ngModel)]="selectedVillage"
+          [showClear]="true"
+          (onChange)="applyFilter()"
+          [disabled]="loading"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Municipality (for municipality reports) -->
+      <div
+        class="col-12 lg:col-3 md:col-3"
+        *ngIf="reportType === 'municipality'"
+      >
+        <!-- <label>Municipality</label> -->
+        <p-multiSelect
+          [options]="municipalities"
+          placeholder="Select Municipality"
+          [(ngModel)]="selectedMunicipality"
+          [showClear]="true"
+          (onChange)="applyFilter()"
+          [disabled]="loading"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Reset Button -->
+      <div class="col-6 lg:col-2 md:col-2">
+        <p-button
+          icon="pi pi-times "
+          [outlined]="true"
+          (click)="clearFilter()"
+          [style]="{ 'margin-left': '10px' }"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="card"> -->
+  <!-- 🔹 Top bar with export buttons -->
+  <!-- <div class="flex justify-between items-center mb-3">
+    <div>
+      <button
+        pButton
+        icon="pi pi-file-excel"
+        class="p-button-success mr-2"
+        label="Excel"
+        (click)="exportExcel()"
+      ></button>
+      <button
+        pButton
+        icon="pi pi-file-pdf"
+        class="p-button-danger"
+        label="PDF"
+        (click)="exportPDF()"
+      ></button>
+    </div>
+  </div> -->
+
+  <!-- 🔹 Main Report Table -->
+  <p-table
+    #dt
+    [value]="filteredReports"
+    [paginator]="true"
+    [rows]="rows"
+    [rowsPerPageOptions]="[10, 20, 50]"
+    [totalRecords]="totalRecords"
+    [sortField]="defaultSortField"
+    [sortOrder]="defaultSortOrder"
+    [globalFilterFields]="searchableColumns"
+    [resizableColumns]="true"
+    [responsiveLayout]="'scroll'"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    dataKey="district_Id"
+    class="p-datatable-sm"
+    (onLazyLoad)="changefilter($event)"
+  >
+    <!-- 🔎 Global Search -->
+    <ng-template pTemplate="caption">
+      <div class="caption-flex">
+        <div>
+          <button
+            pButton
+            icon="pi pi-file-excel"
+            class="p-button-secondary mr-2"
+            (click)="exportExcel()"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-print"
+            class="p-button-info mr-2"
+            (click)="exportPDF()"
+          ></button>
+        </div>
+
+        <input
+          pInputText
+          type="text"
+          placeholder="Search..."
+          (input)="applyGlobalFilter($event)"
+        />
+      </div>
+    </ng-template>
+
+    <!-- 🔹 Table Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- 🔹 Table Body -->
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td
+          *ngFor="let col of cols"
+          [ngClass]="{ 'text-primary cursor-pointer': col.isActionable }"
+          (click)="col.isActionable && showDetails(row)"
+        >
+          {{ row[col.field] || "-" }}
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- ❌ Empty message -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="cols.length" class="text-center py-3 text-gray-500">
+          No Records Found
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- 🔹 Inline Detailed Records -->
+<div *ngIf="selectedData" class="card shadow-md rounded-2xl p-4 mt-6">
+  <div class="flex justify-between items-center mb-3">
+    <h3 class="text-lg font-semibold text-gray-700">
+      Member Detailed Report:
+      {{ selectedData?.district }}
+      <span *ngIf="selectedData?.block"> / {{ selectedData?.block }}</span>
+      <span *ngIf="selectedData?.villagePanchayat">
+        / {{ selectedData?.villagePanchayat }}</span
+      >
+      <span *ngIf="selectedData?.municipality">
+        / {{ selectedData?.municipality }}</span
+      >
+      <span *ngIf="selectedData?.corporation">
+        / {{ selectedData?.corporation }}</span
+      >
+    </h3>
+  </div>
+
+  <p-table
+    #detailsTable
+    [value]="dialogRecords"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 20, 50]"
+    [responsiveLayout]="'scroll'"
+    styleClass="p-datatable-sm"
+    [globalFilterFields]="[
+      'municipality',
+      'local_Body',
+      'name',
+      'member_id',
+      'phone_Number',
+      'organization_Type'
+    ]"
+  >
+    <!-- 🔎 Details Search -->
+    <ng-template pTemplate="caption">
+      <div class="flex justify-end">
+        <input
+          pInputText
+          type="text"
+          placeholder="Search members..."
+          class="p-inputtext-sm w-64 border border-gray-300 rounded-md"
+          (input)="
+            detailsTable.filterGlobal($any($event.target).value, 'contains')
+          "
+        />
+      </div>
+    </ng-template>
+
+    <!-- 🔹 Details Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 50px">#</th>
+        <th>Member ID</th>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>District</th>
+        <th *ngIf="reportType === 'block' || reportType === 'village'">
+          Block
+        </th>
+        <th *ngIf="reportType === 'block' || reportType === 'village'">
+          Village Panchayat
+        </th>
+
+        <!-- Municipality only for municipality tab -->
+        <th *ngIf="reportType === 'municipality'">Municipality</th>
+
+        <!-- Corporation only for corporation tab -->
+        <th *ngIf="reportType === 'corporation'">Corporation</th>
+        <th>Town Panchayat</th>
+        <th>Organization Type</th>
+      </tr>
+    </ng-template>
+
+    <!-- 🔹 Details Body -->
+    <ng-template pTemplate="body" let-row let-i="rowIndex">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>
+          <a
+            [routerLink]="[
+              '/officers/applications/member-view',
+              row?.member_Guidid
+            ]"
+            class="text-blue-500 hover:underline"
+          >
+            {{ row?.member_id || "-" }}
+          </a>
+        </td>
+        <td>{{ row?.name || "-" }}</td>
+        <td>{{ row?.phone_Number || "-" }}</td>
+        <td>{{ row?.district || "-" }}</td>
+        <td *ngIf="reportType === 'block' || reportType === 'village'">
+          {{ row?.block || "-" }}
+        </td>
+        <td *ngIf="reportType === 'block' || reportType === 'village'">
+          {{ row?.villagePanchayat || "-" }}
+        </td>
+
+        <!-- Municipality only for municipality tab -->
+        <td *ngIf="reportType === 'municipality'">
+          {{ row?.municipality || "-" }}
+        </td>
+
+        <!-- Corporation only for corporation tab -->
+        <td *ngIf="reportType === 'corporation'">
+          {{ row?.corporation || "-" }}
+        </td>
+        <td>{{ row?.townPanchayat || "-" }}</td>
+        <td>{{ row?.organization_Type || "-" }}</td>
+      </tr>
+    </ng-template>
+
+    <!-- ❌ Empty message -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="11" class="text-center py-3 text-gray-500">
+          No records found
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- </div> -->

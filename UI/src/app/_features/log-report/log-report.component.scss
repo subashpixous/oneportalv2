@@ -1,0 +1,21 @@
+
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* ✅ Consistent size for all inputs */
+.filters-row ::ng-deep .p-dropdown,
+.filters-row ::ng-deep .p-multiselect,
+.filters-row button {
+  height: 40px !important;
+  width: 180px !important;
+}
+
+/* ✅ Buttons smaller but same height */
+.filters-row button {
+  width: 40px !important;
+}

@@ -1,0 +1,559 @@
+// .otpcls{
+//     font-size: 10px;
+//     margin-bottom: 10px;
+// }
+/* NEW LOGIN CARD STYLES */
+// .registration-container {
+//   padding: 40px 20px;
+//   display: flex;
+//   justify-content: center;
+//   background-color: #f9fbfd; /* Very light background to make card pop */
+// }
+
+// .form-card {
+//   background: #ffffff;
+//   padding: 40px 35px;
+//   border-radius: 14px;
+//   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+// }
+
+// .info-box-right {
+//   background-color: #fdf3e7;
+//   padding: 15px 20px;
+//   border-radius: 8px;
+//   display: flex;
+//   align-items: flex-start;
+//   gap: 12px;
+// }
+
+// .info-box-right .info-icon {
+//   color: #d88b32;
+//   font-size: 20px;
+//   margin-top: 2px;
+// }
+
+// .info-box-right .info-text {
+//   font-family: 'Poppins', sans-serif;
+//   font-size: 13px;
+//   color: #4a4a4a;
+//   line-height: 1.5;
+// }
+
+// .form-label {
+//   font-family: 'Poppins', sans-serif;
+//   font-size: 15px;
+//   font-weight: 600;
+//   color: #333;
+// }
+
+// .sub-text {
+//   font-size: 12px;
+//   color: #888;
+// }
+
+// .custom-input {
+//   height: 50px;
+//   border-radius: 8px;
+//   border: 1px solid #ccc;
+//   padding-left: 15px;
+//   font-size: 16px;
+//   margin-top: 5px;
+//   transition: all 0.3s;
+// }
+
+// .custom-input:focus {
+//   border-color: #d88b32;
+//   box-shadow: 0 0 5px rgba(216, 139, 50, 0.3);
+//   outline: none;
+// }
+
+// .button-group {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .generate-btn {
+//   background: #d88b32 !important;
+//   color: white !important;
+//   border: none !important;
+//   height: 48px;
+//   font-weight: 600 !important;
+//   font-size: 16px !important;
+//   border-radius: 8px !important;
+//   transition: background 0.3s;
+// }
+
+// .generate-btn:hover {
+//   background: #c27a29 !important;
+// }
+
+// .back-btn {
+//   background: #e6e6e6 !important;
+//   color: #333 !important;
+//   border: none !important;
+//   height: 48px;
+//   font-weight: 600 !important;
+//   font-size: 16px !important;
+//   border-radius: 8px !important;
+// }
+
+// .back-btn:hover {
+//   background: #d4d4d4 !important;
+// }
+
+// .error-text {
+//   color: #e53935;
+//   font-size: 13px;
+//   font-weight: 500;
+// }
+
+// /* OTP SECTION STYLES */
+// .otp-section {
+//   padding-top: 5px;
+// }
+
+// .masked-number {
+//   font-size: 18px;
+//   font-weight: 600;
+//   text-align: center;
+//   color: #0F5169;
+//   letter-spacing: 1px;
+// }
+
+// .otp-footer {
+//   font-size: 14px;
+// }
+
+// .resend {
+//   color: #0F5169;
+//   cursor: pointer;
+//   font-weight: 600;
+//   text-decoration: underline;
+// }
+
+// .resend:hover {
+//   color: #d88b32;
+// }
+// /* LEFT SIDE DOCUMENT STYLES */
+// .registration-grid {
+//   max-width: 1200px;
+//   margin: 0 auto;
+// }
+
+// .left-wrapper {
+//   background: #ffffff;
+//   border-radius: 12px;
+//   height: 100%;
+// }
+
+// .doc-header {
+//   background: #5b848c; /* Blue-grey color matching the screenshot */
+//   color: #ffffff;
+//   padding: 16px 20px;
+//   border-radius: 8px;
+//   font-family: 'Poppins', sans-serif;
+//   font-size: 15px;
+//   font-weight: 500;
+//   margin-bottom: 20px;
+//   display: flex;
+//   align-items: center;
+//   gap: 12px;
+// }
+
+// .doc-card {
+//   background: #f4f8fb; /* Light blue background */
+//   padding: 25px;
+//   border-radius: 10px;
+//   border: 1px solid #e0eaf3;
+// }
+
+// .doc-title-main {
+//   font-family: 'Poppins', sans-serif;
+//   font-size: 15px;
+//   font-weight: 600;
+//   color: #2c3e50;
+// }
+
+// .divider-line {
+//   border: 0;
+//   border-top: 1px solid #cfdce6;
+//   margin: 15px 0;
+// }
+
+// .doc-title {
+//   color: #d88b32; /* Orange color */
+//   font-family: 'Poppins', sans-serif;
+//   font-size: 17px;
+//   font-weight: 600;
+//   margin-bottom: 15px;
+// }
+
+// .doc-list {
+//   font-family: 'Poppins', sans-serif;
+//   font-size: 14px;
+//   color: #333;
+//   line-height: 2.2;
+//   padding-left: 20px;
+//   font-weight: 500;
+// }
+
+// .doc-images img {
+//   width: 100%;
+//   max-width: 160px;
+//   height: auto;
+//   border-radius: 6px;
+//   border: 1px solid #ddd;
+// }
+
+
+
+/* --- LAYOUT & CONTAINERS --- */
+.registration-container {
+  padding: 50px 20px;
+  background-color: #F8F9FA; /* Slightly off-white background to let the white cards pop */
+  min-height: calc(100vh - 200px);
+  display: flex;
+  justify-content: center;
+}
+
+/* Custom Flex Layout matching Figma exactly */
+.registration-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.left-col {
+  width: 100%;
+  max-width: 525px; /* Exact Figma width */
+}
+
+.right-col {
+  width: 100%;
+  max-width: 623px; /* Exact Figma width */
+}
+
+/* Responsive fallback */
+@media (max-width: 991px) {
+  .registration-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* --- RIGHT SIDE: FORM CARD --- */
+.form-card {
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 15px;
+  padding: 50px 40px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-content-wrapper {
+  width: 100%;
+  max-width: 538px; /* Restricts inputs and buttons to exact Figma width */
+  margin: 0 auto;
+}
+
+/* --- INFO BOX --- */
+.info-box-right {
+  background: #FFF2E3;
+  border-radius: 5px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 446px; /* Exact Figma width */
+  margin: 0 auto;
+}
+
+.info-box-right .info-icon {
+  color: #DC8F36;
+  font-size: 18px;
+}
+
+.info-box-right .info-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  line-height: 1.4;
+  text-align: left;
+}
+
+/* --- TYPOGRAPHY & LABELS --- */
+.form-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 1.5;
+}
+
+.sub-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #767676;
+}
+
+/* --- STANDARD INPUT --- */
+.input-container {
+  width: 100%;
+}
+
+.custom-input {
+  width: 100%;
+  height: 54px;
+  border-radius: 8px;
+  border: 1px solid #CCCCCC;
+  background: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  color: #565656;
+  font-weight: 500;
+  padding-left: 20px; /* Aligns text exactly like Figma */
+  transition: all 0.3s;
+}
+
+.custom-input:focus {
+  border-color: #DC8F36;
+  outline: none;
+  box-shadow: 0 0 0 1px #DC8F36;
+}
+
+/* --- OTP SPECIFIC UI --- */
+.otp-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  color: #000000;
+  text-align: center;
+}
+
+.masked-number {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #467C88;
+}
+
+.otp-input-wrapper {
+position: relative;
+  width: 340px; /* Matching your Figma width */
+  height: 54px;
+  margin: 0 auto;
+}
+
+.otp-visual-boxes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none; /* Allows clicks to pass through to the input */
+  z-index: 1;
+}
+
+.otp-box {
+  width: 48px;
+  height: 54px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  background: #FFFFFF;
+  display: flex;          /* Added Flexbox to center digits */
+  align-items: center;    /* Vertical center */
+  justify-content: center;/* Horizontal center */
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #565656;
+  transition: all 0.2s ease;
+}
+.otp-actual-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;       /* This hides the actual typed text */
+  z-index: 2;       /* Keeps it on top so it's clickable */
+  cursor: pointer;
+  border: none !important;
+  outline: none !important;
+}
+
+/* Highlight the boxes when the hidden input is focused */
+.otp-actual-input:focus ~ .otp-visual-boxes .otp-box {
+  border-color: #DC8F36;
+  box-shadow: 0 0 5px rgba(220, 143, 54, 0.2);
+}
+
+.otp-footer {
+  width: 340px;
+  margin: 0 auto;
+}
+
+.timer, .resend {
+  color: #034772;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+}
+.resend { cursor: pointer; }
+.resend:hover { text-decoration: underline; }
+
+/* --- BUTTONS --- */
+.generate-btn {
+  background: #DC8F36 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  height: 49px;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  border-radius: 7px !important;
+}
+
+.back-btn {
+  background: #E6E6E6 !important;
+  color: #171717 !important;
+  border: none !important;
+  height: 49px;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  border-radius: 7px !important;
+  text-transform: capitalize !important;
+}
+
+/* --- REGISTRATION LINK --- */
+.register-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.register-link {
+  color: #034772;
+  font-weight: 600;
+  text-decoration: underline; /* Changed from none to underline */
+  cursor: pointer;
+  margin-left: 5px;
+}
+.register-link:hover { text-decoration: underline; }
+
+.error-text { color: #e53935; font-size: 13px; font-family: 'Poppins', sans-serif; }
+
+/* --- LEFT SIDE: DOCUMENT STYLES --- */
+.doc-header {
+  background: #467C88;
+  color: #FFFFFF;
+  padding: 16px 20px;
+  border-radius: 5px 5px 0 0; /* Makes the bottom corners flat to attach to the card perfectly */
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0; /* Changed from 25px to 0 to remove the gap */
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Optional: if you want the card to connect perfectly to the header */
+.doc-card {
+  background: #E6F1F5;
+  padding: 35px 30px;
+  border-radius: 0 0 16px 16px; /* Makes top corners flat to connect to the header */
+}
+
+.doc-title-main {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  line-height: 1.5;
+}
+
+.divider-line {
+  border: 0;
+  border-top: 1px solid #525252;
+  margin: 15px 0 20px 0;
+}
+
+.doc-title {
+  color: #DC8F36;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.doc-list {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  line-height: 1.88; 
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.view-more-link {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #467C88;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.doc-images {
+  background: #FFFCF9;
+  border-radius: 20px;
+}
+.doc-images img {
+  max-width: 145px;
+  height: auto;
+  border-radius: 2px;
+}
+/* Container for the scheme lists */
+.scheme-list-container {
+  max-height: 100%; /* Default state for 2 items */
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* Expanded state with scrollbar */
+.scheme-list-container.expanded-list {
+  max-height: 450px; /* Adjust this height as needed to fit your screen */
+  overflow-y: auto;
+  padding-right: 10px; /* Adds space so the scrollbar doesn't overlap text */
+}
+
+/* Custom scrollbar styling for a cleaner look */
+.scheme-list-container::-webkit-scrollbar {
+  width: 6px;
+}
+.scheme-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 4px;
+}
+.scheme-list-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1; 
+  border-radius: 4px;
+}
+.scheme-list-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; 
+}

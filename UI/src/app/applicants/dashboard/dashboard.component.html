@@ -1,0 +1,59 @@
+<!-- <div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;">
+    <div class="flex align-items-center  mr-4">
+        <p class="fw-bold"> உறுப்பினர் சேர்க்கை விவரங்கள்/MEMBER REGISTRATION DETAILS
+
+        </p>
+    </div>
+    <div class="flex align-items-center  mr-4">
+        <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+    </div>
+</div> -->
+<!-- <app-current-user-time
+    [memberID]="memberInformation.memberId !='' ? memberInformation.memberId :memberInformation.name"></app-current-user-time>
+<h5 class="divhighligher">கிடைக்கும் திட்டம் / Availed Schemes</h5>
+<div class="row " style="text-align: center; margin-top:10px ;background-color: white;">
+    <div class="col-12 flex justify-content-center " style="padding-top: 10px;padding-bottom: 0px;flex-wrap: wrap;">
+
+        <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField" [style]="{'width': '100%'}"
+            [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Configuration'" [rows]="10"
+            [total]="configurationList ? configurationList.length : 0" [actions]="actions"
+            (invokeAction)="actioInvoked($event)" [defaultstatus]="!currentStatus" (changeStatus)="changeStatus($event)"
+            [searchableColumns]="searchableColumns" [hasActiveInactive]="false" [canShowAction]="canShowAction">
+        </app-datatable>
+    </div>
+    <div class="col-12 imagediv justify-content-center">
+        <p-button severity="secondary" styleClass="bcbtn" (onClick)="bckClick()" label="Back" />
+    </div>
+</div> -->
+<div class="flex justify-content-between align-items-center px-4 py-2" style="background-color: #f8fbfb; border-bottom: 1px solid #d1e8e8;">
+    <div class="id-container">
+        ID : {{ memberInformation.memberId != '' ? memberInformation.memberId : memberInformation.name }}
+    </div>
+    <div>
+        <p-button label="Back" icon="pi pi-arrow-left" [outlined]="true" severity="secondary" size="small" (onClick)="bckClick()" styleClass="back-btn-custom"></p-button>
+    </div>
+</div>
+
+<div class="main-content-container p-4">
+    <h5 class="scheme-title-bar">கிடைக்கும் திட்டம் / Availed Schemes</h5>
+
+    <div class="table-card shadow-1">
+        <app-datatable 
+            [records]="configurationList" 
+            [defaultSortField]="defaultSortField" 
+            [style]="{'width': '100%'}"
+            [defaultSortOrder]="defaultSortOrder" 
+            [cols]="cols" 
+            [fileName]="'Configuration'" 
+            [rows]="10"
+            [total]="configurationList ? configurationList.length : 0" 
+            [actions]="actions"
+            (invokeAction)="actioInvoked($event)" 
+            [defaultstatus]="!currentStatus" 
+            (changeStatus)="changeStatus($event)"
+            [searchableColumns]="searchableColumns" 
+            [hasActiveInactive]="false" 
+            [canShowAction]="canShowAction">
+        </app-datatable>
+    </div>
+</div>

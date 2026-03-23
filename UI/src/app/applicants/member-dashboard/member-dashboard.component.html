@@ -1,0 +1,95 @@
+<!-- 
+
+<div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;">
+    <div class="flex align-items-center  mr-4">
+        <p class="fw-bold"> உறுப்பினர் சேர்க்கை விவரங்கள் / MEMBER REGISTRATION DETAILS </p>
+    </div>
+    <div class="flex align-items-center  mr-4">
+        <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+        <p-button *ngIf="isLoggedin"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            label="Logout" (onClick)="Logout()" />
+    </div>
+</div>
+<div *ngIf="memberFormGeneralInfo.reason && !memberFormGeneralInfo.isSubmitted">
+
+    <h5 class="text-left ss text-danger"> Member Application has returned due to {{memberFormGeneralInfo.reason}} and {{memberFormGeneralInfo.comment}}</h5>
+</div>
+
+<div class="row " style="text-align: center; margin-top:10px ;background-color: white;">
+    <div class="col-12 flex justify-content-center " style="padding-top: 10px;padding-bottom: 0px;flex-wrap: wrap;">
+        <app-icon-button *ngFor="let item of model" [model]="item"
+            (iconbtnClicked)="iconbtnClicked($event)"></app-icon-button>
+    </div>
+    <div class="col-12 imagediv justify-content-center">
+        <p-button severity="secondary" styleClass="bcbtn" (onClick)="bckClick()" label="Back" />
+    </div>
+</div>
+<p-dialog header="உறுப்பினர் விவரங்கள் / Member Details" [modal]="true" [(visible)]="visible" [style]="{width: '50vw' }"
+    [maximizable]="true" [draggable]="false">
+    <div class="mb-3  ml-3 mt-4">
+        <div class="row align-items-center" *ngFor="let item of modelforMemDetails" severity="primary"
+            [pTooltip]="item.tooltip" [tooltipPosition]="'top'" [tooltipStyleClass]="'primary'">
+            <div class="col-2 circlew">
+                <img [src]="item.iconImageName" class="img-responsive imgssize">
+            </div>
+            <div class="col-8">
+                <h5 class="text-left ss  fw-bold">{{item.buttonName}}</h5>
+            </div>
+            <div class="col-2">
+                <p-button [disabled]="!item.canClick"
+                    [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+                    [label]="item.buttonTextName" (onClick)="movetosc(item.id)" />
+            </div>
+        </div>
+    </div>
+</p-dialog> -->
+
+<div class="tn-secondary-nav">
+    <div class="id-container">
+        ID : {{ memberDetails?.memberId  }}
+    </div>
+
+    <div class="nav-actions">
+        <div class="nav-item" (click)="memMenu.toggle($event)">
+            <span>Member Info</span>
+            <i class="pi pi-angle-down ml-2"></i>
+        </div>
+        <p-menu #memMenu [model]="memberInfoItems" [popup]="true"></p-menu>
+
+        <div class="nav-item" (click)="goToDashboard()">
+            <i class="pi pi-sitemap mr-2"></i>
+            <span>Availed Scheme</span>
+        </div>
+
+        <div class="nav-item" (click)="eligMenu.toggle($event)">
+            <i class="pi pi-list mr-2"></i>
+            <span>Eligibility Scheme</span>
+        </div>
+        <p-menu #eligMenu [model]="eligibilitySchemeItems" [popup]="true" styleClass="wide-menu"></p-menu>
+    </div>
+</div>
+
+<app-home></app-home>
+
+<p-dialog header="உறுப்பினர் விவரங்கள் / Member Details" [modal]="true" [(visible)]="visible" [style]="{width: '50vw'}" [draggable]="false">
+    <div class="mb-3 mt-4">
+        <div class="row align-items-center mb-3" *ngFor="let item of modelforMemDetails">
+            <div class="col-2 d-flex justify-content-center">
+                <div class="circlew">
+                    <img [src]="item.iconImageName" class="imgssize">
+                </div>
+            </div>
+            <div class="col-7">
+                <h6 class="fw-bold mb-0">{{item.buttonName}}</h6>
+            </div>
+            <div class="col-3">
+                <p-button [disabled]="!item.canClick" 
+                          [label]="item.buttonTextName" 
+                          styleClass="p-button-rounded p-button-sm"
+                          [style]="{'background': 'linear-gradient(103deg, #034772 22%, #2286E3 90%)'}"
+                          (onClick)="movetosc(item.id)" />
+            </div>
+        </div>
+    </div>
+</p-dialog>

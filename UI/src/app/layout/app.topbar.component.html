@@ -1,0 +1,57 @@
+<div class="layout-topbar">
+<button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 18H15C15.55 18 16 17.55 16 17C16 16.45 15.55 16 15 16H4C3.45 16 3 16.45 3 17C3 17.55 3.45 18 4 18ZM4 13H12C12.55 13 13 12.55 13 12C13 11.45 12.55 11 12 11H4C3.45 11 3 11.45 3 12C3 12.55 3.45 13 4 13ZM3 7C3 7.55 3.45 8 4 8H15C15.55 8 16 7.55 16 7C16 6.45 15.55 6 15 6H4C3.45 6 3 6.45 3 7ZM20.3 14.88L17.42 12L20.3 9.12C20.3926 9.02742 20.466 8.91751 20.5161 8.79654C20.5662 8.67558 20.592 8.54593 20.592 8.415C20.592 8.28407 20.5662 8.15442 20.5161 8.03346C20.466 7.91249 20.3926 7.80258 20.3 7.71C20.2074 7.61742 20.0975 7.54398 19.9765 7.49387C19.8556 7.44377 19.7259 7.41798 19.595 7.41798C19.4641 7.41798 19.3344 7.44377 19.2135 7.49387C19.0925 7.54398 18.9826 7.61742 18.89 7.71L15.3 11.3C15.2073 11.3925 15.1337 11.5024 15.0836 11.6234C15.0334 11.7443 15.0076 11.874 15.0076 12.005C15.0076 12.136 15.0334 12.2657 15.0836 12.3866C15.1337 12.5076 15.2073 12.6175 15.3 12.71L18.89 16.3C19.28 16.69 19.91 16.69 20.3 16.3C20.68 15.91 20.69 15.27 20.3 14.88Z" fill="#7A7A7A"/>
+</svg>
+
+</button>
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+<div style="display: flex; width: 100%; justify-content: center;" *ngIf="layoutService.state.staticMenuDesktopInactive">
+    <h5 style="margin-bottom: 0px;font-size: 24px;font-weight: 700; color: #0a417c;">TAMILNADU CLEANLINESS SCHEME PORTAL</h5>
+</div>
+    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        
+        <div class="profile-dropdown-trigger" (click)="op1.toggle($event)">
+            <div class="profile-info">
+                <p class="profile-name">{{user.firstName}} {{user.lastName}}</p>
+                <p class="profile-role">{{user.userDetails.roleName}}</p>
+            </div>
+            
+<div class="profile-avatar">
+<svg width="33" height="34" viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_3329_5684)">
+<circle cx="16.5" cy="14.5" r="14.5" fill="#F1F1F1"/>
+</g>
+<path d="M21.4028 16.4591C21.8703 16.4595 22.3184 16.6455 22.6488 16.9762C22.9792 17.3069 23.1648 17.7552 23.1648 18.2226V18.9421C23.1647 19.3912 23.0244 19.8291 22.7635 20.1946C21.5517 21.8907 19.5735 22.7302 16.8929 22.7302C14.2108 22.7302 12.2333 21.8899 11.0247 20.1938C10.7646 19.8286 10.6249 19.3913 10.625 18.9429V18.2218C10.6252 17.7544 10.811 17.3062 11.1415 16.9756C11.4721 16.6451 11.9203 16.4593 12.3877 16.4591H21.4028ZM16.8921 7.05762C17.4068 7.05762 17.9164 7.15898 18.3918 7.35593C18.8673 7.55287 19.2993 7.84154 19.6632 8.20544C20.0271 8.56935 20.3158 9.00137 20.5127 9.47683C20.7097 9.9523 20.8111 10.4619 20.8111 10.9765C20.8111 11.4912 20.7097 12.0008 20.5127 12.4762C20.3158 12.9517 20.0271 13.3837 19.6632 13.7476C19.2993 14.1115 18.8673 14.4002 18.3918 14.5971C17.9164 14.7941 17.4068 14.8955 16.8921 14.8955C15.8528 14.8955 14.856 14.4826 14.121 13.7476C13.3861 13.0127 12.9732 12.0159 12.9732 10.9765C12.9732 9.93717 13.3861 8.94038 14.121 8.20544C14.856 7.4705 15.8528 7.05762 16.8921 7.05762Z" fill="#013B60"/>
+<defs>
+<filter id="filter0_d_3329_5684" x="0" y="0" width="33" height="34" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="2" operator="erode" in="SourceAlpha" result="effect1_dropShadow_3329_5684"/>
+<feOffset dy="3"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3329_5684"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3329_5684" result="shape"/>
+</filter>
+</defs>
+</svg>
+</div>
+            
+            <i class="pi pi-angle-down profile-arrow"></i>
+        </div>
+    </div>
+
+    <p-overlayPanel #op1 styleClass="profile-overlay">
+        <button class="p-link logout-button" (click)="log($event); op1.hide()">
+            <i class="pi pi-sign-out"></i>
+            <span>Logout</span>
+        </button>
+    </p-overlayPanel>
+    
+   <p-menu #op2 [popup]="true" [model]="items" [style]="{'display': 'none'}"></p-menu>
+</div>

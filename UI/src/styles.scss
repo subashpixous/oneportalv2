@@ -1,0 +1,128 @@
+/* You can add global styles to this file, and also import other style files */
+
+$gutter: 1rem; //for primeflex grid system
+@import "assets/layout/styles/layout/layout.scss";
+@import "assets/printcss/id-card-print.css";
+
+/* PrimeNG */
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primeicons/primeicons.css";
+
+/* Demos */
+@import "assets/demo/styles/flags/flags.css";
+@import "assets/demo/styles/badges.scss";
+@import "assets/demo/styles/code.scss";
+@font-face {
+  font-family: 'poppins';
+  src: url('./Poppins-Medium.ttf') format('truetype');
+}
+.pi-pencil {
+  color: green;
+}
+.pi-trash,
+.pi-times {
+  color: red;
+}
+.notificationBadge {
+  span {
+    display: block !important;
+  }
+}
+.card-dash {
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--card-shadow);
+  border-radius: 12px;
+}
+.selectbtn-dash {
+  .p-element.p-button.p-component {
+    height: 30px;
+    border: 1px solid #003255;
+  }
+  span {
+    font-weight: normal;
+  }
+}
+input:read-only {
+  background-color: #f3f3f3;
+}
+.optioanlcls {
+  color: #8c8d8f;
+}
+
+.p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background: #f8f9fa;
+}
+.p-breadcrumb ul li .p-menuitem-link .p-menuitem-text {
+  color: #003255;
+}
+.p-menuitem-text > h5 {
+  color: #003255;
+  margin-bottom: 0px;
+}
+.p-menuitem-text > h5 > span {
+  color: #003255;
+  font-size: small;
+}
+.noborderRad {
+  border-radius: 0px;
+}
+.warning > span {
+  background-color: #c6c253 !important;
+}
+.success > span {
+  background-color: #55ae1b;
+}
+.grey > span {
+  background-color: #9a9a9a;
+}
+.danger > span {
+  background-color: #ff6262;
+}
+
+.custome-style-p-password {
+  width: 100% !important;
+}
+
+h4 {
+  color: #003255 !important;
+}
+.p-datatable .p-datatable-thead > tr > th {
+  color: #003255 !important;
+}
+
+.p-accordion .p-accordion-header .p-accordion-header-link {
+  background-color: #92bfd6;
+  color: black;
+}
+.p-accordion
+  .p-accordion-header:not(.p-disabled).p-highlight
+  .p-accordion-header-link {
+  color: #ffffff;
+}
+.p-accordion
+  .p-accordion-header:not(.p-disabled).p-highlight
+  .p-accordion-header-link {
+  background: rgba(229, 229, 229, 1);
+  border-color: rgba(229, 229, 229, 1);
+}
+dl,
+ol,
+ul {
+  margin-bottom: 0rem;
+}
+// .layout-main {
+//   background-image: url("../src/assets/LogoImages/bg.png");
+// }
+
+::ng-deep .bcbtn {
+    margin-right: 20px;
+    border-radius: 18px;
+    padding: 5px 45px;
+}
+.divhighligher {
+  font-weight: bold !important;
+}

@@ -1,0 +1,111 @@
+// .boldlabelinsiderow>span{
+//     font-weight: 700;
+// }
+// .divhighligher {
+//   background-color: #bec0fd;
+//   padding: 10px;
+//   border-radius: 5px;
+// }
+.bank-section 
+{
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #ffffff;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.bank-header {
+  background: #f1f5f9;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* MINIMIZED NOTE STYLING */
+.bank-note {
+  margin: 10px 12px;
+  padding: 8px 12px;
+  background: #f3f3f3; // Very light blue tint
+  border-radius: 4px;
+  display: flex;
+  gap: 15px;
+  font-size: 10px; // Minimized font size as requested
+  color: #1e293b;
+  line-height: 1.3;
+}
+
+.note-icon-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #0369a1;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.note-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; // Split note into two columns
+  gap: 20px;
+}
+
+.note-question {
+  font-weight: 600;
+}
+
+.note-instruction {
+  color: #475569;
+}
+
+/* DATA GRID STYLING */
+.bank-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 20px;
+  padding: 0 12px 12px 12px;
+}
+
+.bank-field {
+  display: flex;
+  align-items: flex-start;
+  font-size: 10px;
+}
+
+.bank-label {
+  flex: 0 0 140px; // Slightly tighter label for 100% zoom
+  color: #292929;
+  font-weight: 500;
+}
+
+.bank-colon {
+  flex: 0 0 10px;
+  text-align: center;
+  color: #94a3b8;
+  font-weight: bold;
+}
+
+.bank-value {
+  flex: 1;
+  color: #292929;
+  font-weight: 500;
+  word-break: break-all;
+}
+.changed-field{
+background:#fff3cd;
+border:1px solid #ffc107;
+border-radius:4px;
+padding:3px 6px;
+font-weight:600;
+}
+@media (max-width: 1024px) {
+  .note-content-grid {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .bank-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

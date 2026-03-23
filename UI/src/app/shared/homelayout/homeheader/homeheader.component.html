@@ -1,0 +1,231 @@
+<div style="padding: 10px 30px; background-color: #FAFAFA; display: flex; align-items: center; justify-content: space-between; position: relative; min-height: 90px;">
+
+    <div class="d-flex align-items-center">
+        <img src="../../../assets/LogoImages/logo_tn_govt.png"
+             class="img-fluid" style="max-height:70px;">
+    </div>
+
+<div class="text-center" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; max-width: 600px;">
+    <div class="schenamestyle-tamil">தமிழ்நாடு தூய்மைப் பணியாளர்கள் நல வாரியம்</div>
+    <div class="schenamestyle-english">Tamil Nadu Cleanliness Workers Welfare Board</div>
+</div>
+    <div class="d-flex align-items-center justify-content-end gap-3">
+        <div class="d-flex align-items-center gap-1">
+            <!-- <button pButton icon="pi pi-search"
+                    class="p-button-outlined p-button-sm header-btn">
+            </button> -->
+            <button pButton icon="pi pi-search"
+          class="p-button-outlined p-button-sm header-btn"
+          (click)="toggleSearch()">
+  </button>
+
+  <!-- Search Input -->
+  <input *ngIf="showSearch"
+         type="text"
+         [(ngModel)]="searchText"
+         (keydown.enter)="onSearch()"
+         placeholder="Search"
+         class="search-input" />
+
+            <button pButton label="A-"
+                    class="p-button-outlined p-button-sm header-btn" (click)="decreaseFont()">
+            </button>
+
+            <button pButton label="A+"
+                    class="p-button-outlined p-button-sm header-btn" (click)="increaseFont()">
+            </button>
+
+            <button pButton
+                    class="p-button-outlined p-button-sm header-btn"
+                    (click)="toggleLanguage()">
+                {{ selectedLanguage === 'en' ? 'தமிழ்' : 'English' }}
+            </button>
+        </div>
+
+        <img src="../../../assets/LogoImages/tncwwblogo.png"
+             class="img-fluid" style="max-height:70px;">
+    </div>
+
+</div>
+
+
+<div class="centercard d-flex align-items-center justify-content-between px-4">
+
+    <div class="iconlist">
+        <ul class="social-icons mb-0" *ngIf="!(isLoggedin && isMemberDashboardRoute)">
+            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+        </ul>
+
+<div *ngIf="isLoggedin && isMemberDashboardRoute" class="d-flex align-items-center gap-2">
+    <img [src]="profilePictureUrl" 
+         style="height: 40px; width: 40px; border-radius: 50%; border: 2px solid white; background: white; object-fit: cover;"
+         (error)="profilePictureUrl = 'assets/worker-png.png'">
+    <span class="text-white fw-bold">{{ userData?.name }}</span>
+</div>
+    </div>
+
+    <div class="d-flex align-items-center gap-4 text-white" style="padding-right: 30px;">
+
+        <ng-container *ngIf="breadcrumb">
+            <div class="d-flex align-items-center" style="cursor:pointer;">
+                <span class="breadcrumb">
+                    <a routerLink="/" style="color :white">Home</a> > {{ breadcrumb }}
+                </span>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="!breadcrumb">
+            
+            <div *ngIf="!(isLoggedin && isMemberDashboardRoute)" class="d-flex align-items-center gap-4">
+                <div class="left-header d-flex align-items-center gap-2" (click)="openUserTypeDialog()" style="cursor:pointer;">
+                    <i class="pi pi-user"></i> {{ texts.memberregister }}
+                </div>
+
+                <div class="left-header d-flex align-items-center gap-2" (click)="schemeMenu.toggle($event)" style="cursor:pointer;">
+                    <i class="pi pi-sitemap"></i> {{ texts.schemes }} <i class="pi pi-angle-down"></i>
+                </div>
+
+                <div class="tn-login-trigger d-flex align-items-center gap-2" (click)="loginMenu.toggle($event)" style="cursor:pointer;">
+                    <i class="pi pi-users"></i> {{ texts.login }} <i class="pi pi-angle-down"></i>
+                </div>
+            </div>
+
+<div *ngIf="isLoggedin && isMemberDashboardRoute" class="d-flex align-items-center gap-2" (click)="Logout()" style="cursor:pointer;">                <i class="pi pi-sign-out"></i>
+                <span>Logout</span>
+            </div>
+
+        </ng-container>
+    </div>
+</div>
+<p-menu #schemeMenu 
+        [model]="schemeMenuItems" 
+        [popup]="true" 
+        styleClass="custom-menu">
+</p-menu>
+
+<p-menu #loginMenu 
+        [model]="loginMenuItems" 
+        [popup]="true" 
+        styleClass="tn-login-menu">
+    <ng-template let-item pTemplate="item">
+        <div class="tn-login-item" (click)="item.command()">
+            <img [src]="item.data.avatar" class="tn-avatar"/>
+            <div class="tn-text">
+                <div class="tn-title">{{ item.label }}</div>
+                <div class="tn-subtitle">{{ item.data.subtitle }}</div>
+            </div>
+        </div>
+    </ng-template>
+</p-menu>
+<p-dialog
+    [(visible)]="showUserTypeDialog"
+    [modal]="true"
+    [closable]="false"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '720px' }"
+    styleClass="tn-user-dialog">
+
+    <div class="tn-dialog-container">
+
+        <!-- CLOSE ICON -->
+        <button class="tn-close-btn"
+                type="button"
+                (click)="showUserTypeDialog=false">
+            <i class="pi pi-times"></i>
+        </button>
+
+        <!-- TITLE -->
+        <div class="tn-dialog-title">
+            Select Applicant type
+        </div>
+
+        <!-- OPTIONS -->
+        <div class="tn-user-options">
+
+            <!-- WORKER -->
+            <div class="tn-user-card"
+                 (click)="goToMember()">
+                <div class="tn-icon-circle">
+                    <i class="pi pi-user" style="font-size: 18px;"></i>
+                </div>
+                <div class="tn-user-text">
+                    <div class="tn-user-title">Worker</div>
+                    <div class="tn-user-subtitle">
+                        Self-registration by the applicant
+                    </div>
+                </div>
+            </div>
+
+            <!-- DATA OPERATOR -->
+            <div class="tn-user-card"
+                 (click)="goToDataCollector()">
+                <div class="tn-icon-circle">
+                    <i class="bi bi-person-fill" style="font-size: 18px;"></i>
+                </div>
+                <div class="tn-user-text">
+                    <div class="tn-user-title">
+                        Data Operator / Local body
+                    </div>
+                    <div class="tn-user-subtitle">
+                        Fills application for Worker
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</p-dialog>
+
+
+
+
+
+
+
+<!-- <p-dialog
+    header="Select Applicant type"
+    [(visible)]="showUserTypeDialog"
+    [modal]="true"
+    [closable]="true"
+    [draggable]="false"
+    [resizable]="false"
+    styleClass="user-type-dialog">
+
+    <div class="user-type-container">
+
+        <div class="user-card"
+             (click)="goToMember()">
+            <div class="icon-circle">
+                <i class="pi pi-user"></i>
+            </div>
+            <div>
+                <div class="title">Worker</div>
+                <div class="subtitle">
+                    Self-registration by the applicant
+                </div>
+            </div>
+        </div>
+
+        <div class="user-card"
+             (click)="goToDataCollector()">
+            <div class="icon-circle">
+                <i class="pi pi-users"></i>
+            </div>
+            <div>
+                <div class="title"> Data Operator / Local body</div>
+                <div class="subtitle">
+                    Fills application for Workers
+                </div>
+            </div>
+        </div>
+
+    </div>
+</p-dialog> -->
+
+

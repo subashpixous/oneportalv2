@@ -1,0 +1,101 @@
+<div class="card noborderRad">
+  <div class="grid formgrid">
+    <div class="col-12 lg:col-9 md:col-9 ">
+      <h4>Member Detail</h4>
+    </div>
+    <div class=" col">
+      <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+        icon="pi pi-arrow-left" (click)="bckClick()"></button>
+    </div>
+  </div>
+  <app-current-user-time *ngIf="allDet && allDet.memberDetails"
+    [memberID]="allDet.memberDetails?.member_ID??''"></app-current-user-time>
+  <div class="row " style=" margin-top:10px ;background-color: white;" *ngIf="(isLoggedin && allDet) || !isLoggedin">
+    <div class="col-12 justify-content-center mb-2 " style="padding-top: 10px;padding-bottom: 0px;flex-wrap: wrap;">
+      <p-accordion [multiple]="true" [activeIndex]="activeIndex">
+
+        <p-accordionTab header="அமைப்பு தகவல் / Organization Information" [disabled]="!isLoggedin" *ngIf="isOrgEdit">
+          <app-organization-detail [showNextButton]="false" (formSaved)="movetoNext($event)"
+            [orgDetail]="allDet?.organizationDetail" [formDetail]="allDet?.organizationDetailForm"
+            (typeOfWorkChanged)="onTypeOfWorkChanged($event)" [member_Id]="memberId"></app-organization-detail>
+        </p-accordionTab>
+        <p-accordionTab header="உறுப்பினர் தனிப்பட்ட விவரங்கள் / Member Personal Details" [disabled]="!isLoggedin"
+          *ngIf="isPersonalEdit">
+          <app-mem-personal-detail [isReadonly]="false" [showNextButton]="false" (formSaved)="movetoNext($event)"
+            [memPersonalInfo]="allDet?.memberDetails" [hideAadhaar]="hideAadhaar"
+            [formDetail]="allDet?.memberDetailsForm" [member_Id]="memberId"></app-mem-personal-detail>
+        </p-accordionTab>
+        <p-accordionTab header="முகவரி / Address" [disabled]="!isLoggedin" *ngIf="isMemberAddressEdit">
+          <app-mem-permanent-address [showNextButton]="false" (formSaved)="movetoNext($event)"
+            [formDetail]="allDet?.permanentAddressDetailForm" [formtempDetail]="allDet?.temporaryAddressDetailForm"
+            [addressDetail]="allDet?.temprorayAddress" [addressPermDetail]="allDet?.permanentAddress"
+            [member_Id]="memberId"></app-mem-permanent-address>
+        </p-accordionTab>
+        <p-accordionTab header="குடும்ப உறுப்பினர்களின் விவரங்கள் / Family Members Details" [disabled]="!isLoggedin"
+          *ngIf="isFamilyEdit">
+          <app-mem-family-detail [isOfficerEdit]="true" [showNextButton]="false"
+            [familyMemberList]="allDet?.familyMembers" [formDetail]="allDet?.familyMemberForm"
+            (formSaved)="movetoNext($event)" [member_Id]="memberId"></app-mem-family-detail>
+        </p-accordionTab>
+        <p-accordionTab header="உறுப்பினர் வங்கி கணக்கு விவரங்கள் / Member bank Account Details"
+          [disabled]="!isLoggedin" *ngIf="isMemberBankEdit">
+          <app-mem-bank-detail [showNextButton]="false" [memPersonalInfo]="allDet?.bankDetail"
+            (formSaved)="movetoNext($event)" [member_Id]="memberId"></app-mem-bank-detail>
+        </p-accordionTab>
+        <p-accordionTab header="ஆவண விவரங்கள் / Document Details" [disabled]="!isLoggedin" *ngIf="isDocumentEdit">
+          <app-mem-document-detail [memPersonalInfo]="allDet?.memberDocuments" [ismandatory]="true"
+            [hideAadhaar]="hideAadhaar" [member_Id]="memberId"></app-mem-document-detail>
+        </p-accordionTab>
+        <p-accordionTab header="கூடுதல் ஆவண விவரங்கள் / Additional Document Details" [disabled]="!isLoggedin"
+          *ngIf="isAdditionalDocumentEdit">
+          <app-mem-document-detail [memPersonalInfo]="allDet?.memberNonMandatoryDocuments" [hideAadhaar]="hideAadhaar"
+            [ismandatory]="false" [member_Id]="memberId"></app-mem-document-detail>
+        </p-accordionTab>
+      </p-accordion>
+      <div class="col-12 justify-content-center flex mb-2">
+
+        <div *ngIf="errorMessage!=''"
+          style="width: 80%; margin: 20px; color: red; margin-top:5px;font-size:14px;background-color: #f0f0f0;padding: 10px;border-radius: 10px;">
+          <p> Error:
+            <span style="padding-left: 20px; line-height: 1.6;"> {{errorMessage}}
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <div class=" p-fluid">
+        <form [formGroup]="bankForm" class="col-12">
+          <div class=" p-fluid">
+            <div class="p-formgrid grid ">
+              <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                <div class="field col-12  md:col-4  lg:col-4 pb-0">
+                  <label htmlFor="branch">Collected By Name</label>
+                  <input pInputText formControlName="collectedByName" type="text" />
+                  <app-error-msg [control]="bankForm.get('collectedByName')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-4  lg:col-4 pb-0">
+                  <label htmlFor="branch">Collected By Phone Number</label>
+                  <input pInputText formControlName="collectedByPhoneNumber" type="text" />
+                  <app-error-msg [control]="bankForm.get('collectedByPhoneNumber')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-4  lg:col-4 pb-0">
+                  <label htmlFor="branch">Collected on</label>
+                  <input pInputText formControlName="collectedOn" type="text" readonly />
+                  <app-error-msg [control]="bankForm.get('collectedOn')"></app-error-msg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-12 flex " style="justify-content: center;padding-bottom: 0px;" *ngIf="isLoggedin">
+        <div style="margin-right: 10px;">
+          <p-button label="Submit"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            severity="secondary" (onClick)="submit()" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-toast></p-toast>
+</div>

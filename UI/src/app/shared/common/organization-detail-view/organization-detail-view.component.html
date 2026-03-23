@@ -1,0 +1,516 @@
+<!-- <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+    <div class="p-formgrid grid ">
+        <div class="col-12">
+            <h5 class="divhighligher">நிறுவன தகவல் / Organization Information</h5>
+            <div class="col-12 row ">
+
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.typeOfWork)">
+                    <span>வேலை வகை / Type of work
+                        : </span>{{this.orgDetail && this.orgDetail.typeOfWork ?
+                    this.orgDetail.typeOfWork: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.typeOfCoreSanitoryWorker)">
+                    <span>முக்கிய சுகாதார பணியாளர்களின் வகை / Type of Core Sanitory Workers
+
+                        : </span>{{this.orgDetail && this.orgDetail.typeOfCoreSanitoryWorker ?
+                    this.orgDetail.typeOfCoreSanitoryWorker: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+    *ngIf="CheckNullorEmpty(this.orgDetail?.healthWorkerType)">
+    <span>சுகாதார பணியாளர் வகை / Health Worker Type
+        : </span>{{ this.orgDetail?.healthWorkerType || '' }}
+</div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.organizationType)">
+                    <span>நிறுவன வகை / Organization Type
+
+                        : </span>{{this.orgDetail && this.orgDetail.organizationType ?
+                    this.orgDetail.organizationType: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.natureOfJob)">
+                    <span>பணி நிலை / Nature of Job
+                        : </span>{{this.orgDetail && this.orgDetail.natureOfJob ?
+                    this.orgDetail.natureOfJob: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.distritName)">
+                    <span>மாவட்டத்தின் பெயர் / District Name:
+                    </span>{{this.orgDetail && this.orgDetail.distritName ?
+                    this.orgDetail.distritName: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.localBody)">
+                    <span>உள்ளாட்சி அமைப்பு / Local Body:
+                    </span>{{this.orgDetail && this.orgDetail.localBody ?
+                    this.orgDetail.localBody: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.nameoftheLocalBody)">
+                    <span>உள்ளாட்சி அமைப்பின் பெயர் / Name of the Local Body:
+                    </span>{{this.orgDetail && this.orgDetail.nameoftheLocalBody ?
+                    this.orgDetail.nameoftheLocalBody: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.block)">
+                    <span>தொகுதி / Block :
+                    </span>{{this.orgDetail && this.orgDetail.block ?
+                    this.orgDetail.block: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.villagePanchayat)">
+                    <span>கிராம பஞ்சாயத்து / Village Panchayat:
+                    </span>{{this.orgDetail && this.orgDetail.villagePanchayat ?
+                    this.orgDetail.villagePanchayat: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.corporation)">
+                    <span>கார்ப்பரேஷன் / Corporation :
+                    </span>{{this.orgDetail && this.orgDetail.corporation ?
+                    this.orgDetail.corporation: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.municipality)">
+                    <span>நகராட்சி Municipality:
+                    </span>{{this.orgDetail && this.orgDetail.municipality ?
+                    this.orgDetail.municipality: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.townPanchayat)">
+                    <span>நகர பஞ்சாயத்து / Town Panchayat:
+                    </span>{{this.orgDetail && this.orgDetail.townPanchayat ?
+                    this.orgDetail.townPanchayat: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.zone)">
+                    <span>மண்டலம் / Zone
+                        : </span>{{this.orgDetail && this.orgDetail.zone ?
+                    this.orgDetail.zone: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.healthId)">
+                    <span>சுகாதார அட்டை எண் / Health Id
+                        : </span>{{this.orgDetail && this.orgDetail.healthId ?
+                    this.orgDetail.healthId: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.yellowCardNumber)">
+                    <span>மஞ்சள் அட்டை எண் / Yellow Card Number
+                        : </span>{{this.orgDetail && this.orgDetail.yellowCardNumber ?
+                    this.orgDetail.yellowCardNumber: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.workOrganisationName)">
+                    <span>அமைப்பின் பெயர் / Organisation Name
+                        : </span>{{this.orgDetail && this.orgDetail.workOrganisationName ?
+                    this.orgDetail.workOrganisationName: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.workDesignation)">
+                    <span>பதவி / Designation
+                        : </span>{{this.orgDetail && this.orgDetail.workDesignation ?
+                    this.orgDetail.workDesignation: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.workAddress)">
+                    <span>முகவரி / Address
+                        : </span>{{this.orgDetail && this.orgDetail.workAddress ?
+                    this.orgDetail.workAddress: ''}}
+                </div>
+
+
+
+                         <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.private_Organisation_Name)">
+                    <span>அமைப்பின் பெயர் / Organisation Name
+                        : </span>{{this.orgDetail && this.orgDetail.private_Organisation_Name ?
+                    this.orgDetail.private_Organisation_Name: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.private_Designation)">
+                    <span>பதவி / Designation
+                        : </span>{{this.orgDetail && this.orgDetail.private_Designation ?
+                    this.orgDetail.private_Designation: ''}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.orgDetail?.private_Address)">
+                    <span>முகவரி / Address
+                        : </span>{{this.orgDetail && this.orgDetail.private_Address ?
+                    this.orgDetail.private_Address: ''}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="figma-panel-container" *ngIf="orgDetail">
+    
+
+
+                   <div class="org-card">
+      <div class="org-header">நிறுவனம் விவரங்கள் / Organization Details</div>
+
+      <div class="org-body">
+        <div class="org-row">
+          <div class="org-item">
+            <div class="org-label">உங்கள் வேலை வகை /<br />Type of work</div>
+            <div class="org-value">
+              :     {{orgDetail?.typeOfWork || "-" }}
+            </div>
+          </div>
+   
+
+               <div class="org-item" *ngIf="orgDetail?.typeOfWork?.includes('Health Workers')">
+  <div class="org-label">
+    சுகாதார பணியாளர்களின் வகை /<br />Type of Health Workers
+  </div>
+  <div class="org-value">
+         :     {{ orgDetail?.healthWorkerType || "-" }}
+  </div>
+</div>
+          <div class="org-item" *ngIf="orgDetail?.typeOfWork?.includes('Core Sanitary Workers')">
+            <div class="org-label">
+              சுகாதாரப் பணியாளர்<br />வகை/Type of Core<br />Sanitary Workers
+            </div>
+            <div class="org-value">
+              :     {{orgDetail?.typeOfCoreSanitoryWorker ||"-"}}
+            </div>
+          </div>
+        
+            <div class="org-item">
+        <div class="org-label">
+         நிறுவனம் வகை/<br />Organization Type
+        </div>
+        <div class="org-value">
+          :     {{ orgDetail?.organizationType || "-" }}
+        </div>
+      </div>
+
+
+ 
+
+          <div class="org-item">
+            <div class="org-label">
+              வேலை கொடுப்பவர்<br />வகை/Type of employer
+            </div>
+            <div class="org-value">
+              :     {{orgDetail?.employer_type || "-" }}
+            </div>
+          </div>
+        </div>
+
+        <div class="org-row">
+          <div class="org-item">
+            <div class="org-label">
+              நிரந்தரம் / தற்காலிகம் /<br />Permanent/ Temporary
+            </div>
+            <div class="org-value">
+              :     {{ orgDetail?.natureOfJob || "-" }}
+            </div>
+          </div>
+
+          <div class="org-item">
+            <div class="org-label">
+              நீங்கள் வேலைக்கு<br />செல்லும் அலுவலகம்<br />எது? / Which office
+              do you<br />go to work in?
+            </div>
+            <div class="org-value">
+              :     {{ orgDetail?.workOffice || "-" }}
+            </div>
+          </div>
+        </div>
+
+        <div class="org-subtitle">
+          <b><u>உள்ளாட்சி அமைப்பு / Local Body</u></b>
+        </div>
+
+        <div class="org-row">
+          <div class="org-item">
+            <div class="org-label">
+              நீங்கள் வேலை<br />செய்யும் மாவட்டம் /<br />District where you work
+            </div>
+            <div class="org-value">
+              :     {{ orgDetail?.distritName || "-" }}
+            </div>
+          </div>
+
+          <div class="org-item">
+            <div class="org-label">உள்ளாட்சி அமைப்பு /<br />Local Body</div>
+            <div class="org-value">
+              :     {{ orgDetail?.localBody || "-" }}
+            </div>
+          </div>
+
+
+          
+          <div class="org-item" *ngIf="orgDetail.localBody == 'URBAN'">
+            <div class="org-label">
+              உள்ளாட்சி அமைப்பின்<br />பெயர் / Name of the Local<br />Body
+            </div>
+            <div class="org-value">
+              :     {{orgDetail?.nameoftheLocalBody || "-"}}
+                
+            
+            </div>
+          </div>
+
+          <div class="org-item" *ngIf="orgDetail?.nameoftheLocalBody === 'CORPORATION'">
+  <div class="org-label">கழகம் / Corporation</div>
+  <div class="org-value">
+    :     {{ orgDetail?.corporation || "-" }}
+  </div>
+</div>
+
+<div class="org-item" *ngIf="orgDetail?.nameoftheLocalBody === 'MUNICIPALITY'">
+  <div class="org-label">நகராட்சி / Municipality</div>
+  <div class="org-value">
+    :     {{ orgDetail?.municipality || "-" }}
+  </div>
+</div>
+  
+         <div class="org-item" *ngIf="orgDetail?.nameoftheLocalBody === 'GCC' || orgDetail?.nameoftheLocalBody === 'CMWS'">
+          <div class="org-label">
+மண்டலம் / Zone
+</div>
+            <div class="org-value">
+              :     {{orgDetail?.zone || "-" }}
+             
+                
+            </div>
+          </div>
+
+     
+          <div class="org-item" *ngIf="orgDetail.localBody?.toUpperCase() === 'RURAL'">
+            <div class="org-label">தொகுதி / Block</div>
+            <div class="org-value">
+              :     {{ orgDetail?.block || "-" }}
+            </div>
+          </div>
+
+        
+          <div class="org-item" *ngIf="orgDetail.localBody?.toUpperCase() === 'RURAL'">
+            <div class="org-label">பஞ்சாயத்து / Village Panchayat</div>
+            <div class="org-value">
+              :     {{ orgDetail?.villagePanchayat || "-" }}
+            </div>
+          </div>
+
+      
+            <div
+  class="org-item"
+ *ngIf="orgDetail?.nameoftheLocalBody === 'TOWNPANCHAYAT'">
+            <div class="org-label">மாநகராட்சி /<br />Town Panchayat</div>
+            <div class="org-value">
+              :     {{ orgDetail?.townPanchayat || "-" }}
+            </div>
+            </div>
+
+
+              <div class="org-item">
+            <div class="org-label">பாராளுமன்ற தொகுதி/<br />MP Constituency</div>
+            <div class="org-value">
+              :     {{ orgDetail?.mpConstituency || "-" }}
+            </div>
+          </div>
+
+          <div class="org-item">
+            <div class="org-label">சட்டமன்ற தொகுதி/<br />MLA Constituency</div>
+            <div class="org-value">
+              :     {{ orgDetail?.mlaConstituency || "-" }}
+            </div>
+          </div>
+
+        
+  
+            <div class="org-item">
+            <div class="org-label">சுகாதார அட்டை எண் / Health Id</div>
+            <div class="org-value">
+              :     {{ orgDetail?.healthId || "-" }}
+            </div>
+          </div>
+    
+            <div class="org-item">
+            <div class="org-label">மஞ்சள் அட்டை எண் / Yellow Card Number</div>
+            <div class="org-value">
+              :     {{ orgDetail?.yellowCardNumber || "-" }}
+            </div>
+          </div>
+    
+
+        
+ </div>
+        <div class="org-subtitle"  *ngIf="orgDetail?.organizationType === 'Private / தனியார்'">
+          <b><u>பணியிடம் முகவரி / Work Address</u></b>
+      
+
+        <div class="org-row">
+          <div class="org-item">
+            <div class="org-label">
+              நிறுவனம் பெயர் /<br />Name of the Organization
+            </div>
+            <div class="org-value">
+              :     {{orgDetail?.private_Organisation_Name || "-" }}
+             
+                
+            </div>
+             </div>
+                    <div class="org-item">
+            <div class="org-label">
+              பதவி /<br />Designation </div>
+            <div class="org-value">
+              :     {{orgDetail?.private_Designation || "-" }}
+             
+               
+            </div>
+            </div>
+            <div class="org-item">
+            <div class="org-label">
+              முகவரி /<br />Address 
+            </div>
+            <div class="org-value">
+              :     {{orgDetail?.private_Address || "-" }}
+             
+                
+            </div>
+            </div>
+         
+          </div>
+
+      </div>
+      
+      
+      </div>
+    </div>
+    
+</div>
+
+
+        <!-- <div class="org-grid">
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.typeOfWork)">
+                <div class="org-label">உங்கள் வேலை வகை /<br>Type of work <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.typeOfWork}}</div>
+            </div>
+            
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.typeOfCoreSanitoryWorker)">
+                <div class="org-label">சுகாதாரப் பணியாளர் வகை /<br>Type of Core Sanitary Workers <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.typeOfCoreSanitoryWorker}}</div>
+            </div>
+            
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.healthWorkerType)">
+                <div class="org-label">சுகாதாரப் பணியாளர் வகை /<br>Type of Health Workers <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.healthWorkerType}}</div>
+            </div>
+            
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.organizationType)">
+                <div class="org-label">வேலை கொடுப்பவர் வகை /<br>Type of employer <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.organizationType}}</div>
+            </div>
+
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.natureOfJob)">
+                <div class="org-label">நிரந்தரம் / தற்காலிகம் /<br>Permanent/ Temporary <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.natureOfJob}}</div>
+            </div>
+
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.nameoftheLocalBody)">
+                <div class="org-label">நீங்கள் வேலைக்கு செல்லும் அலுவலகம் எது? /<br>Which office do you go to work in? <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.nameoftheLocalBody}}</div>
+            </div>
+        </div>
+
+        <div class="org-section-title"><u>உள்ளாட்சி அமைப்பு / Local Body</u></div>
+        <div class="org-grid">
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.distritName)">
+                <div class="org-label">நீங்கள் வேலை செய்யும் மாவட்டம் /<br>District where you work <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.distritName}}</div>
+            </div>
+
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.localBody)">
+                <div class="org-label">உள்ளாட்சி அமைப்பு /<br>Local Body <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.localBody}}</div>
+            </div>
+
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.nameoftheLocalBody)">
+                <div class="org-label">உள்ளாட்சி அமைப்பின் பெயர் /<br>Name of the Local Body <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.nameoftheLocalBody}}</div>
+            </div>
+
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.townPanchayat)">
+                <div class="org-label">மாநகராட்சி /<br>Town Panchayat <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.townPanchayat}}</div>
+            </div>
+
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.municipality)">
+                <div class="org-label">நகராட்சி /<br>Municipality <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.municipality}}</div>
+            </div>
+
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.corporation)">
+                <div class="org-label">மாநகராட்சி /<br>Corporation <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.corporation}}</div>
+            </div>
+            
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.block)">
+                <div class="org-label">தொகுதி /<br>Block <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">{{orgDetail?.block}}</div>
+            </div>
+
+            <div class="org-field">
+                <div class="org-label">சட்டமன்ற தொகுதி /<br>MLA Constituency <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">Select Constituency</div>
+            </div>
+
+            <div class="org-field">
+                <div class="org-label">பாராளுமன்ற தொகுதி /<br>MP Constituency <span class="req">*</span></div>
+                <div class="org-value-box dropdown-style">Select Constituency</div>
+            </div>
+        </div>
+
+        <div class="org-section-title"><u>பணியிடம் முகவரி / Work Address</u></div>
+        <div class="org-grid">
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.organisation_Name)">
+                <div class="org-label">நிறுவனம் பெயர் /<br>Name of the Organization</div>
+                <div class="org-value-box">{{orgDetail?.organisation_Name}}</div>
+            </div>
+            
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.workOrganisationName) && !CheckNullorEmpty(orgDetail?.organisation_Name)">
+                <div class="org-label">நிறுவனம் பெயர் /<br>Name of the Organization</div>
+                <div class="org-value-box">{{orgDetail?.workOrganisationName}}</div>
+            </div>
+
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.address)">
+                <div class="org-label">தெரு பெயர் /<br>Street Name <span class="req">*</span></div>
+                <div class="org-value-box">{{orgDetail?.address}}</div>
+            </div>
+            
+             <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.workAddress) && !CheckNullorEmpty(orgDetail?.address)">
+                <div class="org-label">தெரு பெயர் /<br>Street Name <span class="req">*</span></div>
+                <div class="org-value-box">{{orgDetail?.workAddress}}</div>
+            </div>
+
+            <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.villagePanchayat)">
+                <div class="org-label">ஊர் / நகரம் /<br>Village/Town <span class="req">*</span></div>
+                <div class="org-value-box">{{orgDetail?.villagePanchayat}}</div>
+            </div>
+        </div>
+        
+        <ng-container *ngIf="CheckNullorEmpty(orgDetail?.private_Organisation_Name)">
+            <div class="org-section-title"><u>தனியார் நிறுவன விவரங்கள் / Private Organization Details</u></div>
+            <div class="org-grid">
+                <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.private_Organisation_Name)">
+                    <div class="org-label">அமைப்பின் பெயர் /<br>Organisation Name <span class="req">*</span></div>
+                    <div class="org-value-box">{{orgDetail?.private_Organisation_Name}}</div>
+                </div>
+
+                <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.private_Designation)">
+                    <div class="org-label">பதவி /<br>Designation <span class="req">*</span></div>
+                    <div class="org-value-box">{{orgDetail?.private_Designation}}</div>
+                </div>
+
+                <div class="org-field" *ngIf="CheckNullorEmpty(orgDetail?.private_Address)">
+                    <div class="org-label">முகவரி /<br>Address <span class="req">*</span></div>
+                    <div class="org-value-box">{{orgDetail?.private_Address}}</div>
+                </div>
+            </div>
+        </ng-container> -->
+

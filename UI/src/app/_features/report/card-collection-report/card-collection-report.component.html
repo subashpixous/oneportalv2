@@ -1,0 +1,245 @@
+<div class="card noborderRad p-3">
+  <!-- Header -->
+  <div class="grid formgrid mb-3">
+    <div class="col-12 lg:col-4 md:col-4">
+      <h4>Card Collection Report</h4>
+    </div>
+  </div>
+
+  <!-- Filter Section -->
+  <div class="p-fluid" style="padding: 20px 0">
+    <div class="p-formgrid grid" style="align-items: end">
+      <!-- District -->
+      <div class="col-12 lg:col-3 md:col-3">
+        <p-dropdown
+          id="district"
+          [options]="districts"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select District"
+          [(ngModel)]="selectedDistrict"
+          [showClear]="true"
+        >
+        </p-dropdown>
+      </div>
+
+      <!-- Generate Button -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <button
+          pButton
+          pRipple
+          class="p-button-secondary"
+          icon="pi pi-arrow-right"
+          (click)="applyFilter()"
+        ></button>
+        <p-button
+          icon="pi pi-times "
+          [outlined]="true"
+          (click)="clearFilter()"
+          [style]="{ 'margin-left': '10px' }"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="card">
+    <!-- Top Bar -->
+    <!-- <div class="flex justify-between items-center mb-3">
+      <div>
+        <button
+          pButton
+          icon="pi pi-file-excel"
+          class="p-button-success mr-2"
+          label="Excel"
+          (click)="exportExcel()"
+        ></button>
+        <button
+          pButton
+          icon="pi pi-file-pdf"
+          class="p-button-danger"
+          label="PDF"
+          (click)="exportPDF()"
+        ></button>
+      </div>
+    </div> -->
+
+    <!-- Main Data Table -->
+    <p-table
+      #dt
+      [value]="filteredReports"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 20, 50]"
+      [responsiveLayout]="'scroll'"
+      [globalFilterFields]="globalFilterFields"
+    >
+      <!-- Search -->
+      <ng-template pTemplate="caption">
+        <div class="caption-flex">
+          <!-- Left Side: Buttons -->
+          <div>
+            <button
+              pButton
+              icon="pi pi-file-excel"
+              class="p-button-secondary mr-2"
+              (click)="exportExcel()"
+            ></button>
+            <button
+              pButton
+              icon="pi pi-print"
+              class="p-button-info mr-2"
+              (click)="exportPDF()"
+            ></button>
+          </div>
+
+          <!-- Right Side: Search Box -->
+          <div>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                placeholder="Search..."
+                (input)="dt.filterGlobal(getInputValue($event), 'contains')"
+                class="p-inputtext-sm"
+              />
+            </span>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- Header -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+
+      <!-- Body -->
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          <td *ngFor="let col of cols">
+            <span
+              *ngIf="col.isActionable; else normalCell"
+              class="text-primary cursor-pointer underline"
+              (click)="handleColumnClick($event, col.field, row)"
+            >
+              {{ row[col.field] }}
+            </span>
+            <ng-template #normalCell>
+              {{ row[col.field] }}
+            </ng-template>
+          </td>
+        </tr>
+      </ng-template>
+
+      <!-- Footer with Totals -->
+      <ng-template pTemplate="footer">
+        <tr class="font-bold bg-gray-100">
+          <td *ngFor="let col of cols">
+            {{ totalRow ? totalRow[col.field] : "" }}
+          </td>
+        </tr>
+      </ng-template>
+
+      <!-- No Records Message -->
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td
+            [attr.colspan]="cols.length"
+            class="text-center py-3 text-gray-500"
+          >
+            No Records Found
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!-- Inline Details for Member Detailed Report -->
+  <div class="card shadow-md rounded-2xl p-4 mt-6" *ngIf="selectedRecord">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="text-lg font-semibold text-gray-700">
+        District: {{ selectedRecord.district }} | Column:
+        {{ selectedRecord.clickedColumn | titlecase }}
+      </h3>
+      <!-- <button
+      pButton
+      icon="pi pi-times"
+      class="p-button-text p-button-danger"
+      (click)="selectedRecord = null; selectedRecordDetails = []"
+    ></button> -->
+    </div>
+
+    <!-- Inline Details Table -->
+    <p-table
+      [value]="selectedRecordDetails"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 20, 50]"
+      [responsiveLayout]="'scroll'"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex justify-end">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              placeholder="Search..."
+              (input)="dt.filterGlobal(getInputValue($event), 'contains')"
+              class="p-inputtext-sm"
+            />
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Member ID</th>
+          <th>Phone</th>
+          <th>Organization Type</th>
+          <th>Collected By</th>
+          <th>Collected By Phone number</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-row let-i="rowIndex">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ row?.name || "-" }}</td>
+          <td>
+            <a
+              [routerLink]="[
+                '/officers/applications/member-view',
+                row?.member_Guidid
+              ]"
+              class="text-blue-500 hover:underline"
+            >
+              {{ row?.member_id || "-" }}
+            </a>
+          </td>
+          <td>{{ row?.phone_Number || "-" }}</td>
+          <td>{{ row?.organization_Type || "-" }}</td>
+          <td>{{ row?.collectedByName || "-" }}</td>
+          <td>{{ row?.collectedByPhoneNumber || "-" }}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6" class="text-center text-gray-500 py-3">
+            No Records Found
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

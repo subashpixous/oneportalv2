@@ -1,0 +1,28 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-8 md:col-8 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="col-12 lg:col-2 md:col-2 ">
+            <p-multiSelect [options]="roles" optionLabel="text"
+                [style]="{'width': '100%','background': 'rgba(0, 0, 0, 0.02)'}" optionValue="value"
+                placeholder="Select a Role" [showClear]="false" (ngModelChange)="change($event)"
+                [(ngModel)]="selectRoles"></p-multiSelect>
+        </div>
+        <div class="col-12 lg:col-2 md:col-2 ">
+            <p-multiSelect [options]="districts" optionLabel="text"
+                [style]="{'width': '100%','background': 'rgba(0, 0, 0, 0.02)'}" optionValue="value"
+                placeholder="Select a District" [showClear]="false" (ngModelChange)="changeDistricts($event)"
+                [(ngModel)]="selectdistricts"></p-multiSelect>
+        </div>
+    </div>
+    <div class="mb-3 mt-3">
+        <div class="row">
+            <app-datatable [records]="contacts" [defaultSortField]="defaultSortField"
+                [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Configuration'" [rows]="10"
+                [total]="contacts ? contacts.length : 0" [actions]="actions" [searchableColumns]="searchableColumns"
+                [hasActiveInactive]="false" [canShowAction]="false">
+            </app-datatable>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+.circle {
+    height: 100px;
+    width: 100px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #216EB6;
+    cursor: pointer;
+  }
+  .groupinfo{
+    background-color: #DDF1FF;
+    width: 350px;
+    padding: 20px;
+    border-radius: 10px; 
+  }
+  @media screen and (max-width: 992px) {
+    
+  .groupinfo{
+    width: 200px;
+    }
+  }
+  
+  /* On screens that are 600px or less, set the background color to olive */
+  @media screen and (max-width: 600px) {
+   
+  .groupinfo{
+    max-width: 200px;
+    }
+  }
+  .parentDiv{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .imgsize{
+
+    width: 70px;
+    height: 70px;
+  }.cntdtyle {
+    margin-top: 10px;
+    max-width: 476px;
+    padding: 25px 50px;
+    border: 1px solid #dadada;
+    margin-bottom: 20px;
+    box-shadow: 5px 4px 7.8px 0px #00000040;
+    border-radius: 10px;
+}
+
+::ng-deep .bcbtn {
+    margin-right: 20px;
+    border-radius: 18px;
+    padding: 5px 45px;
+}
+.ss{
+    
+    margin-top: 10px;
+    margin-bottom: 0px;
+}

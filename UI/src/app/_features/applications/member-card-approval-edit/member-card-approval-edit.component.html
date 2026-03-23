@@ -1,0 +1,269 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col">
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+    <app-current-user-time *ngIf="memberDetail"
+        [memberID]="memberDetail.memberId !='' ? memberDetail.memberId :memberDetail.firstName+' ' +memberDetail.lastName "></app-current-user-time>
+
+    <div class="mb-3" *ngIf="memberDetail">
+
+        <app-mem-personal-detail-view [personalDetail]="memberDetail"></app-mem-personal-detail-view>
+    </div>
+    <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;" *ngIf="memberCardData">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher">உறுப்பினர் அடையாள அட்டை / Member Identity Card</h5>
+                <!-- ID Card Design -->
+                <div id="id-card-container" class="id-card-wrapper">
+                    <!-- Front Side of the ID Card -->
+                    <div class="id-card text-white">
+
+                        <!-- Member details section -->
+                        <div class="row mt-4 front-side-content">
+                            <div class="col-md-3 text-center">
+                                <div class="photo-container">
+                                    <img [src]=" url && url !='' ? url : 'https://www.w3schools.com/howto/img_avatar.png'" alt="Person"
+                                        class="person-image">
+
+                                </div>
+            <div class="local-body-details">     
+                          <div class="detail-row">
+<div class="label" *ngIf="memberCardData.nameOfLocalBody === 'GCC' || memberCardData.nameOfLocalBody === 'CMWS'">
+        <span class="label">மண்டலம் / Zone</span>
+      <br>
+            <span class="value">
+                {{ memberCardData.nameOfLocalBody }} - {{ memberCardData.zone }}
+            </span>
+    
+    </div>
+    </div>
+    </div>
+                            
+                            </div>
+                            <div class="col-md-9 front-page-section">
+                                <div class="member-details">
+                                    <div class="detail-row">
+                                        <span class="label">பெயர் / NAME</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.nameEnglish">{{
+                                                    memberCardData.nameEnglish }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.nameEnglish && memberCardData.nameTamil"><br></ng-container>
+                                                <ng-container *ngIf="memberCardData.nameTamil">{{
+                                                    memberCardData.nameTamil }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">தந்தை / கணவர்<br>FATHER / HUSBAND</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.fatherNameEnglish">{{
+                                                    memberCardData.fatherNameEnglish }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.fatherNameEnglish && memberCardData.fatherNameTamil"><br></ng-container>
+                                                <ng-container *ngIf="memberCardData.fatherNameTamil">{{
+                                                    memberCardData.fatherNameTamil }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">உறுப்பினர் எண்<br>MEMBER ID</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">{{memberCardData.memberId }}</span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">பிறந்த தேதி / DOB</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">{{memberCardData.dateOfBirth | date:
+                                                'dd-MM-yyyy'}}</span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">மாவட்டம் / DISTRICT</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.districtTamil">{{
+                                                    memberCardData.districtTamil }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.districtTamil && memberCardData.districtEnglish">
+                                                    / </ng-container>
+                                                <ng-container *ngIf="memberCardData.districtEnglish">{{
+                                                    memberCardData.districtEnglish }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+    
+
+    <!-- QR Code Row -->
+    <div class="detail-row">
+  
+            <span class="value">
+                <img [src]="'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(trimmedApiUrl + '/#/member-qr-view/' + (this.memberId)) +'&size=80x80'"
+                    alt="QR Code" class="qr-code">
+            </span>
+       
+    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Back Side of the ID Card -->
+                    <div class="id-card-back">
+                        <!-- Member details section -->
+                        <div class="row mt-4 back-side-content">
+                            <div class="col-md-12">
+                                <div class="back-details">
+                                    <div class="detail-row">
+                                        <span class="label">குடும்பத்தினர்/FAMILY MEMBERS</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container
+                                                    *ngIf="getCommaSeparatedNamesFromFamily(memberCardData.familyMember, 'Tamil') as tamilNames">
+                                                    {{ tamilNames }}
+                                                    <ng-container
+                                                        *ngIf="getCommaSeparatedNamesFromFamily(memberCardData.familyMember, 'English')">
+                                                        <br>
+                                                    </ng-container>
+                                                </ng-container>
+                                                {{ getCommaSeparatedNamesFromFamily(memberCardData.familyMember,
+                                                'English') }}
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">முகவரி/ADDRESS</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <!-- <span class="value">
+                                                {{ getFormattedAddress(memberCardData) }}
+                                            </span> -->
+                                            <span class="value">
+  {{ getFormattedAddressTamil(memberCardData) }}
+  <ng-container *ngIf="getFormattedAddressTamil(memberCardData) && getFormattedAddress(memberCardData)">
+    <br>
+  </ng-container>
+  {{ getFormattedAddress(memberCardData) }}
+</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="approvaldetail && approvaldetail.approvalHistory">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher">Approval Comments</h5>
+                <div class="col-12  row ">
+                    <div class="card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%">S.No</th>
+                                    <th style="width: 10%">Status From </th>
+                                    <th style="width: 10%">Status To</th>
+                                    <th style="width: 10%">Approval Comments</th>
+                                    <th style="width: 15%">Reason</th>
+                                    <th style="width: 15%">Approved By/Date</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="approvaldetail.approvalHistory.length>0; else norecwords">
+                                <tr *ngFor="let itemrow of approvaldetail.approvalHistory ; let i=index;let l=last">
+                                    <td>{{i+1}}</td>
+                                    <td>{{itemrow.fromStatus}}</td>
+                                    <td>{{itemrow.toStatus}}</td>
+                                    <td>{{itemrow.approvalComment}} </td>
+                                    <td>{{itemrow.reason}}</td>
+                                    <td>{{itemrow.createdByUserName}}<br /> ({{dcwt(itemrow.createdDate)}})</td>
+                                </tr>
+                            </tbody>
+                            <ng-template #norecwords>
+                                <p style="padding-top: 20px;">No records</p>
+                            </ng-template>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3" *ngIf="approvaldetail">
+        <div class="card">
+            <h5>Approval Form</h5>
+            <form [formGroup]="approvalForm" (ngSubmit)="submit()" class="col-12">
+                <div class=" p-fluid">
+                    <div class="flex grid formgrid">
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="status">Status</label>
+                            <input pInputText formControlName="status" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('status')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="date">Date</label>
+                            <input pInputText formControlName="date" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('date')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="name">Name</label>
+                            <input pInputText formControlName="name" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('name')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="jobTitle">Role</label>
+                            <input pInputText formControlName="jobTitle" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('jobTitle')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="dob">Approve/ Reject Status</label>
+                            <p-dropdown [options]="approvaldetail.statusList" optionLabel="text" optionValue="value"
+                                placeholder="Select a status" formControlName="approvalRejectedstatus" [showClear]="
+                            true"></p-dropdown>
+                            <app-error-msg [control]="approvalForm.get('approvalRejectedstatus')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="canshowreason">
+                            <label htmlFor="reason">Reason</label>
+                            <p-dropdown [options]="approvaldetail.reasonList" optionLabel="text" optionValue="text"
+                                placeholder="Select a reason" formControlName="reason" [showClear]="
+                            true"></p-dropdown>
+                            <app-error-msg [control]="approvalForm.get('reason')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="comments">Comments</label>
+                            <input pInputText formControlName="comments" type="text" />
+                            <app-error-msg [control]="approvalForm.get('comments')"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-3 mt-1" style="justify-content: end;">
+                    <p-button label="Back" icon="pi pi-arrow-left" class="p-button-secondary" severity="secondary"
+                        (onClick)="back()" />
+                    <p-button label="Submit" type="submit" />
+                    <p-button label="Cancel" class="p-button-secondary" />
+                </div>
+            </form>
+        </div>
+        <p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog>
+    </div>
+</div>

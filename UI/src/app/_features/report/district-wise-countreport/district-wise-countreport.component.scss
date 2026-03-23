@@ -1,0 +1,51 @@
+.caption-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+/* Base Badge Style */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 9999px; /* Pill shape */
+  text-align: center;
+  line-height: 1.4;
+  transition: all 0.2s ease;
+  min-width: 45px;
+  text-transform: capitalize;
+}
+
+/* Hover & Cursor for Clickable Badges */
+.badge-clickable {
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.badge-clickable:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Action Link Style (Non-badge clickable text) */
+.action-link {
+  color: #2563eb; /* Tailwind blue-600 */
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.action-link:hover {
+  color: #1d4ed8;
+}
+
+/* Badge Colors */
+.bg-gray-600 { background-color: #4b5563; color: white; }
+.bg-blue-500 { background-color: #3b82f6; color: white; }
+.bg-green-500 { background-color: #10b981; color: white; }
+.bg-purple-500 { background-color: #8b5cf6; color: white; }
+.bg-yellow-500 { background-color: #facc15; color: black; }
+.bg-orange-500 { background-color: #f97316; color: white; }
+.bg-gray-400 { background-color: #9ca3af; color: white; }

@@ -1,0 +1,29 @@
+<!-- <div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;"> -->
+    <!-- <div class="flex align-items-center  mr-4">
+        <p class="fw-bold"> உறுப்பினர் சேர்க்கை விவரங்கள் / MEMBER REGISTRATION DETAILS
+
+        </p>
+    </div>
+    <div class="flex align-items-center  mr-4">
+        <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+        <p-button *ngIf="isLoggedin"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            label="Logout" (onClick)="Logout()" />
+    </div> -->
+<!-- </div> -->
+<app-current-user-time [memberID]="memberInformation.name"></app-current-user-time>
+<h5 class="divhighligher">உங்கள் உறுப்பினர் வரலாற்றைப் பார்க்கவும் / View Your Member History</h5>
+<div class="row " style="text-align: center; margin-top:10px ;background-color: white;">
+    <div class="col-12 flex justify-content-center " style="padding-top: 10px;padding-bottom: 0px;flex-wrap: wrap;">
+
+        <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField" [style]="{'width': '100%'}"
+            [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Configuration'" [rows]="10"
+            [total]="configurationList ? configurationList.length : 0" [actions]="actions"
+            (invokeAction)="actioInvoked($event)" [defaultstatus]="!currentStatus" (changeStatus)="changeStatus($event)"
+            [searchableColumns]="searchableColumns" [hasActiveInactive]="false" [canShowAction]="false">
+        </app-datatable>
+    </div>
+    <div class="col-12 imagediv justify-content-center">
+        <p-button severity="secondary" styleClass="bcbtn" (onClick)="bckClick()" label="Back" />
+    </div>
+</div>

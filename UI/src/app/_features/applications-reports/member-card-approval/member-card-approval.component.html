@@ -1,0 +1,43 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-4 md:col-4  mb-2">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col-12 lg:col-4 md:col-4 mb-2">
+        </div>
+        <div class="col-12 row   lg:col-12 md:col-12 flex">
+            <div class="col-12 lg:col-2 md:col-2 ">
+                <p-dropdown [options]="datefilter" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a Date Range" [showClear]="false" [(ngModel)]="selecteddatefilter"></p-dropdown>
+            </div>
+            <div class="col-12 lg:col-2 md:col-2 ">
+
+                <p-multiSelect [options]="districts" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a District" [showClear]="false" [(ngModel)]="selectedDistricts"></p-multiSelect>
+            </div>
+            <div class="col-12 lg:col-2 md:col-2 ">
+
+                <p-multiSelect [options]="statuses" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a Status" [showClear]="false" [(ngModel)]="selectedStatuses"></p-multiSelect>
+            </div>
+            <div class="col-12 lg:col-2 md:col-2 ">
+                <button pButton pRipple class="p-button-secondary" icon="pi pi-arrow-right"
+                    (click)="generate()"></button>
+                <p-button icon="pi pi-times " [outlined]="true" (click)="reset()"
+                    [style]="{'margin-left': '10px'}"></p-button>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 mt-3">
+        <div class="row">
+            <app-datatable-pagination [records]="configurationList" [defaultSortField]="defaultSortField"
+                [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Applications'" [rows]="rows"
+                [total]="total" [actions]="actions" (invokeAction)="actioInvoked($event)" s
+                [defaultstatus]="!currentStatus" (changeStatus)="changeStatus($event)"
+                [searchableColumns]="searchableColumns" [hasActiveInactive]="false" [canShowAction]="true"
+                (changefilter)="changefilter($event)" (actionalAction)="actionalAction($event)">
+            </app-datatable-pagination>
+
+        </div>
+    </div>
+</div>

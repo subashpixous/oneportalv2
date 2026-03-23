@@ -1,0 +1,270 @@
+<div class="card noborderRad p-3">
+  <!-- Header -->
+  <div class="grid formgrid mb-3">
+    <div class="col-12 lg:col-4 md:col-4">
+      <h4>{{ title }}</h4>
+    </div>
+  </div>
+
+  <!-- Filter Section -->
+  <div class="p-fluid" style="padding: 0">
+    <div class="p-formgrid grid" style="align-items: end">
+      <!-- District -->
+      <div class="col-12 lg:col-3 md:col-3">
+        <p-multiSelect
+          [options]="districts"
+          placeholder="Select District"
+          [(ngModel)]="selectedDistrict"
+          [showClear]="true"
+          [filter]="false"
+          (onChange)="applyFilter()"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Generate Button -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <button
+          pButton
+          pRipple
+          class="p-button-secondary"
+          icon="pi pi-arrow-right"
+          (click)="generate()"
+        ></button>
+        <p-button
+          icon="pi pi-times "
+          [outlined]="true"
+          (click)="clearFilter()"
+          [style]="{ 'margin-left': '10px' }"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <!-- <div class="card"> -->
+  <!-- Top bar -->
+  <!-- <div class="flex justify-between items-center mb-3">
+
+    <div>
+      <button
+        pButton
+        icon="pi pi-file-excel"
+        class="p-button-success mr-2"
+        label="Excel"
+        (click)="exportExcel()"
+      ></button>
+      <button
+        pButton
+        icon="pi pi-file-pdf"
+        class="p-button-danger"
+        label="PDF"
+        (click)="exportPDF()"
+      ></button>
+    </div>
+  </div> -->
+
+  <div class="text-sm text-gray-600 mb-2 italic">
+    <strong>Note:</strong> <span class="text-blue-600">🔵Total</span> =
+    <span class="text-orange-500">🟠Saved</span> +
+    <span class="text-orange-500">🟠Submitted</span>
+  </div>
+  <!-- Data Table -->
+  <p-table
+    #dt
+    [value]="filteredReports"
+    [paginator]="true"
+    [rows]="rows"
+    [rowsPerPageOptions]="[10, 20, 50]"
+    [totalRecords]="totalRecords"
+    [sortField]="defaultSortField"
+    [sortOrder]="defaultSortOrder"
+    [globalFilterFields]="searchableColumns"
+    [resizableColumns]="true"
+    [responsiveLayout]="'scroll'"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    dataKey="district_Id"
+    class="p-datatable-sm"
+  >
+    <!-- Search Bar -->
+    <ng-template pTemplate="caption">
+      <div class="caption-flex">
+        <div>
+          <button
+            pButton
+            icon="pi pi-file-excel"
+            class="p-button-secondary mr-2"
+            (click)="exportExcel()"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-print"
+            class="p-button-info mr-2"
+            (click)="exportPDF()"
+          ></button>
+        </div>
+
+        <input
+          pInputText
+          type="text"
+          placeholder="Search..."
+          (input)="applyGlobalFilter($event)"
+        />
+      </div>
+    </ng-template>
+
+    <!-- Table Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- Table Body -->
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td *ngFor="let col of cols">
+          <!-- Badge fields with colors -->
+          <span
+            *ngIf="isBadgeColumn(col.field)"
+            class="badge px-3 py-1 rounded-full text-sm font-semibold"
+            [ngClass]="[
+              getBadgeClass(col.field),
+              col.isActionable
+                ? 'cursor-pointer hover:opacity-90 transition'
+                : ''
+            ]"
+            (click)="
+              col.isActionable &&
+                openActionDialog({ record: row, column: col.field })
+            "
+          >
+            {{ row[col.field] }}
+          </span>
+
+          <!-- Non-badge fields -->
+          <span *ngIf="!isBadgeColumn(col.field)">
+            <span
+              *ngIf="col.isActionable; else normalCell"
+              class="text-blue-600 font-semibold underline cursor-pointer hover:text-blue-800"
+              (click)="openActionDialog({ record: row, column: col.field })"
+            >
+              {{ row[col.field] }}
+            </span>
+            <ng-template #normalCell>
+              {{ row[col.field] }}
+            </ng-template>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <tr class="font-bold bg-gray-100">
+        <td *ngFor="let col of cols">
+          {{ totalRow ? totalRow[col.field] : "" }}
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="cols.length" class="text-center py-3 text-gray-500">
+          No Records Found
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Inline Detailed Data Card -->
+<div *ngIf="selectedRecord" class="card shadow-md rounded-2xl p-4 mt-6">
+  <div class="flex justify-between items-center mb-3">
+    <h3 class="text-lg font-semibold text-gray-700">
+      District: {{ selectedRecord.district }} | Column:
+      {{ selectedRecord.clickedColumn | titlecase }}
+    </h3>
+  </div>
+
+  <p-table
+    #detailsTable
+    [value]="selectedRecordDetails"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 20, 50]"
+    [responsiveLayout]="'scroll'"
+    styleClass="p-datatable-sm"
+    [globalFilterFields]="[
+      'municipality',
+      'local_Body',
+      'name',
+      'member_id',
+      'phone_Number',
+      'organization_Type'
+    ]"
+  >
+    <!-- Search bar for details -->
+    <ng-template pTemplate="caption">
+      <div class="flex justify-end">
+        <input
+          pInputText
+          type="text"
+          placeholder="Search members..."
+          class="p-inputtext-sm w-64 border border-gray-300 rounded-md"
+          (input)="
+            detailsTable.filterGlobal($any($event.target).value, 'contains')
+          "
+        />
+      </div>
+    </ng-template>
+
+    <!-- Table Header -->
+    <!-- Table Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 50px">#</th>
+        <th>Member ID</th>
+        <th>Name</th>
+        <th>District</th>
+        <th>Local Body</th>
+        <th>Phone Number</th>
+        <th>Organization Type</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-row let-i="rowIndex">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>
+          <a
+            [routerLink]="[
+              '/officers/applications/member-view',
+              row?.member_Guidid
+            ]"
+            class="text-blue-500 hover:underline"
+          >
+            {{ row?.member_id || "-" }}
+          </a>
+        </td>
+        <td>{{ row?.name || "-" }}</td>
+        <td>{{ row?.district || "-" }}</td>
+        <td>{{ row?.local_Body || "-" }}</td>
+        <td>{{ row?.phone_Number || "-" }}</td>
+        <td>{{ row?.organization_Type || "-" }}</td>
+      </tr>
+    </ng-template>
+
+    <!-- Empty message -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7" class="text-center py-3 text-gray-500">
+          No records found
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<!-- </div> -->

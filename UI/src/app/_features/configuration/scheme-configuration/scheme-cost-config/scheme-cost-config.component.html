@@ -1,0 +1,72 @@
+<div class=" formgrid mb-4">
+    <form [formGroup]="fieldForm" (ngSubmit)="submit()" class="col-12">
+        <div class="card p-fluid" style="padding-bottom: 10px;">
+            <div class="p-formgrid grid">
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="checkfieldName">Check Field</label>
+                    <p-multiSelect [options]="feilds" optionLabel="text" optionValue="value"
+                        placeholder="Select a feild" formControlName="checkfieldName" [showClear]="
+                            true">
+                    </p-multiSelect>
+                    <app-error-msg [control]="fieldForm.get('checkfieldName')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="basefieldName">Base Field</label>
+                    <p-multiSelect [options]="feilds" optionLabel="text" optionValue="value"
+                        placeholder="Select a feild" formControlName="basefieldName" [showClear]="
+                            true">
+                    </p-multiSelect>
+                    <app-error-msg [control]="fieldForm.get('basefieldName')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="condition">Condition</label>
+                    <p-dropdown [options]="conditions" optionLabel="text" optionValue="value"
+                        placeholder="Select a feild" formControlName="condition" [showClear]="
+                            true">
+                    </p-dropdown>
+                    <app-error-msg [control]="fieldForm.get('condition')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="conditionValue">Value</label>
+                    <input pInputText formControlName="conditionValue" type="text" />
+                    <app-error-msg [control]="fieldForm.get('conditionValue')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-6  lg:col-4">
+                    <label htmlFor="conditionUnit">Unit</label>
+                    <p-dropdown [options]="conditionalUnits" optionLabel="text" optionValue="value"
+                        placeholder="Select a feild" formControlName="conditionUnit" [showClear]="
+                            true">
+                    </p-dropdown>
+                    <app-error-msg [control]="fieldForm.get('conditionUnit')"></app-error-msg>
+                </div>
+                <div class=" col-12 md:col-12 flex  lg:col-4" style="margin-top: 10px;">
+                    <div class="col">
+                        <button pButton type="submit"
+                            *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                            [disabled]="!fieldForm.valid" label="Submit"></button>
+                    </div>
+                    <div class="col">
+                        <button pButton type="button" class="p-button-secondary" label="Reset"
+                            (click)="resetForm()"></button>
+                    </div>
+                </div>
+            </div>
+            <p>
+                Note: The difference between Base Value and Check Value should be less than or equal to the Threshold
+                (e.g. Base Value: 100, Check Value: 90, Threshold: 5 then, (100 -90) <= 5 results invalid) </p>
+        </div>
+    </form>
+</div>
+
+<div class="grid formgrid">
+    <div class="col-12 lg:col-9 md:col-9 flex ">
+        <h4>{{this.title}} List </h4><span style="font-size: small;font-weight: 600;margin-left: 5px;"
+            [ngStyle]="{'color': currentStatus ? '#0abb0a' : '#fd7878'}">
+            {{currentStatus?'(Active)':'(In-Active)'}}</span>
+    </div>
+</div>
+<app-datatable [records]="configurationList" [defaultSortField]="defaultSortField" [defaultSortOrder]="defaultSortOrder"
+    [cols]="cols" [fileName]="'Role'" [rows]="rows" [total]="configurationList ? configurationList.length : 0"
+    [actions]="actions" (invokeAction)="actioInvoked($event)" [searchableColumns]="searchableColumns"
+    [defaultstatus]="!currentStatus" (changeStatus)="changeStatus($event)" [hasActiveInactive]="false">
+</app-datatable>

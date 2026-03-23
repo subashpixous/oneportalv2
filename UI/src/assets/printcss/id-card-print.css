@@ -1,0 +1,34 @@
+/* Print styles for ID Card */
+@media print {
+    
+    #id-card-container,
+    #id-card-container * {
+        visibility: visible;
+    }
+    
+    #id-card-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    
+    .id-card,
+    .id-card-back {
+        page-break-after: always;
+        width: 85mm;
+        height: 65mm;
+        margin: 0;
+        padding: 10px;
+    }
+    
+    .id-card-back {
+        page-break-after: avoid;
+    }
+    
+    /* Hide buttons during print */
+    .bcbtn,
+    p-button {
+        display: none !important;
+    }
+}

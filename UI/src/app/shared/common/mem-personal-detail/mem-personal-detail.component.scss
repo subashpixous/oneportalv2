@@ -1,0 +1,1884 @@
+.p-inputtext{
+    border-radius: 20px;
+}::ng-deep .p-dropdown{
+
+    border-radius: 20px;
+}
+.field{
+    margin-bottom: 0rem;
+}
+.image-container {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+img {
+  height: 100px;
+  width: 100px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  object-fit: cover; /* Ensure images maintain aspect ratio */
+  background: #f0f0f0; /* Fallback background for transparent PNGs */
+}
+
+
+.select-profile-picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+/* Modern Crop Dialog Styles */
+:host ::ng-deep .modern-crop-dialog .p-dialog {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+:host ::ng-deep .modern-crop-dialog .p-dialog-header {
+  background: #FFFFFF;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1.5rem;
+  border-radius: 18px 18px 0 0;
+}
+
+:host ::ng-deep .modern-crop-dialog .p-dialog-header .p-dialog-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #000000;
+}
+
+:host ::ng-deep .modern-crop-dialog .p-dialog-content {
+  background: #FFFFFF;
+  padding: 0;
+  border-radius: 0 0 18px 18px;
+}
+
+:host ::ng-deep .modern-crop-dialog .p-dialog-header-icons {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+:host ::ng-deep .modern-crop-dialog .p-dialog-header-icons button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .modern-crop-dialog .p-dialog-header-icons button:hover {
+  background: #f5f5f5;
+}
+
+/* Modern Crop Content */
+.modern-crop-content {
+  padding: 0;
+}
+
+.crop-main-section {
+  padding: 1.5rem;
+}
+
+/* Crop Frame with Corner Indicators */
+.image-crop-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.crop-frame {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f8f9fa;
+  border: 2px solid #007ad9;
+  min-height: 300px;
+  height: 350px;
+}
+
+:host ::ng-deep .modern-image-cropper {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+:host ::ng-deep .modern-image-cropper .cropper-container {
+  border-radius: 10px;
+}
+
+:host ::ng-deep .modern-image-cropper .source-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Corner Indicators */
+.corner-indicator {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #FFFFFF;
+  z-index: 10;
+}
+
+.corner-indicator.top-left {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-indicator.top-right {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-indicator.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+}
+
+.corner-indicator.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Modern Zoom Controls */
+.zoom-controls-modern {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 14px;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+
+.zoom-btn-modern {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #f8f9fa;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.zoom-btn-modern:hover {
+  background: #e9ecef;
+  transform: scale(1.1);
+}
+
+.zoom-btn-modern.reset {
+  background: #007ad9;
+  color: white;
+}
+
+.zoom-btn-modern.reset:hover {
+  background: #005b9f;
+}
+
+.zoom-level-modern {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #000000;
+  min-width: 45px;
+  text-align: center;
+}
+
+/* Analyzing Status */
+.analyzing-status {
+  text-align: center;
+  padding: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #000000;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(153, 153, 153, 0) 100%);
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* Modern Preview Section */
+.preview-section-modern {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  border: 1px solid #e9ecef;
+}
+
+.preview-section-modern h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #000000;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.preview-container-modern {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+  height: 150px;
+}
+
+.preview-image-modern {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.preview-info-modern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+}
+
+.preview-info-modern .dimensions {
+  font-weight: 500;
+  color: #000000;
+}
+
+.preview-info-modern .file-size {
+  color: #6c757d;
+  background: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Modern Action Buttons */
+.action-buttons-modern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  gap: 12px;
+}
+
+.modern-btn {
+  min-width: 120px;
+  border-radius: 25px !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 500 !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.cancel-btn {
+  border: 2px solid #6c757d !important;
+  color: #6c757d !important;
+}
+
+.cancel-btn:hover {
+  background: #6c757d !important;
+  color: white !important;
+}
+
+.auto-crop-btn {
+  border: 2px solid #007ad9 !important;
+  color: #007ad9 !important;
+}
+
+.auto-crop-btn:hover:not(:disabled) {
+  background: #007ad9 !important;
+  color: white !important;
+}
+
+.continue-btn {
+  background: #007ad9 !important;
+  border: 2px solid #007ad9 !important;
+}
+
+.continue-btn:hover:not(:disabled) {
+  background: #005b9f !important;
+  border-color: #005b9f !important;
+  transform: translateY(-2px);
+}
+
+/* No Image State */
+.no-image-modern {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.no-image-modern i {
+  font-size: 4rem;
+  color: #adb5bd;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.no-image-modern p {
+  font-family: 'Poppins', sans-serif;
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  :host ::ng-deep .modern-crop-dialog .p-dialog {
+    margin: 1rem;
+  }
+
+  .crop-frame {
+    height: 280px;
+  }
+
+  .action-buttons-modern {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modern-btn {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .zoom-controls-modern {
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 12px;
+  }
+
+  .zoom-btn-modern {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Animation for smooth transitions */
+.modern-crop-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.zoom-level-modern {
+  transition: all 0.2s ease-in-out;
+}
+
+.zoom-level-modern.changed {
+  color: #007ad9;
+  transform: scale(1.1);
+}
+// .gov-form-wrapper {
+//   background: #f4f8fb;
+//   padding: 35px 50px;
+//   border-radius: 25px;
+//   margin-bottom: 40px;
+// }
+
+// .gov-section-header {
+//   background: #cfe3ec;
+//   padding: 15px 25px;
+//   border-radius: 30px;
+//   font-weight: 600;
+//   font-size: 16px;
+//   margin-bottom: 30px;
+// }
+
+// .profile-img {
+//   height: 120px;
+//   width: 120px;
+//   border-radius: 50%;
+//   border: 3px solid #1c8db6;
+// }
+
+// .phone-display {
+//   font-weight: 600;
+//   margin-bottom: 25px;
+// }
+
+// .gov-next-btn {
+//   border-radius: 12px !important;
+//   padding: 10px 30px !important;
+// }
+
+// .p-inputtext,
+// .p-dropdown,
+// .p-calendar input {
+//   height: 42px !important;
+//   border-radius: 6px !important;
+// }
+// /* ===== Remove Card Feel ===== */
+// .gov-form-wrapper {
+//   padding: 40px 80px;
+//   background: transparent;
+// }
+
+// /* ===== Big Rounded Section Header ===== */
+// .gov-section-header {
+//   background: #c6dde6;
+//   padding: 20px 30px;
+//   border-radius: 40px;
+//   font-weight: 600;
+//   font-size: 17px;
+//   margin-bottom: 40px;
+// }
+
+// /* ===== Watermark Background ===== */
+// .gov-form-wrapper {
+//   position: relative;
+// }
+
+// .gov-form-wrapper::before {
+//   content: "";
+//   position: absolute;
+//   top: 120px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   width: 600px;
+//   height: 600px;
+//   background: url('/assets/logo-watermark.png') no-repeat center;
+//   background-size: contain;
+//   opacity: 0.05;
+//   z-index: 0;
+// }
+
+// .gov-form-wrapper form {
+//   position: relative;
+//   z-index: 1;
+// }
+
+// /* ===== Field Spacing ===== */
+// .field {
+//   margin-bottom: 30px;
+// }
+
+// /* ===== Larger Input Height ===== */
+// .p-inputtext,
+// .p-dropdown,
+// .p-calendar input {
+//   height: 46px !important;
+//   border-radius: 8px !important;
+// }
+
+// /* ===== Make Grid Spacious ===== */
+// .grid {
+//   row-gap: 20px;
+// }
+/* ===================== FULL LAYOUT ===================== */
+
+// .gov-form-wrapper {
+//   padding: 50px 100px;
+//   position: relative;
+// }
+
+// /* Watermark */
+// .gov-form-wrapper::before {
+//   content: "";
+//   position: absolute;
+//   top: 140px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   width: 700px;
+//   height: 700px;
+//   background: url('/assets/logo-watermark.png') no-repeat center;
+//   background-size: contain;
+//   opacity: 0.05;
+//   z-index: 0;
+// }
+
+// .gov-form-wrapper form {
+//   position: relative;
+//   z-index: 1;
+// }
+
+// /* Section header */
+// .gov-section-header {
+//   background: #c6dde6;
+//   padding: 20px 35px;
+//   border-radius: 40px;
+//   font-weight: 600;
+//   font-size: 17px;
+//   margin-bottom: 45px;
+// }
+
+
+
+// /* Input uniform sizing */
+// .form-group .p-inputtext,
+// .form-group .p-dropdown,
+// .form-group .p-calendar input {
+//   height: 46px !important;
+//   border-radius: 6px !important;
+//   width: 100%;
+// }
+
+// /* Dropdown width fix */
+// .p-dropdown {
+//   width: 100%;
+// }
+
+// /* Calendar width fix */
+// .p-calendar {
+//   width: 100%;
+// }
+
+// /* Phone display */
+// .phone-display {
+//   margin-bottom: 40px;
+//   font-weight: 600;
+// }
+
+// /* Profile image */
+// .profile-img {
+//   height: 120px;
+//   width: 120px;
+//   border-radius: 50%;
+//   border: 3px solid #1c8db6;
+// }
+
+// /* Next button */
+// .gov-next-btn {
+//   border-radius: 10px !important;
+//   padding: 10px 30px !important;
+// }
+
+// /* Responsive */
+// @media (max-width: 1200px) {
+//   .form-grid {
+//     grid-template-columns: repeat(2, 1fr);
+//   }
+// }
+
+// @media (max-width: 768px) {
+//   .form-grid {
+//     grid-template-columns: 1fr;
+//   }
+// }
+// /* ================= PRIME INPUT RESET ================= */
+
+// /* Normal Input */
+// ::ng-deep .p-inputtext {
+//   background: #f2f2f2 !important;
+//   border: 1px solid #dcdcdc !important;
+//   border-radius: 8px !important;
+//   height: 50px !important;
+//   padding: 0 14px !important;
+//   font-size: 14px !important;
+//   box-shadow: none !important;
+// }
+
+// /* Dropdown */
+// ::ng-deep .p-dropdown {
+//   background: #f2f2f2 !important;
+//   border: 1px solid #dcdcdc !important;
+//   border-radius: 8px !important;
+//   height: 50px !important;
+//   align-items: center;
+// }
+
+// /* Dropdown label alignment */
+// ::ng-deep .p-dropdown-label {
+//   padding-left: 14px !important;
+//   font-size: 14px !important;
+// }
+
+// /* Calendar */
+// ::ng-deep .p-calendar .p-inputtext {
+//   height: 50px !important;
+// }
+
+// /* Remove blue focus glow */
+// ::ng-deep .p-inputtext:focus,
+// ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
+//   border: 1px solid #1c8db6 !important;
+//   box-shadow: none !important;
+// }
+
+// /* Remove pill dropdown look */
+// ::ng-deep .p-dropdown.p-component {
+//   border-radius: 8px !important;
+// }
+
+// /* Fix dropdown icon spacing */
+// ::ng-deep .p-dropdown-trigger {
+//   width: 3rem !important;
+// }
+
+// /* Remove internal spacing issues */
+// ::ng-deep .p-inputwrapper {
+//   width: 100%;
+// }
+// /* ========== 3 COLUMN GOVERNMENT STYLE ========== */
+
+// .form-grid {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   column-gap: 80px;
+//   row-gap: 30px;
+// }
+
+// /* Each row */
+// .form-row {
+//   display: flex;
+//   align-items: center;
+// }
+
+// /* Label fixed width */
+// .form-label {
+//   width: 180px;
+//   font-size: 14px;
+//   font-weight: 500;
+// }
+
+// /* Input takes remaining space */
+// .form-input {
+//   flex: 1;
+// }
+
+// /* Input styling */
+// .form-input .p-inputtext,
+// .form-input .p-dropdown,
+// .form-input .p-calendar input {
+//   width: 100%;
+//   height: 50px !important;
+//   background: #f2f2f2 !important;
+//   border: 1px solid #dcdcdc !important;
+//   border-radius: 8px !important;
+// }
+/* ================= CLEAN FINAL VERSION ================= */
+
+// .gov-form-wrapper {
+//   max-width: 1400px;
+//   margin: auto;
+
+//   position: relative;
+//   box-sizing: border-box;
+// }
+
+// /* Watermark */
+// .gov-form-wrapper::before {
+//   content: "";
+//   position: absolute;
+//   top: 140px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   width: 600px;
+//   height: 600px;
+//   background: url('/assets/logo-watermark.png') no-repeat center;
+//   background-size: contain;
+//   opacity: 0.05;
+//   z-index: 0;
+// }
+
+// .gov-form-wrapper form {
+//   position: relative;
+//   z-index: 1;
+// }
+
+// /* Section Header */
+// .gov-section-header {
+//   background: #c6dde6;
+//   padding: 20px 35px;
+//   border-radius: 40px;
+//   font-weight: 600;
+//   font-size: 17px;
+//   margin-bottom: 40px;
+// }
+
+// /* 3 Column Grid */
+// .form-grid {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   column-gap: 40px;
+//   row-gap: 30px;
+// }
+
+// /* Horizontal field layout */
+// .form-row {
+//   display: flex;
+//   align-items: center;
+//   width: 100%;
+// }
+
+// /* Label */
+// .form-label {
+//   width: 170px;
+//   min-width: 170px;
+//   font-size: 14px;
+//   font-weight: 500;
+// }
+
+// /* Input area */
+// .form-input {
+//   flex: 1;
+// }
+
+// /* Uniform input styling */
+// .form-input .p-inputtext,
+// .form-input .p-dropdown,
+// .form-input .p-calendar input {
+//   width: 100% !important;
+//   height: 50px !important;
+//   background: #f2f2f2 !important;
+//   border: 1px solid #dcdcdc !important;
+//   border-radius: 8px !important;
+//   box-sizing: border-box;
+// }
+
+// /* Prime dropdown width fix */
+// ::ng-deep .p-dropdown {
+//   width: 100% !important;
+// }
+
+// ::ng-deep .p-calendar {
+//   width: 100% !important;
+// }
+
+// /* Remove focus glow */
+// ::ng-deep .p-inputtext:focus,
+// ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
+//   border: 1px solid #1c8db6 !important;
+//   box-shadow: none !important;
+// }
+
+// /* Prevent overflow */
+// body {
+//   overflow-x: hidden;
+// }
+
+// /* Responsive */
+// @media (max-width: 1200px) {
+//   .form-grid {
+//     grid-template-columns: repeat(2, 1fr);
+//   }
+// }
+
+// @media (max-width: 768px) {
+//   .form-grid {
+//     grid-template-columns: 1fr;
+//   }
+// }
+/* ================= WRAPPER ================= */
+
+// .gov-form-wrapper {
+//   max-width: 1300px;
+//   margin: 0 auto;
+//   // padding: 30px 20px;
+//   box-sizing: border-box;
+//   position: relative;
+//   margin-right: 30px;
+// }
+
+// /* Watermark */
+// .gov-form-wrapper::before {
+//   content: "";
+//   position: absolute;
+//   top: 120px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   width: 550px;
+//   height: 550px;
+//   background: url('/assets/logo-watermark.png') no-repeat center;
+//   background-size: contain;
+//   opacity: 0.05;
+//   z-index: 0;
+// }
+
+// .gov-form-wrapper form {
+//   position: relative;
+//   z-index: 1;
+// }
+
+// /* ================= HEADER ================= */
+
+// .gov-section-header {
+//   background: #c6dde6;
+//   padding: 18px 30px;
+//   border-radius: 40px;
+//   font-weight: 600;
+//   font-size: 16px;
+//   margin-bottom: 35px;
+// }
+
+// /* ================= GRID ================= */
+
+// .form-grid {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   column-gap: 20px;
+//   row-gap: 15px;
+// }
+
+// /* ================= ROW ================= */
+
+// .form-row {
+//   display: flex;
+//   align-items: center;
+//   // gap: 12px;
+// }
+
+// /* Label smaller width */
+// .form-label {
+//   width: 150px;
+//   min-width: 150px;
+//   font-size: 14px;
+//   font-weight: 500;
+// }
+
+// /* Input grows properly */
+// .form-row input,
+// .form-row .p-dropdown,
+// .form-row .p-calendar {
+//   flex: 1;
+// }
+
+// /* ================= UNIFORM PRIME FIX ================= */
+
+// ::ng-deep .p-inputtext,
+// ::ng-deep .p-dropdown,
+// ::ng-deep .p-calendar input {
+//   width: 100% !important;
+//   height: 46px !important;
+//   background: #f2f2f2 !important;
+//   border: 1px solid #d6d6d6 !important;
+//   border-radius: 6px !important;
+//   font-size: 14px !important;
+//   box-shadow: none !important;
+// }
+
+// /* Remove double border look */
+// ::ng-deep .p-dropdown {
+//   display: flex !important;
+//   align-items: center !important;
+//   border-radius: 6px !important;
+// }
+
+// ::ng-deep .p-dropdown-label {
+//   padding-left: 12px !important;
+//   line-height: 46px !important;
+// }
+
+// ::ng-deep .p-dropdown-trigger {
+//   width: 2.8rem !important;
+//   height: 46px !important;
+// }
+
+// /* Fix calendar icon box */
+// ::ng-deep .p-calendar {
+//   width: 100% !important;
+// }
+
+// ::ng-deep .p-calendar .p-inputtext {
+//   height: 46px !important;
+// }
+
+// ::ng-deep .p-calendar .p-datepicker-trigger {
+//   height: 46px !important;
+//   border-top-right-radius: 6px !important;
+//   border-bottom-right-radius: 6px !important;
+// }
+
+// /* Remove blue glow */
+// ::ng-deep .p-inputtext:focus,
+// ::ng-deep .p-dropdown.p-focus {
+//   border: 1px solid #1c8db6 !important;
+//   box-shadow: none !important;
+// }
+
+// /* Phone display */
+// .phone-display {
+//   margin-bottom: 25px;
+//   font-weight: 600;
+// }
+
+// /* Profile image */
+// .profile-img {
+//   height: 110px;
+//   width: 110px;
+//   border-radius: 50%;
+//   border: 3px solid #1c8db6;
+// }
+
+// /* Button */
+// .gov-next-btn {
+//   border-radius: 8px !important;
+//   padding: 8px 28px !important;
+// }
+
+// /* ================= RESPONSIVE ================= */
+
+// @media (max-width: 1200px) {
+//   .form-grid {
+//     grid-template-columns: repeat(2, 1fr);
+//   }
+// }
+
+// @media (max-width: 768px) {
+//   .form-grid {
+//     grid-template-columns: 1fr;
+//   }
+// }
+// /* ================= FIX DROPDOWN WIDTH + TRUNCATE ================= */
+// /* ===== FORCE DROPDOWN FIXED WIDTH ===== */
+
+// ::ng-deep .p-dropdown {
+//   width: 100% !important;
+
+//   box-sizing: border-box !important;
+// }
+
+// /* Prevent content stretching */
+// // ::ng-deep .p-dropdown-label {
+// //   flex: 1 1 auto !important;
+// //   overflow: hidden !important;
+// //   white-space: nowrap !important;
+// //   text-overflow: ellipsis !important;
+// // }
+// ::ng-deep .p-dropdown-label {
+//   overflow: hidden !important;
+//   white-space: nowrap !important;
+//   text-overflow: ellipsis !important;
+// }
+
+// /* Keep trigger fixed */
+// ::ng-deep .p-dropdown-trigger {
+//   flex: 0 0 2.8rem !important;
+// }
+
+// /* 🔥 VERY IMPORTANT FIX FOR FLEX OVERFLOW */
+
+// .form-row {
+//   display: flex;
+//   align-items: center;
+//   min-width: 0;   /* allow shrinking */
+// }
+
+// .form-row .p-dropdown,
+// .form-row .p-calendar,
+// .form-row input {
+//   flex: 1 1 auto;
+//   min-width: 0;   /* THIS FIXES THE EXPANSION */
+// }
+// .gov-form-wrapper {
+//   max-width: 1300px;
+//   margin: auto;
+//   position: relative;
+//   padding: 30px 40px;
+// }
+
+// /* Watermark */
+// .gov-form-wrapper::before {
+//   content: "";
+//   position: absolute;
+//   top: 120px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   width: 550px;
+//   height: 550px;
+//   background: url('/assets/logo-watermark.png') no-repeat center;
+//   background-size: contain;
+//   opacity: 0.05;
+//   z-index: 0;
+// }
+
+// .gov-form-wrapper > * {
+//   position: relative;
+//   z-index: 1;
+// }
+
+// /* ================= TOP ROW ================= */
+
+// .top-row {
+//   display: grid;
+//   grid-template-columns: 1fr 320px 120px;
+//   align-items: center;
+//   margin-bottom: 35px;
+// }
+
+// .phone-block {
+//   font-weight: 600;
+//   font-size: 15px;
+// }
+
+// .phone-value {
+//   color: #1c8db6;
+//   margin-left: 6px;
+// }
+
+// .verified-icon {
+//   color: #28a745;
+//   margin-left: 8px;
+// }
+
+// .aadhaar-block {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 6px;
+// }
+
+// .profile-avatar img {
+//   width: 80px;
+//   height: 80px;
+//   border-radius: 50%;
+// }
+
+// /* ================= FIGMA GRID ================= */
+
+// .figma-grid {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   column-gap: 60px;
+//   row-gap: 20px;
+// }
+
+// /* Each field */
+// .field {
+//   display: grid;
+//   grid-template-columns: 220px 20px 280px;
+//   align-items: center;
+// }
+
+// .label {
+//   font-size: 14px;
+//   font-weight: 500;
+// }
+
+// .colon {
+//   text-align: center;
+// }
+
+// /* ================= UNIFORM CONTROL STYLE ================= */
+
+// ::ng-deep .p-inputtext,
+// ::ng-deep .p-dropdown,
+// ::ng-deep .p-calendar input {
+//   width: 280px !important;
+//   height: 44px !important;
+//   background: #f3f3f3 !important;
+//   border: 1px solid #d5d5d5 !important;
+//   border-radius: 6px !important;
+//   font-size: 14px !important;
+//   box-shadow: none !important;
+// }
+
+// /* Dropdown fix */
+// ::ng-deep .p-dropdown {
+//   display: flex !important;
+//   align-items: center !important;
+// }
+
+// ::ng-deep .p-dropdown-label {
+//   overflow: hidden !important;
+//   white-space: nowrap !important;
+//   text-overflow: ellipsis !important;
+//   line-height: 44px !important;
+// }
+
+// ::ng-deep .p-dropdown-trigger {
+//   flex: 0 0 2.5rem !important;
+// }
+
+// /* Calendar icon fix */
+// ::ng-deep .p-calendar .p-datepicker-trigger {
+//   height: 44px !important;
+// }
+
+// /* Focus */
+// ::ng-deep .p-inputtext:focus,
+// ::ng-deep .p-dropdown.p-focus {
+//   border: 1px solid #1c8db6 !important;
+//   box-shadow: none !important;
+// }
+// .three-column-layout {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   column-gap: 60px;
+// }
+
+// .column {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 18px;
+// }
+
+// .field {
+//   display: grid;
+//   grid-template-columns: 200px 20px 260px;
+//   align-items: center;
+// }
+
+// .label {
+//   font-size: 14px;
+//   font-weight: 500;
+// }
+
+// .colon {
+//   text-align: center;
+// }
+
+// /* Force equal input width */
+// ::ng-deep .p-inputtext,
+// ::ng-deep .p-dropdown,
+// ::ng-deep .p-calendar input {
+//   width: 260px !important;
+//   height: 44px !important;
+//   background: #f3f3f3 !important;
+//   border-radius: 6px !important;
+// }
+
+// /* Prevent dropdown stretch */
+// ::ng-deep .p-dropdown-label {
+//   overflow: hidden !important;
+//   white-space: nowrap !important;
+//   text-overflow: ellipsis !important;
+// }
+// /* ===== TOP THREE SECTION ===== */
+
+// .top-three-section {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr;
+//   align-items: start;
+//   margin-bottom: 40px;
+// }
+
+// .top-left {
+//   font-weight: 600;
+//   font-size: 15px;
+//   padding-top: 8px;
+// }
+
+// .phone-value {
+//   color: #1c8db6;
+//   margin-left: 6px;
+// }
+
+// .verified-icon {
+//   color: #28a745;
+//   margin-left: 8px;
+// }
+
+// .top-middle {
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .top-field {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 6px;
+// }
+
+// .top-field input {
+//   width: 260px !important;
+//   height: 44px !important;
+// }
+
+// /* PROFILE RIGHT SIDE */
+// .top-right {
+//   display: flex;
+//   justify-content: flex-end;
+// }
+
+// .profile-wrapper {
+//   text-align: center;
+// }
+
+// .profile-img {
+//   width: 90px;
+//   height: 90px;
+//   border-radius: 50%;
+//   border: 3px solid #1c8db6;
+// }
+
+// .profile-action {
+//   margin-top: 12px;
+// }
+/* ================= WRAPPER ================= */
+/* ================= WRAPPER ================= */
+
+
+// .gov-form-wrapper {
+//   width: 100%;
+//   // padding: 50px 40px;
+//   position: relative;
+
+
+
+// }
+
+// .gov-form-wrapper {
+//   position: relative;
+//   width: 100%;
+//   padding: 140px 60px 40px 60px; /* IMPORTANT: top padding increased */
+// }
+
+// .gov-form-wrapper::before {
+//   content: "";
+//   position: absolute;
+//   top: 120px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   width: 550px;
+//   height: 550px;
+//   background: url('/assets/logo-watermark.png') no-repeat center;
+//   background-size: contain;
+//   opacity: 0.05;
+//   z-index: 0;
+// }
+
+// .gov-form-wrapper > * {
+//   position: relative;
+//   z-index: 1;
+// }
+
+
+// /* ================= TOP SECTION ================= */
+
+
+// .top-three-section {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr auto;
+//   gap: 40px;
+//   margin-bottom: 60px;
+// }
+
+// .top-left {
+//   font-weight: 600;
+//   font-size: 15px;
+//   padding-top: 8px;
+// }
+
+// .phone-value {
+//   color: #1c8db6;
+//   margin-left: 6px;
+// }
+
+// .verified-icon {
+//   color: #28a745;
+//   margin-left: 8px;
+// }
+
+// /* Aadhaar row alignment */
+// .top-middle .field {
+//   display: grid;
+//   grid-template-columns: 190px 15px 200px;
+//   align-items: center;
+// }
+// .three-column-layout {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   gap: 70px;
+// }
+
+// .column {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 25px;
+// }
+
+// .profile-wrapper {
+//   width: 120px;
+//   margin-bottom: 20px;
+//   text-align: center;
+// }
+
+// .profile-img {
+//   width: 95px;
+//   height: 95px;
+//   border-radius: 50%;
+//   border: 3px solid #1c8db6;
+//   object-fit: cover;
+// }
+
+// .field {
+//   display: grid;
+//   grid-template-columns: 170px 15px 1fr;
+//   align-items: center;
+// }
+
+
+// /* ================= PROFILE ================= */
+
+// .top-right {
+//   display: flex;
+//   justify-content: flex-end;
+// }
+
+// .profile-wrapper {
+//   position: relative;
+//   width: 95px;
+//   text-align: center;
+// }
+
+// .hidden-upload {
+//   position: absolute;
+//   width: 95px;
+//   height: 95px;
+//   opacity: 0;
+//   cursor: pointer;
+// }
+
+// .profile-img {
+//   width: 95px;
+//   height: 95px;
+//   border-radius: 50%;
+//   border: 3px solid #1c8db6;
+//   object-fit: cover;
+// }
+
+// .remove-text {
+//   margin-top: 8px;
+//   font-size: 13px;
+//   color: #1c8db6;
+//   cursor: pointer;
+// }
+
+
+// /* ================= FORM SECTION ================= */
+
+// .three-column-layout {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   column-gap: 100px;
+// }
+
+// .three-column-layout {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   gap: 60px;
+//   max-width: 1200px;
+//   margin: 0 auto;
+// }
+
+
+// .column {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 26px;
+// }
+
+
+// /* FIELD STRUCTURE */
+
+// // .field {
+// //   display: grid;
+// //   grid-template-columns: 190px 15px 200px;
+// //   align-items: center;
+// // }
+// .field {
+//   display: grid;
+//   grid-template-columns: 160px 10px minmax(0, 1fr);
+//   align-items: center;
+// }
+
+
+
+
+
+
+// /* ================= PRIME CONTROL STYLE ================= */
+
+// ::ng-deep .p-inputtext,
+// ::ng-deep .p-dropdown,
+// ::ng-deep .p-calendar input {
+//   width: 100% !important;
+//   height: 42px !important;
+//   background: #f3f3f3 !important;
+//   border: 1px solid #ddd !important;
+//   border-radius: 6px !important;
+//   font-size: 14px !important;
+//   box-shadow: none !important;
+// }
+// ::ng-deep .p-inputtext,
+// ::ng-deep .p-dropdown,
+// ::ng-deep .p-calendar input {
+//   width: 100% !important;
+// }
+
+// ::ng-deep .p-dropdown-label {
+//   overflow: hidden !important;
+//   white-space: nowrap !important;
+//   text-overflow: ellipsis !important;
+// }
+
+
+// /* ================= RESPONSIVE ================= */
+
+// @media (max-width: 1024px) {
+
+//   .top-three-section,
+//   .three-column-layout {
+//     grid-template-columns: 1fr;
+//     row-gap: 30px;
+//   }
+
+//   .field {
+//     grid-template-columns: 160px 15px 1fr;
+//   }
+
+//   ::ng-deep .p-inputtext,
+//   ::ng-deep .p-dropdown,
+//   ::ng-deep .p-calendar input {
+//     width: 100% !important;
+//   }
+
+//   .top-right {
+//     justify-content: flex-start;
+//   }
+// }
+// .phone-value {
+//   color: #1c8db6;
+//   margin-left: 6px;
+// }
+
+// .gov-form-wrapper {
+//   position: relative;
+//   padding: 60px 60px 40px 60px;
+// }
+
+// /* ================= DESKTOP ================= */
+
+// .profile-top-right {
+//   position: absolute;
+//   top: 40px;
+//   right: 60px;
+// }
+
+// .profile-wrapper {
+//   width: 95px;
+//   text-align: center;
+// }
+
+// .profile-img {
+//   width: 95px;
+//   height: 95px;
+//   border-radius: 50%;
+//   border: 3px solid #1c8db6;
+//   object-fit: cover;
+// }
+
+// .remove-text {
+//   margin-top: 8px;
+//   font-size: 13px;
+//   color: #1c8db6;
+//   cursor: pointer;
+// }
+
+
+// /* ================= TABLET ================= */
+
+// @media (max-width: 1200px) {
+
+//   .profile-top-right {
+//     right: 30px;
+//   }
+
+//   .gov-form-wrapper {
+//     padding: 50px 40px;
+//   }
+// }
+
+
+// /* ================= MOBILE ================= */
+
+// @media (max-width: 992px) {
+
+//   .profile-top-right {
+//     position: static;      /* remove absolute */
+//     text-align: center;
+//     margin-bottom: 30px;
+//   }
+
+//   .gov-form-wrapper {
+//     padding: 40px 20px;
+//   }
+
+//   .profile-wrapper {
+//     margin: 0 auto;
+//   }
+
+// }
+// .gov-form-wrapper {
+//   padding: 60px 60px 40px 60px;
+// }
+
+// /* ================= GRID ================= */
+
+// .form-grid {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   gap: 35px 80px;
+// }
+
+// /* ================= FIELD ================= */
+
+// .field {
+//   display: grid;
+//   grid-template-columns: 170px 15px 1fr;
+//   align-items: center;
+// }
+
+// .label {
+//   font-size: 14px;
+//   font-weight: 500;
+// }
+
+// .colon {
+//   text-align: center;
+// }
+
+// .phone-value {
+//   color: #1c8db6;
+//   margin-left: 6px;
+// }
+
+// .verified-icon {
+//   color: #28a745;
+//   margin-left: 6px;
+// }
+
+// /* ================= PROFILE ================= */
+
+// .profile-cell {
+//   display: flex;
+//   justify-content: center;
+//   align-items: flex-start;
+// }
+
+// .profile-wrapper {
+//   text-align: center;
+//   margin-top: -30px; /* prevents row stretching */
+// }
+
+// .profile-img {
+//   width: 95px;
+//   height: 95px;
+//   border-radius: 50%;
+//   border: 3px solid #1c8db6;
+//   object-fit: cover;
+// }
+
+// .upload-btn {
+//   margin-top: 10px;
+// }
+
+// .remove-text {
+//   margin-top: 8px;
+//   font-size: 13px;
+//   color: #1c8db6;
+//   cursor: pointer;
+// }
+
+// /* ================= PRIME CONTROLS ================= */
+
+// ::ng-deep .p-inputtext,
+// ::ng-deep .p-dropdown,
+// ::ng-deep .p-calendar input {
+//   width: 100% !important;
+//   height: 42px !important;
+//   background: #f3f3f3 !important;
+//   border-radius: 6px !important;
+//   font-size: 14px !important;
+// }
+
+// /* ================= LARGE TABLET ================= */
+
+// @media (max-width: 1200px) {
+//   .form-grid {
+//     grid-template-columns: repeat(2, 1fr);
+//   }
+// }
+
+// /* ================= TABLET ================= */
+
+// @media (max-width: 992px) {
+
+//   .gov-form-wrapper {
+//     padding: 40px 30px;
+//   }
+
+//   .form-grid {
+//     grid-template-columns: 1fr;
+//   }
+
+//   .profile-wrapper {
+//     margin-top: 0;
+//   }
+
+//   .profile-cell {
+//     justify-content: center;
+//   }
+// }
+
+// /* ================= MOBILE ================= */
+
+// @media (max-width: 576px) {
+
+//   .gov-form-wrapper {
+//     padding: 30px 15px;
+//   }
+
+//   .field {
+//     grid-template-columns: 130px 10px 1fr;
+//   }
+
+//   .profile-img {
+//     width: 80px;
+//     height: 80px;
+//   }
+// }
+/* ================= WRAPPER ================= */
+
+.gov-form-wrapper {
+width: 100%;     /* prevents infinite stretching */
+          /* center container */
+  // padding: 60px 40px 40px 40px;
+  padding: 20px 10px;
+}
+
+
+/* ================= GRID ================= */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* prevent overflow */
+  column-gap: 50px;   /* reduced from 80px */
+  row-gap: 10px;      /* slightly tighter rows */
+}
+
+
+/* ================= FIELD ================= */
+
+.field {
+  display: grid;
+  grid-template-columns: 160px 12px minmax(0, 1fr); /* prevents right overflow */
+  align-items: center;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.colon {
+  text-align: center;
+}
+
+.phone-value {
+  color: #1c8db6;
+  margin-left: 6px;
+}
+
+.verified-icon {
+  color: #28a745;
+  margin-left: 6px;
+}
+
+
+/* ================= PROFILE ================= */
+
+.profile-cell {
+  display: flex;
+  justify-content: flex-end;   /* align right properly */
+  align-items: flex-start;
+}
+
+.profile-wrapper {
+  text-align: center;
+  margin-top: -25px;  /* prevents row stretching but less aggressive */
+}
+
+.profile-img {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  border: 3px solid #1c8db6;
+  object-fit: cover;
+}
+
+.upload-btn {
+  margin-top: 10px;
+}
+
+.remove-text {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #1c8db6;
+  cursor: pointer;
+}
+
+
+/* ================= PRIME CONTROLS ================= */
+
+::ng-deep .p-inputtext,
+::ng-deep .p-dropdown,
+::ng-deep .p-calendar input {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  height: 42px !important;
+  background: #f3f3f3 !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+}
+
+
+/* ================= LARGE TABLET ================= */
+
+@media (max-width: 1200px) {
+
+  .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-cell {
+    justify-content: flex-start;
+  }
+
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 992px) {
+
+  .gov-form-wrapper {
+    padding: 40px 25px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-wrapper {
+    margin-top: 0;
+  }
+
+  .profile-cell {
+    justify-content: center;
+  }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 576px) {
+
+  .gov-form-wrapper {
+    padding: 30px 15px;
+  }
+
+  .field {
+    grid-template-columns: 130px 8px minmax(0, 1fr);
+  }
+
+  .profile-img {
+    width: 80px;
+    height: 80px;
+  }
+
+}
+/* Force dropdown fixed width */
+::ng-deep .p-dropdown {
+  width: 100% !important;
+  height: 44px !important;
+  max-width: 100% !important;
+}
+
+/* Prevent full text overflow */
+::ng-deep .p-dropdown .p-dropdown-label {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.error-msg {
+  color: #e24c4c;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.invalid-input .p-inputtext,
+.invalid-input .p-dropdown,
+.invalid-input .p-calendar {
+  border: 1px solid #e24c4c !important;
+}
+.profile-error {
+  margin-top: 8px;
+  color: #e53935;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+.profile-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-error {
+  margin-top: 8px;
+  color: #e53935;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.invalid-profile {
+
+}
+.required-star {
+  color: red;
+
+  font-weight: bold;
+}
+.aadhaar-text {
+  // font-weight: 180;
+  color: #5e5d5d;
+  font-size: 15px;
+  // letter-spacing: 0.5px;
+  display: inline-block;
+  margin-left: 6px;
+}
+.readonly-input {
+  background-color: #f5f5f5;
+  color: #666;
+  cursor: not-allowed;
+}

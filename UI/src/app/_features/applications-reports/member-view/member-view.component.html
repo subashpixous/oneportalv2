@@ -1,0 +1,307 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col mb-2">
+            <button pButton pRipple printTitle="Member Details" [closeWindow]="false" [openNewTab]="true"
+                styleSheetFile="assets/printcss/printstylesteet.css" [style]="{'float': 'right', 'margin-left':'10px'}"
+                [useExistingCss]="true" type="button" label="Print" ngxPrint printSectionId="memberPrintSection"
+                class="p-button-primary"></button>
+            <button pButton pRipple label="Back to Home Page" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+    <app-current-user-time *ngIf="memberDetails"
+        [memberID]="memberDetails.memberDetail.memberId !='' ? memberDetails.memberDetail.memberId :memberDetails.memberDetail.firstName+' ' +memberDetails.memberDetail.lastName "></app-current-user-time>
+    <div class="mb-3">
+        <div class="" id="demo" *ngIf="memberDetails">
+
+            <div style="margin: 20px;">
+                <app-organization-detail-view
+                    [orgDetail]="memberDetails?.organizationalDetail"></app-organization-detail-view>
+            </div>
+            <div style="margin: 20px;">
+                <app-mem-personal-detail-view
+                    [personalDetail]="memberDetails?.memberDetail"></app-mem-personal-detail-view>
+            </div>
+            <div style="margin: 20px;">
+                <app-mem-permanent-address-view
+                    [addressDetail]="memberDetails?.permanentAddress"></app-mem-permanent-address-view>
+            </div>
+            <div style="margin: 20px;">
+                <app-mem-temp-address-view
+                    [addressDetail]="memberDetails?.temproraryAddress"></app-mem-temp-address-view>
+            </div>
+            <div style="margin: 20px;">
+                <app-mem-family-detail-view
+                    [familyMemberList]="memberDetails?.familyMembers"></app-mem-family-detail-view>
+            </div>
+            <div style="margin: 20px;">
+                <app-mem-bank-detail-view [personalDetail]="memberDetails?.bankDetails"></app-mem-bank-detail-view>
+            </div>
+            <div class="card p-fluid" style="margin: 20px;padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+                <div class="p-formgrid grid ">
+                    <div class="col-12">
+                        <h5 class="divhighligher"> ஆவணங்கள் / Documents</h5>
+                        <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;overflow-x: auto;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th> வ.எண் / S.No</th>
+                                        <th style="min-width: 200px">
+                                            ஆவண வகை / Document Category
+                                        </th>
+                                        <!-- <th style="min-width: 100px">
+                                            ஆவண வகை / Document Type
+                                        </th> -->
+                                        <th> கோப்பு பதிவேற்றம் / Uploaded File Name
+                                        </th>
+                                        <th> செயல் / Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let itemrow of memberDetails.memberDocuments; let i=index;let l=last">
+                                        <td>{{i+1}} </td>
+                                        <td>{{itemrow.documentCategory}} </td>
+                                        <!-- <td>{{itemrow.acceptedDocumentType}} </td> -->
+                                        <td>{{itemrow.originalFileName}} </td>
+                                        <td> <button type="button" style="background-color: aliceblue;"
+                                                *ngIf="itemrow.originalFileName" pButton pRipple icon="pi pi-download"
+                                                (click)="downloadFile(itemrow.id,itemrow.originalFileName)"
+                                                class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                title="Delete"></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <h5 class="divhighligher"> கூடுதல் ஆவணங்கள் / Additional Documents</h5>
+                        <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;overflow-x: auto;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th> வ.எண் / S.No</th>
+                                        <th style="min-width: 200px">
+                                            ஆவண வகை / Document Category
+                                        </th>
+                                        <!-- <th style="min-width: 100px">
+                                            ஆவண வகை / Document Type
+                                        </th> -->
+                                        <th> கோப்பு பதிவேற்றம் / Uploaded File Name
+                                        </th>
+                                        <th> செயல் / Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let itemrow of memberDetails.memberNonMandatoryDocuments; let i=index;let l=last">
+                                        <td>{{i+1}} </td>
+                                        <td>{{itemrow.documentCategory}} </td>
+                                        <!-- <td>{{itemrow.acceptedDocumentType}} </td> -->
+                                        <td>{{itemrow.originalFileName}} </td>
+                                        <td> <button type="button" style="background-color: aliceblue;"
+                                                *ngIf="itemrow.originalFileName" pButton pRipple icon="pi pi-download"
+                                                (click)="downloadFile(itemrow.id,itemrow.originalFileName)"
+                                                class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                title="Delete"></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin: 20px;" *ngIf="memberDetails && memberDetails.memberDetail">
+                <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+                    <div class="p-formgrid grid ">
+                        <div class="col-12">
+                            <h5 class="divhighligher">Collected By Information / பதிவு செய்த பயனர்
+                            </h5>
+                            <div class="col-12 row ">
+                                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                                    <span>Name :
+                                    </span>{{this.memberDetails.memberDetail.collectedByName}}
+                                </div>
+                                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                                    <span>Phone Number :
+                                    </span>{{memberDetails.memberDetail?.collectedByPhoneNumber}}
+                                </div>
+                                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                                    <span>Date & Time :
+                                    </span>{{memberDetails.memberDetail?.collectedOn}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;" *ngIf="memberCardData && status === 'Completed' " >
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher">உறுப்பினர் அடையாள அட்டை / Member Identity Card</h5>
+                <!-- ID Card Design -->
+                <div id="id-card-container" class="id-card-wrapper">
+                    <!-- Front Side of the ID Card -->
+                    <div class="id-card text-white">
+
+                        <!-- Member details section -->
+                        <div class="row mt-4 front-side-content">
+                            <div class="col-md-3 text-center">
+                                <div class="photo-container">
+                                    <img [src]="url || 'assets/id-card/img_avatar.png'" alt="Person"
+                                        class="person-image">
+
+                                </div>
+                                 <div class="qr-section">
+                                    <img [src]="'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(trimmedApiUrl + '/#/member-qr-view/' + (this.memberId)) +'&size=80x80'"
+                                        alt="QR Code" class="qr-code">
+                                </div>
+                            </div>
+                            <div class="col-md-9 front-page-section">
+                                <div class="member-details">
+                                    <div class="detail-row">
+                                        <span class="label">பெயர் / NAME</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.nameEnglish">{{
+                                                    memberCardData.nameEnglish }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.nameEnglish && memberCardData.nameTamil"><br></ng-container>
+                                                <ng-container *ngIf="memberCardData.nameTamil">{{
+                                                    memberCardData.nameTamil }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">தந்தை / கணவர்<br>FATHER / HUSBAND</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.fatherNameEnglish">{{
+                                                    memberCardData.fatherNameEnglish }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.fatherNameEnglish && memberCardData.fatherNameTamil"><br></ng-container>
+                                                <ng-container *ngIf="memberCardData.fatherNameTamil">{{
+                                                    memberCardData.fatherNameTamil }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">உறுப்பினர் எண்<br>MEMBER ID</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">{{memberCardData.memberId }}</span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">பிறந்த தேதி / DOB</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">{{memberCardData.dateOfBirth | date:
+                                                'dd-MM-yyyy'}}</span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">மாவட்டம் / DISTRICT</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.districtTamil">{{
+                                                    memberCardData.districtTamil }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.districtTamil && memberCardData.districtEnglish">
+                                                    / </ng-container>
+                                                <ng-container *ngIf="memberCardData.districtEnglish">{{
+                                                    memberCardData.districtEnglish }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Back Side of the ID Card -->
+                    <div class="id-card-back">
+                        <!-- Member details section -->
+                        <div class="row mt-4 back-side-content">
+                            <div class="col-md-12">
+                                <div class="back-details">
+                                    <div class="detail-row">
+                                        <span class="label">குடும்பத்தினர்/FAMILY MEMBERS</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container
+                                                    *ngIf="getCommaSeparatedNamesFromFamily(memberCardData.familyMember, 'Tamil') as tamilNames">
+                                                    {{ tamilNames }}
+                                                    <ng-container
+                                                        *ngIf="getCommaSeparatedNamesFromFamily(memberCardData.familyMember, 'English')">
+                                                        <br>
+                                                    </ng-container>
+                                                </ng-container>
+                                                {{ getCommaSeparatedNamesFromFamily(memberCardData.familyMember,
+                                                'English') }}
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">முகவரி/ADDRESS</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                {{ getFormattedAddress(memberCardData) }}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            <div style="margin: 20px;" *ngIf="memberDetails && memberDetails.memberDetail">
+                <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+                    <div class="p-formgrid grid ">
+                        <div class="col-12">
+
+                            <h5 class="divhighligher"> Member
+                                History</h5>
+                            <div class="row " style="text-align: center; margin-top:10px ;background-color: white;">
+                                <div class="col-12 flex justify-content-center "
+                                    style="padding-top: 10px;padding-bottom: 0px;flex-wrap: wrap;">
+
+                                    <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField"
+                                        [style]="{'width': '100%'}" [defaultSortOrder]="defaultSortOrder" [cols]="cols"
+                                        [fileName]="'Configuration'" [rows]="10"
+                                        [total]="configurationList ? configurationList.length : 0"
+                                        [searchableColumns]="searchableColumns" [hasActiveInactive]="false"
+                                        [canShowAction]="false">
+                                    </app-datatable>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:none;">
+        <div class="mb-3" id="memberPrintSection">
+            <app-mem-detail-view-print [memberDetails]="memberDetails"></app-mem-detail-view-print>
+        </div>
+    </div>
+</div>

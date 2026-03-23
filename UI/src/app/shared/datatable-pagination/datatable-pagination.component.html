@@ -1,0 +1,395 @@
+<div class="wd">
+  <p-table
+    #dt
+    [columns]="cols"
+    [exportFilename]="fileName + '_Report'"
+    [value]="entirerecords"
+    [customSort]="true"
+    [paginator]="false"
+    [rows]="10"
+    [lazy]="true"
+    (onLazyLoad)="lazyload($event)"
+    [totalRecords]="total"
+    (selectionChange)="selectionChanged($event)"
+    [(selection)]="selectedProducts"
+    [loading]="false"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [globalFilterFields]="searchableColumns"
+    responsiveLayout="scroll"
+  >
+    <ng-template pTemplate="caption" style="display: flex">
+      <div class="col-6" style="padding: 0px">
+        <button
+          type="button"
+          pButton
+          pRipple
+          (click)="exportExcel()"
+          icon="pi pi-file-excel"
+          class="p-button-secondary mr-2"
+          pTooltip="CSV"
+          tooltipPosition="bottom"
+        ></button>
+        <button
+ *ngIf="!excelExport"
+  type="button"
+  pButton
+  pRipple
+  (click)="exportPdf()"
+  icon="pi pi-print"
+  class="p-button-info mr-2"
+  pTooltip="PDF"
+  tooltipPosition="bottom"
+></button>
+        </div>
+      <div class="col-2" style="padding: 0px">
+        <div
+          class="col"
+          *ngIf="hasActiveInactive; else elsep"
+          style="text-align: end; padding: 0px; margin-right: 10px"
+        >
+          <p-toggleButton
+            [(ngModel)]="defaultstatus"
+            [onLabel]="onLabel"
+            [offLabel]="offLabel"
+            [style]="{ width: '10em' }"
+            (onChange)="changeEvent($event)"
+          ></p-toggleButton>
+        </div>
+        <ng-template #elsep>
+          <div class="col" style="padding: 0px"></div>
+        </ng-template>
+      </div>
+      <div class="col-4" style="padding: 0px">
+        <input
+          class="p-inputtext p-component p-element w-full"
+          [(ngModel)]="searchString"
+          (change)="onGlobalFilter($event)"
+          placeholder="Search Keyword and Click Enter"
+        />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+         <th *ngIf="canShowAction">Action</th>
+        <th *ngIf="canShowCheckbox"  style="height: 40px; text-align:center;">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th
+          *ngFor="let col of columns"
+          [pSortableColumn]="col.sortablefield"
+          style="text-wrap: nowrap"
+        >
+          {{ col.header | titlecase }}
+          <p-sortIcon
+            *ngIf="col.sortablefield"
+            [field]="col.sortablefield"
+          ></p-sortIcon>
+        </th>
+
+      </tr>
+      <tr>
+        <th *ngIf="canShowAction"></th>
+        <th *ngIf="canShowCheckbox"></th>
+        <th *ngFor="let col of columns">
+       
+          
+          <div
+            *ngIf="
+              col.field === 'lastUpdatedDate' || col.field === 'createdDate';
+              else columsfwwiletr
+            "
+          ></div>
+          <ng-template #columsfwwiletr>
+            <div
+              *ngIf="
+                col.field === 'startDate' || col.field === 'endDate';
+                else columfiletr
+              "
+            >
+            </div>
+          </ng-template>
+          <ng-template #columfiletr>
+            <p-columnFilter
+              type="text"
+              *ngIf="col.isSearchable"
+              matchMode="in"
+              [showMenu]="false"
+              [field]="col.sortablefield"
+            ></p-columnFilter>
+          </ng-template>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+                 <!-- <td class="dttable" *ngIf="canShowAction" style="display: flex">
+          <ng-container *ngFor="let action of actions">
+            <div
+              *ngIf="action.isIcon; else buttn"
+              style="height: 40px; display: flex"
+            >
+              <button
+                type="button"
+                style="background-color: aliceblue"
+                *ngIf="
+                  (action.visibilityCheckFeild
+                    ? rowData[action.visibilityCheckFeild] == 1
+                    : true) && getPerm(action.privilege)
+                "
+                pButton
+                pRipple
+                [icon]="action.icon"
+                (click)="makeAction(action.type, rowData, $event)"
+                class="mr-2 p-element p-ripple p-button p-button-outlined p-button p-component p-button"
+                [title]="action.title"
+              ></button>
+            </div>
+            <ng-template #buttn style="height: 40px; display: flex">
+              <button
+                pButton
+                pRipple
+                type="button"
+                *ngIf="
+                  action.visibilityCheckFeild
+                    ? rowData[action.visibilityCheckFeild]
+                    : true
+                "
+                (click)="makeAction(action.type, rowData, $event)"
+                [label]="action.title"
+                class="mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+              ></button>
+            </ng-template>
+          </ng-container>
+        </td>  -->
+        
+<!-- <td class="action-cell" *ngIf="canShowAction">
+  <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
+    <ng-container *ngFor="let action of actions">
+      <button
+        *ngIf="(action.visibilityCheckFeild ? rowData[action.visibilityCheckFeild] : true)"
+        pButton
+        type="button"
+        [label]="!action.isIcon ? (action.title || '') : ''"
+        [title]="action.title || ''"
+          [ngClass]="{
+    'verify-btn': action.type === 'VERIFY',
+    'review-btn': action.type === 'REVIEW',
+    'view-btn': action.type === 'VIEW',
+    'update-btn': action.type === 'EDIT'
+  }"
+        (click)="makeAction(action.type, rowData, $event)">
+      </button>
+    </ng-container>
+  </div>
+</td> -->
+       
+
+<td class="action-cell" *ngIf="canShowAction">
+  <div style="display:flex; gap:8px; justify-content:center; align-items:center;">
+
+    <ng-container *ngFor="let action of actions">
+
+      <!-- ICON BUTTON -->
+      <button
+        *ngIf="action.isIcon && (action.visibilityCheckFeild ? rowData[action.visibilityCheckFeild] : true)"
+        pButton
+        pRipple
+        type="button"
+        [icon]="action.icon || ''"
+        [title]="action.title"
+        class="p-button-rounded p-button-text"
+        (click)="makeAction(action.type, rowData, $event)">
+      </button>
+
+      <!-- TEXT BUTTON -->
+      <button
+        *ngIf="!action.isIcon && (action.visibilityCheckFeild ? rowData[action.visibilityCheckFeild] : true)"
+        pButton
+        type="button"
+        [label]="action.title || ''"
+        [title]="action.title || ''"
+        [ngClass]="{
+          'verify-btn': action.type === 'VERIFY',
+          'review-btn': action.type === 'REVIEW',
+          'view-btn': action.type === 'VIEW',
+          'update-btn': action.type === 'EDIT',
+          'cardview-btn': action.type === 'CARDVIEW'
+        }"
+        (click)="makeAction(action.type, rowData, $event)">
+      </button>
+
+    </ng-container>
+
+  </div>
+</td>
+
+
+
+
+
+<td [ngClass]="getcheckStyle()" *ngIf="canShowCheckbox" >
+          <div style="height: 40px; text-align:center;">
+            <p-tableCheckbox [value]="rowData" *ngIf="rowData.canApprove"></p-tableCheckbox>
+          </div>
+        </td>
+        <td *ngFor="let col of columns" class="dttable">
+          <div *ngIf="col.isProgress; else noprog">
+            <div class="row">
+              <div class="col-9" style="padding: 10px 0px 0px 0px">
+                <p-progressBar
+                  [value]="rowData[col.field]"
+                  [showValue]="false"
+                  [color]="getcolorforProgress(rowData[col.field], col.field)"
+                ></p-progressBar>
+              </div>
+              <div class="col-3" style="padding: 10px 0px 0px 0px">
+                {{ rowData[col.field] | round }}%
+              </div>
+            </div>
+          </div>
+          <ng-template #noprog>
+            <div
+              *ngIf="getDateColumn(col.field); else elspe"
+              style="width: max-content"
+            >
+              {{ dc(rowData[col.field], col.field) }}
+            </div>
+            <ng-template #elspe>
+              <div *ngIf="col.isLink; else link">
+                <a
+                  target="_blank"
+                  [title]="rowData[col.field]"
+                  [href]="rowData[col.field]"
+                >
+                  Link
+                </a>
+              </div>
+              <ng-template #link>
+                <!-- <div *ngIf="col.isBadge; else nobadge">
+                
+                  <ng-container [ngSwitch]="rowData[col.field]">
+                    <p-tag
+                      *ngSwitchCase="'Yes'"
+                      severity="success"
+                      value="Yes"
+                    ></p-tag>
+                    <p-tag
+                      *ngSwitchCase="'No'"
+                      severity="info"
+                      value="No"
+                    ></p-tag>
+                    <ng-container *ngSwitchDefault>
+                      <p-tag
+                        *ngIf="rowData[col.field]"
+                        [severity]="
+                          getBtnSeverity(rowData[col.field], col, rowData)
+                        "
+                        [pTooltip]="rowData[col.badgeCheckfield]"
+                        [value]="rowData[col.field]"
+                      >
+                      </p-tag>
+                    </ng-container>
+                  </ng-container>
+                </div> -->
+
+<div *ngIf="col.isBadge; else nobadge">
+  <p-tag
+    *ngIf="rowData[col.field] === 'Verified'"
+    value="Verified"
+    icon="pi pi-check"
+    severity="success"
+    class="verified-badge">
+  </p-tag>
+
+  <p-tag
+    *ngIf="rowData[col.field] === 'To Be Verified'"
+    value="To Be Verified"
+    icon="pi pi-times"
+    severity="danger"
+    class="tobeverified-badge">
+  </p-tag>
+
+  <p-tag
+    *ngIf="rowData[col.field] !== 'Verified' && rowData[col.field] !== 'To Be Verified'"
+    [value]="rowData[col.field]"
+    severity="info">
+  </p-tag>
+</div>
+                
+                
+                <ng-template #nobadge>
+                  <div *ngIf="col.isActionable; else noActionable">
+                    <p
+                      style="
+                        color: blue;
+                        text-decoration: underline;
+                        cursor: pointer;
+                      "
+                      (click)="makeViewevent(rowData, $event)"
+                    >
+                      {{ rowData[col.field] }}
+                    </p>
+                  </div>
+                  <ng-template #noActionable>
+                    <div *ngIf="col.isColorText; else noisColorText">
+                      <p [style]="getcolor(rowData[col.field])">
+                        {{ rowData[col.field] }}
+                      </p>
+                    </div>
+
+
+                    <ng-template #noisColorText>
+  <span>
+    {{ rowData[col.field] }}
+
+
+    <i
+      *ngIf="
+        col.compareWith &&
+        getTrend(rowData[col.field], rowData[col.compareWith]) === 'up'
+      "
+      class="pi pi-arrow-up"
+      style="color: green; margin-left: 6px"
+    ></i>
+
+   
+    <i
+      *ngIf="
+        col.compareWith &&
+        getTrend(rowData[col.field], rowData[col.compareWith]) === 'down'
+      "
+      class="pi pi-arrow-down"
+      style="color: red; margin-left: 6px"
+    ></i>
+  </span>
+</ng-template>
+
+                  </ng-template>
+                </ng-template>
+              </ng-template>
+            </ng-template>
+          </ng-template>
+        </td>
+
+
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="cols.length + 1">No Records Found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [showCurrentPageReport]="true"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="total"
+    [rowsPerPageOptions]="rowsPerPageOptions"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  ></p-paginator>
+<p-toast></p-toast>  
+  <p-confirmPopup key="confirm2"></p-confirmPopup>
+</div>

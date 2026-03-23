@@ -1,0 +1,95 @@
+<div class=" mb-3">
+    <form [formGroup]="scholarshipForm" (ngSubmit)="submit()" class="col-12">
+        <div class="card p-fluid" style="padding-bottom: 10px;">
+            <div class="p-formgrid grid">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th style="min-width: 300px">Category</th>
+                            <th style="min-width: 100px">Community </th>
+                            <th> Cost
+                                <br>
+                                <input type="text" pInputText [pattern]="patn" (input)="changeCost($event)"
+                                    placeholder="Enter a Cost" />
+
+                            </th>
+                            <th>Recurrence
+                                <br>
+                                <p-dropdown [options]="recurrenceList" optionLabel="text" optionValue="value"
+                                    display="chip" placeholder="Select a Reccurrence" (onChange)="changerecc($event)"
+                                    [showClear]="
+                                false"></p-dropdown>
+                            </th>
+                            <th>Occurrence
+                                <br>
+                                <input type="text" pInputText [pattern]="patn" (input)="changeOcc($event)"
+                                    placeholder="Enter a Occurrence" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="costs">
+                        <tr *ngFor="let itemrow of t.controls; let i=index;let l=last" [formGroupName]="i">
+                            <td> {{ i+1 }} </td>
+                            <td> {{ costList[i].controls['subCategory'].value }} </td>
+                            <td>
+                                {{ costList[i].controls['community'].value }} </td>
+                            <td>
+                                <input pInputText [maxlength]="10" formControlName="amount" type="text" />
+                            </td>
+                            <td>
+                                <p-dropdown [options]="costList[i].controls['occurrenceList'].value" optionLabel="text"
+                                    optionValue="value" display="chip" placeholder="Select a Reccurrence"
+                                    formControlName="recurrence" [showClear]="
+                                false"></p-dropdown>
+                            </td>
+                            <td>
+                                <input pInputText [maxlength]="3" formControlName="occurrence" type="text" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="field col-12  md:col-3  lg:col-3">
+                    <label htmlFor="fromDate">From Date</label>
+                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true" [showButtonBar]="true"
+                        dateFormat="dd-mm-yy" [maxDate]="scholarshipForm.get('toDate')?.value" [readonlyInput]="true"
+                        formControlName="fromDate" inputId="icon"></p-calendar>
+                    <app-error-msg [control]="scholarshipForm.get('fromDate')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-3  lg:col-3">
+                    <label htmlFor="toDate">To Date</label>
+                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true" [showButtonBar]="true"
+                        dateFormat="dd-mm-yy" [minDate]="scholarshipForm.get('fromDate')?.value" [readonlyInput]="true"
+                        formControlName="toDate" inputId="icon"></p-calendar>
+                    <app-error-msg [control]="scholarshipForm.get('toDate')"></app-error-msg>
+                </div>
+                <div class="col-12 md:col-6 flex  lg:col-2" style="margin-top: 14px">
+                    <div class="col">
+                        <button pButton type="submit"
+                            *ngxPermissionsOnly="[privleges.ROLE_CREATE, privleges.ROLE_UPDATE]"
+                            [disabled]="!scholarshipForm.valid || t.controls.length==0" label="Submit"></button>
+                    </div>
+                    <div class="col">
+                        <button pButton type="button" class="p-button-secondary" label="Reset"
+                            (click)="resetForm()"></button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<p-toast></p-toast>
+<div class="grid formgrid">
+    <div class="col-12 lg:col-9 md:col-9 flex ">
+        <h4>{{this.title}} List </h4><span style="font-size: small;font-weight: 600;margin-left: 5px;"
+            [ngStyle]="{'color': currentStatus ? '#0abb0a' : '#fd7878'}">
+            {{currentStatus?'(Active)':'(In-Active)'}}</span>
+    </div>
+</div>
+<app-datatable [records]="configurationList" [defaultSortField]="defaultSortField" [defaultSortOrder]="defaultSortOrder"
+    [cols]="cols" [fileName]="'Role'" [rows]="rows" [total]="configurationList ? configurationList.length : 0"
+    [actions]="actions" (invokeAction)="actioInvoked($event)" [searchableColumns]="searchableColumns"
+    [defaultstatus]="!currentStatus" (changeStatus)="changeStatus($event)" [hasActiveInactive]="false">
+</app-datatable>

@@ -1,0 +1,103 @@
+<div class="verification-container">
+  <div class="grid" style="margin-left: 150px">
+    <!-- LEFT PANEL -->
+    <div class="col-10 lg:col-5">
+      <div class="instruction-wrapper">
+        <!-- Header -->
+        <div class="instruction-header" style="width: 100%">
+          <i class="bi bi-file-earmark-text"></i>
+          MEMBER APPLICATION VERIFICATION – INSTRUCTIONS
+        </div>
+
+        <!-- Card -->
+        <div class="instruction-card">
+          <div class="instruction-title">
+            Please review the application carefully before <br />
+            taking action.
+          </div>
+
+          <div class="instruction-divider"></div>
+
+          <ul class="instruction-list">
+            <li style="padding-bottom: 3px">
+              Data Operator is responsible for creating applications for
+              members.
+            </li>
+            <li style="padding-bottom: 3px">
+              Ensure all required information is entered accurately.
+            </li>
+            <li style="padding-bottom: 3px">
+              Upload necessary documents as provided by the member.
+            </li>
+            <li style="padding-bottom: 26px">
+              Review the application carefully before submission.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-10 lg:col-5">
+      <div class="login-card p-fluid">
+        <div class="field">
+          <label class="form-label">Username</label>
+
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="username"
+            placeholder="Enter your Username"
+            class="custom-input"
+          />
+          <span *ngIf="isError" style="color: red">
+            {{ ErrorUsernameMessage }}
+          </span>
+        </div>
+
+        <div class="field">
+          <label class="form-label">Password</label>
+
+          <span class="p-input-icon-right w-full">
+            <i
+              class="pi"
+              [ngClass]="
+                showPassword ? 'bi bi-eye-slash-fill' : 'bi bi-eye-fill'
+              "
+              (click)="togglePassword()"
+              style="cursor: pointer; color: rgba(70, 124, 136, 1)"
+            >
+            </i>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              pInputText
+              [(ngModel)]="password"
+              placeholder="Enter your Password"
+              class="custom-input"
+            />
+            <span *ngIf="isError" style="color: red">
+              {{ ErrorMessage }}
+            </span>
+          </span>
+
+          <div class="forgot-password">Forgot Password?</div>
+        </div>
+
+        <div class="button-group">
+          <button
+            pButton
+            label="Login"
+            (click)="onSubmit()"
+            class="login-btn"
+          ></button>
+
+          <button
+            pButton
+            label="Back"
+            (click)="goBack()"
+            class="back-btn"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

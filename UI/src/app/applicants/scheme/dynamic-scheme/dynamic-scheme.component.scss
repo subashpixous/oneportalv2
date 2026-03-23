@@ -1,0 +1,440 @@
+
+.tncwwb-main-container {
+  font-family: 'Poppins', sans-serif !important;
+  padding: 20px;
+  background: #FFFFFF;
+}
+.tncwwb-main-container *:not(.pi) {
+  font-family: 'Poppins', sans-serif !important;
+}
+/* ==========================================
+   TOP HEADER ROW (STRAIGHT LINE FIX)
+   ========================================== */
+.top-info-row {
+  width: 100%;
+}
+.info-label {
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 16px;
+  color: #467C88;
+  line-height: 19px;
+}
+.info-val {
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 16px;
+  color: #467C88;
+  line-height: 19px;
+}
+
+/* ==========================================
+   SINGLE MAIN BORDER WRAPPER
+   ========================================== */
+.main-wrapper-box {
+  border: 0.5px solid #6A6A6A; /* Exact single thin border */
+  border-radius: 5px;
+  padding: 0;
+  background: #FFFFFF;
+  margin-bottom: 20px;
+  overflow: hidden; 
+}
+
+/* Grey Section Headers */
+.figma-grey-header {
+  background: #F4F2F2;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  font-weight: 500;
+  font-size: 14.08px;
+  color: #797979;
+}
+
+.figma-grey-header.first-header {
+  border-top: none; 
+}
+
+/* Internal Content Padding */
+.figma-doc-content-area {
+  padding: 30px 25px;
+}
+
+/* Detailed Values Formatting */
+.detail-label {
+  font-weight: 400;
+  font-size: 15px; 
+  color: #000000;
+  line-height: 22px;
+  width: 45%;
+}
+.colon-mark {
+  font-size: 15px;
+  color: #525252;
+  padding: 0 10px;
+  width: 5%;
+  text-align: center;
+}
+.detail-value {
+  font-weight: 400;
+  font-size: 15px;
+  color: #000000;
+  line-height: 22px;
+  width: 50%;
+}
+
+.custom-input {
+  border: 0.5px solid #747474;
+  border-radius: 3px;
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 11px;
+  color: #525252;
+  min-height: 35px;
+}
+.form-label {
+  color: #000000;
+  font-weight: 400;
+  font-size: 11px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ==========================================
+   DOCUMENTS TABLE
+   ========================================== */
+.table-responsive {
+  overflow-x: auto;
+  width: 100%;
+}
+.figma-doc-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.figma-doc-table th {
+  background-color: #E6F1F5; 
+  color: #595959;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  padding: 12px 15px;
+  border-bottom: 0.5px solid #CBCBCB; 
+}
+
+.figma-doc-table td {
+  padding: 20px 15px;
+  border-bottom: 0.5px solid #CBCBCB;
+  vertical-align: middle;
+}
+
+.figma-doc-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sr-num {
+  font-weight: 400;
+  font-size: 11px;
+  color: #525252;
+}
+
+.doc-name-col {
+  font-weight: 500;
+  font-size: 12.8px;
+  line-height: 18px;
+  color: #000000;
+}
+
+/* Document Images */
+.doc-img {
+  height: 112px;
+  width: auto;
+  border-radius: 2.27px;
+  object-fit: contain;
+}
+
+/* Upload Dashed Box */
+.upload-dashed-box {
+  width: 310.89px;
+  height: 117.38px;
+  background: #FDFDFD;
+  border: 0.29px dashed #034772;
+  border-radius: 6.14px;
+  position: relative;
+}
+
+.cloud-icon {
+  font-size: 28px;
+  color: #088586;
+}
+.drag-drop-text {
+  font-weight: 400;
+  font-size: 12.8px;
+  color: #454545;
+  margin: 0;
+}
+.browse-link {
+  color: #088586;
+  text-decoration: underline;
+  cursor: pointer;
+  position: relative;
+}
+.supported-formats-text {
+  font-weight: 400;
+  font-size: 11px;
+  color: #676767;
+  margin-top: 5px;
+}
+
+.invisible-upload {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+::ng-deep .invisible-upload .p-button {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  opacity: 0;
+  cursor: pointer !important;
+}
+
+/* ==========================================
+   DECLARATION BOX
+   ========================================== */
+.declaration-box {
+  background: rgba(252, 232, 175, 0.37);
+  border-radius: 15.5px;
+  padding: 25px 30px;
+  border: none;
+}
+
+.dec-badge {
+  background: #C08D00;
+  color: #FFFFFF;
+  border-radius: 4.84px;
+  padding: 5px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17.4px;
+  font-weight: 500;
+}
+
+.dec-list {
+  color: #936C00;
+  font-weight: 400;
+  font-size: 17.44px;
+  line-height: 26px;
+  margin: 15px 0;
+}
+
+.dec-list li {
+  margin-bottom: 8px;
+}
+
+.dec-agree-text {
+  color: #936C00;
+  font-weight: 400;
+  font-size: 17.44px;
+}
+
+::ng-deep .custom-dec-checkbox .p-checkbox-box {
+  border: 1.93px solid #BC900B !important;
+  border-radius: 1.93px !important;
+  width: 20.34px;
+  height: 20.34px;
+  background: #FFFFFF !important;
+}
+::ng-deep .custom-dec-checkbox .p-checkbox-box.p-highlight {
+  background: #BC900B !important;
+  border-color: #BC900B !important;
+}
+
+/* ==========================================
+   BOTTOM ACTION BUTTONS (Exact Figma CSS)
+   ========================================== */
+.figma-action-buttons {
+  gap: 8.31px;
+}
+
+.figma-btn-back {
+  box-sizing: border-box;
+  width: 117.34px;
+  height: 34.77px;
+  background: #DFDFDF;
+  border-radius: 7.71992px;
+  border: none;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 15.4398px;
+  color: #585858;
+  cursor: pointer;
+  text-align: center;
+}
+
+.figma-btn-preview {
+  box-sizing: border-box;
+  width: 117.34px;
+  height: 34.77px;
+  background: #A6A6A6;
+  border-radius: 7.71992px;
+  border: none;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 13.3809px;
+  color: #FFFFFF;
+  cursor: pointer;
+  text-align: center;
+}
+
+.figma-btn-submit {
+  box-sizing: border-box;
+  width: 117.34px;
+  height: 34.77px;
+  background: #DC8F36;
+  box-shadow: 1.54398px 0.771992px 8.9551px rgba(0, 0, 0, 0.31);
+  border-radius: 7.71992px;
+  border: none;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 15.4398px;
+  color: #FFFFFF;
+  cursor: pointer;
+  text-align: center;
+}
+
+.figma-btn-back:hover { background: #d0d0d0; }
+.figma-btn-preview:hover { background: #969696; }
+.figma-btn-submit:hover { background: #c67f2b; }
+
+.figma-error-box {
+  background-color: #ffeaea;
+  border-left: 4px solid red;
+  padding: 12px 20px;
+  border-radius: 4px;
+  color: #d30000;
+  font-weight: 500;
+}
+.cloud-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.cloud-svg {
+  /* This controls the overall size */
+  width: 48px; 
+  height: auto;
+}
+
+.cloud-svg path {
+  /* Increase this number (e.g., 2.8 or 3) to make the icon even thicker/bolder */
+  stroke-width: 2.5; 
+  stroke: #088586;
+}
+/* ==========================================
+   DYNAMIC SUBMIT POPUP (SUCCESS & ERROR)
+   ========================================== */
+::ng-deep .success-submit-dialog .p-dialog-content {
+  padding: 0 !important;
+  border-radius: 12px;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.success-popup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 45px 50px;
+  min-width: 380px;
+  max-width: 480px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.status-icon-circle {
+  width: 51px;
+  height: 51px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.status-icon-circle i {
+  color: #FFFFFF;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Dynamic Colors */
+.bg-success { background: #16A05D; }
+.bg-error { background: #D32F2F; }
+.text-success { color: #16A05D; }
+.text-error { color: #D32F2F; }
+
+.status-message {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.back-home-btn {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 20px;
+  gap: 8px;
+  min-width: 160px;
+  height: 40px;
+  background: #F9F8F8;
+  border: 1px solid #F0F0F0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #555555;
+  transition: all 0.2s ease;
+}
+
+.back-home-btn:hover { background: #EAEAEA; }
+.back-home-btn i { font-size: 15px; }
+/* This ONLY runs on Mobile */
+@media screen and (max-width: 768px) {
+  .responsive-info-row {
+    flex-direction: column !important; /* Stack vertically */
+    align-items: flex-start !important; /* Align everything to the left */
+    gap: 10px; /* Space between the items */
+  }
+
+  .responsive-info-row .info-block {
+    flex: none !important; /* Disable the 1 / 1.5 flex ratios from desktop */
+    width: 100% !important;
+    text-align: left !important; /* Ensure text doesn't stay centered/right */
+    border-bottom: 0.5px solid rgba(70, 124, 136, 0.2); /* Subtle separator */
+    padding-bottom: 8px;
+  }
+
+  .responsive-info-row .info-block:last-child {
+    border-bottom: none;
+  }
+  
+  .info-label, .info-val {
+    font-size: 14px; /* Slightly smaller for mobile if needed */
+  }
+}

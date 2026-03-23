@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Model.ViewModel.Report
+{
+    public class MemberExportAllDetails
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Member_Id { get; set; } = string.Empty;
+        public string First_Name { get; set; } = string.Empty;
+        public string Last_Name { get; set; } = string.Empty;
+        public string Father_Name { get; set; } = string.Empty;
+        public string Date_Of_Birth { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Ration_Card_Number { get; set; } = string.Empty;
+        public string Aadhaar_Number { get; set; } = string.Empty;
+        public string Phone_Number { get; set; } = string.Empty;
+        public string GenderString { get; set; } = string.Empty;
+        public string ReligionString { get; set; } = string.Empty;
+        public string CommunityString { get; set; } = string.Empty;
+        public string CasteString { get; set; } = string.Empty;
+        public string MaritalStatusString { get; set; } = string.Empty;
+        public string EducationString { get; set; } = string.Empty;
+        public string CollectedByName { get; set; } = string.Empty;
+        public string CollectedByPhoneNumber { get; set; } = string.Empty;
+        public string CollectedOn { get; set; } = string.Empty;
+        public string Type_of_WorkString { get; set; } = string.Empty;
+        public string Core_Sanitary_Worker_TypeString { get; set; } = string.Empty;
+        public string Organization_TypeString { get; set; } = string.Empty;
+        public string DistrictString { get; set; } = string.Empty;
+        public string Nature_of_JobString { get; set; } = string.Empty;
+        public string Name_of_Local_BodyString { get; set; } = string.Empty;
+        public string ZoneString { get; set; } = string.Empty;
+        public string Organisation_Name { get; set; } = string.Empty;
+        public string DesignationString { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string BlockString { get; set; } = string.Empty;
+        public string Village_PanchayatString { get; set; } = string.Empty;
+        public string CorporationString { get; set; } = string.Empty;
+        public string MunicipalityString { get; set; } = string.Empty;
+        public string Town_PanchayatString { get; set; } = string.Empty;
+        public string New_Yellow_Card_Number { get; set; } = string.Empty;
+        public string Health_Id { get; set; } = string.Empty;
+        public string Already_a_Member_of_CWWB { get; set; } = string.Empty;
+        public string Account_Holder_Name { get; set; } = string.Empty;
+        public string Account_Number { get; set; } = string.Empty;
+        public string IFSC_Code { get; set; } = string.Empty;
+        public string Bank_Name { get; set; } = string.Empty;
+        public string Branch { get; set; } = string.Empty;
+        public string Permanent_DoorNo { get; set; } = string.Empty;
+        public string Permanent_StreetName { get; set; } = string.Empty;
+        public string Permanent_VilllageTownCity { get; set; } = string.Empty;
+        public string Permanent_LocalBody { get; set; } = string.Empty;
+        public string Permanent_NameoflocalBody { get; set; } = string.Empty;
+        public string Permanent_Pincode { get; set; } = string.Empty;
+        public string Permanent_Area { get; set; } = string.Empty;
+        public string Permanent_DistrictString { get; set; } = string.Empty;
+        public string Permanent_TalukString { get; set; } = string.Empty;
+        public string Permanent_BlockString { get; set; } = string.Empty;
+        public string Permanent_CorporationString { get; set; } = string.Empty;
+        public string Permanent_MunicipalityString { get; set; } = string.Empty;
+        public string Permanent_TownPanchayatString { get; set; } = string.Empty;
+        public string Temporary_DoorNo { get; set; } = string.Empty;
+        public string Temporary_StreetName { get; set; } = string.Empty;
+        public string Temporary_VilllageTownCity { get; set; } = string.Empty;
+        public string Temporary_LocalBody { get; set; } = string.Empty;
+        public string Temporary_NameoflocalBody { get; set; } = string.Empty;
+        public string Temporary_Pincode { get; set; } = string.Empty;
+        public string Temporary_Area { get; set; } = string.Empty;
+        public string Temporary_DistrictString { get; set; } = string.Empty;
+        public string Temporary_TalukString { get; set; } = string.Empty;
+        public string Temporary_BlockString { get; set; } = string.Empty;
+        public string Temporary_CorporationString { get; set; } = string.Empty;
+        public string Temporary_MunicipalityString { get; set; } = string.Empty;
+        public string Temporary_TownPanchayatString { get; set; } = string.Empty;
+    }
+}

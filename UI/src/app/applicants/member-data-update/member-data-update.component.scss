@@ -1,0 +1,42 @@
+
+.divhighligher {
+  background-color: #bec0fd;
+  padding: 10px;
+  border-radius: 5px;
+}
+.nav-item {
+    cursor: pointer;
+    font-size: 14px;
+    color: #4f7f88;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+
+    &:hover {
+        color: #034772;
+    }
+
+    i {
+        font-size: 16px;
+    }
+}
+
+:host ::ng-deep .wide-menu {
+    width: 300px !important;
+}
+
+.imgssize {
+    width: 30px;
+    height: 30px;
+}
+
+.circlew {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #216EB6;
+}

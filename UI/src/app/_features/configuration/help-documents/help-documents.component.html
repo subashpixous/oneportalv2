@@ -1,0 +1,124 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}
+            </h4>
+        </div>
+        <div class="">
+        </div>
+    </div>
+    <div class="grid formgrid mb-3">
+        <form [formGroup]="helpDocForm" (ngSubmit)="submit()" class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;">
+                <div class="p-formgrid grid">
+                    <div class="field col-12  md:col-6  lg:col-6">
+                        <label htmlFor="documentName">Name</label>
+                        <input pInputText formControlName="documentName" type="text" />
+                        <app-error-msg [control]="helpDocForm.get('documentName')"></app-error-msg>
+                    </div>
+
+                    <div class="field col-12 md:col-3 lg:col-3">
+  <label htmlFor="documentType">Type</label>
+  <p-dropdown 
+    [options]="types" 
+    optionLabel="text" 
+    optionValue="value"
+    placeholder="Select a type"
+    formControlName="documentType" 
+    (onChange)="onTypeChange($event)"  
+    [showClear]="true">
+  </p-dropdown>
+  <app-error-msg [control]="helpDocForm.get('documentType')"></app-error-msg>
+</div>
+                    <!-- <div class="field col-12  md:col-3  lg:col-3">
+                        <label htmlFor="documentType">Type</label>
+                        <p-dropdown [options]="types" optionLabel="text" optionValue="value" placeholder="Select a type"
+                            formControlName="documentType" [showClear]="
+                            true"></p-dropdown>
+                        <app-error-msg [control]="helpDocForm.get('documentType')"></app-error-msg>
+                    </div> -->
+                    <div class="field col-12  md:col-6  lg:col-3">
+                        <label htmlFor="category">Category</label>
+                        <p-dropdown [options]="catgories" optionLabel="text" optionValue="value"
+                            (ngModelChange)="changecate($event)" placeholder="Select a category"
+                            formControlName="category" [showClear]="
+                            true"></p-dropdown>
+                        <app-error-msg [control]="helpDocForm.get('category')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-6  lg:col-6">
+                        <label htmlFor="description">Description</label>
+                        <textarea rows="5" cols="30" pInputTextarea formControlName="description"></textarea>
+                        <app-error-msg [control]="helpDocForm.get('description')"></app-error-msg>
+                    </div>
+                    <!-- <div class="field  col-12  md:col-6  lg:col-6 ">
+                        <label htmlFor="dob">Document</label>
+                        <p-fileUpload mode="advanced" chooseLabel="Upload" #filechosen class=""
+                            chooseIcon="pi pi-upload" [maxFileSize]="100000000" [customUpload]="true"
+                            [showUploadButton]="false" (onSelect)="onSelectDocumentFile($event)"
+                            (onRemove)="removefile($event)" (onClear)="removefile($event)" />
+                        <app-error-msg [control]="helpDocForm.get('filedetails')"></app-error-msg>
+                    </div> -->
+
+                    <div class="field col-12 md:col-6 lg:col-6">
+  <label htmlFor="dob">Document</label>
+  <p-fileUpload 
+    mode="advanced" 
+    chooseLabel="Upload" 
+    #filechosen
+    class=""
+    chooseIcon="pi pi-upload" 
+    [maxFileSize]="100000000"
+    [customUpload]="true"
+    [accept]="acceptedTypes"   
+    [disabled]="!isTypeSelected"
+    [showUploadButton]="false"
+    (onSelect)="onSelectDocumentFile($event)"
+    (onRemove)="removefile($event)"
+    (onClear)="removefile($event)">
+  </p-fileUpload>
+  <app-error-msg [control]="helpDocForm.get('filedetails')"></app-error-msg>
+</div>
+                    <div class="field col-12  md:col-6  lg:col-3" *ngIf="helpDocForm.get('category')?.value == 'role'">
+                        <label htmlFor="roleIds">Roles</label>
+                        <p-multiSelect [options]="roles" optionLabel="text" optionValue="value"
+                            placeholder="Select a role" formControlName="roleIds" [showClear]="true"> </p-multiSelect>
+                        <app-error-msg [control]="helpDocForm.get('roleIds')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-6  lg:col-3"
+                        *ngIf="helpDocForm.get('category')?.value == 'scheme'">
+                        <label htmlFor="schemeIds">Scheme</label>
+                        <p-multiSelect [options]="schemes" optionLabel="text" optionValue="value"
+                            placeholder="Select a scheme" formControlName="schemeIds" [showClear]="
+                            true"></p-multiSelect>
+                        <app-error-msg [control]="helpDocForm.get('schemeIds')"></app-error-msg>
+                    </div>
+                    <div class="col-12 md:col-6 flex  lg:col-2" style="margin-top: 25px">
+                        <div class="col">
+                            <button pButton *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                                type="submit" label="Submit"></button>
+                        </div>
+                        <div class="col">
+                            <button pButton type="button" class="p-button-secondary" label="Reset"
+                                (click)="resetForm()"></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 flex ">
+            <h4>{{this.title}} List </h4><span style="font-size: small;font-weight: 600;margin-left: 5px;"
+                [ngStyle]="{'color': currentStatus ? '#0abb0a' : '#fd7878'}">
+                {{currentStatus?'(Active)':'(In-Active)'}}</span>
+        </div>
+    </div>
+    <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField"
+        [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Role'" [rows]="rows"
+        [total]="configurationList ? configurationList.length : 0" [actions]="actions"
+        (invokeAction)="actioInvoked($event)" [searchableColumns]="searchableColumns" [defaultstatus]="!currentStatus"
+        (changeStatus)="changeStatus($event)" [hasActiveInactive]="false">
+    </app-datatable>
+</div>

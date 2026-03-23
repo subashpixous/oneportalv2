@@ -1,0 +1,39 @@
+.cntdtyle {
+    margin-top: 10px;
+    max-width: 776px;
+    padding: 20px 50px;
+    border: 1px solid #dadada;
+    margin-bottom: 20px;
+    box-shadow: 5px 4px 7.8px 0px #00000040;
+    border-radius: 10px;
+}
+
+::ng-deep .bcbtn {
+    margin-right: 20px;
+    border-radius: 18px;
+    padding: 5px 45px;
+}
+.lookupheader{
+    
+    font-size: 16px;
+    font-weight: bold;
+    color: blue;
+}
+.sublookupheader{
+    
+    font-size: 10px;
+    margin-bottom: 15px;
+}
+.sublookupresultpos{
+    
+    font-size: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;color: green;
+}
+.sublookupresult{
+    
+    
+    font-size: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;color: red;
+}

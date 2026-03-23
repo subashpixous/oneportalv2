@@ -1,0 +1,14 @@
+<ul class="layout-menu">
+    <div class="sidebar-logo-container">
+        <img src="assets/LogoImages/tncwwblogo.png" height="45" alt="logo">
+        <div class="sidebar-logo-text">
+            Tamil Nadu<br>Cleanliness Workers<br>Welfare Board
+        </div>
+    </div>
+    <ng-container *ngFor="let item of model; let i = index;">
+        <ng-template [ngxPermissionsOnly]="item.ngxPermissionsOnly">
+            <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
+            <li *ngIf="item.separator" class="menu-separator"></li>
+        </ng-template>
+    </ng-container>
+</ul>

@@ -1,0 +1,88 @@
+// .boldlabelinsiderow>span{
+//     font-weight: 700;
+// }
+// .divhighligher {
+//   background-color: #bec0fd;
+//   padding: 10px;
+//   border-radius: 5px;
+// }
+.address-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 10px; // Matches your requested small font density
+}
+
+/* THE NOTE BOX STYLE */
+.address-note-container {
+  background-color: #f3f3f3; // Light blue tint from screenshot
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 5px;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.note-text {
+  margin-left: 10px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* CUSTOM CHECKBOX STYLE */
+.checkbox-wrapper input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #0369a1; // Professional blue to match your values
+}
+
+/* ALIGNMENT ROWS */
+.address-row {
+  display: grid;
+  grid-template-columns: 180px 15px auto; // Strict alignment for colons
+  align-items: flex-start;
+}
+
+.label {
+  color: #252529;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.colon {
+  text-align: center;
+  color: #94a3b8;
+  font-weight: bold;
+}
+
+.value {
+  color: #252529;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Adjustments for the parent body container */
+.address-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.changed-field{
+background:#fff3cd;
+border:1px solid #ffc107;
+border-radius:4px;
+padding:3px 6px;
+font-weight:600;
+}
+
+@media (max-width: 960px) {
+  .address-body {
+    grid-template-columns: 1fr;
+  }
+}

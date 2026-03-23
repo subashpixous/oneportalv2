@@ -1,0 +1,156 @@
+<div class="card noborderRad p-3">
+  <!-- Header -->
+  <div class="grid formgrid mb-3">
+    <div class="col-12">
+      <h4>Print Module Report</h4>
+      <p class="text-sm text-gray-600">View and manage print status of member cards</p>
+    </div>
+  </div>
+
+  <!-- Filter and Export Buttons -->
+  <div class="flex justify-between items-center mb-3">
+    <div>
+      <!-- Status Filter Dropdown -->
+      <p-dropdown
+        [options]="statusOptions"
+        [(ngModel)]="selectedStatus"
+        placeholder="Filter by Status"
+        (onChange)="filterByStatus()"
+        [showClear]="true"
+        styleClass="mr-2 w-full md:w-15rem">
+      </p-dropdown>
+    </div>
+
+  </div>
+
+  <!-- Data Table -->
+  <p-table
+    #dt
+    [value]="filteredReports"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10,20,50]"
+    [responsiveLayout]="'scroll'"
+    [globalFilterFields]="globalFilterFields"
+  >
+    <!-- Search -->
+<ng-template pTemplate="caption">
+  <div class="caption-flex">
+        <!-- Left Side: Buttons -->
+        <div>
+          <button
+            pButton
+            icon="pi pi-file-excel"
+            class="p-button-secondary mr-2"
+            (click)="exportExcel()"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-print"
+            class="p-button-info mr-2"
+            (click)="exportPDF()"
+          ></button>
+        </div>
+
+        <!-- Right Side: Search Box -->
+        <div>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              placeholder="Search..."
+              (input)="dt.filterGlobal(getInputValue($event), 'contains')"
+              class="p-inputtext-sm"
+            />
+          </span>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of cols"
+            [pSortableColumn]="col.sortable ? col.field : undefined"
+            [style.width]="col.width">
+          {{ col.header }}
+          <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- Body -->
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td *ngFor="let col of cols">
+          <!-- Member ID with Routing -->
+          <ng-container *ngIf="col.field === 'member_Id'">
+            <a
+              [routerLink]="['/officers/applications/member-view', row?.id]"
+              class="text-blue-500 hover:underline"
+            >
+              {{ row?.member_Id || '-' }}
+            </a>
+          </ng-container>
+
+          <!-- Profile Image -->
+          <ng-container *ngIf="col.field === 'profileImage'">
+<img
+  [src]="getProfileImageUrl(row.profile_Picture_url, row.profileImage)"
+  alt="Profile"
+  class="profile-image cursor-pointer"
+  style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"
+  (click)="viewImage(getProfileImageUrl(row.profile_Picture_url, row.profileImage))"
+/>
+
+          </ng-container>
+
+          <!-- QR Code -->
+<ng-container *ngIf="col.field === 'qrCodeURL'">
+ <a [routerLink]="['/officers/applications/member-view', row.id]" class="block">
+    <qrcode
+      [qrdata]="generateQRCodeLink(row.id)"
+      [width]="80"
+      [errorCorrectionLevel]="'M'">
+    </qrcode>
+  </a>
+</ng-container>
+
+          <!-- Other Fields -->
+          <ng-container
+            *ngIf="
+              col.field !== 'member_Id' &&
+              col.field !== 'profileImage' &&
+              col.field !== 'qrCodeURL'
+            "
+          >
+            {{ row[col.field] || '-' }}
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- No Records -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="cols.length" class="text-center py-3 text-gray-500">
+          No Records Found
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Profile Image Dialog -->
+<p-dialog header="Profile Image" [(visible)]="displayImageDialog" [style]="{width: '50vw'}" [modal]="true">
+  <img [src]="selectedImage" alt="Profile Image" class="w-full">
+</p-dialog>
+
+<!-- QR Code Dialog -->
+<p-dialog header="QR Code" [(visible)]="displayQRDialog" [style]="{width: '30vw'}" [modal]="true">
+  <div class="text-center">
+    <img [src]="selectedQRCode" alt="QR Code" class="mx-auto mb-3" style="max-width: 200px;">
+    <p class="text-sm text-gray-600">Scan this QR code to view member details</p>
+  </div>
+</p-dialog>

@@ -1,0 +1,141 @@
+<div class="layout-footer" style="background-color: rgba(241, 241, 241, 1);">
+  <div class="col-12 row flex">
+
+    <form [formGroup]="roleForm" (ngSubmit)="submit()" class="col-12" style="padding-bottom: 0px; padding-left: 10px;">
+      <div class="p-fluid" >
+        <div class="p-formgrid grid">
+          <div class="col-12 md:col-1 lg:col-1">
+            <p-button label="{{ texts.feedback }}"  formControlName="feedback" (click)="openFeedback()" [link]="true" [style]="{ 'text-decoration': 'underline', 'color':'rgba(70, 124, 136, 1)' }" > 
+</p-button>
+          </div>
+              
+          <div class="field col-12 md:col-6 lg:col-3" *ngIf="showFeedbackSection">
+            <input pInputText [style]="{ 'padding': '8px', 'width': '80%'}" maxlength="200"
+            (keypress)="allowOnlyLetters($event)"  pattern="[A-Za-z\s]+"
+              formControlName="name" placeholder="{{ texts.name }}" type="text" />
+            <app-err-msg-comp [control]="roleForm.get('name')"></app-err-msg-comp>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-3" *ngIf="showFeedbackSection">
+            <input pInputText [style]="{ 'padding': '8px', 'width': '80%' }" formControlName="mobileNumber"
+             pattern="[0-9]*" (keypress)="allowOnlyNumbers($event)"
+              placeholder="{{ texts.mobile }}" maxlength="10" minlength="10" type="text" />
+            <app-err-msg-comp [control]="roleForm.get('mobileNumber')"></app-err-msg-comp>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-3" *ngIf="showFeedbackSection">
+            <input pInputText [style]="{ 'padding': '8px', 'width': '80%'}"  formControlName="feedback"
+              placeholder="{{ texts.feedbackNotes }}" type="text" maxlength="1000" />
+            <app-err-msg-comp [control]="roleForm.get('feedback')"></app-err-msg-comp>
+          </div>
+          <div class="col-12 md:col-1 lg:col-1 text-center" *ngIf="showFeedbackSection">
+            <p-button type="submit"
+              [style]="{
+                'border-radius': '27px',
+                'width': '100%',
+                'padding': '7px 15px',
+                'background': '#467C88'
+              }"
+              label="{{ texts.submit }}" />
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="grid align-items-start">
+
+  <!-- 🔹 Address -->
+  <div class="col-12 md:col-6 lg:col-3 pl-5">
+    <div>
+      <div style="text-decoration: underline; color: #467C88; padding-bottom: 5px; font-size: 20px; font-weight: 400;">{{ texts.addressTitle }}</div>
+      <div style="color: #467C88;">
+        {{ texts.address1 }}
+      </div>
+      <div style="color: #467C88;">
+         {{ texts.address2 }}
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔹 Contact -->
+  <div class="col-12 md:col-6 lg:col-3 pl-5">
+    <div>
+      <div style="text-decoration: underline;color: #467C88; padding-bottom: 5px;  font-size: 20px; font-weight: 400;">{{ texts.contactTitle }}</div>
+      <div style="color: #467C88;">
+        <a href="mailto:tncwwb@gmail.com" style="color: #467C88;">
+        <i class="bi bi-envelope-fill"></i> &nbsp;tncwwb@gmail.com</a>
+      </div>
+      <div>
+        <a href="tel:+91 44 24310221" style="color: #467C88;">
+          <i class="bi bi-telephone-fill"></i>&nbsp;+91 44 24310221
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-12 md:col-6 lg:col-3 pl-5">
+    <div>
+      <p-button
+        severity="secondary"
+        [style]="{
+          'border-radius': '20px',
+          'width': 'auto',
+          'padding': '5px 15px',
+          'background': '#467C88'
+        }"
+        styleClass="bcbtn"
+        (onClick)="documentpage()"
+        label="{{ texts.help }}">
+      </p-button>
+
+      <div class="mt-2">
+        <span class="query-title" style="color: #467C88; ">{{ texts.query }}</span>
+        <div>
+          <a href="tel:+917094700111">
+            <i class="bi bi-telephone-fill" style="padding-right: 6px; color: #467C88;"></i>
+          </a>  
+          <a href="https://wa.me/917094700111" target="_blank">
+            <i class="pi pi-whatsapp" style="color: #467C88;"></i>
+          </a>
+          <a href="tel:+917094700111" style="color: #467C88"> &nbsp;+91 70947 00111</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-12 md:col-6 lg:col-3 text-right pt-3">
+    <img
+      src="../../../assets/bottom-logo.png"
+      class="img-responsive imgsize"/>
+    <div style="color:rgba(70, 124, 136, 1)">
+    {{ texts.developed }}
+      <a
+        style="color:rgba(70, 124, 136, 1); text-decoration: underline;"
+        href="https://pixoustech.com/"
+        target="_blank">
+        Pixous Technologies
+      </a>
+    </div>
+  </div>
+
+</div>
+<hr class="rights-line">
+   <div class="rights-card" style="text-align: center;">
+         <span>{{ texts.rights }}</span>
+    </div>
+
+  </div>
+
+
+
+
+
+ 
+  <p-dialog header="நன்றி / Thank You" [modal]="true" [(visible)]="showThankYou" [closable]="false"
+    [style]="{ width: '40rem' }">
+    <p>உங்கள் கருத்து வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது. / <br />Your feedback has been submitted successfully.</p>
+    <p-footer>
+      <button pButton label="Close" (click)="closeDialog()"></button>
+    </p-footer>
+  </p-dialog>
+  
+</div>

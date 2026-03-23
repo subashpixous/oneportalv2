@@ -1,0 +1,483 @@
+<div class="card noborderRad">
+  <div class="grid formgrid">
+    <div class="col-12 lg:col-4 md:col-4 mb-2">
+      <h4>{{ title }}</h4>
+    </div>
+    <div class="col-12 lg:col-4 md:col-4 mb-2">
+      <div class="justify-content-center flex">
+        <p-selectButton
+          [options]="mainOptions"
+          [(ngModel)]="mainValue"
+          (ngModelChange)="generateMainFilter()"
+          [multiple]="false"
+          optionLabel="name"
+          optionValue="value"
+          [allowEmpty]="false"
+          class="selectdash"
+        >
+          <ng-template let-item pTemplate>
+            <span>{{ item.name }}</span>
+          </ng-template>
+        </p-selectButton>
+      </div>
+    </div>
+    <div class="col-12 lg:col-4 md:col-4 mb-2"></div>
+    <div class="col-12 row lg:col-12 md:col-12 flex">
+      <div class="col-12 lg:col-2 md:col-2">
+        <p-dropdown
+          [options]="datefilter"
+          optionLabel="text"
+          [style]="{ width: '100%' }"
+          optionValue="value"
+          placeholder="Date Range"
+          [showClear]="false"
+          [(ngModel)]="selecteddatefilter"
+          pTooltip="Date Range"
+          tooltipPosition="top"
+        ></p-dropdown>
+      </div>
+      <div class="col-12 lg:col-2 md:col-2" *ngIf="mainValue == 'SCHEME'">
+        <p-dropdown
+          [options]="activeStatuses"
+          optionLabel="text"
+          [style]="{ width: '100%' }"
+          optionValue="value"
+          placeholder="Status"
+          [showClear]="false"
+          [(ngModel)]="selectedActiveStatuses"
+          pTooltip="Scheme status"
+          tooltipPosition="top"
+        ></p-dropdown>
+      </div>
+      <!-- modified by Indu on 27-10-2025 for application filters and hover -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <p-multiSelect
+          [options]="districts"
+          optionLabel="text"
+          optionValue="value"
+          [style]="{ width: '100%' }"
+          placeholder="District"
+          [showClear]="false"
+          pTooltip="District"
+          tooltipPosition="top"
+          [(ngModel)]="selectedDistricts"
+          (onChange)="onDistrictChange($event.value)"
+        >
+        </p-multiSelect>
+      </div>
+
+      <div class="col-12 lg:col-2 md:col-2 mb-2" *ngIf="mainValue == 'MEMBER'">
+        <p-multiSelect
+          [options]="cardStatus"
+          optionLabel="text"
+          [style]="{ width: '100%' }"
+          optionValue="value"
+          placeholder="Card Status"
+          [showClear]="false"
+          [(ngModel)]="selectedCardStatus"
+          pTooltip="Card status"
+          tooltipPosition="top"
+        ></p-multiSelect>
+      </div>
+
+      <div
+        class="col-12 lg:col-2 md:col-2 mb-2"
+        *ngIf="mainValue == 'MEMBER' && !isStatusFromQuery"
+      >
+        <p-multiSelect
+          [options]="Application_Status"
+          optionLabel="text"
+          [style]="{ width: '100%' }"
+          optionValue="value"
+          placeholder="Application Status"
+          [showClear]="false"
+          [(ngModel)]="selectedApplication_Status"
+          pTooltip="Application Status"
+          tooltipPosition="top"
+        ></p-multiSelect>
+      </div>
+
+      <div class="col-12 lg:col-2 md:col-2 mb-2" *ngIf="mainValue == 'MEMBER'">
+        <p-multiSelect
+          [options]="Changed_Detail_Records"
+          optionLabel="text"
+          [style]="{ width: '100%' }"
+          optionValue="value"
+          placeholder="Changed Detail Records"
+          [showClear]="false"
+          [(ngModel)]="selectedChanged_Detail_Records"
+          pTooltip="Changed Detail Records"
+          tooltipPosition="top"
+        ></p-multiSelect>
+      </div>
+
+      <ng-container *ngIf="showAllFilters">
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER'"
+        >
+          <p-multiSelect
+            [options]="organizationType"
+            optionLabel="text"
+            [style]="{ width: '100%' }"
+            optionValue="value"
+            placeholder="Organization Type"
+            [showClear]="false"
+            [(ngModel)]="selectedorganizationType"
+            pTooltip="Organization Type"
+            tooltipPosition="top"
+          ></p-multiSelect>
+        </div>
+
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER'"
+        >
+          <p-multiSelect
+            [options]="typeOfWork"
+            optionLabel="text"
+            [style]="{ width: '100%' }"
+            optionValue="value"
+            placeholder="Type of Work"
+            [showClear]="false"
+            [(ngModel)]="selectedtypeOfWork"
+            pTooltip="Type of Work"
+            tooltipPosition="top"
+          ></p-multiSelect>
+        </div>
+
+        <!-- LOCAL BODY -->
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER'"
+        >
+          <p-dropdown
+            [options]="localbody"
+            optionLabel="text"
+            optionValue="value"
+            [(ngModel)]="selectedLocalBody"
+            [style]="{ width: '100%' }"
+            placeholder="Local Body"
+            [showClear]="false"
+            pTooltip="Local Body"
+            tooltipPosition="top"
+            (onChange)="onLocalBodyChange($event.value)"
+          >
+          </p-dropdown>
+        </div>
+
+        <!--  NAME OF LOCAL BODY -->
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="
+            mainValue == 'MEMBER' && nameoflocalbody?.length > 0 && isUrban
+          "
+        >
+          <p-multiSelect
+            [options]="nameoflocalbody"
+            optionLabel="text"
+            optionValue="value"
+            [(ngModel)]="selectedNameOfLocalBody"
+            [style]="{ width: '100%' }"
+            placeholder="Name Of the LocalBody"
+            [showClear]="false"
+            pTooltip="Name Of the LocalBody"
+            tooltipPosition="top"
+            (onChange)="onNameOfLocalBodyChange($event.value)"
+          >
+          </p-multiSelect>
+        </div>
+
+        <!--  BLOCK -->
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER' && selected_Block.length > 0"
+        >
+          <p-multiSelect
+            [options]="selected_Block"
+            optionLabel="text"
+            optionValue="value"
+            [(ngModel)]="selectedBlock"
+            [style]="{ width: '100%' }"
+            placeholder="Block"
+            [showClear]="true"
+            pTooltip="Block"
+            tooltipPosition="top"
+            (onChange)="onBlockChange($event.value)"
+          >
+          </p-multiSelect>
+        </div>
+
+        <!-- CORPORATION -->
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER' && selected_Corporation.length > 0"
+        >
+          <p-multiSelect
+            [options]="selected_Corporation"
+            optionLabel="text"
+            optionValue="value"
+            [(ngModel)]="selectedCorporation"
+            [style]="{ width: '100%' }"
+            placeholder="Corporation"
+            [showClear]="true"
+            pTooltip="Corporation"
+            tooltipPosition="top"
+          >
+          </p-multiSelect>
+        </div>
+
+        <!-- MUNICIPALITY -->
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER' && selected_Municipality.length > 0"
+        >
+          <p-multiSelect
+            [options]="selected_Municipality"
+            optionLabel="text"
+            optionValue="value"
+            [(ngModel)]="selectedMunicipality"
+            [style]="{ width: '100%' }"
+            placeholder="Municipality"
+            [showClear]="true"
+            pTooltip="Municipality"
+            tooltipPosition="top"
+          >
+          </p-multiSelect>
+        </div>
+
+        <!-- TOWN PANCHAYAT -->
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER' && selected_TownPanchayat.length > 0"
+        >
+          <p-multiSelect
+            [options]="selected_TownPanchayat"
+            optionLabel="text"
+            optionValue="value"
+            [(ngModel)]="selectedTownPanchayat"
+            [style]="{ width: '100%' }"
+            placeholder="Town Panchayat"
+            [showClear]="true"
+            pTooltip="Town Panchayat"
+            tooltipPosition="top"
+          >
+          </p-multiSelect>
+        </div>
+
+        <!-- VILLAGE PANCHAYAT -->
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER' && selected_VillagePanchayat.length > 0"
+        >
+          <p-multiSelect
+            [options]="selected_VillagePanchayat"
+            optionLabel="text"
+            optionValue="value"
+            [(ngModel)]="selectedVillagePanchayat"
+            [style]="{ width: '100%' }"
+            placeholder="Village Panchayat"
+            [showClear]="true"
+            pTooltip="Village Panchayat"
+            tooltipPosition="top"
+          >
+          </p-multiSelect>
+        </div>
+
+        <!-- ZONE -->
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER' && selected_zone.length > 0"
+        >
+          <p-multiSelect
+            [options]="selected_zone"
+            optionLabel="text"
+            optionValue="value"
+            [(ngModel)]="selectedZone"
+            [style]="{ width: '100%' }"
+            placeholder="Zone(s)"
+            [showClear]="true"
+            [filter]="true"
+            pTooltip="Zone"
+            tooltipPosition="top"
+          >
+          </p-multiSelect>
+        </div>
+
+        <!-- District Local Body Ending -->
+
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER' && CollectedByPhoneNo?.length > 0"
+        >
+          <p-multiSelect
+            [options]="CollectedByPhoneNo"
+            [(ngModel)]="selectedCollectedByPhone"
+            optionLabel="text"
+            optionValue="value"
+            [style]="{ width: '100%' }"
+            placeholder="Collected By PhoneNo"
+            [showClear]="true"
+            [filter]="true"
+            pTooltip="Collected By PhoneNo"
+            tooltipPosition="top"
+          >
+          </p-multiSelect>
+        </div>
+
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER'"
+        >
+          <p-calendar
+            [(ngModel)]="Collected_FromDate"
+            [showIcon]="true"
+            placeholder="Collected From Date"
+            dateFormat="yy-mm-dd"
+            [style]="{ width: '100%' }"
+            pTooltip="Collected From Date"
+            tooltipPosition="top"
+          >
+          </p-calendar>
+        </div>
+
+        <div
+          class="col-12 lg:col-2 md:col-2 mb-2"
+          *ngIf="mainValue == 'MEMBER'"
+        >
+          <p-calendar
+            [(ngModel)]="Collected_ToDate"
+            [showIcon]="true"
+            placeholder="Collected To Date"
+            dateFormat="yy-mm-dd"
+            [style]="{ width: '100%' }"
+            pTooltip="Collected To Date"
+            tooltipPosition="top"
+          >
+          </p-calendar>
+        </div>
+      </ng-container>
+
+      <!-- <div
+        class="col-12 lg:col-2 md:col-2 mb-2 flex"
+        *ngIf="mainValue == 'MEMBER'"
+      >
+        <button
+          pButton
+          pRipple
+          class="p-button-outlined p-button-sm flex-1"
+          style="height: 100%; width: 40%"
+          icon="pi pi-filter"
+          [label]="showAllFilters ? 'Less Filters' : 'More Filters'"
+          (click)="toggleFilters()"
+        ></button>
+      </div> -->
+      <div class="col-12 lg:col-2 md:col-2" *ngIf="mainValue == 'SCHEME'">
+        <p-multiSelect
+          [options]="schemes"
+          optionLabel="text"
+          [style]="{ width: '100%' }"
+          optionValue="value"
+          placeholder="Scheme"
+          (ngModelChange)="changescheme($event)"
+          [showClear]="false"
+          [(ngModel)]="selectedSchemes"
+          pTooltip="Scheme"
+          tooltipPosition="top"
+        ></p-multiSelect>
+      </div>
+
+      <div class="col-12 lg:col-2 md:col-2" *ngIf="mainValue == 'SCHEME'">
+        <p-multiSelect
+          [options]="statuses"
+          optionLabel="text"
+          [style]="{ width: '100%' }"
+          optionValue="value"
+          placeholder="Status"
+          [showClear]="false"
+          [(ngModel)]="selectedStatuses"
+          pTooltip="status"
+          tooltipPosition="top"
+        ></p-multiSelect>
+      </div>
+
+      <div class="col-12 lg:col-2 md:col-2">
+        <button
+          pButton
+          pRipple
+          class="p-button-secondary"
+          icon="pi pi-arrow-right"
+          (click)="generate()"
+        ></button>
+        <p-button
+          icon="pi pi-times "
+          [outlined]="true"
+          (click)="reset()"
+          [style]="{ 'margin-left': '10px' }"
+        ></p-button>
+      </div>
+
+      <div
+        class="col-12 lg:col-2 md:col-2 mb-2 d-flex align-items-end"
+        *ngIf="mainValue == 'MEMBER' && !isStatusFromQuery"
+      >
+        <button
+          pButton
+          pRipple
+          label="Create"
+          *ngxPermissionsOnly="[privleges.FORM_CREATE]"
+          (click)="createform()"
+          icon="pi pi-plus"
+          class="p-button-primary"
+        ></button>
+      </div>
+      <div
+        class="col-12 lg:col-2 md:col-2 mb-2 d-flex align-items-end"
+        *ngIf="mainValue == 'SCHEME'"
+      >
+        <button
+          pButton
+          pRipple
+          label="Create"
+          *ngxPermissionsOnly="[privleges.APPLY_SCHEME]"
+          (click)="schemeApply()"
+          icon="pi pi-plus"
+          class="p-button-primary"
+        ></button>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 mt-3" *ngIf="mainValue == 'SCHEME'">
+    <div class="row">
+      <app-datatable-pagination
+        [records]="configurationList"
+        [defaultSortField]="defaultSortField"
+        [defaultSortOrder]="defaultSortOrder"
+        [cols]="cols"
+        [fileName]="'Applications'"
+        [rows]="rows"
+        [total]="total"
+        [actions]="actions"
+        (invokeAction)="actioInvoked($event)"
+        [defaultstatus]="!currentStatus"
+        (changeStatus)="changeStatus($event)"
+        [searchableColumns]="searchableColumns"
+        [hasActiveInactive]="false"
+        (changefilter)="changefilter($event)"
+        (actionalAction)="actionalAction($event)"
+        [normallyExportedData]="true"
+      >
+      </app-datatable-pagination>
+      <!-- modified by Sivasankar on 31-10-2025 for export functionality -->
+    </div>
+  </div>
+  <div class="mb-3 mt-3" *ngIf="mainValue == 'MEMBER'">
+    <div class="row">
+      <app-member-list
+        [filtermodel]="memberfilter"
+        [showdata]="showdata"
+        [isCalledFromApplication]="true"
+      ></app-member-list>
+    </div>
+  </div>
+</div>

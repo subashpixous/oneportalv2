@@ -1,0 +1,235 @@
+.verification-container {
+  padding: 40px;
+  background-color: #f8f9fa;
+}
+.instruction-divider {
+  height: 2px;
+  background-color: rgba(83, 157, 219, 1);
+  width: 100%;
+  margin: 12px 0 18px 0;
+  border-radius: 1px;
+}
+/* LEFT SIDE */
+.instruction-header {
+  background-color: #1e5d6f;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 6px;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.instruction-card {
+  background-color: #eef2f5;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.instruction-title {
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-family: Poppins;
+font-weight: 500;
+font-style: Medium;
+font-size: 16px;
+
+}
+
+.instruction-list {
+  padding-left: 18px;
+}
+
+.instruction-list li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+  color: #333;
+}
+
+
+/* RIGHT SIDE */
+.login-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #1e5d6f;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.custom-input {
+  height: 45px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.forgot-password {
+  text-align: right;
+  font-size: 13px;
+  color: #888;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+
+/* BUTTONS */
+.button-group {
+  margin-top: 20px;
+}
+
+.login-btn {
+  background: rgba(220, 143, 54, 1);
+  color: rgb(255, 255, 255);
+  border: none !important;
+  height: 48px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+
+.back-btn {
+  background: rgba(230, 230, 230, 1);
+  color: black;
+  border: none !important;
+  height: 48px;
+}
+.back-btn:hover{
+   background: rgba(230, 230, 230, 1);
+  color: black;
+}
+.login-btn:hover {
+  background-color: #c47a26;
+   color: rgb(255, 255, 255);
+}
+
+
+@media (max-width: 992px) {
+
+  .verification-container {
+    padding: 30px 20px;
+  }
+
+  .verification-container .grid {
+    margin-left: 0 !important;
+    justify-content: center;
+  }
+
+  /* Make both columns full width */
+  .verification-container .col-10 {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .instruction-header {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .instruction-card {
+    padding: 20px;
+  }
+
+  .login-card {
+    padding: 25px;
+  }
+
+}
+
+
+@media (max-width: 576px) {
+
+  .verification-container {
+    padding: 20px 12px;
+  }
+
+  .verification-container .grid {
+    margin-left: 0 !important;
+  }
+
+  /* Stack layout */
+  .verification-container .col-10 {
+    width: 100%;
+  }
+
+  /* HEADER */
+  .instruction-header {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  /* CARD */
+  .instruction-card {
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+  .instruction-title {
+    font-size: 15px;
+  }
+
+  .instruction-list li {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* LOGIN CARD */
+  .login-card {
+    padding: 20px;
+  }
+
+  /* INPUT */
+  .custom-input {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .form-label {
+    font-size: 14px;
+  }
+
+  /* BUTTONS */
+  .login-btn,
+  .back-btn {
+    height: 42px;
+    font-size: 14px;
+  }
+
+  /* FORGOT PASSWORD */
+  .forgot-password {
+    font-size: 12px;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .instruction-header {
+    font-size: 12px;
+  }
+
+  .instruction-title {
+    font-size: 14px;
+  }
+
+  .instruction-list li {
+    font-size: 13px;
+  }
+
+  .login-btn,
+  .back-btn {
+    height: 40px;
+    font-size: 13px;
+  }
+
+}

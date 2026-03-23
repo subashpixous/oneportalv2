@@ -1,0 +1,162 @@
+<!-- <div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+
+     
+    </div>
+    <div class="mb-3" >
+        <div class="row flex">
+            <div [ngClass]="getmbookStyleClass()">
+                <div class="workLiskContainer row flex col-12">
+                    <div class="col-12 flex" style="justify-content: space-between;">
+                        <div>
+                            <h6>My Work List</h6>
+                        </div>
+                        <div style="margin-top: -10px;">
+                            <p-button icon="pi pi-window-maximize" *ngIf="isMimimized" [rounded]="true" [text]="true"
+                                (click)="togglembookStable()" severity="primary "></p-button>
+                            <p-button icon="pi pi-window-minimize" *ngIf="!isMimimized" [rounded]="true" [text]="true"
+                                (click)="togglembookStable()" severity="primary "></p-button>
+                        </div>
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 flex justify-content-center">
+                        <button pButton type="button" [style]="{ 'width':'100%'}" [ngClass]="getbtnclass('DISTRICT')"
+                            label="District" (click)="setSelected('DISTRICT')"></button>
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 flex justify-content-center">
+                        <button pButton type="button" [style]="{ 'width':'100%'}" [ngClass]="getbtnclass('SCHEME')"
+                            label="Scheme" (click)="setSelected('SCHEME')"></button>
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 flex justify-content-center">
+                        <button pButton type="button" [style]="{ 'width':'100%'}" [ngClass]="getbtnclass('DUEDATE')"
+                            label="Due Date" (click)="setSelected('DUEDATE')"></button>
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 ">
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 " *ngFor="let item of countcards;let i = index">
+                        <div style="text-align: center;color: white;border-radius: 5px;cursor: pointer;"
+                            (click)="navigateToApplications(item)" [ngClass]="getclassbasedonIndex(i)">
+                            <p style="margin-bottom: 0px;padding-top: 5px;font-size: 14px;">{{item.label}}</p>
+                            <p style="font-size: x-large;font-weight: 500;">{{prependZero(item.count)}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="workLiskContainer row flex col-12">
+                    <app-map-view [markerPositions]="markerPositions"></app-map-view>
+                </div>
+            </div>
+            <div [ngClass]="getStyleClass()">
+                <div class="workLiskContainer  row flex col-12">
+                    <div class="col-12 flex" style="justify-content: space-between;">
+                        <div>
+                            <h6>Status</h6>
+                        </div>
+                        <div style="margin-top: -10px;">
+                            <p-button icon="pi pi-arrow-right" [rounded]="true" [text]="true" (click)="navigate()"
+                                severity="primary "></p-button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p-dropdown [options]="schemes" optionLabel="text" (ngModelChange)="schemeChanged($event)"
+                            [style]="{'width': '100%','background': 'rgba(0, 0, 0, 0.02)'}" optionValue="value"
+                            placeholder="Select a Scheme" [showClear]="false"
+                            [(ngModel)]="selectedSchemes"></p-dropdown>
+                    </div>
+                    <div *ngFor="let item of applicationCountModel;let i = index">
+                        <div class="col-12 flex justify-content-between pb-0">
+                            <p style="display: flex;align-items: center;">{{item.status}}</p>
+                            <p style="display: flex;align-items: center;font-size: 16px;">
+                                {{item.count}}<p-button icon="pi pi-arrow-right" [rounded]="true" [text]="true"
+                                    (click)="expand(item.statusId)" severity="primary "></p-button>
+                            </p>
+                        </div>
+                        <p-progressBar [value]="item.percentage" [showValue]="false"
+                            [style]="{'height':'.5rem'}"></p-progressBar>
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+  
+
+
+</div> -->
+<div class="card noborderRad">
+  <div class="grid formgrid">
+    <div class="col-12 lg:col-9 md:col-9">
+      <h4>{{ title }}</h4>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <div class="row flex">
+      <!-- Left panel: Map & top count cards -->
+      <div class="col-12 lg:col-7 md:col-6">
+        <!-- My Work List & Top Cards -->
+        <div class="workLiskContainer row flex col-12">
+          <div class="col-12 flex justify-content-between">
+            <h6>Card Status</h6>
+          </div>
+
+          <!-- Count Cards -->
+          <div class="col-12 lg:col-3 md:col-3" *ngFor="let item of statusBars; let i = index">
+            <div style="text-align: center; color:#0A417C; border-radius: 5px; cursor: pointer;">
+              <p style="margin-bottom: 0px; padding-top: 5px; font-size: 14px;">{{ item.status }}</p>
+              <p style="font-size: x-large; font-weight: 500;">{{ item.count }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="workLiskContainer row flex col-12 mt-3">
+          <app-map-view [markerPositions]="markerPositions"></app-map-view>
+        </div>
+      </div>
+
+      <!-- Right panel: Status bars & dropdown -->
+      <div class="col-12 lg:col-5 md:col-6">
+        <!-- District Dropdown -->
+        <div class="mb-3">
+          <p-dropdown 
+            [options]="districts" 
+            optionLabel="label" 
+            optionValue="value" 
+            [(ngModel)]="selectedDistrictId"
+            placeholder="Select a District"
+            (onChange)="updateStatusBars(); updateMarkerPositions()"
+             [style]="{'width': '100%','background': 'rgba(0, 0, 0, 0.02)'}" optionValue="value"
+                           [showClear]="true">
+          </p-dropdown>
+        </div>
+
+      
+
+        <!-- Status Bars -->
+        <!-- <div *ngFor="let item of statusBars; let i = index" class="mb-2">
+          <div class="flex justify-content-between align-items-center">
+            <span>{{ item.status }}</span>
+            <span>{{ item.count }}</span>
+          </div>
+          <p-progressBar [value]="item.percentage" [showValue]="false" [style]="{'height':'.5rem'}"></p-progressBar>
+        </div> -->
+  <div *ngFor="let item of statusBars;let i = index">
+                        <div class="col-12 flex justify-content-between pb-0">
+                            <p style="display: flex;align-items: center;">{{item.status}}</p>
+                            <p style="display: flex;align-items: center;font-size: 16px;">
+                                {{item.count}}
+                                <!-- <p-button icon="pi pi-arrow-right" [rounded]="true" [text]="true"
+                                  severity="primary "></p-button> -->
+                            </p>
+                        </div>
+                        <p-progressBar [value]="item.percentage" [showValue]="false"
+                            [style]="{'height':'.5rem'}"></p-progressBar>
+                    </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

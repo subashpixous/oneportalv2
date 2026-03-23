@@ -1,0 +1,17 @@
+
+
+
+::ng-deep .diff-table tr.changed { 
+  border-radius: 10px;
+}
+::ng-deep .diff-table tr.changed td{ 
+  border-radius: 30px;
+  background-color: #ffbcbc; 
+  font-weight: bold;
+  box-shadow: 0 0 6px rgba(255, 103, 103, 0.4); 
+}
+::ng-deep .diff-table tr.changed td:first-child{ 
+    background-color: revert;
+    font-weight: revert;
+    box-shadow: revert;
+}

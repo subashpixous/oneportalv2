@@ -1,0 +1,121 @@
+.CountBox {
+    border-style: solid;
+    border-color: #06568e;
+    border-width: 0px 10px 10px 10px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.CountBox:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.CountBox>.Status {
+    padding: 15px 0px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background-color: #06568e;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.CountBox>.Count {
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.total_count_cls {
+    margin-bottom: 20px;
+    text-align: right;
+    padding-right: 50px;
+}
+
+::ng-deep .selectdash>.p-selectbutton>.p-button:first-child {
+    border-radius: 30px 0px 0px 30px !important;
+
+}
+
+::ng-deep .selectdash>.p-selectbutton>.p-button:last-child {
+    border-radius: 0px 30px 30px 0px !important;
+}
+
+::ng-deep .selectdash>.p-selectbutton>.p-button {
+    border-radius: 0px;
+    padding: 0.50rem 1.25rem;
+    background-color: #E0F6FF;
+}
+
+::ng-deep .selectdash>.p-selectbutton>.p-button>span {
+    font-weight: 600;
+}
+
+::ng-deep .selectdash>.p-selectbutton>.p-button.p-highlight {
+    background-color: #0a417c;
+    color: white;
+}
+
+.smallpaddforbtn {
+    padding: 0.50rem 1.25rem;
+    background-color: #D9D9D9;
+    color: black;
+}
+.smallpaddforbtn.p-highlight {
+    padding: 0.50rem 1.25rem;
+    background-color: #0a417c;
+    color: white;
+}
+
+::ng-deep .smallpaddforbtn>.p-button-label {
+    font-weight: 600;
+}
+
+.workLiskContainer {
+    background-color: #F4F4F4;
+    margin: 5px;
+    border-radius: 10px;
+}
+.count1s{
+    background: #0a417c;
+}
+.count2s{
+    background: #34689E;
+}
+.count3s{
+    background: #4B8CD0;
+}
+.count4s{
+    background: #5AAAFF;
+}
+.totcnt{
+        background: linear-gradient(103.06deg, rgb(3, 71, 114) 22.83%, rgb(34, 134, 227) 90.87%);
+    border-radius: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+.totcntDiv{
+    
+    color: white;
+    font-size: 20px;
+}
+.totcntDivSmall{
+    
+    color: white;
+    font-size: 12px;
+}
+.totcntDivIcons{
+    
+    align-items: center;
+    display: flex
+;
+}
+
+.match-height {
+  height: 38px; /* Default height of PrimeNG dropdowns/multiselects */
+}

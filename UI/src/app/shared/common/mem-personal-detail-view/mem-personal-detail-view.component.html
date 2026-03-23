@@ -1,0 +1,235 @@
+<!-- <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+    <div class="p-formgrid grid ">
+        <div class="col-12">
+            <h5 class="divhighligher">உறுப்பினர் தனிப்பட்ட விவரங்கள் / Member Personal Details</h5>
+            <div class="col-12 p-0 m-0 flex" style="flex-wrap: wrap; justify-content: center;">
+                <div class="col-3">
+                    <div class="row col-12">
+                        <div class="col-12" style="text-align: center;">
+                            <label class="hoverable" for="">
+                                <img
+                                    [src]=" url && url !='' ? url : 'https://www.w3schools.com/howto/img_avatar.png'"  height="100"/>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 row ">
+
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.firstName)">
+                    <span>முதல் பெயர் / First Name:
+                    </span>{{this.personalDetail?.firstName}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.lastName)">
+                    <span>கடைசி பெயர் / Initial:
+                    </span>{{this.personalDetail?.lastName}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.fathersName)">
+                    <span>தந்தை (அ) கணவர் பெயர் / Father (or) Husband Name:
+                    </span>{{this.personalDetail?.fathersName}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.gender)">
+                    <span>பாலினம் / Gender
+                    </span>{{this.personalDetail?.gender }}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.community)">
+                    <span>இனம் / Community:
+                    </span>{{this.personalDetail?.community }}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.maritalStatus)">
+                    <span>திருமண நிலை / Marital Status:
+                    </span>{{this.personalDetail?.maritalStatus}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.education)">
+                    <span>கல்வி / Education:
+                    </span>{{this.personalDetail?.education}}
+                </div>
+                <div class=" col-12 boldlabelinsiderow" *ngIf="CheckNullorEmpty(this.personalDetail?.dob)">
+                    <span>பிறந்த தேதி / Date Of Birth:
+                        (If you don't know the beneficiary's birth date and month, you can select January 1st of
+                        your birth year)/ (பயனாளியின் பிறந்த தேதி மற்றும் மாதம் உங்களுக்குத் தெரியாவிட்டால், உங்கள்
+                        பிறந்த ஆண்டின் ஜனவரி 1 ஆம் தேதியைத் தேர்ந்தெடுக்கலாம்)* :
+                    </span>{{this.personalDetail?.dob}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.phoneNumber)">
+                    <span>தொலைபேசி எண் / Phone Number:
+                    </span>{{this.personalDetail?.phoneNumber}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.email)">
+                    <span>மின்னஞ்சல் / Email:
+                    </span>{{this.personalDetail?.email}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.rationCard)">
+                    <span>குடும்ப அட்டை எண் / Ration Card No:
+                    </span>{{this.personalDetail?.rationCard}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.healthId)">
+                    <span>சுகாதார அட்டை எண் / Health Id:
+                    </span>{{this.personalDetail?.healthId}}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.personalDetail?.aadharNumber)">
+                    <span>ஆதார் எண் / Aadhaar Number:
+                    </span>{{this.personalDetail?.aadharNumber}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="personal-card">
+  <div class="profile-wrapper">
+    <img
+      class="profile-img"
+      [src]="url && url != '' ? url : 'assets/landing-2.jpg'"
+    />
+  </div>
+
+  <div class="personal-grid-container">
+    <div class="personal-col">
+      <div class="info-row" *ngIf="getValue('aadharNumber')">
+        <span class="label">ஆதார் எண் / Aadhaar Number</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.aadharNumber }} <i class="pi pi-check-circle verified"></i></span> -->
+        <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('aadharNumber')}">
+
+{{ getValue('aadharNumber') }}
+<!-- <i class="pi pi-check-circle verified"></i> -->
+</span>
+      </div>
+      <div class="info-row" *ngIf="getValue('firstName')">
+        <span class="label">முதல் பெயர் / First Name</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.firstName }}</span> -->
+         <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('firstName')}">
+
+{{ getValue('firstName') }}
+</span>
+      </div>
+      <div class="info-row" *ngIf="getValue('gender')">
+        <span class="label">பாலினம் / Gender</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.gender }}</span> -->
+         <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('gender')}">
+
+{{ getValue('gender') }}
+</span>
+      </div>
+      <div class="info-row" *ngIf="getValue('community')">
+        <span class="label">சமூகம் / Community</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.community }}</span> -->
+         <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('community')}">
+
+{{ getValue('community') }}
+</span>
+      </div>
+      
+
+    </div>
+
+    
+
+    <div class="personal-col">
+      <div class="info-row" *ngIf="getValue('phoneNumber')">
+        <span class="label">கைப்பேசி எண் / Mobile Number</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.phoneNumber }} <i class="pi pi-check-circle verified"></i></span> -->
+       <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('phoneNumber')}">
+
+{{ getValue('phoneNumber') }}
+</span>
+      </div>
+      <div class="info-row" *ngIf="getValue('lastName')">
+        <span class="label">கடைசி பெயர் / Last Name</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.lastName }}</span> -->
+         <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('lastName')}">
+
+{{ getValue('lastName') }}
+</span>
+      </div>
+      <!-- <div class="info-row" *ngIf="getValue('dob')">
+        <span class="label">பிறந்த தேதி / Date Of Birth</span>
+        <span class="colon">:</span>
+         <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('dob')}">
+
+{{ getValue('dob') }}
+</span>
+      </div> -->
+      <div class="info-row" *ngIf="getValue('dob')">
+  <span class="label">பிறந்த தேதி / Date Of Birth</span>
+  <span class="colon">:</span>
+
+  <span class="value text-blue"
+        [ngClass]="{'changed-field': isChanged('dob')}">
+
+    {{ getValue('dob') | date:'dd-MM-yyyy' }}
+
+  </span>
+</div>
+      <div class="info-row" *ngIf="getValue('caste_String')">
+        <span class="label">சாதி / Caste</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.caste }}</span> -->
+         <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('caste_String')}">
+
+{{ getValue('caste_String') }}
+</span>
+      </div>
+    </div>
+
+    <div class="personal-col">
+      <div class="info-row" *ngIf="getValue('fathersName')">
+        <span class="label">தந்தை பெயர்/father Name (or) கணவர் பெயர்/Husband Name</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.fathersName }}</span> -->
+         <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('fathersName')}">
+
+{{ getValue('fathersName') }}
+</span>
+      </div>
+      <div class="info-row" *ngIf="getValue('maritalStatus')">
+        <span class="label">திருமண நிலை / Marital Status</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.maritalStatus }}</span> -->
+         <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('maritalStatus')}">
+
+{{ getValue('maritalStatus') }}
+</span>
+      </div>
+      <div class="info-row" *ngIf="getValue('education')">
+        <span class="label">கல்வி / Education</span>
+        <span class="colon">:</span>
+        <!-- <span class="value text-blue">{{ personalDetail?.education }}</span> -->
+         <span class="value text-blue"
+[ngClass]="{'changed-field': isChanged('education')}">
+
+{{ getValue('education') }}
+</span>
+      </div>
+    </div>
+  </div>
+</div>

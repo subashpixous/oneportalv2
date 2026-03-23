@@ -1,0 +1,22 @@
+<p-card styleClass="viewer-card">
+    <ng-container [ngSwitch]="config.type">
+        <ng-container *ngSwitchCase="'pdf'">
+            <object [data]="config.documentUrl" type="application/pdf" class="viewer-content">
+                <div class="fallback">
+                    <i class="pi pi-file-pdf"></i>
+                    <p>Unable to display PDF. <a [href]="config.documentUrl" download>Download</a> instead.</p>
+                </div>
+            </object>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'video'">
+            <video controls class="viewer-content">
+                <source [src]="config.documentUrl" type="video/mp4">
+                <div class="fallback">
+                    <i class="pi pi-video"></i>
+                    <p>Your browser does not support the video tag.</p>
+                </div>
+            </video>
+        </ng-container>
+    </ng-container>
+</p-card>

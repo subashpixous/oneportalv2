@@ -1,0 +1,26 @@
+.chartContainer {
+
+    background-color: #0a417c;
+    color: white;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px;
+}
+
+.chartContainer>h5 {
+
+    margin: 0px;
+    color: white !important;
+    padding: 10px;
+}
+
+.chartCard {
+
+    border: solid 1px #0a417c;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}

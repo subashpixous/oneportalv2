@@ -1,0 +1,553 @@
+<!-- <div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;">
+    <div class="flex align-items-center  mr-4">
+        <p class="fw-bold">Schemes Detail</p>
+    </div>
+    <div class="flex align-items-center  mr-4">
+        <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+        <p-button *ngIf="isLoggedin"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            label="Logout" (onClick)="Logout()" />
+    </div>
+</div> -->
+<!-- <div class="container flex justify-content-center mt-4 mb-4 flex-wrap " *ngIf="configurationList">
+    <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+        <div class="p-formgrid grid ">
+            <div class="col-12 p-4 divhighligher">
+                <h5 class="font-bold">{{configurationList.schemeName}}</h5>
+                <h6 class="" *ngIf="configurationList.description !=''">
+                    {{configurationList.description}} </h6>
+            </div> -->
+            <!-- <h5 class="card-title" style="font-weight: 700;margin-bottom: 1.5rem;padding: 20px;">
+                பதிவேற்ற வேண்டிய
+                ஆவணங்களின் பட்டியல் (அதிகபட்ச கோப்பு அளவு 2mb) (பொருந்தினால் மட்டும்) /
+                LIST OF DOCUMENTS TO BE UPLOADED (max. file size 2 mb) (If applicable only)
+            </h5>
+
+            <div class="col-12 flex flex-wrap" *ngIf="configurationList && configurationList.documents">
+                <div class="col col-md-6 col-sm-12" *ngFor="let docGroups of configurationList.documents">
+                    <h6 class="" style="font-weight: 700;margin-bottom: 1.5rem;">
+                        {{docGroups.groupName}}
+                    </h6>
+
+                    <div class="documentfontsixe" *ngFor="let doscs of docGroups.requiredDocumentCategory">
+                        <p class="documentfontsixe" *ngFor="let dosdcs of getNonEmptyDocs(doscs.applicableDocuments)">
+                            &#x2022; {{dosdcs}}
+                        </p>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="col-12 flex flex-wrap">
+                <div class="parentDiv  col-12  md:col-4  lg:col-4" *ngFor="let item of memberEligibilitydetail">
+                    <div class="groupinfo">
+                        <h4 class="text-center ss">{{item.name}}</h4>
+                        <h4 class="text-center ss" style="font-size: 14px;">{{item.isFamilyMember?
+                            'Applicable for family relations':'Applicable for self'}}</h4>
+                        <div style="text-align: center;margin-top: 15px;">
+                            <p-button severity="primary" styleClass="bcbtn"
+                                [label]="item.showApplyOption? getLabel(item?.existApplication): 'Approval Pending'"
+                                [disabled]="isToDisable(item)" [style]="{'text-align':'center'}"
+                                (onClick)="applyClick(item)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mb-3 flex justify-content-center ">
+    <p-button severity="secondary" styleClass="bcbtn" (onClick)="back()" label="Back" />
+</div> -->
+
+
+
+<!-- <div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;">
+    <div class="flex align-items-center  mr-4">
+        <p class="fw-bold">Schemes Detail</p>
+    </div>
+    <div class="flex align-items-center  mr-4">
+        <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+        <p-button *ngIf="isLoggedin"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            label="Logout" (onClick)="Logout()" />
+    </div>
+</div>
+<div class="container flex justify-content-center mt-4 mb-4 flex-wrap " *ngIf="configurationList">
+    <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+        <div class="p-formgrid grid ">
+            <div class="col-12 p-4 divhighligher">
+                <h5 class="font-bold">{{configurationList.schemeName}}</h5>
+                <h6 class="" *ngIf="configurationList.description !=''">
+                    {{configurationList.description}} </h6>
+            </div>
+            <h5 class="card-title" style="font-weight: 700;margin-bottom: 1.5rem;padding: 20px;">
+                பதிவேற்ற வேண்டிய
+                ஆவணங்களின் பட்டியல் (அதிகபட்ச கோப்பு அளவு 2mb) (பொருந்தினால் மட்டும்) /
+                LIST OF DOCUMENTS TO BE UPLOADED (max. file size 2 mb) (If applicable only)
+            </h5>
+
+            <div class="col-12 flex flex-wrap" *ngIf="configurationList && configurationList.documents">
+                <div class="col col-md-6 col-sm-12" *ngFor="let docGroups of configurationList.documents">
+                    <h6 class="" style="font-weight: 700;margin-bottom: 1.5rem;">
+                        {{docGroups.groupName}}
+                    </h6>
+
+                    <div class="documentfontsixe" *ngFor="let doscs of docGroups.requiredDocumentCategory">
+                        <p class="documentfontsixe" *ngFor="let dosdcs of getNonEmptyDocs(doscs.applicableDocuments)">
+                            &#x2022; {{dosdcs}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 flex flex-wrap">
+                <div class="parentDiv  col-12  md:col-4  lg:col-4" *ngFor="let item of memberEligibilitydetail">
+                    <div class="groupinfo">
+                        <h4 class="text-center ss">{{item.name}}</h4>
+                        <h4 class="text-center ss" style="font-size: 14px;">{{item.isFamilyMember?
+                            'Applicable for family relations':'Applicable for self'}}</h4>
+                        <div style="text-align: center;margin-top: 15px;">
+                            <p-button severity="primary" styleClass="bcbtn"
+                                [label]="item.showApplyOption? getLabel(item?.existApplication): 'Approval Pending'"
+                                [disabled]="isToDisable(item)" [style]="{'text-align':'center'}"
+                                (onClick)="applyClick(item)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mb-3 flex justify-content-center ">
+    <p-button severity="secondary" styleClass="bcbtn" (onClick)="back()" label="Back" />
+</div> -->
+
+<!-- <div class="eligibility-container p-4">
+    <div class="flex justify-content-between align-items-center mb-4 px-3 header-section">
+        <div class="flex gap-5 font-bold header-text">
+            <span>ID : {{ memberDetails?.id }}</span>
+            <span>Scheme : {{ configurationList?.schemeName }}</span>
+        </div>
+        <p-button label="Back" icon="pi pi-arrow-left" styleClass="p-button-outlined back-btn" (onClick)="back()"></p-button>
+    </div>
+
+    <div class="card p-0 main-card">
+        <div class="card-header px-4 py-3 font-bold">
+            தகுதியான திட்டம் / Eligible Scheme
+        </div>
+
+        <div class="grid m-0 p-4">
+            
+            <div class="col-12 lg:col-6 left-panel pr-4">
+                
+                <ng-container *ngIf="selfMembers.length > 0; else dummySelfMember">
+                    <h5 class="section-title">Schemes For Member</h5>
+                    <div class="table-container mb-4">
+                        <div class="table-header grid m-0">
+                            <div class="col-6">Name / பெயர்</div>
+                            <div class="col-6">தகுதியான திட்டம் / Eligible Scheme</div>
+                        </div>
+                        <div class="table-row grid m-0 align-items-center cursor-pointer hover:bg-gray-100" 
+                             *ngFor="let mem of selfMembers"
+                             [class.selected-row]="selectedMember === mem"
+                             (click)="selectMember(mem)">
+                            <div class="col-6 member-name">{{ mem.name }}</div>
+                            <div class="col-6">
+                                <button pButton type="button" class="p-button-success p-button-sm w-full">
+                                    <i class="pi pi-file mr-2"></i> {{ configurationList?.schemeName || 'கல்வி உதவித்தொகை / Education Assistance' }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-template #dummySelfMember>
+                    <h5 class="section-title">Schemes For Member</h5>
+                    <div class="table-container mb-4">
+                        <div class="table-header grid m-0">
+                            <div class="col-6">Name / பெயர்</div>
+                            <div class="col-6">தகுதியான திட்டம் / Eligible Scheme</div>
+                        </div>
+                        <div class="table-row grid m-0 align-items-center cursor-pointer hover:bg-gray-100" (click)="selectDummyMember()">
+                            <div class="col-6 member-name">{{ memberDetails?.name || 'Loganathan' }}</div> 
+                            <div class="col-6">
+                                <button pButton type="button" class="p-button-success p-button-sm w-full">
+                                    <i class="pi pi-file mr-2"></i> {{ configurationList?.schemeName || 'கல்வி உதவித்தொகை / Education Assistance' }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="doc-card mt-4">
+                    <div class="doc-header" style="background-color: #558B8B; color: white; padding: 10px; border-radius: 6px 6px 0 0;">
+                        <i class="pi pi-file mr-2"></i>
+                        தொடங்குவதற்கு முன் இந்த ஆவணங்களைத் தயாராக வைத்திருங்கள். / KEEP THESE DOCUMENTS READY BEFORE APPLYING
+                    </div>
+                    <div class="doc-content p-4 border-1 border-gray-300" style="border-radius: 0 0 6px 6px; border-top: none;">
+                        <p class="doc-subtitle font-bold mb-3">Please keep the following documents ready before starting your application:</p>
+                        <h4 class="scheme-highlight mb-3" style="color: #DC8F36 !important;">{{ configurationList?.schemeName || 'கல்வி உதவித்தொகை / Education Assistance' }}</h4>
+                        
+                        <div *ngIf="configurationList?.documents?.length; else staticDocs">
+                            <ul class="doc-list pl-3" *ngFor="let docGroups of configurationList.documents">
+                                <li class="font-semibold mb-2" *ngIf="docGroups.groupName">{{docGroups.groupName}}</li>
+                                <ng-container *ngFor="let doscs of docGroups.requiredDocumentCategory">
+                                    <li class="mb-1 text-sm text-gray-700" *ngFor="let dosdcs of getNonEmptyDocs(doscs.applicableDocuments)">
+                                        {{ dosdcs }}
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                        
+                        <ng-template #staticDocs>
+                            <ul class="doc-list pl-3">
+                                <li class="mb-1 text-sm text-gray-700">கல்வி சான்றிதழ் / Education Certificate</li>
+                                <li class="mb-1 text-sm text-gray-700">மதிப்பெண் பட்டியல் / Marksheet</li>
+                                <li class="mb-1 text-sm text-gray-700">மாணவர் அடையாள அட்டை / Student ID Card</li>
+                                <li class="mb-1 text-sm text-gray-700">சான்று ஆவணப் படம் / Reference document image</li>
+                            </ul>
+                        </ng-template>
+
+                        <div class="doc-images mt-4 flex gap-4 justify-content-center">
+                            <img src="assets/worker-reference-image.png" alt="Reference Image 1" class="doc-img shadow-2" style="max-width: 150px;">
+                            <img src="assets/worker-reference-second.jpg" alt="Reference Image 2" class="doc-img shadow-2" style="max-width: 150px;">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-12 lg:col-6 right-panel pl-4">
+                <div class="sub-scheme-card border-1 border-gray-300 border-round">
+                    <div class="sub-scheme-header font-bold bg-gray-100 p-3 border-bottom-1 border-gray-300" style="border-radius: 6px 6px 0 0;">
+                        துணைத் திட்டம் / Sub-Scheme
+                    </div>
+                    
+                    <div class="sub-scheme-list p-3">
+                        <div class="sub-scheme-row flex justify-content-between align-items-center p-3 mb-2 border-1 border-gray-200 border-round shadow-1" 
+                             *ngFor="let sub of schemeList">
+                             
+                            <div class="sub-name pr-3 font-semibold text-gray-800">
+                                {{ sub.schemeName }}
+                            </div>
+                            
+                            <button pButton 
+                                    [disabled]="sub.isApplicable === false"
+                                    [ngClass]="{'p-button-outlined p-button-secondary': sub.isApplicable === false}"
+                                    (click)="applySubSchemeClick(sub)"
+                                    [label]="sub.isApplicable === false ? 'Not Applicable' : 'Apply Now'"
+                                    class="p-button-sm white-space-nowrap">
+                            </button>
+                        </div>
+                        
+                        <div *ngIf="schemeList.length === 0" class="text-center p-4 text-gray-500 font-italic">
+                            இந்த உறுப்பினருக்கு துணை திட்டங்கள் எதுவும் கிடைக்கவில்லை.<br>
+                            (No sub-schemes available for this member.)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+<div class="eligibility-container p-4">
+    <div class="flex justify-content-between align-items-center mb-4 header-section">
+        <div class="flex gap-5 font-bold header-text">
+            <span>ID : {{ memberDetails?.memberId }}</span>
+           <span>Scheme : {{ schemeGroupNameDisplay }}</span>
+        </div>
+<p-button *ngIf="isApplicant" label="Back" icon="pi pi-arrow-left" styleClass="back-btn" (onClick)="back()"></p-button>
+
+        <p-button *ngIf="!isApplicant" label="Logout" icon="pi pi-power-off" styleClass="back-btn p-button-danger" (onClick)="Logout()"></p-button>
+    </div>
+
+    <div class="main-card-title mb-4">
+        தகுதியான திட்டம் / Eligible Scheme
+    </div>
+
+    <div class="grid m-0 mb-4">
+        
+        <div class="col-12 lg:col-6 pr-4">
+            
+<div class="mb-5">
+                <h5 class="section-title">Scheme For Member</h5>
+                <div class="custom-table">
+                    <div class="custom-table-header grid m-0">
+                        <div class="col-5 border-bottom">Name / பெயர்</div>
+                        <div class="col-7 border-left border-bottom">தகுதியான திட்டம் / Eligible Scheme</div>
+                    </div>
+                    
+                    <ng-container *ngIf="selfMembers && selfMembers.length > 0; else noSelfData">
+                        <div class="custom-table-row grid m-0 align-items-center" 
+                             *ngFor="let mem of selfMembers"
+                             [class.selected-row]="selectedMember === mem"
+                             (click)="selectMember(mem)">
+                            <div class="col-5 member-name">{{ mem.name }}</div>
+                            <div class="col-7 border-left">
+                                <button type="button" class="scheme-select-btn w-full flex justify-content-between align-items-center" (click)="selectMember(mem); $event.stopPropagation()">
+<span class="text-left"><i class="pi pi-file mr-2"></i> {{ schemeGroupNameDisplay }}</span>
+                                    <i class="pi pi-chevron-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-template #noSelfData>
+                        <div class="custom-table-row grid m-0 align-items-center">
+                            <div class="col-12 text-center p-4 text-gray-500 font-italic" style="font-size: 14px;">
+                                உறுப்பினருக்கான திட்டம் இல்லை / No Scheme For member 
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <!-- <ng-template #dummySelfMember>
+                <div class="mb-5">
+                    <h5 class="section-title">Scheme For Member</h5>
+                    <div class="custom-table">
+                        <div class="custom-table-header grid m-0">
+                            <div class="col-5 border-bottom">Name / பெயர்</div>
+                            <div class="col-7 border-left border-bottom">தகுதியான திட்டம் / Eligible Scheme</div>
+                        </div>
+                        
+                        <div class="custom-table-row grid m-0 align-items-center" 
+                             [class.selected-row]="selectedMember?.id === memberDetails?.id"
+                             (click)="selectDummyMember()">
+                            <div class="col-5 member-name">{{ memberDetails?.name || 'Loganathan' }}</div>
+                            <div class="col-7 border-left">
+                                <button class="scheme-select-btn w-full flex justify-content-between align-items-center">
+                                    <span class="text-left"><i class="pi pi-file mr-2"></i> {{ configurationList?.schemeName || 'கல்வி உதவித்தொகை / Education Assistance' }}</span>
+                                    <i class="pi pi-chevron-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template> -->
+
+<div class="mb-2">
+    <div class="flex justify-content-between align-items-end mb-3">
+        <h5 class="section-title m-0">Scheme For Family Member</h5>
+        
+        <div class="family-badge cursor-pointer"(click)="openFamilyModal()">
+            <i class="pi pi-user-plus icon-style"></i>
+            <div class="badge-text-group">
+                <span>குடும்ப உறுப்பினர்கள்</span>
+                <span>Family Members</span>
+            </div>
+        </div>
+    </div>
+
+<div class="custom-table">
+    <div class="custom-table-header grid m-0">
+        <div class="col-2 border-bottom flex-column text-center justify-content-center" style="font-size: 13px !important;">
+            Action / <br> செயல்
+        </div>
+        <div class="col-4 border-left border-bottom">Name / பெயர்</div>
+        <div class="col-6 border-left border-bottom">தகுதியான திட்டம் / Eligible Scheme</div>
+    </div>
+    
+    <ng-container *ngIf="familyMembers && familyMembers.length > 0; else noFamilyData">
+        <div class="custom-table-row grid m-0 align-items-center" 
+             *ngFor="let mem of familyMembers"
+             [class.selected-row]="selectedMember === mem"
+             (click)="selectMember(mem)">
+            
+            <div class="col-2 flex justify-content-center">
+<div class="flex gap-2" *ngIf="canEditOrDelete(mem)">
+    <button type="button" class="figma-table-action-btn figma-edit-btn" 
+            (click)="editFamilyMember(mem, $event)">
+        <i class="pi pi-pencil"></i>
+    </button>
+            
+    <button type="button" class="figma-table-action-btn figma-delete-btn" 
+            (click)="deleteFamilyMember(mem, $event)">
+        <i class="pi pi-trash"></i>
+    </button>
+</div>
+            </div>
+
+            <div class="col-4 member-name flex-column align-items-start border-left">
+                <span class="mb-1">{{ mem.name }}</span>
+                <span class="text-xs" style="color: #6A6A6A;">[ {{ mem.relationString }} ]</span>
+            </div>
+            
+            <div class="col-6 border-left">
+                <button type="button" class="scheme-select-btn family-btn w-full flex justify-content-between align-items-center" (click)="selectMember(mem); $event.stopPropagation()">
+                    <span class="text-left"><i class="pi pi-file mr-2"></i> {{ schemeGroupNameDisplay }}</span>
+                    <i class="pi pi-chevron-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #noFamilyData>
+        <div class="custom-table-row grid m-0 align-items-center">
+            <div class="col-12 text-center p-4 text-gray-500 font-italic" style="font-size: 14px;">
+                குடும்ப உறுப்பினர்களுக்கு எந்த திட்டமும் இல்லை. / No Scheme for family members 
+            </div>
+        </div>
+    </ng-template>
+</div>
+            </div>
+
+        </div>
+
+        <div class="col-12 lg:col-6 pl-4">
+            
+            <div class="empty-state-card flex flex-column align-items-center justify-content-center h-full" *ngIf="!selectedMember">
+                <img src="../../../assets/LogoImages/Scheme.png" alt="Scheme Document" class="empty-image mb-4">
+                
+<div class="flex align-items-center justify-content-center mt-2 cursor-pointer" 
+     style="max-width: 410px; width: 100%;" 
+     (click)="selectFirstMember()">
+    <i class="pi pi-arrow-left mr-3" style="color: #0F5169; font-size: 24px; font-weight: bold;"></i>
+    <span class="empty-text m-0 hover:text-blue-500 transition-colors">Click any scheme to view the eligible schemes and the required documents for applying.</span>
+</div>
+            </div>
+
+            <div class="sub-scheme-card flex flex-column h-full" *ngIf="selectedMember">
+                <div class="sub-scheme-header">
+                    துணைத் திட்டம் / Sub-Scheme
+                </div>
+                
+                <div class="sub-scheme-list p-4 flex-grow-1">
+                    <div class="sub-scheme-row flex justify-content-between align-items-center px-3 py-2 mb-3" 
+                         *ngFor="let sub of schemeList">
+                         
+                        <div class="sub-name pr-3">
+                            {{ sub.schemeName }}
+                        </div>
+                        
+<button class="apply-btn" 
+        [disabled]="sub.isApplicable === false"
+        (click)="applySubSchemeClick(sub)">
+    {{ getButtonLabel(sub) }}
+</button>
+                    </div>
+                    
+                    <div *ngIf="schemeList.length === 0" class="text-center p-4 text-gray-500 font-italic" style="font-size: 14px;">
+                        இந்த உறுப்பினருக்கு துணை திட்டங்கள் எதுவும் கிடைக்கவில்லை.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="doc-card mt-2 w-full">
+        <div class="doc-header flex align-items-center">
+            <i class="pi pi-file mr-2 text-xl"></i>
+            தொடங்குவதற்கு முன் இந்த ஆவணங்களைத் தயாராக வைத்திருங்கள். / KEEP THESE DOCUMENTS READY BEFORE APPLYING
+        </div>
+        
+        <div class="doc-content p-4 grid m-0">
+            <div class="col-12 lg:col-7 pl-4">
+                <h4 class="scheme-highlight mb-2 mt-0"> {{ schemeGroupNameDisplay }}</h4>
+                <hr class="doc-divider mb-3">
+                
+                <div *ngIf="configurationList?.documents?.length;">
+                    <ul class="doc-list pl-3" *ngFor="let docGroups of configurationList.documents">
+                        <li class="font-semibold mb-2" *ngIf="docGroups.groupName" style="list-style-type: none; margin-left: -20px;">{{docGroups.groupName}}</li>
+                        <ng-container *ngFor="let doscs of docGroups.requiredDocumentCategory">
+                            <li class="mb-1" *ngFor="let dosdcs of getNonEmptyDocs(doscs.applicableDocuments)">
+                                {{ dosdcs }}
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+                
+                <!-- <ng-template #staticDocs>
+                    <ul class="doc-list pl-3">
+                        <li class="mb-1">கல்வி சான்றிதழ் / Education Certificate</li>
+                        <li class="mb-1">மதிப்பெண் பட்டியல் / Marksheet</li>
+                        <li class="mb-1">மாணவர் அடையாள அட்டை / Student ID Card</li>
+                        <li class="mb-1">சான்று ஆவணப் படம் / Reference document image</li>
+                    </ul>
+                </ng-template> -->
+            </div>
+            
+<div class="col-12 lg:col-5 flex align-items-center justify-content-end pr-4">
+    <div class="image-preview-box flex gap-3 cursor-pointer" (click)="openImageModal()" *ngIf="displayImages.length > 0">
+        
+        <div class="preview-item relative">
+            <img [src]="displayImages[0]" alt="Reference Document 1" class="shadow-2 border-round bg-white p-1" style="height: 180px; max-width: 150px; object-fit: contain; border: 1px solid #ddd;" />
+        </div>
+
+        <div class="preview-item relative" *ngIf="displayImages.length > 1">
+            <img [src]="displayImages[1]" alt="Reference Document 2" class="shadow-2 border-round bg-white p-1" style="height: 180px; max-width: 150px; object-fit: contain; border: 1px solid #ddd;" />
+            
+            <div class="more-overlay absolute top-0 left-0 w-full h-full flex align-items-center justify-content-center border-round" 
+                 *ngIf="displayImages.length > 2" 
+                 style="background: rgba(0, 0, 0, 0.6); color: white; font-weight: bold; font-size: 1.2rem; backdrop-filter: blur(2px);">
+                <span>+{{ displayImages.length - 2 }} More</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="showImageModal" 
+          [modal]="true" 
+          header="Reference Documents" 
+          [style]="{ width: '70vw', zIndex: 10000 }" 
+          [maximizable]="true" 
+          [draggable]="false" 
+          [resizable]="false"
+          styleClass="reference-dialog">
+  
+  <div class="grid m-0">
+    <div class="col-12 md:col-6 lg:col-4 p-3 text-center" *ngFor="let img of displayImages">
+      <img [src]="img" alt="Document" class="w-full shadow-2 border-round bg-white p-2" style="max-height: 400px; object-fit: contain; border: 1px solid #eee;" />
+    </div>
+  </div>
+
+</p-dialog>
+
+<p-dialog [(visible)]="showFamilyModal" [modal]="true" [closable]="true" [draggable]="false" [resizable]="false" [style]="{width: '805px'}" styleClass="family-figma-modal">
+    <ng-template pTemplate="header">
+        <div class="font-bold text-lg text-gray-700 uppercase">புதிய குடும்ப உறுப்பினரை சேர்க்க/ Add New Family Member</div>
+    </ng-template>
+
+<app-add-family-popup *ngIf="showFamilyModal"
+    [memberId]="memberDetails?.id || ''"
+    [schemeGroupId]="schemeGroupId" 
+    [formDetail]="configurationList" 
+    [editData]="selectedEditMember" 
+    (onCancel)="showFamilyModal = false"
+    (onSuccess)="handleFamilySuccess($event)"> 
+</app-add-family-popup>
+</p-dialog>
+
+<p-dialog [(visible)]="showSuccessModal" [modal]="true" [closable]="false" [showHeader]="false" [draggable]="false" [resizable]="false" styleClass="figma-action-modal">
+    <div class="flex flex-column align-items-center justify-content-center p-5 text-center">
+        <div class="figma-icon-circle success-bg mb-4 flex align-items-center justify-content-center">
+            <i class="pi pi-check" style="font-size: 26px; color: white; font-weight: bold;"></i>
+        </div>
+        <div class="figma-message-text success-text mb-4 mt-2" [innerHTML]="successMessage"></div>
+        <button class="figma-modal-btn btn-success" (click)="continueAfterSuccess()">Continue</button>
+    </div>
+</p-dialog>
+
+<p-dialog [(visible)]="showDeleteConfirmModal" [modal]="true" [closable]="false" [showHeader]="false" [draggable]="false" [resizable]="false" styleClass="figma-action-modal">
+    <div class="flex flex-column align-items-center justify-content-center p-5 text-center">
+        <div class="mb-4 flex align-items-center justify-content-center">
+            <i class="pi pi-exclamation-circle" style="font-size: 50px; color: #E74F4F;"></i>
+        </div>
+        <div class="figma-message-text confirm-text mb-4 mt-2">Do you want to Delete the<br>Family Member</div>
+        <div class="flex justify-content-center gap-4 w-full mt-2">
+            <button class="figma-modal-btn btn-cancel" (click)="cancelDelete()">Cancel</button>
+            <button class="figma-modal-btn btn-delete" [disabled]="isDeleting" (click)="confirmDelete()">
+                <i class="pi pi-spinner pi-spin mr-2" *ngIf="isDeleting"></i> Delete
+            </button>
+        </div>
+    </div>
+</p-dialog>

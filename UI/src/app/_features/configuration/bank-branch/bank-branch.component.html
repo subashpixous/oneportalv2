@@ -1,0 +1,70 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}
+            </h4>
+        </div>
+    </div>
+    <div class="grid formgrid mb-3">
+        <form [formGroup]="bankBranchForm" (ngSubmit)="savebankBranch()" class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;">
+                <div class="p-formgrid grid">
+                    <div class="field col-12  md:col-6  lg:col-6">
+                        <label htmlFor="bankId">Bank</label>
+                        <p-dropdown [options]="banks" optionLabel="text" [filter]="true" optionValue="value"
+                            placeholder="Select a bank" formControlName="bankId" [showClear]="
+                            true"></p-dropdown>
+                        <app-error-msg [control]="bankBranchForm.get('bankId')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-6  lg:col-6">
+                        <label htmlFor="branchId">Branch</label>
+                        <p-dropdown [options]="branches" [filter]="true" optionLabel="text" optionValue="value"
+                            [virtualScroll]="true" [virtualScrollItemSize]="30" placeholder="Select a branch"
+                            formControlName="branchId" [showClear]="
+                            true"></p-dropdown>
+                        <app-error-msg [control]="bankBranchForm.get('branchId')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="branchName">Branch Name</label>
+                        <input pInputText formControlName="branchName" [readOnly]="true" type="text" />
+                        <app-error-msg [control]="bankBranchForm.get('branchName')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="ifscCode">IFSC Code</label>
+                        <input pInputText formControlName="ifscCode" type="text" />
+                        <app-error-msg [control]="bankBranchForm.get('ifscCode')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="districtId">District</label>
+                        <p-dropdown [options]="districts" optionLabel="text" optionValue="value"
+                            placeholder="Select a district" formControlName="districtId" [showClear]="
+                            true"></p-dropdown>
+                        <app-error-msg [control]="bankBranchForm.get('districtId')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-12  lg:col-12">
+                        <label htmlFor="address">Address</label>
+                        <input pInputText formControlName="address" type="text" />
+                        <app-error-msg [control]="bankBranchForm.get('address')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-9  lg:col-9">
+                        <label htmlFor="email">Email</label>
+                        <input pInputText formControlName="email" type="text" />
+                        <app-error-msg [control]="bankBranchForm.get('email')"></app-error-msg>
+                    </div>
+                    <div class="col-12 md:col-3 flex  lg:col-3" style="margin-top: 25px">
+                        <div class="col">
+                            <button pButton *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                                type="submit" [disabled]="!bankBranchForm.valid" label="Submit"></button>
+                        </div>
+                        <div class="col">
+                            <button pButton type="button" class="p-button-secondary" label="Reset"
+                                (click)="resetForm()"></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

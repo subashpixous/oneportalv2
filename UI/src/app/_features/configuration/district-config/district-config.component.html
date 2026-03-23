@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}
+            </h4>
+        </div>
+        <div class="col" style="text-align: center;">
+            <p-dropdown [options]="districts" optionLabel="text" [style]="{'width': '50%'}" optionValue="value"
+                placeholder="Select a District" (ngModelChange)="changeDistrict($event)" [showClear]="false"
+                [(ngModel)]="selectedDistricts"></p-dropdown>
+        </div>
+    </div>
+    <div class="grid formgrid mb-3">
+        <form [formGroup]="districtForm" (ngSubmit)="savedistrict()" class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;">
+                <div class="p-formgrid grid">
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="latitude">Latitude</label>
+                        <input pInputText formControlName="latitude" type="text" />
+                        <app-error-msg [control]="districtForm.get('latitude')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="longitude">Longitude</label>
+                        <input pInputText formControlName="longitude" type="text" />
+                        <app-error-msg [control]="districtForm.get('longitude')"></app-error-msg>
+                    </div>
+                    <div class="col-12 md:col-3 flex  lg:col-3" style="margin-top: 25px">
+                        <div class="col">
+                            <button pButton *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                                type="submit" label="Submit"></button>
+                        </div>
+                        <div class="col">
+                            <button pButton type="button" class="p-button-secondary" label="Reset"
+                                (click)="resetForm()"></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

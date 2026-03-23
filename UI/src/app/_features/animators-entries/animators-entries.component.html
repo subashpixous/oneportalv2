@@ -1,0 +1,112 @@
+
+ <!-- [29-Oct-2025] Updated by Sivasankar  K: Modified to fetch Animator entries -->
+
+<div class="card noborderRad">
+<div class="text-center mb-4">
+  <p-selectButton
+    [options]="mainOptions" 
+    [(ngModel)]="mainValue"
+    (ngModelChange)="generateMainFilter()"
+    [multiple]="false"
+    optionLabel="name"
+    optionValue="value"
+    [allowEmpty]="false"
+    class="selectdash"
+    [ngStyle]="{ width: '100%', 'max-width': '250px' }"
+  >
+    <ng-template let-item pTemplate>
+      <span style="font-weight: 600;">{{ item.name }}</span>
+    </ng-template>
+  </p-selectButton>
+</div>
+
+<!-- 🔹 Filter Row: all aligned LEFT -->
+<!-- 🔹 Uniform Left-Aligned Filter Row -->
+<div class="col-12 mb-3">
+  <div class="filters-row">
+    <!-- District -->
+    <p-dropdown
+      [options]="districts"
+      optionLabel="text"
+      optionValue="value"
+      [(ngModel)]="selectedDistricts"
+      placeholder="Select District"
+      [showClear]="true"
+      [appendTo]="'body'"
+      (onChange)="onDistrictChange()"
+      pTooltip="Select District"
+          tooltipPosition="top"
+    ></p-dropdown>
+
+    <!-- Scheme -->
+    <p-multiSelect
+      *ngIf="mainValue === 'application'"
+      [options]="schemes"
+      optionLabel="text"
+      optionValue="value"
+      [(ngModel)]="selectedSchemes"
+      placeholder="Select Scheme"
+      [appendTo]="'body'"
+      (ngModelChange)="changescheme($event)"
+      pTooltip="Select Scheme"
+          tooltipPosition="top"
+    ></p-multiSelect>
+
+    <!-- Status -->
+    <p-multiSelect
+      *ngIf="mainValue === 'application'"
+      [options]="statuses"
+      optionLabel="text"
+      optionValue="value"
+      [(ngModel)]="selectedStatuses"
+      placeholder="Select Status"
+      [appendTo]="'body'"
+      (ngModelChange)="changestatus($event)"
+      pTooltip="Select Status"
+          tooltipPosition="top"
+    ></p-multiSelect>
+
+    <!-- Generate Button -->
+    <button
+      pButton
+      pRipple
+      icon="pi pi-arrow-right"
+      class="p-button-secondary"
+      (click)="generate()"
+    ></button>
+
+    <!-- Reset Button -->
+    <button
+      pButton
+      pRipple
+      icon="pi pi-times"
+      class="p-button-outlined"
+      (click)="reset()"
+    ></button>
+  </div>
+</div>
+
+
+<!-- 🔹 Table Section -->
+<div class="row">
+  <app-datatable-pagination
+    [records]="configurationList"
+    [defaultSortField]="defaultSortField"
+    [defaultSortOrder]="defaultSortOrder"
+    [cols]="cols"
+    [fileName]="mainValue === 'application' ? 'Scheme' : 'Members'"
+    [rows]="rows"
+    [total]="total"
+     [canShowAction]="false"
+    (changefilter)="changefilter($event)"
+    (actionalAction)="actionalAction($event)"
+    [excelExport]="true" 
+  
+  (exportRequest)="onExportRequest($event)"
+  
+
+  ></app-datatable-pagination>
+   <!-- modified by Sivasankar on 08-11-2025 for export functionality -->
+</div>
+</div>
+<p-toast></p-toast>

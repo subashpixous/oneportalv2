@@ -1,0 +1,8 @@
+<p class="">
+    <span *ngFor="let item of breadcrumbs; index as i">
+        <span (click)="onBreadcrumClick(item.routing)" style="color: #003255;cursor: pointer;"
+            *ngIf="item.isActionable"> {{item.pathName}}</span>
+        <span *ngIf="!item.isActionable"> {{item.pathName}}</span>
+        <span *ngIf="breadcrumbs.length -1 != i "> / </span>
+    </span>
+</p>

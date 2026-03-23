@@ -1,0 +1,89 @@
+// td {
+//     background-color: white !important;
+// }
+
+// .vs-custom-btn {
+//     width: 90%;
+//     margin-bottom: 10px;
+//     background-color: #1a6194;
+//     border-color: #1a6194;
+// }
+
+//     .vs-custom-btn:hover {
+//         background-color: #1a6194;
+//         border-color: #1a6194;
+//     }
+
+//     .vs-custom-btn:active {
+//         background-color: #1a6194;
+//         border-color: #1a6194;
+//     }
+
+// .SearchOptionClass {
+//     display: none;
+// }
+// .divhighligher {
+//   background-color: #bec0fd;
+//   padding: 10px;
+//   border-radius: 5px;
+// }
+/* ID Bar Style */
+.id-container {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #467C88;
+}
+
+/* Page Background */
+:host {
+    display: block;
+    background-color: #f2f2f2; /* Light grey background like image 1 */
+    min-height: 100vh;
+}
+
+/* Title Bar - Greyish background with dark text */
+.scheme-title-bar {
+    background-color: #eeeeee;
+    color: #666666;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Table Card styling */
+.table-card {
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Data Table Header Customization */
+::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    background-color: #e9f2f4 !important; /* Light teal/blue from reference */
+    color: #333333 !important;
+    font-size: 13px !important;
+    padding: 10px 5px !important;
+    text-align: center !important;
+    border: 1px solid #d1e8e8 !important;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    border: 1px solid #f0f0f0 !important;
+    font-size: 13px !important;
+    color: #555555;
+    text-align: center;
+}
+
+
+/* Custom Back Button */
+::ng-deep .back-btn-custom {
+    background: #f0f0f0 !important;
+    border-color: #dcdcdc !important;
+    color: #666 !important;
+    font-weight: 600;
+}

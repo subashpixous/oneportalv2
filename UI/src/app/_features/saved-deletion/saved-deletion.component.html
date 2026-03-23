@@ -1,0 +1,153 @@
+<div class="card noborderRad">
+  <!-- Toast Messages -->
+  <p-toast position="top-right"></p-toast>
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+  <div class="grid formgrid">
+    <!-- Header -->
+    <div class="col-12 lg:col-4 md:col-4 mb-2">
+      <h4>Saved Applications Deletion</h4>
+    </div>
+
+    <!-- Tabs -->
+    <div class="col-12 lg:col-4 md:col-4 mb-2">
+      <div class="justify-content-center flex">
+        <p-selectButton
+          [options]="mainOptions"
+          [(ngModel)]="mainValue"
+          (ngModelChange)="generateMainFilter()"
+          [multiple]="false"
+          optionLabel="name"
+          optionValue="value"
+          [allowEmpty]="false"
+          class="selectdash">
+          <ng-template let-item pTemplate>
+            <span>{{item.name}}</span>
+          </ng-template>
+        </p-selectButton>
+      </div>
+    </div>
+
+    <!-- <div class="col-12 lg:col-4 md:col-4 mb-2">
+      <div class="flex justify-content-end gap-2">
+        <button
+          pButton
+          icon="pi pi-refresh"
+          label="Refresh"
+          class="p-button-outlined"
+          (click)="loadApplications()"
+          [disabled]="loading"
+          [loading]="loading">
+        </button>
+      </div>
+    </div> -->
+
+    <!-- Search Bar -->
+    <div class="col-12 row lg:col-12 md:col-12 flex">
+      <div class="col-12 lg:col-10 md:col-10">
+        <!-- <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+            <i class="pi pi-search"></i>
+          </span>
+          <input
+            type="text"
+            pInputText
+            placeholder="Search by application number, name, scheme..."
+            [(ngModel)]="searchText"
+            (input)="onSearch()"
+            [disabled]="loading"
+            style="width: 100%"
+          />
+          <button
+            pButton
+            icon="pi pi-times"
+            class="p-button-outlined p-button-secondary"
+            (click)="clearSearch()"
+            [disabled]="!searchText || loading"
+            pTooltip="Clear search"
+          ></button>
+        </div> -->
+      </div>
+
+      <!-- Bulk Actions -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <div class="flex justify-content-end gap-2">
+          <span *ngIf="hasSelected()" class="text-primary font-semibold align-self-center">
+            {{ getSelectedCount() }} selected
+          </span>
+
+          <!-- Restore button for TRASH tab -->
+          <button *ngIf="mainValue === 'TRASH'"
+                  pButton
+                  icon="pi pi-refresh"
+                  label="Restore"
+                  class="p-button-success"
+                  [disabled]="!hasSelected() || loading"
+                  (click)="restoreApplications()"
+                  pTooltip="Restore selected applications from trash">
+          </button>
+
+          <!-- Move to Trash button for ACTIVE tab -->
+          <button *ngIf="mainValue === 'ACTIVE'"
+                  pButton
+                  icon="pi pi-trash"
+                  label="Move to Trash"
+                  class="p-button-danger"
+                  [disabled]="!hasSelected() || loading"
+                  (click)="moveToTrash()"
+                  pTooltip="Move selected applications to trash">
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Datatable -->
+    <div class="col-12 mb-3 mt-3">
+      <div class="row">
+        <app-datatable-pagination
+          [records]="applications"
+          [defaultSortField]="defaultSortField"
+          [defaultSortOrder]="defaultSortOrder"
+          [cols]="cols"
+          [fileName]="'Saved Applications'"
+          [rows]="rows"
+          [total]="totalRecords"
+          [actions]="actions"
+          (invokeAction)="actioInvoked($event)"
+          [defaultstatus]="true"
+          [searchableColumns]="searchableColumns"
+          [hasActiveInactive]="false"
+          (changefilter)="changefilter($event)"
+          (actionalAction)="actionalAction($event)"
+    [canShowAction]="true"
+      [canShowCheckbox]="true"
+      (selectedApplications)="onSelectedApplications($event)">
+        </app-datatable-pagination>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Info -->
+  <div class="mt-4 p-3 surface-card border-round">
+    <div class="flex justify-content-between align-items-center">
+      <!-- <div class="text-sm">
+        <span *ngIf="totalRecords > 0">
+          Showing {{ first + 1 }} to {{ Math.min(first + rows, totalRecords) }}
+          of {{ totalRecords }} {{ mainValue === 'ACTIVE' ? 'active' : 'trashed' }} applications
+        </span>
+        <span *ngIf="totalRecords === 0">
+          No {{ mainValue === 'ACTIVE' ? 'active' : 'trashed' }} applications found
+        </span>
+      </div> -->
+      <!-- <div class="text-sm text-600">
+        <i class="pi pi-info-circle mr-1"></i>
+        <span *ngIf="mainValue === 'ACTIVE'">
+          Showing active saved applications (IsActive = 1). Saved applications expire after 30 days.
+        </span>
+        <span *ngIf="mainValue === 'TRASH'">
+          Showing trashed saved applications (IsActive = 0). These applications have been moved to trash.
+        </span>
+      </div> -->
+    </div>
+  </div>
+</div>

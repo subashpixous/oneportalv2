@@ -1,0 +1,1542 @@
+<div class="" style="display: flex;justify-content: center;">
+    <div class="" [style]="stylee">
+        <div class="card" style="padding: 0px;">
+            <div class="card-body" style="padding-top: 0px !important;">
+                <div class="col-12 flex row" style="display: flex;justify-content: center;padding: 0px !important;">
+                    <div class="col-12  md:col-2  lg:col-2" style="text-align: left;">
+                        <p-button label=" Back" class="p-button-secondary" severity="secondary" icon="pi pi-arrow-left"
+                            *ngIf="!cashow" (onClick)="backtogrid()" />
+                    </div>
+                    <div class="col-12  md:col-6  lg:col-6">
+                        <h4 *ngIf="this.schemeDetails?.applicationNumber || this.schemeDetails?.temporaryNumber" style="background-color: #ced4da; border-radius: 10px; padding: 10px 15px;
+                        margin-bottom: 0px;font-size: 20px;text-align: center;">Application Number / எண்:
+                            {{this.schemeDetails.applicationNumber?this.schemeDetails.applicationNumber:this.schemeDetails.temporaryNumber}}
+                        </h4>
+                    </div>
+                    <!-- <div class="col-12  md:col-1  lg:col-1" style="text-align: end;">
+                        <a download="G.O.[Ms].No. 856-18122024163237.pdf"
+                            href="assets/G.O.[Ms].No. 856-18122024163237.pdf"> <button class="p-button-success"
+                                severity="success" type="button" label="GO Link" pButton></button></a>
+                    </div> -->
+                    <div class="col-12  md:col-1  lg:col-1" style="text-align: end;">
+                        <a target="_blank" [routerLink]="'/help/scheme'"> <button class="p-button-success"
+                                severity="success" type="button" label="Help" pButton></button></a>
+                    </div>
+                    <div class="col-12  md:col-2  lg:col-2" style="text-align: end;">
+                        <p-button label="Expand" class="p-button-secondary" severity="secondary"
+                            icon="pi pi-window-maximize" *ngIf="!IsExpanded" (onClick)="expandCollapse()" />
+                        <p-button label="Collapse" class="p-button-secondary" severity="secondary"
+                            icon="pi pi-window-minimize" *ngIf="IsExpanded" (onClick)="expandCollapse()" />
+                    </div>
+
+                    <div class="col-12" style="text-align: end;" *ngIf="schemeDetails && schemeDetails.statusFlow">
+                        <div style="display: flex; flex-wrap: wrap;justify-content:center;">
+                            <div [class]="getclass(item) " *ngFor="let item of schemeDetails.statusFlow"
+                                [style]="getStyle(item)" [title]="item.status">
+                                <div>{{item.number}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p-accordion [multiple]="true" [activeIndex]="activeIndex" [style]="{'width':'100%'}">
+                        <p-accordionTab header="General Information  / பொதுவான தகவல்" [className]="'wdq'">
+                            <div class="grid formgrid mb-3">
+                                <div class="col-12">
+                                    <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+                                        <div class="p-formgrid grid ">
+                                            <div class="col-12 flex md:col-12  lg:col-12"
+                                                style="flex-wrap: wrap; justify-content: center;">
+                                                <div class="col-3">
+                                                    <div class="row col-12">
+                                                        <div class="col-12" style="text-align: center;">
+                                                            <label class="hoverable" for="">
+                                                                <img
+                                                                    [src]=" url && url !='' ? url : 'https://www.w3schools.com/howto/img_avatar.png'" />
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-12" *ngIf=" !url && url ==''"
+                                                            style="margin-top: 10px;display: flex;justify-content: center;">
+                                                            <p-fileUpload mode="basic" chooseLabel="Upload"
+                                                                chooseIcon="pi pi-upload" accept=".png, .jpg, .jpeg"
+                                                                [maxFileSize]="2000000" [auto]="true" img
+                                                                [customUpload]="true"
+                                                                (uploadHandler)="onSelectFile($event)" />
+                                                        </div>
+                                                        <div class="col-12" *ngIf="url && url !=''"
+                                                            style="margin-top: 10px;display: flex;justify-content: center;">
+                                                            <p-button label="Remove" class="p-button-secondary"
+                                                                (onClick)="removeImage()" />
+                                                        </div>
+                                                        <br />
+                                                        <app-error-msg [style]="{'text-align':'center'}"
+                                                            [control]="schemeGeneralForm.get('userImage')"></app-error-msg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form [formGroup]="schemeGeneralForm" class="col-12">
+                                    <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+                                        <div class="p-formgrid grid ">
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="firstName">Ex-Service Man First Name / முன்னாள்
+                                                        ராணுவ வீரரின் முதல் பெயர்
+                                                    </label>
+                                                    <input pInputText formControlName="firstName" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('firstName')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="lastName">Ex-Service Man Last Name / முன்னாள் ராணுவ
+                                                        வீரரின் கடைசி பெயர்
+                                                    </label>
+                                                    <input pInputText formControlName="lastName" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('lastName')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="servedIn">Served In / பணியாற்றிய படைப்பிரிவு
+                                                    </label>
+                                                    <p-dropdown [options]="services" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Service"
+                                                        formControlName="servedIn" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('servedIn')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="serviceNumber">Service Number / படை எண்:
+                                                    </label>
+                                                    <input pInputText formControlName="serviceNumber" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('serviceNumber')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="rank">Rank / தரம்
+                                                    </label>
+                                                    <p-dropdown [options]="ranks" optionLabel="text" optionValue="value"
+                                                        placeholder="Select a rank" formControlName="rank"
+                                                        [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('rank')"></app-error-msg>
+                                                </div>
+                                                <!-- <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="dateOfEnrollment">Date Of Enrollment</label>
+                                                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true"
+                                                        [showButtonBar]="true"
+                                                        [maxDate]="schemeGeneralForm.get('dateOfDischarge')?.value?? endDate"
+                                                        [minDate]="schemeGeneralForm.get('dob')?.value"
+                                                        [readonlyInput]="true" formControlName="dateOfEnrollment"
+                                                        inputId="icon"></p-calendar>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('dateOfEnrollment')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="dateOfDischarge">Date Of Discharge</label>
+                                                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true"
+                                                        [showButtonBar]="true" [maxDate]="endDate"
+                                                        [minDate]="schemeGeneralForm.get('dateOfEnrollment')?.value??schemeGeneralForm.get('dob')?.value"
+                                                        [readonlyInput]="true" formControlName="dateOfDischarge"
+                                                        inputId="icon"></p-calendar>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('dateOfDischarge')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="totalYearsinService">Total Years in
+                                                        Service</label>
+                                                    <input pInputText [readOnly]="true"
+                                                        formControlName="totalYearsinService" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('totalYearsinService')"></app-error-msg>
+                                                </div> -->
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="isSelf">Self / Dependent / தனக்கு/சார்ந்தோர்: :
+                                                    </label>
+                                                    <p-inputSwitch formControlName="isSelf"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('isSelf')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="schemeGeneralForm.get('isSelf')?.value == true">
+                                                    <label htmlFor="dependents">Dependents / சார்ந்தோர் :
+                                                    </label>
+                                                    <p-dropdown [options]="dependants" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a dependent"
+                                                        formControlName="dependents" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('dependents')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="schemeGeneralForm.get('isSelf')?.value == true">
+                                                    <label htmlFor="dependentName">Dependent Name / சார்ந்திருப்பவரின்
+                                                        பெயர்</label>
+                                                    <input pInputText formControlName="dependentName" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('dependentName')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="schemeGeneralForm.get('isSelf')?.value == true">
+                                                    <label htmlFor="dob">Dependent DOB / சார்ந்தோர் பிறந்த தேதி
+                                                    </label>
+                                                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true"
+                                                        [showButtonBar]="true" [maxDate]="endDate" dateFormat="dd-mm-yy"
+                                                        [readonlyInput]="true" formControlName="dependentDob"
+                                                        inputId="icon"></p-calendar>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('dependentDob')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="schemeGeneralForm.get('isSelf')?.value == false">
+                                                    <label htmlFor="fathersName">Father's Name / தந்தை பெயர்:
+                                                    </label>
+                                                    <input pInputText formControlName="fathersName" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('fathersName')"></app-error-msg>
+                                                </div>
+                                                <!-- <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="isFirstEntrepreneur">Are you a first-generation
+                                                        entrepreneur? / நீங்கள் முதல் தலைமுறை தொழில்முனைவோரா? :
+                                                    </label>
+                                                    <p-inputSwitch formControlName="isFirstEntrepreneur"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('isFirstEntrepreneur')"></app-error-msg>
+                                                </div> -->
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="isNativeTamilNadu">Are you a native of Tamil Nadu? /
+                                                        நீங்கள் தமிழகத்தை பூர்வீகமாக கொண்டவரா?
+                                                    </label> <p-inputSwitch formControlName="isNativeTamilNadu"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('isNativeTamilNadu')"></app-error-msg>
+                                                </div>
+                                                <!-- <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="idCardNo">ID Card No</label>
+                                                    <input pInputText formControlName="idCardNo" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('idCardNo')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="ppoNo">PPO No</label>
+                                                    <input pInputText formControlName="ppoNo" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('ppoNo')"></app-error-msg>
+                                                </div> -->
+
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="dob">Ex-Service Man's D.O.B / முன்னாள்
+                                                        ராணுவ வீரரின் பிறந்த தேதி
+                                                    </label>
+                                                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true"
+                                                        [showButtonBar]="true" dateFormat="dd-mm-yy"
+                                                        [maxDate]="schemeGeneralForm.get('dateOfEnrollment')?.value"
+                                                        [readonlyInput]="true" formControlName="dob"
+                                                        dateFormat="dd-mm-yy" inputId="icon"></p-calendar>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('dob')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="age">Ex-Service Man's Age / முன்னாள்
+                                                        ராணுவ வீரரின் வயது
+                                                    </label>
+                                                    <input pInputText [readOnly]="true" formControlName="age"
+                                                        type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('age')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="sex">Gender / பாலினம்
+                                                    </label>
+                                                    <p-dropdown [options]="sexes" optionLabel="text" optionValue="value"
+                                                        placeholder="Select a gender" formControlName="sex"
+                                                        [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('sex')"></app-error-msg>
+                                                </div>
+                                                <!-- <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="religion">Religion</label>
+                                                    <p-dropdown [options]="religions" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Religion"
+                                                        formControlName="religion" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('religion')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="community">Community</label>
+                                                    <p-dropdown [options]="communities" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Community"
+                                                        formControlName="community" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('community')"></app-error-msg>
+                                                </div> -->
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="maritalStatus">Marital Status / திருமண நிலை
+                                                    </label>
+                                                    <p-dropdown [options]="maritalstatuses" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Marital Status"
+                                                        formControlName="maritalStatus" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('maritalStatus')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="mobile">Mobile / கைபேசி
+                                                    </label>
+                                                    <input pInputText formControlName="mobile" [maxlength]="10"
+                                                        type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('mobile')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="projectDistrict">Project District / திட்டத்தின்
+                                                        மாவட்டம்
+                                                    </label>
+                                                    <p-dropdown [options]="districts" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a District"
+                                                        formControlName="projectDistrict"
+                                                        [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeGeneralForm.get('projectDistrict')"></app-error-msg>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 flex " style="justify-content: center;">
+                                                <div class=" col-12  md:col-1  lg:col-1">
+                                                    <p-button label="Next" (onClick)="next(1)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </p-accordionTab>
+                        <p-accordionTab header="Personal Information/	தனிப்பட்ட தகவல்
+                        " [disabled]="isnew">
+                            <div class="grid formgrid mb-3">
+                                <form [formGroup]="schemePersonalForm" class="col-12">
+                                    <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+                                        <div class="p-formgrid grid ">
+                                            <div class="outlayerdiv">
+                                                <div class="outlayerinnerdiv">
+                                                    <h5 class="outlarheader">Residential Address / குடியிருப்பு முகவரி
+                                                    </h5>
+                                                </div>
+                                                <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="resident_doorNo">Address / முகவரி
+                                                        </label>
+                                                        <input pInputText id="doorno" formControlName="resident_doorNo"
+                                                            type="text" />
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_doorNo')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="resident_streetName">Street Name / தெரு பெயர்
+                                                        </label>
+                                                        <input pInputText formControlName="resident_streetName"
+                                                            type="text" />
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_streetName')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="resident_district">District / மாவட்டம்
+                                                        </label>
+                                                        <p-dropdown [options]="residence_districts" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a District"
+                                                            formControlName="resident_district"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_district')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="resident_taluk">Taluk / தாலுக்கா
+                                                        </label>
+                                                        <p-dropdown [options]="residence_taluks" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a Taluk"
+                                                            formControlName="resident_taluk"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_taluk')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="resident_village">Village / கிராமம்
+                                                        </label>
+                                                        <input pInputText formControlName="resident_village"
+                                                            type="text" />
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_village')"></app-error-msg>
+                                                    </div>
+                                                    <!-- <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="resident_localBody">Area</label>
+                                                        <p-dropdown [options]="residence_areas" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a area"
+                                                            formControlName="resident_localBody"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_localBody')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="res_localbodyValue === 'URBAN'">
+                                                        <label htmlFor="resident_nameoflocalBody">Name of the Local
+                                                            body</label>
+                                                        <p-dropdown [options]="residence_nameOfLocalbody"
+                                                            optionLabel="text" optionValue="value"
+                                                            placeholder="Select a Local body"
+                                                            formControlName="resident_nameoflocalBody"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_nameoflocalBody')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="res_localbodyValue === 'RURAL'">
+                                                        <label htmlFor="resident_block">Block</label>
+                                                        <p-dropdown [options]="residence_blocks" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a Block"
+                                                            formControlName="resident_block"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_block')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="res_nameoflocalbodyValue === 'CORPORATION'">
+                                                        <label htmlFor="resident_corporation">Corporation</label>
+                                                        <p-dropdown [options]="residence_corporations"
+                                                            optionLabel="text" optionValue="value"
+                                                            placeholder="Select a Corporation"
+                                                            formControlName="resident_corporation"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_corporation')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="res_nameoflocalbodyValue === 'MUNICIPALITY'">
+                                                        <label htmlFor="resident_municipality">Municipality</label>
+                                                        <p-dropdown [options]="residence_municipalities"
+                                                            optionLabel="text" optionValue="value"
+                                                            placeholder="Select a Municipality"
+                                                            formControlName="resident_municipality"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_municipality')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="res_nameoflocalbodyValue== 'TOWNPANCHAYAT'">
+                                                        <label htmlFor="resident_townPanchayat">Town Panchayat</label>
+                                                        <p-dropdown [options]="residence_townpanchayat"
+                                                            optionLabel="text" optionValue="value"
+                                                            placeholder="Select a Town Panchayat"
+                                                            formControlName="resident_townPanchayat"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_townPanchayat')"></app-error-msg>
+                                                    </div> -->
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="resident_pincode">Pincode / பின்கோடு
+                                                        </label>
+                                                        <input pInputText formControlName="resident_pincode"
+                                                            [maxlength]="6" [minlength]="6" type="text" />
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('resident_pincode')"></app-error-msg>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                                                <div class="field col-12  md:col-6  lg:col-6">
+                                                    <label htmlFor="isSame">Is Correspondence Address is Same as
+                                                        Residential Address / கடித முகவரி என்பது குடியிருப்பு முகவரிக்கு
+                                                        சமம்
+                                                    </label>
+                                                    <p-inputSwitch formControlName="isSame"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('isSame')"></app-error-msg>
+                                                </div>
+                                            </div>
+                                            <div class="outlayerdiv" *ngIf="!schemePersonalForm.get('isSame')?.value">
+                                                <div class="outlayerinnerdiv">
+                                                    <h5 class="outlarheader">Correspondence Address / கடிதத்தொடர்பு
+                                                        முகவரி
+
+                                                    </h5>
+                                                </div>
+                                                <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="correspondence_doorNo">Address / முகவரி
+                                                        </label>
+                                                        <input pInputText formControlName="correspondence_doorNo"
+                                                            type="text" />
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_doorNo')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="correspondence_streetName">Street Name / தெரு
+                                                            பெயர்
+                                                        </label>
+                                                        <input pInputText formControlName="correspondence_streetName"
+                                                            type="text" />
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_streetName')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="correspondence_district">District / மாவட்டம்
+                                                        </label>
+                                                        <p-dropdown [options]="corres_districts" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a District"
+                                                            formControlName="correspondence_district"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_district')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="correspondence_taluk">Taluk / தாலுக்கா
+                                                        </label>
+                                                        <p-dropdown [options]="corres_taluks" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a Taluk"
+                                                            formControlName="correspondence_taluk"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_taluk')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="correspondence_village">Village / கிராமம்
+                                                        </label>
+                                                        <input pInputText formControlName="correspondence_village"
+                                                            type="text" />
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_village')"></app-error-msg>
+                                                    </div>
+                                                    <!-- <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="correspondence_localBody">Area</label>
+                                                        <p-dropdown [options]="corres_areas" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a area"
+                                                            formControlName="correspondence_localBody"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_localBody')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="corres_localbodyValue === 'URBAN'">
+                                                        <label htmlFor="correspondence_nameoflocalBody">Name of the
+                                                            Local body</label>
+                                                        <p-dropdown [options]="corres_nameOfLocalbody"
+                                                            optionLabel="text" optionValue="value"
+                                                            placeholder="Select a Local body"
+                                                            formControlName="correspondence_nameoflocalBody"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_nameoflocalBody')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="corres_localbodyValue === 'RURAL'">
+                                                        <label htmlFor="correspondence_block">Block</label>
+                                                        <p-dropdown [options]="corres_blocks" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a Block"
+                                                            formControlName="correspondence_block"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_block')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="corres_nameoflocalbodyValue === 'CORPORATION'">
+                                                        <label htmlFor="correspondence_corporation">Corporation</label>
+                                                        <p-dropdown [options]="corres_corporations" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a Corporation"
+                                                            formControlName="correspondence_corporation"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_corporation')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="corres_nameoflocalbodyValue === 'MUNICIPALITY'">
+                                                        <label
+                                                            htmlFor="correspondence_municipality">Municipality</label>
+                                                        <p-dropdown [options]="corres_municipalities" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a Municipality"
+                                                            formControlName="correspondence_municipality"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_municipality')"></app-error-msg>
+                                                    </div>
+                                                    <div class="field col-12  md:col-4  lg:col-4"
+                                                        *ngIf="corres_nameoflocalbodyValue== 'TOWNPANCHAYAT'">
+                                                        <label htmlFor="correspondence_townPanchayat">Town
+                                                            Panchayat</label>
+                                                        <p-dropdown [options]="corres_townpanchayat" optionLabel="text"
+                                                            optionValue="value" placeholder="Select a Town Panchayat"
+                                                            formControlName="correspondence_townPanchayat"
+                                                            [showClear]="true"></p-dropdown>
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_townPanchayat')"></app-error-msg>
+                                                    </div> -->
+                                                    <div class="field col-12  md:col-4  lg:col-4">
+                                                        <label htmlFor="correspondence_pincode">Pincode / பின்கோடு
+                                                        </label>
+                                                        <input pInputText formControlName="correspondence_pincode"
+                                                            [maxlength]="6" [minlength]="6" type="text" />
+                                                        <app-error-msg
+                                                            [control]="schemePersonalForm.get('correspondence_pincode')"></app-error-msg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12"
+                                                style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                            </div>
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="aadharNo">Aadhar No / ஆதார் எண்
+                                                    </label>
+                                                    <input pInputText formControlName="aadharNo" [maxlength]="12"
+                                                        type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('aadharNo')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="email">Email / மின்னஞ்சல்
+                                                    </label>
+                                                    <input pInputText formControlName="email" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('email')"></app-error-msg>
+                                                </div>
+                                                <!-- <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="isReEmployed">Are you re-employed? / நீங்கள்
+                                                        மீண்டும் பணியமர்த்தப்பட்டுள்ளீர்களா?
+                                                    </label> <p-inputSwitch formControlName="isReEmployed"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('isReEmployed')"></app-error-msg>
+                                                </div> -->
+                                            </div>
+                                            <div class="col-12"
+                                                style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                            </div>
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+
+                                                <!-- <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="residinginSameArea">Residing continuously for the
+                                                        last three years in the area from where loan is applied</label>
+
+                                                    <p-inputSwitch formControlName="residinginSameArea"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('residinginSameArea')"></app-error-msg>
+                                                </div> -->
+
+                                                <!-- <div class="col-12"
+                                                    style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                                </div> -->
+                                                <div style="padding: 20px;width: 100%;overflow-x: auto;">
+
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 10%">S.No / வ.எண்
+                                                                </th>
+                                                                <th style="width: 30%">Educational Qualification/
+                                                                    கல்வித் தகுதி
+                                                                </th>
+                                                                <th style="width: 20%">Course Details / படிப்பு
+                                                                    விவரங்கள்
+                                                                    <br>
+                                                                    <span *ngIf="courseErrorMsg"
+                                                                        class="tableheadererrormsg">{{courseErrorMsg}}</span>
+                                                                </th>
+                                                                <th style="width: 30%"> Institution / நிறுவனம்
+                                                                    <br>
+                                                                    <span *ngIf="institutionErrorMsg"
+                                                                        class="tableheadererrormsg">{{institutionErrorMsg}}</span>
+                                                                </th>
+                                                                <th style="width: 10%">Year of Passing / கடந்த ஆண்டு
+                                                                    <br>
+                                                                    <span
+                                                                        class="tableheadererrormsg">{{yearErrorMsg}}</span>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody formArrayName="educationalDetails">
+                                                            <tr *ngFor="let itemrow of educationalDetailsArray.controls; let i=index;let l=last"
+                                                                [formGroupName]="i">
+                                                                <td>
+                                                                    {{
+                                                                    i+1
+                                                                    }}
+                                                                </td>
+                                                                <td>{{
+                                                                    educationalDetailsList[i].controls['educationalQualification'].value
+                                                                    ? (
+                                                                    educationalDetailsList[i].controls['educationalQualification'].value):''
+                                                                    }}
+                                                                </td>
+                                                                <td>
+                                                                    <input pInputText [maxlength]="250"
+                                                                        formControlName="courseDetails"
+                                                                        (ngModelChange)="validatecourse(i,'courseDetails');"
+                                                                        type="text" />
+                                                                </td>
+                                                                <td>
+                                                                    <input pInputText [maxlength]="250"
+                                                                        formControlName="institution" type="text"
+                                                                        (ngModelChange)="validatecourse(i,'institution');" />
+                                                                </td>
+                                                                <td>
+                                                                    <input pInputText [maxlength]="250"
+                                                                        formControlName="yearOfPassing" type="text"
+                                                                        [maxlength]="4"
+                                                                        (ngModelChange)="validatecourse(i,'yearOfPassing');" />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <div class="col-12"
+                                                    style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                                </div>
+                                                <div class="field col-12  md:col-3  lg:col-3">
+                                                    <label htmlFor="istrainingUndergone">Training Undergone / பயிற்சி
+                                                        முடிந்த விவரம்
+
+                                                    </label>
+
+                                                    <p-inputSwitch formControlName="istrainingUndergone"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('istrainingUndergone')"></app-error-msg>
+                                                </div>
+                                                <div style="padding: 20px;width: 100%;overflow-x: auto;"
+                                                    *ngIf="schemePersonalForm.get('istrainingUndergone')?.value == true">
+                                                    <div class="col-12"
+                                                        style="display: flex;justify-content: space-between;">
+                                                        <div style="display: flex; align-items: center;">
+                                                            <!-- <h5>Training Details / பயிற்சி
+                                                                விவரங்கள்
+                                                            </h5> -->
+                                                        </div>
+                                                        <div style="margin: 5px;">
+                                                            <button pButton type="button"
+                                                                (click)="addTrainng()">Add</button>
+                                                        </div>
+
+                                                    </div>
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 10%">S.No / வ.எண்
+                                                                </th>
+                                                                <th style="width: 30%">Name of Institution /
+                                                                    நிறுவனத்தின் பெயர்
+                                                                    <br>
+                                                                    <span *ngIf="instErrorMsg"
+                                                                        class="tableheadererrormsg">{{instErrorMsg}}</span>
+                                                                </th>
+                                                                <th style="width: 15%">Training Duration From / துவங்கிய
+                                                                    தேதி
+                                                                    <br>
+                                                                    <span *ngIf="trainingFromErrorMsg"
+                                                                        class="tableheadererrormsg">{{trainingFromErrorMsg}}</span>
+                                                                </th>
+                                                                <th style="width: 15%"> Training Duration To / முடிந்த
+                                                                    தேதி
+                                                                    <br>
+                                                                    <span *ngIf="trainingtoErrorMsg"
+                                                                        class="tableheadererrormsg">{{trainingtoErrorMsg}}</span>
+                                                                </th>
+                                                                <th style="width: 30%">Type of Training / பயிற்சியின்
+                                                                    வகை
+                                                                    <br>
+                                                                    <span *ngIf="typetrainingErrorMsg"
+                                                                        class="tableheadererrormsg">{{typetrainingErrorMsg}}</span>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody formArrayName="trainingDetails">
+                                                            <tr *ngFor="let itemrow of trainingDetailsArray.controls; let i=index;let l=last"
+                                                                [formGroupName]="i">
+                                                                <td>
+                                                                    {{
+                                                                    i+1
+                                                                    }}
+                                                                </td>
+                                                                <td>
+                                                                    <input pInputText [maxlength]="250"
+                                                                        formControlName="nameOfTheInstitution"
+                                                                        (ngModelChange)="validateTraining(i,'nameOfTheInstitution');"
+                                                                        type="text" />
+                                                                </td>
+                                                                <td>
+                                                                    <p-calendar [defaultDate]="defaultDate"
+                                                                        [showIcon]="true" [showButtonBar]="true"
+                                                                        [maxDate]="endDate" dateFormat="dd-mm-yy"
+                                                                        [maxDate]="itemrow.get('toDate')?.value"
+                                                                        appendTo="body" [readonlyInput]="true"
+                                                                        (ngModelChange)="validateTraining(i,'fromDate');"
+                                                                        formControlName="fromDate"
+                                                                        inputId="icon"></p-calendar>
+                                                                </td>
+                                                                <td>
+                                                                    <p-calendar [defaultDate]="defaultDate"
+                                                                        [showIcon]="true" [showButtonBar]="true"
+                                                                        appendTo="body" [maxDate]="endDate"
+                                                                        [minDate]="itemrow.get('fromDate')?.value"
+                                                                        [readonlyInput]="true" dateFormat="dd-mm-yy"
+                                                                        (ngModelChange)="validateTraining(i,'toDate');"
+                                                                        formControlName="toDate"
+                                                                        inputId="icon"></p-calendar>
+                                                                </td>
+                                                                <td>
+                                                                    <input pInputText [maxlength]="250"
+                                                                        formControlName="typeOfTraining" type="text"
+                                                                        (ngModelChange)="validateTraining(i,'typeOfTraining');" />
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" *ngIf="i!=0"
+                                                                        style="background-color: aliceblue;" pButton
+                                                                        pRipple icon="pi pi-times"
+                                                                        (click)="removeTrainng(itemrow.get('id')?.value)"
+                                                                        class=" mr-2  p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button">
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- <div class="field col-12  md:col-2  lg:col-2"
+                                                    *ngIf="schemePersonalForm.get('istrainingUndergone')?.value == true">
+                                                    <p-button label="Add" (onClick)="addtypetraining(chipInput)" />
+                                                </div> -->
+                                            </div>
+                                            <div class="col-12"
+                                                style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                            </div>
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="isEmployed">Whether the applicant is presently
+                                                        employed / விண்ணப்பதாரரின் தற்போதைய பணி நிலை
+
+                                                    </label>
+
+                                                    <p-inputSwitch formControlName="isEmployed"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('isEmployed')"></app-error-msg>
+                                                </div>
+
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="schemePersonalForm.get('isEmployed')?.value == true">
+                                                    <label htmlFor="employeementType">Employment Type / பணியின் வகை
+                                                    </label>
+                                                    <p-dropdown [options]="employmentTypes" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Employment Type"
+                                                        formControlName="employeementType"
+                                                        [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('employeementType')"></app-error-msg>
+                                                </div>
+
+                                                <div class="field col-12  md:col-4  lg:col-4" *ngIf="showemptypeOther">
+                                                    <label htmlFor="employementOthers">Employment Type Other / பணியின்
+                                                        மற்ற வகை
+
+                                                    </label>
+                                                    <input pInputText formControlName="employementOthers" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('employementOthers')"></app-error-msg>
+                                                </div>
+                                                <!-- <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="schemePersonalForm.get('isEmployed')?.value == true">
+                                                    <label htmlFor="employmentDetails">Employment details</label>
+                                                    <input pInputText formControlName="employmentDetails" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('employmentDetails')"></app-error-msg>
+                                                </div> -->
+                                            </div>
+                                            <!-- <div class="col-12"
+                                                style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                            </div>
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="isRegistered">Registered with Employment
+                                                        Exchange</label>
+                                                    <p-inputSwitch formControlName="isRegistered"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('isRegistered')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="schemePersonalForm.get('isRegistered')?.value == true">
+                                                    <label htmlFor="registrationNo">Employment Registration
+                                                        Number</label>
+                                                    <input pInputText formControlName="registrationNo" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('registrationNo')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="schemePersonalForm.get('isRegistered')?.value == true">
+                                                    <label htmlFor="registrationDate">Employment Registration
+                                                        Date</label>
+                                                    <p-calendar [defaultDate]="defaultDate" [showIcon]="true"
+                                                        [showButtonBar]="true" [maxDate]="endDate"
+                                                        [minDate]="schemeGeneralForm.get('dob')?.value"
+                                                        [readonlyInput]="true" formControlName="registrationDate"
+                                                        inputId="icon"></p-calendar>
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('registrationDate')"></app-error-msg>
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="col-12"
+                                                style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                            </div> -->
+                                            <!-- <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="hasPreviousExp">Previous experience in the line of
+                                                        activity</label>
+                                                    <p-inputSwitch formControlName="hasPreviousExp"
+                                                        [style]="{'display':'flex'}" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('hasPreviousExp')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="schemePersonalForm.get('hasPreviousExp')?.value == true">
+                                                    <label htmlFor="previousExperience">Previous experience in the line
+                                                        of activity, If any</label>
+                                                    <input pInputText formControlName="previousExperience"
+                                                        type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemePersonalForm.get('previousExperience')"></app-error-msg>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-12 flex " style="justify-content: center;">
+                                                <div class=" col-12  md:col-1  lg:col-1">
+                                                    <p-button label="Next" (onClick)="next(2)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </p-accordionTab>
+                        <p-accordionTab header="Project Details/	திட்ட விவரங்கள்
+                        " [disabled]="isnew">
+                            <div class="grid formgrid mb-3">
+                                <form [formGroup]="schemeProjectForm" class="col-12">
+                                    <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+                                        <div class="p-formgrid grid ">
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="ventureCategory">Venture Category / தொழில் வகை
+
+                                                    </label>
+                                                    <p-dropdown [options]="ventures" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Category"
+                                                        formControlName="ventureCategory"
+                                                        [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('ventureCategory')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="activityLane">Activity Lane / செயல்பாட்டு வகை
+                                                    </label>
+                                                    <p-dropdown [options]="activities" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a activity"
+                                                        formControlName="activityLane" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('activityLane')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4" *ngIf="showactiviOther">
+                                                    <label htmlFor="activityLaneOther">Activity Lane Other / செயல்பாட்டு
+                                                        வகை மற்றவை
+
+                                                    </label>
+                                                    <input pInputText formControlName="activityLaneOther" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('activityLaneOther')"></app-error-msg>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12"
+                                                style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                            </div>
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="doorNo">Address / முகவரி
+                                                    </label>
+                                                    <input pInputText formControlName="doorNo" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('doorNo')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="streetName">Street Name / தெரு பெயர்
+                                                    </label>
+                                                    <input pInputText formControlName="streetName" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('streetName')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="villlageTownCity">Village / கிராமம்
+                                                    </label>
+                                                    <input pInputText formControlName="villlageTownCity" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('villlageTownCity')"></app-error-msg>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="district">District / மாவட்டம்
+                                                    </label>
+                                                    <p-dropdown [options]="districts" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a District"
+                                                        formControlName="district" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('district')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="taluk">Taluk / தாலுக்கா
+                                                    </label>
+                                                    <p-dropdown [options]="taluks" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Taluk"
+                                                        formControlName="taluk" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('taluk')"></app-error-msg>
+                                                </div>
+                                                <!-- <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="localBody">Area</label>
+                                                    <p-dropdown [options]="areas" optionLabel="text" optionValue="value"
+                                                        placeholder="Select a Area" formControlName="localBody"
+                                                        [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('localBody')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="localbodyValue === 'URBAN'">
+                                                    <label htmlFor="nameoflocalBody">Name of the Local body</label>
+                                                    <p-dropdown [options]="nameOfLocalbody" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Local body"
+                                                        formControlName="nameoflocalBody"
+                                                        [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('nameoflocalBody')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="localbodyValue === 'RURAL'">
+                                                    <label htmlFor="block">Block</label>
+                                                    <p-dropdown [options]="blocks" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Block"
+                                                        formControlName="block" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('block')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="nameoflocalbodyValue === 'CORPORATION'">
+                                                    <label htmlFor="corporation">Corporation</label>
+                                                    <p-dropdown [options]="corporations" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Corporation"
+                                                        formControlName="corporation" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('corporation')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="nameoflocalbodyValue === 'MUNICIPALITY'">
+                                                    <label htmlFor="municipality">Municipality</label>
+                                                    <p-dropdown [options]="municipalities" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Municipality"
+                                                        formControlName="municipality" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('municipality')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="nameoflocalbodyValue== 'TOWNPANCHAYAT'">
+                                                    <label htmlFor="townPanchayat">Town Panchayat</label>
+                                                    <p-dropdown [options]="townpanchayat" optionLabel="text"
+                                                        optionValue="value" placeholder="Select a Town Panchayat"
+                                                        formControlName="townPanchayat" [showClear]="true"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('townPanchayat')"></app-error-msg>
+                                                </div> -->
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="pincode">Pincode / பின்கோடு
+                                                    </label>
+                                                    <input pInputText formControlName="pincode" type="text"
+                                                        [maxlength]="6" [minlength]="6" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('pincode')"></app-error-msg>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12"
+                                                style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                            </div>
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                                                <!-- <div class="field col-12  md:col-4  lg:col-4">
+
+                                                    <label htmlFor="projectOutlayCost">Project Outlay Cost (Rs) /
+                                                        திட்டச்
+                                                        தொகை (ரூ)
+
+                                                        <p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="projectOutlayCost" [escape]="false"
+                                                            [rounded]="true" tooltipStyleClass="ttopte"
+                                                            [text]="true"></p-button>
+                                                    </label>
+                                                    <input pInputText formControlName="projectOutlayCost" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('projectOutlayCost')"></app-error-msg>
+                                                    <ng-template #projectOutlayCost>
+                                                        <div [innerHTML]="'Project Cost'">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div> -->
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="canShowthisProjectField('LAND_COST')">
+                                                    <label htmlFor="landCost">Land Cost (Rs) / நிலத்தின் தொகை (ரூ)
+
+                                                        <p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="LAND_COST" [escape]="false" [rounded]="true"
+                                                            tooltipStyleClass="ttopte" [text]="true"></p-button>
+                                                    </label>
+                                                    <input pInputText formControlName="landCost" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('landCost')"></app-error-msg>
+
+                                                    <ng-template #LAND_COST style="width: 500px;">
+                                                        <div [innerHTML]="getTooltipthisProjectField('LAND_COST')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="canShowthisProjectField('BUILDING_COST')">
+                                                    <label htmlFor="buildingCost">Building Cost (Rs) / கட்டிட தொகை (ரூ)
+                                                        <p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="BUILDING_COST" [escape]="false" [rounded]="true"
+                                                            tooltipStyleClass="ttopte" [text]="true"></p-button>
+                                                    </label>
+                                                    <input pInputText formControlName="buildingCost" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('buildingCost')"></app-error-msg>
+
+                                                    <ng-template #BUILDING_COST>
+                                                        <div [innerHTML]="getTooltipthisProjectField('BUILDING_COST')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="canShowthisProjectField('MACHINERY_EQUIPMENT_COST')">
+                                                    <label htmlFor="equipmentCost"> Plant and Machinery Costs (Rs) /
+                                                        தொழிற்சாலை மற்றும் இயந்திரச் செலவுகள் (ரூ)
+                                                        <p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="MACHINERY_EQUIPMENT_COST" [escape]="false"
+                                                            [rounded]="true" tooltipStyleClass="ttopte"
+                                                            [text]="true"></p-button></label>
+                                                    <input pInputText formControlName="equipmentCost" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('equipmentCost')"></app-error-msg>
+
+                                                    <ng-template #MACHINERY_EQUIPMENT_COST>
+                                                        <div
+                                                            [innerHTML]="getTooltipthisProjectField('MACHINERY_EQUIPMENT_COST')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="canShowthisProjectField('WORKING_COST')">
+                                                    <label htmlFor="workingCost">Working Capital Cost (Rs) / பணி மூலதனச்
+                                                        செலவு (ரூ)
+                                                        <p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="WORKING_COST" [escape]="false" [rounded]="true"
+                                                            tooltipStyleClass="ttopte" [text]="true"></p-button>
+                                                    </label>
+                                                    <input pInputText formControlName="workingCost" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('workingCost')"></app-error-msg>
+
+                                                    <ng-template #WORKING_COST>
+                                                        <div [innerHTML]="getTooltipthisProjectField('WORKING_COST')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="canShowthisProjectField('PRE_OPERTAIVE_EXPENSE')">
+                                                    <label htmlFor="preopertaiveExpense">Preliminary & Pre-Operative
+                                                        Expenses (Rs)
+
+                                                        <p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="PRE_OPERTAIVE_EXPENSE" [escape]="false"
+                                                            [rounded]="true" tooltipStyleClass="ttopte"
+                                                            [text]="true"></p-button>
+                                                    </label>
+                                                    <input pInputText formControlName="preopertaiveExpense"
+                                                        type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('preopertaiveExpense')"></app-error-msg>
+
+                                                    <ng-template #PRE_OPERTAIVE_EXPENSE>
+                                                        <div
+                                                            [innerHTML]="getTooltipthisProjectField('PRE_OPERTAIVE_EXPENSE')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="canShowthisProjectField('OTHER_EXPENSE')">
+                                                    <label htmlFor="otherExpense">Other Expenses (Rs)
+                                                        <p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="OTHER_EXPENSE" [escape]="false" [rounded]="true"
+                                                            tooltipStyleClass="ttopte" [text]="true"></p-button>
+                                                    </label>
+                                                    <input pInputText formControlName="otherExpense" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('otherExpense')"></app-error-msg>
+
+                                                    <ng-template #OTHER_EXPENSE>
+                                                        <div [innerHTML]="getTooltipthisProjectField('OTHER_EXPENSE')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="canShowthisProjectField('BENEFICIARY_CONTRIBUTION')">
+                                                    <label htmlFor="beneficiaryCost">Promoter Contribution /
+                                                        ஊக்குவிப்பாளரின் பங்களிப்பு (ரூ)
+                                                        (Rs)<p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="BENEFICIARY_CONTRIBUTION" [escape]="false"
+                                                            [rounded]="true" tooltipStyleClass="ttopte"
+                                                            [text]="true"></p-button></label>
+                                                    <input pInputText formControlName="beneficiaryCost" type="text"
+                                                        [readOnly]="false" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('beneficiaryCost')"></app-error-msg>
+                                                    <ng-template #BENEFICIARY_CONTRIBUTION>
+                                                        <div class=""
+                                                            [innerHTML]="getTooltipthisProjectField('BENEFICIARY_CONTRIBUTION')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="totalCost">Total Project Cost (Rs) / மொத்த திட்டத்
+                                                        தொகை (ரூ)<p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="TOTAL_COST" [escape]="false" [rounded]="true"
+                                                            tooltipStyleClass="ttopte" [text]="true"></p-button>
+                                                    </label>
+                                                    <div class="p-inputgroup">
+                                                        <input pInputText formControlName="totalCost" type="text"
+                                                            [readOnly]="true" />
+                                                        <button type="button" pButton label="Get Subsidy"
+                                                            *ngIf="showButton()" (click)="getSubsidy()"
+                                                            styleClass="p-button-warn"></button>
+                                                    </div>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('totalCost')"></app-error-msg>
+                                                    <ng-template #TOTAL_COST>
+                                                        <div class=""
+                                                            [innerHTML]="getTooltipthisProjectField('TOTAL_COST')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4"
+                                                    *ngIf="canShowthisProjectField('SUBSIDY_COST') && showButton()">
+                                                    <label htmlFor="subsidyCost">Subsidy Cost / மானியத் தொகை
+                                                        <p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="SUBSIDY_COST" [escape]="false" [rounded]="true"
+                                                            tooltipStyleClass="ttopte" [text]="true"></p-button>
+                                                    </label>
+                                                    <input pInputText formControlName="subsidyCost" type="text"
+                                                        [readOnly]="true" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('subsidyCost')"></app-error-msg>
+
+                                                    <ng-template #SUBSIDY_COST>
+                                                        <div [innerHTML]="getTooltipthisProjectField('SUBSIDY_COST')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4" *ngIf="showButton()">
+                                                    <label htmlFor="loanCost">Loan Amount (Rs) / கடன் தொகை (ரூ)
+                                                        <p-button icon="pi pi-info-circle"
+                                                            [style]="{ 'height':'1.5rem', 'padding':'0px'}"
+                                                            [pTooltip]="LOAN_AMOUNT" [escape]="false" [rounded]="true"
+                                                            tooltipStyleClass="ttopte" [text]="true"></p-button>
+                                                    </label>
+                                                    <input pInputText formControlName="loanCost" type="text"
+                                                        [readOnly]="true" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('loanCost')"></app-error-msg>
+                                                    <ng-template #LOAN_AMOUNT>
+                                                        <div class=""
+                                                            [innerHTML]="getTooltipthisProjectField('LOAN_AMOUNT')">
+
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="field col-12  md:col-6  lg:col-6">
+                                                    <label htmlFor="totalCostinWords">Total Project Cost in Words (Rs) /
+                                                        மொத்த திட்டத் தொகை எழுத்தால் (ரூ)</label>
+                                                    <input pInputText formControlName="totalCostinWords" type="text"
+                                                        [readOnly]="true"
+                                                        [style]="{'font-weight': 'bold','color': 'blue'}" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('totalCostinWords')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-6  lg:col-6" *ngIf="showButton()">
+                                                    <label htmlFor="loanCostinWords">Loan Cost in Words (Rs)/
+                                                        மொத்த தொகை எழுத்தால் (ரூ)
+
+                                                    </label>
+                                                    <input pInputText formControlName="loanCostinWords" type="text"
+                                                        [style]="{'font-weight': 'bold','color': 'blue'}"
+                                                        [readOnly]="true" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('loanCostinWords')"></app-error-msg>
+                                                </div>
+                                            </div>
+                                            <div class="col-12"
+                                                style="border-top: 2px solid #ced4da;margin:20px 0px 20px">
+
+                                            </div>
+                                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                                                <div class="col-12">
+                                                    <h5 class="divhighligher">Lending Bank Details / கடன் வங்கி
+                                                        விவரங்கள்
+                                                    </h5>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="ifsc">IFSC</label>
+
+                                                    <p-autoComplete formControlName="ifsc" field="text"
+                                                        [suggestions]="suggestions" (completeMethod)="search($event)"
+                                                        [forceSelection]="true" [showClear]="true" [minLength]="3"
+                                                        (onClear)="clearIfsc($event)" (onSelect)="selectifsc($event)"
+                                                        optionLabel="text"></p-autoComplete>
+
+                                                    <!-- <div class="p-inputgroup">
+                                                        <p-autoComplete formControlName="ifsc" field="text"
+                                                            field="value" [suggestions]="suggestions"
+                                                            (completeMethod)="search($event)" [forceSelection]="true"
+                                                            [showClear]="true" optionLabel="text"></p-autoComplete>
+
+                                                        <input pInputText formControlName="ifsc" type="text"
+                                                            [readOnly]="false" />
+                                                        <button type="button" pButton label="Get Details"
+                                                            (click)="getbankDetails()"
+                                                            styleClass="p-button-warn"></button>
+                                                    </div> -->
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('ifsc')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="bank">Bank / வங்கி
+                                                    </label>
+                                                    <p-dropdown [options]="banks" optionLabel="text" optionValue="value"
+                                                        [readonly]="true" placeholder="Select a bank"
+                                                        formControlName="bank" [showClear]="false"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('bank')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="branch">Branch / கிளை
+                                                    </label>
+                                                    <p-dropdown [options]="branches" optionLabel="text"
+                                                        [readonly]="true" optionValue="value"
+                                                        placeholder="Select a branch" formControlName="branch"
+                                                        [showClear]="false"></p-dropdown>
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('branch')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="address">Address / முகவரி
+                                                    </label>
+                                                    <input pInputText formControlName="address" [readOnly]="true"
+                                                        type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('address')"></app-error-msg>
+                                                </div>
+                                                <div class="field col-12  md:col-4  lg:col-4">
+                                                    <label htmlFor="accountNumber">Account Number / கணக்கு எண்
+                                                    </label>
+                                                    <input pInputText formControlName="accountNumber" type="text" />
+                                                    <app-error-msg
+                                                        [control]="schemeProjectForm.get('accountNumber')"></app-error-msg>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 flex " style="justify-content: center;">
+                                                <div class=" col-12  md:col-1  lg:col-1">
+                                                    <p-button label="Next" (onClick)="next(3)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </p-accordionTab>
+                        <p-accordionTab header="Documents/	ஆவணங்கள்
+                        " [disabled]="isnew">
+                            <form [formGroup]="documentsForm" class="col-12" *ngIf="documentGroups">
+                                <div *ngFor="let grp of documentGroups">
+                                    <div class="card p-fluid" style="padding-bottom: 10px;">
+                                        <fieldset [disabled]="false">
+                                            <div class="p-formgrid grid ">
+                                                <div class="outlayerdiv" style="width: 100%;">
+                                                    <div class="outlayerinnerdiv">
+                                                        <h5 class="outlarheader">{{grp}}</h5>
+                                                    </div>
+                                                    <div class="col-12 flex md:col-12  lg:col-12"
+                                                        style="flex-wrap: wrap;overflow-x: auto;">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>S.No / வ.எண்</th>
+                                                                    <th style="min-width: 200px">Document Category / ஆவண
+                                                                        வகை
+                                                                    </th>
+                                                                    <th style="min-width: 100px">Document Type / ஆவண வகை
+                                                                        <br>
+                                                                        <span *ngIf="documentTypeErrorMsg"
+                                                                            class="tableheadererrormsg">{{documentTypeErrorMsg}}</span>
+                                                                    </th>
+                                                                    <th>File Upload / கோப்பு பதிவேற்றம்
+                                                                        <br>
+                                                                        <span *ngIf="fileUploadErrorMsg"
+                                                                            class="tableheadererrormsg">{{fileUploadErrorMsg}}</span>
+                                                                    </th>
+                                                                    <th>Action / செயல்
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody formArrayName="documents">
+                                                                <tr *ngFor="let itemrow of getGrpItems(grp); let i=index;let l=last"
+                                                                    [formGroupName]="getFormGrp(itemrow.get('id')?.value)">
+                                                                    <td>{{i+1}} </td>
+                                                                    <td>{{itemrow.get('documentCategoryName')?.value}}<span
+                                                                            *ngIf="itemrow.get('isRequired')?.value == true"
+                                                                            class="tableheadererrormsg">*</span>
+                                                                    </td>
+                                                                    <td><p-dropdown
+                                                                            [options]="itemrow.get('acceptedDocumentList')?.value"
+                                                                            optionLabel="text" optionValue="value"
+                                                                            appendTo="body"
+                                                                            formControlName="acceptedDocumentTypeId"
+                                                                            placeholder="Select a document type"
+                                                                            [showClear]="true"></p-dropdown></td>
+                                                                    <td>
+
+                                                                        <p-fileUpload
+                                                                            *ngIf="!itemrow.get('originalFileName')?.value"
+                                                                            mode="basic" chooseLabel="Upload" class=""
+                                                                            [disabled]="!itemrow.get('acceptedDocumentTypeId')?.value"
+                                                                            chooseIcon="pi pi-upload"
+                                                                            [maxFileSize]="2000000" [auto]="true"
+                                                                            [customUpload]="true" accept=".pdf"
+                                                                            (uploadHandler)="onSelectDocumentFile($event, itemrow.get('id')?.value)" />
+                                                                        <p
+                                                                            *ngIf="itemrow.get('originalFileName')?.value">
+                                                                            {{itemrow.get('originalFileName')?.value}}
+                                                                        </p>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button"
+                                                                            style="background-color: aliceblue;"
+                                                                            *ngIf="itemrow.get('originalFileName')?.value"
+                                                                            pButton pRipple icon="pi pi-download"
+                                                                            (click)="downloadFile(itemrow.get('id')?.value,itemrow.get('originalFileName')?.value)"
+                                                                            class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                                            title="Delete"></button>
+
+                                                                        <button type="button"
+                                                                            style="background-color: aliceblue;"
+                                                                            *ngIf="itemrow.get('originalFileName')?.value"
+                                                                            pButton pRipple icon="pi pi-times"
+                                                                            (click)="removeFile(itemrow.get('id')?.value)"
+                                                                            class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                                            title="Delete"></button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </form>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+                <div class="declarDiv">
+                    <h3>
+                        Declaration / பிரகடனம்
+                    </h3>
+                    <div style="display: flex; align-items: center; margin-top: 20px;">
+                        <p-checkbox [(ngModel)]="checked" [binary]="true" (ngModelChange)="updateError()"
+                            inputId="ny"></p-checkbox>
+                        <label for="ny" style="margin-left: 8px; color: #333; font-size: 14px;">
+                            "
+                            I hereby declare and confirm that the information furnished above by me is correct as per
+                            the original documents in my possession. I understand that I will be responsible for any
+                            incorrect declaration and in such circumstances, I shall be liable for any action as deemed
+                            fit and I will be legally bound to return the subsidy received. Further I declare that I or
+                            my parents (incase of dependent applicant) have not availed any assistance under PMEGP /
+                            PMFME / UYEGP / NEEDS / AABCS / BLISS or under any other scheme for re settlement through
+                            Government of India or State Government.
+
+                            மேலே கொடுக்கப்பட்டுள்ள தகவல்கள் என்வசம் உள்ள ஆவணங்களின்படி சரியானவை என்பதை இதன் மூலம்
+                            உறுதிபடுத்துகிறேன். மேலும் என்னால் அளிக்கப்பட்ட எந்த ஒரு தவறான தகவலுக்கும் நான் பொறுப்பாவேன்
+                            என்பதையும் அத்தகைய சூழ்நிலைகளில் எடுக்கப்படும் எந்தவிதமான நடவடிக்கைக்கும் (சட்டரீதியான
+                            நடவடிக்கைக்கு உட்பட்டு) ஒத்துழைப்பேன் எனவும், அத்தகைய சூழ்நிலையில் பெறப்பட்ட மானியத்தை
+                            முழுமையாக நிபந்தனையின்றி திரும்ப செலுத்துவதற்கு நான் சட்டபூர்வமாக கட்டுப்படுவேன் என உறுதி
+                            அளிக்கிறேன். மேலும் நான் அல்லது என்பெற்றோர் (சார்ந்தோர் விண்ணப்பிக்கும்பட்சத்தில்) PMEGP /
+                            PMFME / UYEGP / NEEDS / AABCS / BLISS அல்லது மத்திய அரசு மற்றும் மாநில அரசின் மறுவாழ்வு
+                            திட்டங்களின் கீழ் எந்த ஒரு உதவியும் பெறவில்லை என உறுதிபடுத்துகிறேன்.
+                            "
+                        </label>
+                    </div>
+                    <p style="color: rgb(243, 46, 46);" *ngIf="showDecError"> Declaration is Required</p>
+                </div>
+
+                <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+
+                <div>
+                    <div class="flex gap-3 mt-1" style="justify-content: center;">
+                        <p-button label="Back" icon="pi pi-arrow-left" class="p-button-secondary" severity="secondary"
+                            (onClick)="back()" />
+                        <p-button label="Submit" (onClick)="validateall()" />
+                        <p-button label="Cancel" (onClick)="home()" class="p-button-secondary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog>
+</div>

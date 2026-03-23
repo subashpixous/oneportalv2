@@ -1,0 +1,340 @@
+// html, body, h1, h2, h3, h4, p, img { margin: 0;} /* margin reset*/
+// h1{font-size: 18pt; font-weight: 500; margin-bottom: 0.5cm;}
+// h2{font-size: 16pt; font-weight: 500;}
+// p{font-size: 12pt;}
+
+// .items-group {
+//   border-style: solid;
+//   border-color: black;
+//   border-width: 1pt 1pt 1pt 1pt;
+//   border-radius: 5pt;
+//   padding: 3pt 3pt 3pt 3pt;
+//   margin: 9pt 0 9pt 0;
+// }
+
+// .logotipo {
+//   width: 6cm;
+//   height: 4cm;
+//   margin: -0.5cm;
+// }
+
+// .label { font-weight: 500;}
+
+// .disclaimer, .address p {
+//   font-size: 10pt;
+//   padding: 10px;
+// }
+
+// .signature-field {
+//   padding-bottom: 24pt;
+//   border-bottom: solid black 1pt;
+// }.imagediv{
+//     display:flex; justify-content: center;
+// }
+// .imgsize{
+//     width:75px;height:75px;
+// }
+// .schenamestyle{
+//     font-weight: bold !important;
+//     color: #1B729D !important; 
+//     font: caption;
+//     font-size: x-large;
+// }
+// @page {
+//   margin-bottom: 1cm;
+//   margin-top: 1cm;
+// }
+
+// /*You can add this as an extra for compatibility*/
+// @media print {
+//   body {
+//     margin-top: 1cm !important;
+//     margin-bottom: 1cm !important;
+//     margin-left: 0.3cm !important;
+//     margin-right: 0.3cm !important;
+//   }
+//   .items-group {
+//     page-break-inside: avoid; /* For older browsers */
+//     break-inside: avoid; /* For modern browsers */
+//   }
+// } 
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+.imgsize {
+    width: 75px !important;
+    height: 75px !important;
+    max-width: 75px !important;
+    max-height: 75px !important;
+    object-fit: contain !important;
+}
+
+/* --- Main Wrapper --- */
+.print-container {
+    font-family: 'Poppins', sans-serif;
+    background: #FFFFFF;
+    border: 0.3px solid #000000;
+    border-radius: 5px;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 1400px;
+    color: #1B1B1B;
+}
+
+/* --- Headers & Banners --- */
+.top-header-banner {
+    padding: 20px 30px;
+}
+.breadcrumb-bar {
+    background-color: #387B95;
+    color: #FFFFFF;
+    padding: 8px 30px;
+    font-size: 12px;
+    text-align: right;
+}
+.page-title-bar {
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0;
+}
+.page-title-bar h4 {
+    color: #0F5169;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+}
+.back-btn {
+    background: #E0E0E0;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 20px;
+    font-weight: 500;
+}
+
+/* --- Section Titles --- */
+.section-title {
+    background: #F4F2F2;
+    color: #595959;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 12px 30px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* --- Key-Value Data Rows (The exact colon alignment) --- */
+.data-section {
+    padding: 20px 30px;
+    position: relative;
+}
+.kv-row {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+.kv-col {
+    display: flex;
+    align-items: flex-start;
+    padding-right: 15px;
+}
+.kv-label {
+    width: 200px; /* Fixed width to align colons perfectly */
+    font-size: 13px;
+    color: #242424;
+    font-weight: 400;
+    line-height: 1.5;
+}
+.kv-colon {
+    width: 20px;
+    text-align: center;
+    color: #535353;
+}
+.kv-value {
+    flex: 1;
+    font-size: 13px;
+    color: #0F5169;
+    font-weight: 700;
+    line-height: 1.5;
+}
+.val-check {
+    color: #28874E;
+    font-size: 16px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+/* --- Profile Image --- */
+.profile-photo-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+.profile-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #E6F1F5;
+    object-fit: cover;
+}
+
+/* --- Address Blocks --- */
+.address-wrapper {
+    display: flex;
+    gap: 30px;
+    padding: 0 30px 20px 30px;
+}
+.address-box {
+    flex: 1;
+    border: 0.3px solid #CBCBCB;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.address-header {
+    background: #E6F1F5;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.3px solid #CBCBCB;
+}
+.address-header input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: #069CCA;
+}
+.address-body {
+    padding: 15px;
+}
+.addr-line {
+    font-size: 13px;
+    color: #0F5169;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* --- Bank Info Note --- */
+.bank-note {
+    background: #E6F1F5;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+.note-badge {
+    background: #467C88;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+.note-text {
+    font-size: 12px;
+    color: #000000;
+    margin: 0;
+}
+
+/* --- Family Table (Pill Style) --- */
+.custom-table-wrapper {
+    padding: 20px 30px;
+    overflow-x: auto;
+}
+.family-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+.family-table th {
+    font-size: 12px;
+    font-weight: 500;
+    color: #000000;
+    text-align: center;
+    padding: 0 10px 10px 10px;
+    border-bottom: 1px solid #D4D4D4;
+}
+.family-table td {
+    text-align: center;
+    padding: 0 5px;
+}
+.td-pill {
+    border: 0.3px solid #CBCBCB;
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #959595;
+    background: #FDFDFD;
+    min-height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* --- Organization Details --- */
+.org-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.org-label {
+    width: 250px;
+    font-size: 13px;
+    color: #000000;
+}
+.org-label span.req { color: red; }
+.org-value {
+    flex: 1;
+    border: 0.3px solid #747474;
+    border-radius: 3px;
+    padding: 8px 15px;
+    font-size: 13px;
+    color: #525252;
+}
+.sub-heading {
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-transform: uppercase;
+    color: #000000;
+    margin: 20px 30px 15px 30px;
+}
+
+/* --- Documents Thumbnails --- */
+.doc-thumb-list {
+    display: flex;
+    gap: 15px;
+    padding: 10px 0;
+}
+.doc-thumbnail {
+    width: 100px;
+    height: 120px;
+    border: 1px dashed #034772;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FDFDFD;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px;
+    word-break: break-word;
+}
+
+/* --- Print Settings --- */
+@media print {
+    body { margin: 0; background: #fff; }
+    .print-container { border: none; margin: 0; padding: 0; box-shadow: none; max-width: 100%; }
+    .breadcrumb-bar, .back-btn { display: none !important; } /* Hide interactive elements on print */
+    .section-title { background-color: #F4F2F2 !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+    .address-header, .bank-note { background-color: #E6F1F5 !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+    .note-badge { background-color: #467C88 !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+    .td-pill { background-color: #FDFDFD !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+    .kv-value { color: #0F5169 !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+    .val-check { color: #28874E !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+}

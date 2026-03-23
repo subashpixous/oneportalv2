@@ -1,0 +1,89 @@
+<!-- <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+    <div class="p-formgrid grid ">
+        <div class="col-12">
+            <h5 class="divhighligher">நிலையான முகவரி / Permanent Address</h5>
+            <div class="col-12 row ">
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.addressDetail?.doorNo)">
+                    <span>கதவு எண் / Door No
+                        : </span> {{this.addressDetail?.doorNo }}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.addressDetail?.streetName)">
+                    <span>தெரு பெயர் / Street Name
+                        : </span> {{this.addressDetail?.streetName }}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.addressDetail?.villageorCity)">
+                    <span>கிராமம் / Village
+                        : </span> {{this.addressDetail?.villageorCity }}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.addressDetail?.talukName)">
+                    <span>தாலுக்கா / Taluk
+                        : </span> {{this.addressDetail?.talukName }}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.addressDetail?.district)">
+                    <span>மாவட்டம் / District:
+                        : </span> {{this.addressDetail?.district }}
+                </div>
+                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow"
+                    *ngIf="CheckNullorEmpty(this.addressDetail?.pincode)">
+                    <span>பின்கோடு / Pincode
+                        : </span> {{this.addressDetail?.pincode }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="address-grid">
+  <div class="address-note-container">
+    <label class="checkbox-wrapper">
+      <input type="checkbox" checked disabled>
+      <span class="checkmark"></span>
+      <span class="note-text">இது உங்களுடைய நிரந்தர முகவரியா? / Is this your permanent address?</span>
+    </label>
+  </div>
+
+  <div class="address-row">
+    <div class="label">முகவரியை உள்ளிடவும் / Enter your address</div>
+    <div class="colon">:</div>
+    <!-- <div class="value">
+      {{ addressDetail?.doorNo }}, {{ addressDetail?.streetName }},
+      {{ addressDetail?.villageorCity }}, {{ addressDetail?.talukName }}
+    </div> -->
+    <div class="value"
+[ngClass]="{
+'changed-field':
+
+isChanged('streetName')
+}">
+ {{ getValue('streetName') }}
+
+</div>
+  </div>
+
+  <div class="address-row">
+    <div class="label">மாவட்டம் / District</div>
+    <div class="colon">:</div>
+    <!-- <div class="value">{{ addressDetail?.district }}</div> -->
+
+    <div class="value"
+[ngClass]="{'changed-field': isChanged('district')}">
+{{ getValue('district') }}
+</div>
+  </div>
+
+  <div class="address-row">
+    <div class="label">அஞ்சல் குறியீடு / Pincode</div>
+    <div class="colon">:</div>
+    <!-- <div class="value">{{ addressDetail?.pincode }}</div> -->
+     <div class="value"
+[ngClass]="{'changed-field': isChanged('pincode')}">
+{{ getValue('pincode') }}
+</div>
+  </div>
+</div>

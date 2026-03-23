@@ -1,0 +1,553 @@
+.banner-img {
+  height: 500px;
+  object-fit: cover;
+}
+
+
+.custom-slider {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden; 
+}
+
+.slides {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease-in-out; /* The sliding speed */
+}
+
+/* This class prevents the 'rewind' animation during the loop reset */
+.no-transition {
+  transition: none !important;
+}
+
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Keeps the aspect ratio like the TNCWWB site */
+}
+
+.bottom-nav {
+  position: absolute;
+  background-color: #FAFAFA;
+  bottom: 25px;
+  border-radius: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 10;
+}
+
+.bottom-nav button {
+  background: #2f7f8f;
+  color: white;
+  border: 3px solid white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.bottom-nav button:hover {
+  background: #1f5f6b;
+  transform: scale(1.1);
+}
+
+/////////////////////////////////////////////
+
+.info-section {
+  padding: 20px 20px;
+  background: #ffffff;
+}
+
+
+/* GRID WRAPPER */
+.info-grid {
+  max-width: 1600px;
+  margin: auto;
+  display: flex;
+  gap: 20px;              
+}
+
+/* CARD STYLE */
+.info-card {
+  flex: 1;
+  background: rgba(230, 241, 245, 1);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.info-header {
+  background: #4f7f88;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* MAIN LIST */
+.info-list {
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+// font-size: 16px;
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+
+.info-list li {
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+
+/* SUB LIST */
+.info-sub-list {
+  padding-left: 40px;
+  margin-bottom: 20px;
+}
+
+.info-sub-list li {
+  font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+// font-size: 16px;
+  margin-bottom: 12px;
+}
+
+/* HIGHLIGHT TEXT */
+.highlight {
+  color: #0c6a7e;
+  font-weight: 600;
+}
+
+/* SUBTITLE */
+.info-subtitle {
+ font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+padding-left: 4px;
+// font-size: 16px;
+
+  text-decoration: underline;
+  margin: 20px 0 10px;
+}
+
+/* BUTTON */
+.view-btn {
+  margin-top: auto;
+  border: 1px solid #4f7f88;
+  background: white;
+  color: #4f7f88;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.view-btn:hover {
+  background: #4f7f88;
+  color: white;
+}
+/* ============================= */
+/* RESPONSIVE IMPROVEMENTS */
+/* ============================= */
+
+@media (max-width: 1200px) {
+  .info-grid {
+    max-width: 95%;
+    gap: 18px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .info-section {
+    padding: 25px 15px;
+  }
+
+  .info-grid {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .info-card {
+    width: 100%;
+    padding: 25px;
+  }
+
+  .view-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+
+  .custom-slider {
+    height: 250px;
+  }
+
+  .slide img {
+    height: 250px;
+  }
+
+  .info-section {
+    padding: 20px 12px;
+  }
+
+  .info-card {
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .info-header {
+    // font-size: 16px;
+
+    padding: 10px 14px;
+  }
+
+  .info-list li {
+    // font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .info-sub-list {
+    padding-left: 25px;
+  }
+
+  // .info-subtitle {
+  //   // font-size: 16px;
+  // }
+
+  .view-btn {
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+  }
+}
+/* MOBILE */
+@media (max-width: 992px) {
+  .info-grid {
+    flex-direction: column;
+  }
+}
+
+
+///////////////login pop up ////////////////
+
+::ng-deep .p-dialog-mask {
+  background: rgba(0, 0, 0, 0.55) !important;
+  backdrop-filter: blur(3px);
+}
+
+/* REMOVE DEFAULT HEADER */
+::ng-deep .tn-user-dialog .p-dialog-header {
+  display: none !important;
+}
+
+/* MAIN DIALOG BOX */
+::ng-deep .tn-user-dialog .p-dialog {
+  border-radius: 26px !important;
+  overflow: hidden !important;
+}
+
+/* CONTENT AREA */
+::ng-deep .tn-user-dialog .p-dialog-content {
+  padding: 0 !important;
+  border-radius: 26px !important;
+}
+
+/* MAIN CONTAINER */
+.tn-dialog-container {
+  position: relative;
+  padding: 25px 45px 45px 45px;
+  background: #ffffff;
+  border-radius: 40px;
+  text-align: center;
+}
+
+/* TITLE */
+.tn-dialog-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* CLOSE BUTTON */
+.tn-close-btn {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  background: #f2f2f2;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.tn-close-btn i {
+  font-size: 14px;
+  color: #555;
+}
+
+.tn-close-btn:hover {
+  background: #e4e4e4;
+}
+
+/* OPTIONS CONTAINER */
+.tn-user-options {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* USER CARD */
+.tn-user-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 26px;
+  border-radius: 18px;
+  border: 1.5px solid #c8dde5;
+  background: #f7fafc;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* HOVER EFFECT */
+.tn-user-card:hover {
+  background: #eef6fa;
+  border-color: #6fb2c5;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ICON */
+.tn-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #0e5c6f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* TEXT ALIGNMENT */
+.tn-user-text {
+  text-align: left;
+}
+
+/* TITLE */
+.tn-user-title {
+  font-family: 'Poppins';
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+  margin-bottom: 4px;
+}
+
+/* SUBTITLE */
+.tn-user-subtitle {
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(164, 164, 164, 1);
+
+}
+
+@media (max-width: 992px) {
+
+  /* SLIDER */
+  .custom-slider {
+    height: 320px;
+  }
+
+  .slide img {
+    height: 320px;
+  }
+
+  /* INFO GRID STACK */
+  .info-grid {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .info-card {
+    width: 100%;
+    padding: 25px;
+  }
+
+  /* HEADER TEXT */
+  .info-header {
+    font-size: 16px;
+  }
+
+  .info-list li {
+    font-size: 15px;
+  }
+
+  .info-sub-list li {
+    font-size: 15px;
+  }
+
+  /* BUTTON */
+  .view-btn {
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  /* SLIDER */
+  .custom-slider {
+    height: 200px;
+  }
+
+  .slide img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  /* NAV BUTTON */
+  .bottom-nav {
+    bottom: 10px;
+    padding: 4px;
+  }
+
+  .bottom-nav button {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  /* SECTION PADDING */
+  .info-section {
+    padding: 18px 12px;
+  }
+
+  /* CARD */
+  .info-card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  /* HEADER */
+  .info-header {
+    font-size: 15px;
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .info-header i {
+    font-size: 16px;
+  }
+
+  /* TEXT */
+  .info-list li {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .info-sub-list li {
+    font-size: 14px;
+  }
+
+  .info-sub-list {
+    padding-left: 20px;
+  }
+
+  .info-subtitle {
+    font-size: 14px;
+  }
+
+  /* HIGHLIGHT */
+  .highlight {
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .custom-slider {
+    height: 180px;
+  }
+
+  .slide img {
+    height: 180px;
+  }
+
+  .bottom-nav button {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .info-header {
+    font-size: 14px;
+  }
+
+  .info-list li {
+    font-size: 13px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  ::ng-deep .tn-user-dialog .p-dialog {
+    width: 95vw !important;
+    margin: 10px;
+  }
+
+  .tn-dialog-container {
+    padding: 20px;
+  }
+
+  .tn-user-card {
+    padding: 18px;
+    gap: 12px;
+  }
+
+  .tn-user-title {
+    font-size: 18px;
+  }
+
+  .tn-user-subtitle {
+    font-size: 13px;
+  }
+
+  .tn-icon-circle {
+    width: 46px;
+    height: 46px;
+  }
+
+}

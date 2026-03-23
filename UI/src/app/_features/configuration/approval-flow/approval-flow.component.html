@@ -1,0 +1,176 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="col-12  lg:col-12">
+            <h4>{{title}}</h4>
+        </div>
+
+    </div>
+    <div class="col" style="text-align: center;">
+        <p-dropdown [options]="schemes" optionLabel="text" [style]="{'width': '70%'}" optionValue="value"
+            class="multiselect-custom" placeholder="Select a Scheme" (onChange)="changeScheme($event)"
+            [showClear]="false" [(ngModel)]="selectedscheme"></p-dropdown>
+    </div>
+    <div class="col-12 flex row" style="justify-content: center;">
+        <div class="col-12 md:col-6  lg:col-6">
+            <h5 style="text-align: center;">Order the Document Group</h5>
+            <div class="grid formgrid mb-3" style="margin-top: 20px !important;">
+                <div cdkDropList class="example-list"
+                    [cdkDropListDisabled]="!getPerm([privleges.APPROVALFLOW_CREATE, privleges.APPROVALFLOW_UPDATE])"
+                    (cdkDropListDropped)="dropDocumentGroup($event)">
+                    <div class="example-box" cdkDrag *ngFor="let item of documentGroups" cdkDrag>
+                        <i class="pi pi-bars mr-2"></i>
+                        {{item.documentGroupName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 md:col-6  lg:col-6" style="border-left: 2px solid #ced4da;">
+            <h5 style="text-align: center;">Status Flow</h5>
+            <div class="col-12 flex">
+                <p-multiSelect [options]="statuses" [(ngModel)]="selectedstatuses" placeholder="Select a Role"
+                    optionLabel="text" optionValue="value" (ngModelChange)="enablestatusbutton()"
+                    class="multiselect-custom" ngClass="dd" [ngStyle]="{'width': '100%', 'margin':'0px 20px 0px 0px '}">
+                    <ng-template let-roles pTemplate="item">
+                        <div class="flex align-items-center">
+                            <span class="ml-2">{{roles.text}}</span>
+                        </div>
+                    </ng-template>
+                </p-multiSelect>
+                <div tooltip="Click to add role">
+                    <p-button icon="pi pi-arrow-right" label="Generate"
+                        [disabled]="isenablestatusbutton&& selectedstatuses&& selectedstatuses.length>0?false:true"
+                        pTooltip="Click to add role" [ngStyle]="{'margin-right': '20px;'}"
+                        *ngxPermissionsOnly="[privleges.APPROVALFLOW_CREATE, privleges.APPROVALFLOW_UPDATE]"
+                        (onClick)="addstatus($event)"></p-button>
+                </div>
+            </div>
+            <div class="col-12 flex" style="justify-content: center;margin-top: 30px;">
+                <div class="col-12">
+                    <h5>Order the Status Flow</h5>
+                    <div class="grid formgrid mb-3" style="margin-top: 20px !important;">
+                        <div cdkDropList class="example-list"
+                            [cdkDropListDisabled]="!getPerm([privleges.APPROVALFLOW_CREATE, privleges.APPROVALFLOW_UPDATE])"
+                            (cdkDropListDropped)="dropsttaus($event)">
+                            <div class="example-box" [ngStyle]="{'background-color': i<3?'#c0c0c0':'reset'}"
+                                [cdkDragDisabled]="i<3" cdkDragLockAxis="y" cdkDrag
+                                *ngFor="let item of statusFlows;index as i">
+                                <i class="pi pi-bars mr-2"></i>
+                                {{item.statusName}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hline">
+        <div class="col-8 md:col-8  lg:col-8">
+            <h5 style="text-align: center;">Member Approval Flow</h5>
+            <div class="col-12 flex">
+                <p-multiSelect [options]="roles" [(ngModel)]="selectedRoles" placeholder="Select a Role"
+                    optionLabel="text" optionValue="value" (ngModelChange)="enableapprovalbutton()"
+                    class="multiselect-custom" ngClass="dd" [ngStyle]="{'width': '100%', 'margin':'0px 20px 0px 0px '}">
+                    <ng-template let-roles pTemplate="item">
+                        <div class="flex align-items-center">
+                            <span class="ml-2">{{roles.text}}</span>
+                        </div>
+                    </ng-template>
+                </p-multiSelect>
+                <div tooltip="Click to add role">
+                    <p-button icon="pi pi-arrow-right" label="Generate"
+                        [disabled]="isenableapprovalbutton&&selectedRoles&& selectedRoles.length>0?false:true"
+                        *ngxPermissionsOnly="[privleges.APPROVALFLOW_CREATE, privleges.APPROVALFLOW_UPDATE]"
+                        pTooltip="Click to add role" [ngStyle]="{'margin-right': '20px;'}"
+                        (onClick)="addRoles($event)"></p-button>
+                </div>
+            </div>
+            <div class="col-12 flex" style="justify-content: center;margin-top: 30px;">
+                <div class="col-12">
+                    <h5 style="text-align: center;">Order the Approval Flow</h5>
+                    <div class="grid formgrid mb-3" style="margin-top: 20px !important;">
+                        <div cdkDropList class="example-list"
+                            [cdkDropListDisabled]="!getPerm([privleges.APPROVALFLOW_CREATE, privleges.APPROVALFLOW_UPDATE])"
+                            (cdkDropListDropped)="drop($event)">
+                            <div class="example-box" cdkDrag *ngFor="let item of approvalFlows" cdkDrag>
+                                <i class="pi pi-bars mr-2"></i>
+                                {{item.roleName}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="hline">
+        <div class="col-8 md:col-8  lg:col-8">
+            <h5 style="text-align: center;">Order the Scheme Group</h5>
+            <div class="grid formgrid mb-3" style="margin-top: 20px !important;">
+                <div cdkDropList class="example-list"
+                    [cdkDropListDisabled]="!getPerm([privleges.APPROVALFLOW_CREATE, privleges.APPROVALFLOW_UPDATE])"
+                    (cdkDropListDropped)="dropSchemeGroup($event)">
+                    <div class="example-box" cdkDrag *ngFor="let item of schemeGroupOrder" cdkDrag>
+                        <i class="pi pi-bars mr-2"></i>
+                        {{item.groupNameEnglish}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="hline">
+        <div class="col-8  md:col-8  lg:col-8">
+            <h5 style="text-align: center;">Order the Scheme by Group</h5>
+            <div class="col-12">
+                <p-dropdown [options]="schemeGroupOrder" optionLabel="groupNameEnglish" [style]="{'width': '100%'}"
+                    optionValue="id" class="multiselect-custom" placeholder="Select a Scheme Group"
+                    (ngModelChange)="changeGroup($event)" [showClear]="false" [(ngModel)]="selectedGroup"></p-dropdown>
+            </div>
+            <div class="col-12 flex" style="justify-content: center;margin-top: 30px;" *ngIf="schemeOrder">
+                <div class="col-12">
+                    <h5 style="text-align: center;">Order the Scheme</h5>
+                    <div class="grid formgrid mb-3" style="margin-top: 20px !important;">
+                        <div cdkDropList class="example-list"
+                            [cdkDropListDisabled]="!getPerm([privleges.APPROVALFLOW_CREATE, privleges.APPROVALFLOW_UPDATE])"
+                            (cdkDropListDropped)="dropSchemeOrder($event)">
+                            <div class="example-box" cdkDrag *ngFor="let item of schemeOrder" cdkDrag>
+                                <i class="pi pi-bars mr-2"></i>
+                                {{item.schemeNameEnglish}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hline">
+        <div class="col-8 md:col-8  lg:col-8" *ngIf="cardApprovalStatus">
+            <h5 style="text-align: center;">Order the Card approval Status</h5>
+            <div class="grid formgrid mb-3" style="margin-top: 20px !important;">
+                <div cdkDropList class="example-list"
+                    [cdkDropListDisabled]="!getPerm([privleges.APPROVALFLOW_CREATE, privleges.APPROVALFLOW_UPDATE])"
+                    (cdkDropListDropped)="dropCardApprovalOrder($event)">
+                    <div class="example-box" cdkDrag *ngFor="let item of cardApprovalStatus" cdkDrag>
+                        <i class="pi pi-bars mr-2"></i>
+                        {{item.statusName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-12 md:col-6  lg:col-6" style="border-left: 2px solid #ced4da;">
+            <h5 style="text-align: center;">Educational Qualification Flow</h5>
+            <div class="col-12 flex" style="justify-content: center;margin-top: 30px;">
+                <div class="col-12">
+                    <h5>Order the Educational Qualification</h5>
+                    <div class="grid formgrid mb-3" style="margin-top: 20px !important;">
+                        <div cdkDropList class="example-list" (cdkDropListDropped)="dropsttaus($event)">
+                            <div class="example-box" [ngStyle]="{'background-color': i<3?'#c0c0c0':'reset'}"
+                                [cdkDragDisabled]="i<3" cdkDragLockAxis="y" cdkDrag
+                                *ngFor="let item of statusFlows;index as i">
+                                <i class="pi pi-bars mr-2"></i>
+                                {{item.statusName}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <p-confirmPopup key="confirm2"></p-confirmPopup>
+</div>

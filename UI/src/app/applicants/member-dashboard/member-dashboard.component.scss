@@ -1,0 +1,160 @@
+.circle {
+    height: 100px;
+    width: 100px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #216EB6;
+    cursor: pointer;
+  }
+  .circlew{    
+    height: 60px;
+    width: 60px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #216EB6;
+    cursor: pointer;
+  }
+  .groupinfo{
+    cursor: pointer;
+    background-color: #DDF1FF;
+    width: 450px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: -50px;
+    padding-top: 50px;
+  }
+  @media screen and (max-width: 992px) {
+    
+  .groupinfo{
+    width: 200px;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+  ::ng-deep .p-dialog {
+    width: 100vw !important;
+  }
+}
+
+  /* On screens that are 600px or less, set the background color to olive */
+  @media screen and (max-width: 600px) {
+   
+  .groupinfo{
+    max-width: 200px;
+    }
+  }
+  .parentDiv{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }.imgssize{
+    
+    width: 40px;
+    height: 40px;
+  }
+  .imgsize{
+
+    width: 70px;
+    height: 70px;
+  }.cntdtyle {
+    margin-top: 10px;
+    max-width: 476px;
+    padding: 25px 50px;
+    border: 1px solid #dadada;
+    margin-bottom: 20px;
+    box-shadow: 5px 4px 7.8px 0px #00000040;
+    border-radius: 10px;
+}
+
+::ng-deep .bcbtn {
+    margin-right: 20px;
+    border-radius: 18px;
+    padding: 5px 45px;
+}
+.ss{
+    
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+/* Poppins font should be imported in your styles.scss or index.html */
+
+.tn-secondary-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px; /* Adjust based on your layout margins */
+    height: 60px; /* Height based on Figma top positions */
+    background-color: #f8fbfb;
+    border-bottom: 1px solid #d1e8e8;
+    font-family: 'Poppins', sans-serif;
+
+    .id-container {
+        /* Exact Figma Style for ID */
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        color: #467C88;
+    }
+
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 30px; /* Space between the groups in Figma */
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            
+            /* Exact Figma Style for Nav Items */
+            font-style: normal;
+            font-weight: 500; /* Medium weight for items */
+            font-size: 15px;
+            line-height: 24px;
+            color: #467C88;
+            transition: all 0.2s ease;
+
+            i {
+                font-size: 14px;
+                color: #467C88;
+            }
+
+            span {
+                /* Padding and alignment */
+                display: inline-block;
+            }
+
+            &:hover {
+                opacity: 0.8;
+                transform: translateY(-1px);
+            }
+        }
+    }
+}
+
+/* Customizing PrimeNG Menu to match color */
+::ng-deep .p-menu {
+    border-radius: 8px;
+    .p-menuitem-link {
+        .p-menuitem-text, .p-menuitem-icon {
+            color: #467C88 !important;
+            font-family: 'Poppins', sans-serif;
+        }
+    }
+}
+
+/* Wide Menu for Eligibility */
+::ng-deep .wide-menu {
+    width: 300px !important;
+}

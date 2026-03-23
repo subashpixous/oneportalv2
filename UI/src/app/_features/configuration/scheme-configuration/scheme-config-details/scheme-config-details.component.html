@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}
+            </h4>
+        </div>
+    </div>
+    <div class="card">
+        <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex"
+            (activeIndexChange)="onActiveIndexChange($event)"></p-steps>
+        <router-outlet></router-outlet>
+    </div>
+</div>

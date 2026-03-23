@@ -1,0 +1,881 @@
+// ::ng-deep .p-fileupload-buttonbar> .p-button
+// {
+//     width: auto;
+// }
+// .declarDiv{
+//   width: 100%;
+//   padding: 20px;
+//   background-color: #f7f7f7;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+//   margin: 20px auto;
+//   font-family: Arial, sans-serif;
+//   h3{
+    
+//     font-size: 20px;
+//     color: #333;
+//     margin-bottom: 15px;
+//     border-bottom: 2px solid #ccc;
+//     padding-bottom: 5px;
+//   }
+// }
+// .divhighligher{
+  
+//   background-color: #bec0fd;
+//   padding: 10px;
+//   border-radius: 5px;
+// }.chip {
+//   background-color: #f3f3f3;
+//   color: #000000;
+//   padding: 0px 10px;
+//   border-radius: 20px;
+//   display: flex;
+//   align-items: center;
+// }
+
+// .delete-btn {
+//   background-color: transparent;
+//   border: none;
+//   padding: 5px;
+//   margin-left: 10px;
+//   cursor: pointer;
+// }
+
+// .delete-btn:hover {
+//   color: #ccc;
+// }
+// .chip-container {
+//   display: flex;
+//   gap: 10px;
+// }
+
+// .tableheadererrormsg{
+//   font-weight: 400;
+//   color: #ff0052;
+// }
+/* --- FIGMA EXACT LAYOUT --- */
+// .figma-scheme-container {
+//     padding: 20px 30px;
+//     background: #F5F5F5; /* Standard gray background */
+//     font-family: 'Poppins', sans-serif;
+//     min-height: 100vh;
+
+//     /* Top Header */
+
+    
+//     .header-row {
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         margin-bottom: 25px;
+
+//         .page-title {
+//             font-family: 'Montserrat';
+//             font-weight: 600;
+//             font-size: 18px;
+//             color: #000000; /* Exact Deep Blue from the Zoomed Image */
+//             margin: 0;
+//         }
+
+//         /* Back Button Override */
+//         ::ng-deep .custom-back-btn {
+//             background: #ffffff !important;
+//             color: #555555 !important;
+//             border: 1px solid #dcdcdc !important;
+//             border-radius: 4px;
+//             padding: 6px 15px;
+//             font-size: 13px;
+//             height: auto;
+//             &:hover { background: #f0f0f0 !important; }
+//             .pi { font-size: 12px; }
+//         }
+//     }
+
+// /* Meta Data - Fixed to exactly match Figma row breaks */
+//     .metadata-container {
+//         margin-bottom: 30px;
+//         width: 100%;
+
+//         .meta-row {
+//             display: flex;
+//             align-items: center;
+//             width: 100%;
+            
+//             /* For Row 1: Pushes ID to left and Date to right */
+//             &.space-between {
+//                 justify-content: space-between;
+//             }
+
+//             /* For Row 2: Spacing 3 items equally */
+//             &.split-three {
+//                 justify-content: space-between;
+                
+//                 .meta-item {
+//                     flex: 1; /* Forces all 3 spans to take equal width */
+//                 }
+//             }
+//         }
+
+//         .meta-item {
+//             color: #DC8F36; /* Exact Orange/Gold color */
+//             font-family: 'Poppins', sans-serif;
+//             font-weight: 600;
+//             font-size: 14px;
+            
+//             /* Text alignment helpers */
+//             &.text-left { text-align: left; }
+//             &.text-center { text-align: center; }
+//             &.text-right { text-align: right; }
+//         }
+        
+//         .mt-3 {
+//             margin-top: 15px; /* Adds gap between Row 1 and Row 2 */
+//         }
+//     }
+
+//     /* Layout Split */
+//     .content-split-layout {
+//         display: flex;
+//         gap: 25px; /* Spacing between left and right panel */
+//         align-items: flex-start;
+//         flex-wrap: nowrap; /* Forces them to stay side-by-side */
+        
+//         @media screen and (max-width: 1100px) {
+//             flex-direction: column;
+//             flex-wrap: wrap;
+//         }
+//     }
+
+//     /* Left panel takes up remaining space securely */
+//     .left-panel {
+//         flex: 1 1 auto;
+//         min-width: 0; /* CRITICAL: Stops the inner view components from pushing the layout wider */
+//         width: 100%;
+//     }
+
+//     /* Right panel exact Figma width */
+//     .right-panel {
+//         flex: 0 0 379px; /* CRITICAL: Fixed exactly at 379px. Cannot grow or shrink. */
+//         width: 379px; 
+        
+//         @media screen and (max-width: 1100px) {
+//             flex: 1 1 auto;
+//             width: 100%;
+//         }
+//     }
+
+//     /* Blue Note Box */
+//     .note-box {
+//         background: #E2EDFF;
+//         color: #528FF5;
+//         padding: 12px 15px;
+//         border-radius: 5px;
+//         font-size: 13.5px;
+//         font-weight: 500;
+//         line-height: 1.4;
+//         margin-bottom: 20px;
+//     }
+
+//     /* The White Form Card */
+//     .approval-card {
+//         background: #FFFFFF;
+//         border-radius: 12px; /* Smoother corner */
+//         padding: 25px 20px;
+//         box-shadow: 0px 2px 8px rgba(0,0,0,0.04);
+//         border: 1px solid #eaeaea;
+
+//         .card-header {
+//             h3 { 
+//                 font-family: 'Montserrat'; 
+//                 font-weight: 600; 
+//                 font-size: 16px;
+//                 margin: 0; 
+//                 color: #000000;
+//             }
+//             .source-text { 
+//                 color: #989898; 
+//                 font-weight: 500;
+//                 font-size: 11.5px; 
+//                 margin-top: 6px; 
+//                 margin-bottom: 0;
+//             }
+//         }
+        
+//         .divider { border: 0.5px solid #F0F0F0; margin: 15px 0 20px 0; }
+
+//         /* Form Fields overrides */
+//         .approval-form {
+//             display: flex;
+//             flex-direction: column;
+//             gap: 16px;
+//         }
+
+//         .custom-field label { 
+//             font-family: 'Poppins', sans-serif;
+//             font-size: 11.5px; 
+//             color: #333333;
+//             font-weight: 500;
+//             display: block; 
+//             margin-bottom: 5px; 
+//         }
+
+//         /* Input specific overrides - Brutally crushing PrimeNG */
+//         ::ng-deep .custom-input.p-inputtext,
+//         ::ng-deep .custom-input .p-inputtext,
+//         ::ng-deep .p-dropdown {
+//             height: 38px !important; 
+//             width: 100%;
+//             border: 1px solid #D1D1D1 !important;
+//             border-radius: 6px !important;
+//             font-size: 12px !important;
+//             color: #7B7B7B !important;
+//             background: #FFFFFF !important;
+//             box-shadow: none !important;
+//             display: flex;
+//             align-items: center;
+//         }
+
+//         ::ng-deep .custom-textarea {
+//             width: 100%;
+//             border: 1px solid #D1D1D1 !important;
+//             border-radius: 6px !important;
+//             font-size: 12px !important;
+//             color: #7B7B7B !important;
+//             padding: 10px 12px !important;
+//             box-shadow: none !important;
+//             resize: none;
+//         }
+
+//         ::ng-deep .p-calendar .p-button {
+//             height: 100%;
+//             border-radius: 0 6px 6px 0 !important;
+//         }
+//     }
+
+//     /* Exact Figma Buttons */
+//     .figma-button-group {
+//         display: flex;
+//         gap: 8px;
+//         margin-top: 20px;
+//         justify-content: center;
+//         align-items: center;
+
+//         button {
+//             border: none;
+//             border-radius: 5px;
+//             color: white;
+//             padding: 0;
+//             font-size: 11px;
+//             font-weight: 500;
+//             font-family: 'Poppins', sans-serif;
+//             text-transform: capitalize;
+//             cursor: pointer;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             gap: 5px;
+//             height: 32px; 
+//         }
+
+//         .btn-preview { background: #A6A6A6; width: 75px; }
+//         .btn-return { background: #E45036; width: 85px; }
+//         .btn-approve { background: #16A05D; width: 85px; }
+//     }
+// }
+
+// /* User's Additional Table / Dec logic */
+// .tableheadererrormsg {
+//   font-weight: 400;
+//   color: #ff0052;
+// }
+
+// .declarDiv {
+//   width: 100%;
+//   padding: 12px;
+//   background-color: #FAFAFA;
+//   border: 1px solid #EAEAEA;
+//   border-radius: 6px;
+//   h3 {
+//     font-size: 12px;
+//     color: #333;
+//     margin: 0 0 8px 0;
+//     border-bottom: 1px solid #EAEAEA;
+//     padding-bottom: 5px;
+//   }
+// }
+/* --- EXACT FIGMA LAYOUT --- */
+// ::ng-deep body {
+//     background-color: #F5F5F5 !important;
+// }
+
+// .f-page-wrapper {
+//     background: #F5F5F5; 
+//     min-height: 100vh;
+//     padding: 25px 35px;
+//     font-family: 'Poppins', sans-serif;
+// }
+
+// .f-title {
+//     font-family: 'Montserrat', sans-serif;
+//     font-weight: 600;
+//     font-size: 17.42px;
+//     color: #000000;
+//     margin-bottom: 25px;
+// }
+
+// /* Meta Data Row */
+// .f-meta-info {
+//     margin-bottom: 25px;
+//     width: 100%;
+// }
+// .f-meta-row {
+//     display: flex;
+//     justify-content: space-between;
+//     width: 100%;
+// }
+// .f-meta-text {
+//     font-family: 'Poppins', sans-serif;
+//     font-weight: 600;
+//     font-size: 14px;
+//     color: #DC8F36;
+//     line-height: 21px;
+// }
+// .f-meta-text.left { text-align: left; flex: 1; }
+// .f-meta-text.center { text-align: center; flex: 1; }
+// .f-meta-text.right { text-align: right; flex: 1; }
+// .mt-3 { margin-top: 15px; }
+
+// /* Grid Layout */
+// .f-layout-grid {
+//     display: flex;
+//     gap: 20px;
+//     align-items: flex-start;
+// }
+// .f-left-col {
+//     flex: 1;
+//     min-width: 0;
+// }
+// .f-right-col {
+//     flex: 0 0 379px;
+//     width: 379px; 
+// }
+
+// /* Blue Note */
+// .f-blue-note {
+//     background: #E2EDFF;
+//     border-radius: 5px;
+//     padding: 14px 12px;
+//     font-weight: 500;
+//     font-size: 14px;
+//     color: #528FF5;
+//     line-height: 20px;
+//     margin-bottom: 20px;
+// }
+
+// /* Approval Card */
+// .f-approval-card {
+//     background: #FFFFFF;
+//     border-radius: 20px;
+//     padding: 25px 25px 35px 25px;
+//     box-shadow: 0px 4px 10px rgba(0,0,0,0.02);
+
+//     .f-card-header {
+//         text-align: center;
+//         h3 {
+//             font-family: 'Montserrat', sans-serif;
+//             font-weight: 600;
+//             font-size: 17.42px;
+//             color: #000000;
+//             margin: 0;
+//         }
+//         p {
+//             font-weight: 500;
+//             font-size: 12px;
+//             color: #989898;
+//             margin-top: 8px;
+//             margin-bottom: 0;
+//         }
+//     }
+// }
+
+// .f-divider {
+//     border: 0;
+//     border-top: 1px solid #ECECEC;
+//     margin: 18px 0;
+// }
+
+// /* Form Fields */
+// .f-field-group {
+//     margin-bottom: 16px;
+//     label {
+//         font-weight: 400;
+//         font-size: 12.3px;
+//         color: #000000;
+//         display: block;
+//         margin-bottom: 6px;
+//     }
+// }
+
+// /* Input Overrides for Figma Specs */
+// ::ng-deep .f-custom-input,
+// ::ng-deep .f-custom-input .p-inputtext,
+// ::ng-deep .f-custom-input.p-dropdown {
+//     width: 100% !important;
+//     height: 40.53px !important;
+//     border: 0.3px solid #D1D1D1 !important;
+//     border-radius: 6px !important;
+//     background: #FFFFFF !important;
+//     font-family: 'Poppins', sans-serif !important;
+//     font-size: 12.33px !important;
+//     color: #7B7B7B !important;
+//     box-shadow: none !important;
+// }
+
+// ::ng-deep .f-custom-textarea {
+//     width: 100% !important;
+//     border: 0.3px solid #D1D1D1 !important;
+//     border-radius: 6px !important;
+//     font-family: 'Poppins', sans-serif !important;
+//     font-size: 12.33px !important;
+//     color: #7B7B7B !important;
+//     padding: 10px !important;
+//     resize: none;
+//     height: 100px !important;
+// }
+
+// /* ==========================================
+//    BOTTOM ACTION BUTTONS (Back, Preview, Submit)
+//    ========================================== */
+// .figma-action-buttons {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: flex-end; /* வலது ஓரத்தில் வரவைக்க */
+//   margin-top: 30px;
+// }
+
+// .figma-btn-back {
+//   box-sizing: border-box;
+//   width: 117px;
+//   height: 35px;
+//   background: #DFDFDF;
+//   border-radius: 7px;
+//   border: none;
+//   font-family: 'Poppins', sans-serif;
+//   font-weight: 500;
+//   font-size: 14px;
+//   color: #585858;
+//   cursor: pointer;
+// }
+
+// .figma-btn-preview {
+//   box-sizing: border-box;
+//   width: 117px;
+//   height: 35px;
+//   background: #A6A6A6;
+//   border-radius: 7px;
+//   border: none;
+//   font-family: 'Poppins', sans-serif;
+//   font-weight: 500;
+//   font-size: 13px;
+//   color: #FFFFFF;
+//   cursor: pointer;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   gap: 6px;
+// }
+
+// .figma-btn-submit {
+//   box-sizing: border-box;
+//   width: 117px;
+//   height: 35px;
+//   background: #16A05D; /* Figma Orange Color */
+//   box-shadow: 1.5px 0.7px 8px rgba(0, 0, 0, 0.2);
+//   border-radius: 7px;
+//   border: none;
+//   font-family: 'Poppins', sans-serif;
+//   font-weight: 500;
+//   font-size: 14px;
+//   color: #FFFFFF;
+//   cursor: pointer;
+//   transition: background 0.2s ease;
+// }
+
+// .figma-btn-back:hover { opacity: 0.8; }
+// .figma-btn-preview:hover { opacity: 0.8; }
+
+
+::ng-deep body {
+    background-color: #FFFFFF !important;
+}
+
+.f-page-wrapper {
+    background: #FFFFFF;
+    min-height: 100vh;
+    padding: 25px 35px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Title & Header Fixes (Forces Black Color) */
+.f-title {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+    color: #000000 !important; /* Explicitly Black to override global blue */
+}
+
+.f-last-updated {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: #000000 !important;
+}
+
+/* =======================================
+   META DATA SECTION (Exact Figma Match)
+   ======================================= */
+/* =======================================
+   META DATA SECTION (Exact Figma Match)
+   ======================================= */
+.f-meta-section {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-end; /* View Profile button ah keela erakkum */
+    width: 100%;
+    padding-right: 12px; /* IDHU DHAAN MAIN! Idhu dhaan Scheme Details button-ku nera exact ah align pannum */
+}
+
+.f-meta-left-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Row 1 kum Row 2 kum ulla vertical gap */
+}
+
+/* ID kum Applicant Name kum ulla horizontal gap */
+.f-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px; 
+}
+
+.f-meta-text {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14.5px !important;
+    color: #DC8F36 !important; /* Figma Orange */
+    line-height: 1.2;
+    margin: 0 !important;
+}
+
+/* View Profile Button */
+.f-btn-view-profile {
+    background: #A6A6A6 !important;
+    border-radius: 4.38px !important;
+    color: #FFFFFF !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    border: none !important;
+    padding: 0 16px !important;
+    height: 32px !important;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px; 
+    white-space: nowrap; 
+}
+
+.f-btn-view-profile i {
+    font-size: 14px !important;
+}
+
+.f-btn-view-profile:hover { 
+    opacity: 0.9; 
+}
+
+/* View Profile Button Fix */
+.f-btn-gray {
+    background: #A6A6A6 !important;
+    border-radius: 4.38px !important;
+    color: #FFFFFF !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    border: none !important;
+    padding: 0 16px !important;
+    height: 32px !important;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px; /* Spacing between icon and text */
+}
+
+.f-btn-gray i {
+    font-size: 14px;
+}
+
+.f-btn-gray:hover { opacity: 0.9; }
+
+.f-btn-outline {
+    background: #FCFCFC;
+    border: 0.44px solid #525252;
+    border-radius: 4.59px;
+    color: #525252;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 9.18px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.f-btn-orange {
+    background: #DC8F36;
+    border-radius: 4.59px;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 9.18px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+}
+.f-btn-orange:hover { opacity: 0.9; }
+
+/* Grid Layout */
+.f-layout-grid {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+.f-left-col { flex: 1; min-width: 0; }
+.f-right-col { flex: 0 0 379px; width: 379px; }
+
+/* Note Box */
+.f-note-container {
+    background: #E6F1F5;
+    border-radius: 5px;
+    padding: 8px 12px;
+}
+.f-blue-note {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    color: #467C88;
+}
+
+/* =======================================
+   RIGHT COLUMN - APPROVAL CARD
+   ======================================= */
+.f-approval-card {
+    background: #F7F7F7;
+    border-radius: 20px;
+    padding: 25px;
+
+    .f-card-header h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 17.42px;
+        color: #000000;
+        margin: 0;
+    }
+}
+.f-divider { border: 0; border-top: 1px solid #ECECEC; margin: 18px 0; }
+.f-field-group {
+    margin-bottom: 16px;
+    label {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        color: #000000;
+        display: block;
+        margin-bottom: 6px;
+    }
+}
+
+::ng-deep .f-custom-input,
+::ng-deep .f-custom-input .p-inputtext,
+::ng-deep .f-custom-input.p-dropdown {
+    width: 100% !important;
+    height: 40.53px !important;
+    border: 0.3px solid #D1D1D1 !important;
+    border-radius: 6px !important;
+    background: #FFFFFF !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12.33px !important;
+    color: #7B7B7B !important;
+    box-shadow: none !important;
+}
+::ng-deep .f-custom-textarea {
+    width: 100% !important;
+    border: 0.3px solid #D1D1D1 !important;
+    border-radius: 6px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12.33px !important;
+    color: #7B7B7B !important;
+    padding: 10px !important;
+    resize: none;
+    height: 100px !important;
+}
+
+.figma-action-buttons { display: flex; gap: 12px; }
+.figma-btn-back {
+    width: 89px; height: 29px; background: #E5E5E5; border-radius: 4px; border: none;
+    font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 14px; color: #585858; cursor: pointer;
+}
+.figma-btn-submit {
+    width: 79px; height: 29px; background: #16A05D; border-radius: 5.21px; border: none;
+    font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 10.43px; color: #FFFFFF; cursor: pointer;
+}
+.figma-btn-back:hover, .figma-btn-submit:hover { opacity: 0.85; }
+
+.figma-btn-preview {
+  box-sizing: border-box;
+width: 89px;
+ height: 29px;
+  background: #A6A6A6;
+  border-radius: 4px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* =======================================
+   POPUP STYLES (SCHEME DETAILS DIALOG)
+   ======================================= */
+::ng-deep .p-dialog .p-dialog-content {
+    border-radius: 10px;
+    padding: 0 !important;
+    background: #FFFFFF;
+}
+
+.f-popup-container {
+    background: #FFFFFF;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.f-role-section {
+    .f-lbl-blue { font-weight: 500; font-size: 12px; color: #467C88; }
+    .f-val-dark { font-weight: 400; font-size: 12px; color: #1D1D1D; }
+}
+
+.f-about-scheme-box {
+    background: #E6F1F5;
+    border-radius: 10px;
+    padding: 15px 20px;
+    h5 { font-weight: 500; font-size: 12px; color: #467C88; margin: 0 0 8px 0; }
+    p { font-weight: 400; font-size: 12px; line-height: 18px; color: #000000; margin: 0; }
+}
+
+.f-scheme-details-box {
+    border: 1px solid #D4D4D4;
+    border-radius: 5px;
+    overflow: hidden;
+    .f-sd-header {
+        background: #F4F2F2; padding: 10px 20px; font-weight: 500; font-size: 11px; color: #525252;
+    }
+    .f-sd-body { padding: 20px; background: #FFFFFF; }
+    .f-sd-lbl { font-weight: 400; font-size: 9.5px; color: #000000; }
+    .f-sd-val { font-weight: 400; font-size: 9px; color: #525252; }
+}
+
+.f-checklist-box {
+    background: rgba(255, 220, 179, 0.23);
+    border-radius: 10px;
+    padding: 20px;
+    h5 { font-weight: 500; font-size: 12px; color: #000000; margin: 0 0 5px 0; }
+    p, li { font-weight: 400; font-size: 12px; color: #000000; line-height: 20px; }
+    ul { padding-left: 20px; margin-top: 5px; }
+
+    .f-ref-doc-section {
+        background: #FFFFFF;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #F1F1F1;
+        width: 300px;
+        h5 { text-transform: capitalize; font-size: 11px; }
+        .f-doc-img-wrapper {
+            background: #FDFDFD;
+            border: 0.3px dashed #034772;
+            border-radius: 6.3px;
+            padding: 5px;
+            text-align: center;
+            height: 105px;
+            img { max-height: 100%; max-width: 100%; border-radius: 2px; object-fit: contain; }
+        }
+    }
+}
+
+.f-action-required-box {
+    background: rgba(255, 194, 179, 0.23);
+    border-radius: 10px;
+    padding: 15px 20px;
+    .f-req-title {
+        font-weight: 600; font-size: 14px; color: #DD1E1E; display: block; margin-bottom: 5px; background: #FFF000; width: max-content; padding: 0 5px;
+    }
+    p { font-weight: 500; font-size: 14px; color: #DD1E1E; line-height: 21px; margin: 0; }
+}
+
+.status-popup-container {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+
+    .status-icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        &.bg-success { background: #16A05D; }
+        &.bg-return { background: #E45036; }
+    }
+
+    .status-message {
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 1.2;
+        max-width: 350px;
+
+        &.text-success { color: #16A05D; }
+        &.text-dark { color: #2A2A2A; }
+    }
+
+    .btn-popup-gray {
+        background: #EDEDED;
+        border: 1px solid #F0F0F0;
+        border-radius: 10px;
+        padding: 8px 30px;
+        color: #949494;
+        font-size: 16px;
+        cursor: pointer;
+        min-width: 140px;
+    }
+
+    .btn-popup-return {
+        background: #E45036;
+        border: 1px solid #F0F0F0;
+        border-radius: 10px;
+        padding: 8px 30px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        min-width: 140px;
+    }
+}

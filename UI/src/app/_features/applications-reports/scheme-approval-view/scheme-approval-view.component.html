@@ -1,0 +1,173 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col">
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+    <div class="mb-3">
+        <app-mem-scheme-view [schemeDetails]="schemeDetails" [memberDetails]="memberDetail"></app-mem-scheme-view>
+    </div>
+    <div class="mb-3">
+        <div class="card">
+            <h5>Approval Form</h5>
+            <form [formGroup]="approvalForm" (ngSubmit)="submit()" class="col-12">
+                <div class=" p-fluid">
+                    <div class="flex grid formgrid">
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="status">Status</label>
+                            <input pInputText formControlName="status" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('status')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="date">Date</label>
+                            <input pInputText formControlName="date" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('date')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="name">Name</label>
+                            <input pInputText formControlName="name" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('name')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="jobTitle">Role</label>
+                            <input pInputText formControlName="jobTitle" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('jobTitle')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="dob">Approve/ Reject Status</label>
+                            <p-dropdown [options]="approvalStatuses" optionLabel="statusName" optionValue="statusId"
+                                (ngModelChange)="changeApproveStatus()" placeholder="Select a status"
+                                formControlName="approvalRejectedstatus" [showClear]="
+                            true"></p-dropdown>
+                            <app-error-msg [control]="approvalForm.get('approvalRejectedstatus')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="canshowreason">
+                            <label htmlFor="reason">Reason</label>
+                            <p-dropdown [options]="reasons" optionLabel="text" optionValue="text"
+                                placeholder="Select a reason" formControlName="reason" [showClear]="
+                            true"></p-dropdown>
+                            <app-error-msg [control]="approvalForm.get('reason')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="showAssertVerfication">
+                            <label htmlFor="assertVerificationVenue">Asset Verification Venue</label>
+                            <input pInputText formControlName="assertVerificationVenue" type="text" />
+                            <app-error-msg [control]="approvalForm.get('assertVerificationVenue')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="showAssertVerfication">
+                            <label htmlFor="assertVerificationDate">Asset Verification Date</label>
+                            <p-calendar [defaultDate]="endDate" [showIcon]="true" [showButtonBar]="true"
+                                [maxDate]="endDate" [readonlyInput]="true" formControlName="assertVerificationDate"
+                                inputId="icon"></p-calendar>
+                            <app-error-msg [control]="approvalForm.get('assertVerificationDate')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="showAssertVerfication">
+                            <label htmlFor="verifiedby">Asset Verfied By</label>
+                            <input pInputText formControlName="verifiedby" type="text" />
+                            <app-error-msg [control]="approvalForm.get('verifiedby')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="comments">Comments</label>
+                            <input pInputText formControlName="comments" type="text" />
+                            <app-error-msg [control]="approvalForm.get('comments')"></app-error-msg>
+                        </div>
+                        <!-- <div class="field  col-12  md:col-6  lg:col-6 ">
+                            <label htmlFor="dob" [innerHTML]="this.documentFieldLabel">Document</label><span
+                                style="color: #e24c4c;" *ngIf="isDocumentRequired"> *<span *ngIf="isDocumentRequired">
+                                    Required</span></span>
+                            <p-fileUpload mode="advanced" chooseLabel="Upload" class="" chooseIcon="pi pi-upload"
+                                accept=".pdf" [maxFileSize]="2000000" [customUpload]="true" [showUploadButton]="false"
+                                (onSelect)="onSelectDocumentFile($event)" (onClear)="removefile($event)" />
+                            <app-error-msg [control]="approvalForm.get('document')"></app-error-msg>
+                        </div> -->
+
+                        <div class="outlayerdiv" style="width: 100%;margin-top: 10px;"
+                            *ngIf="documentsFormArray && documentsFormArray.length>0  &&!canshowreason">
+                            <div class="outlayerinnerdiv">
+                                <h5 class="outlarheader">Approval Documents</h5>
+                            </div>
+                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;overflow-x: auto;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No </th>
+                                            <th style="min-width: 200px">Document Category
+                                            </th>
+                                            <th>File Upload
+                                                <br>
+                                                <span *ngIf="fileUploadErrorMsg"
+                                                    class="tableheadererrormsg">{{fileUploadErrorMsg}}</span>
+                                            </th>
+                                            <th>Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody formArrayName="documents">
+                                        <tr *ngFor="let itemrow of documentsFormArray.controls; let i=index;let l=last"
+                                            [formGroupName]="i">
+                                            <td>{{i+1}} </td>
+                                            <td>{{itemrow.get('docCategory')?.value}}<span
+                                                    *ngIf="itemrow.get('isRequired')?.value == true"
+                                                    class="tableheadererrormsg">*</span>
+                                            </td>
+                                            <td>
+
+                                                <p-fileUpload *ngIf="!itemrow.get('originalFileName')?.value"
+                                                    mode="basic" chooseLabel="Upload" class="" chooseIcon="pi pi-upload"
+                                                    [maxFileSize]="2000000" [auto]="true" [customUpload]="true"
+                                                    accept=".pdf"
+                                                    (uploadHandler)="onSelectDocumentFileuploadMul($event, itemrow.get('id')?.value)" />
+                                                <p *ngIf="itemrow.get('originalFileName')?.value">
+                                                    {{itemrow.get('originalFileName')?.value}}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <button type="button" style="background-color: aliceblue;"
+                                                    *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple
+                                                    icon="pi pi-download"
+                                                    (click)="approvalStatusFiledownloads(itemrow.get('originalFileName')?.value,itemrow.get('id')?.value)"
+                                                    class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                    title="Delete"></button>
+
+                                                <button type="button" style="background-color: aliceblue;"
+                                                    *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple
+                                                    icon="pi pi-times" (click)="removeFile(itemrow)"
+                                                    class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                    title="Delete"></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="declarDiv" *ngIf="showAssertVerfication">
+                            <h3>
+                                Declaration / பிரகடனம்
+                            </h3>
+                            <div style="display: flex; align-items: center; margin-top: 20px;">
+                                <p-checkbox [binary]="true" formControlName="assertVerificationDeclaration"
+                                    (ngModelChange)="updateError()" inputId="ny"></p-checkbox>
+                                <label for="ny" style="margin-left: 8px; color: #333; font-size: 14px;">
+                                    I hereby confirm that I have thoroughly verified the asset and found it to be in
+                                    proper condition as per the required standards.
+                                </label>
+                            </div>
+                            <p style="color: rgb(243, 46, 46);" *ngIf="showDecError"> Declaration is Required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-3 mt-1" style="justify-content: end;">
+                    <p-button label="Back" icon="pi pi-arrow-left" class="p-button-secondary" severity="secondary"
+                        (onClick)="back()" />
+                    <p-button label="Submit" type="submit" />
+                    <p-button label="Cancel" class="p-button-secondary" />
+                </div>
+            </form>
+        </div>
+        <p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog>
+    </div>
+
+</div>

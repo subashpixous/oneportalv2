@@ -1,0 +1,35 @@
+/* src/app/features/report/reports-tab-view/reports-tab-view.component.scss */
+:host ::ng-deep {
+  .p-tabview {
+    .p-tabview-nav {
+      border: none;
+
+      li {
+        margin-right: 0.5rem;
+
+        .p-tabview-nav-link {
+          border: none;
+          background: #f8f9fa;
+          border-radius: 6px;
+          margin: 0;
+          padding: 1rem 1.25rem;
+          transition: all 0.2s;
+
+          &:not(.p-disabled):focus {
+            box-shadow: none;
+          }
+        }
+
+        &.p-highlight .p-tabview-nav-link {
+          background: var(--primary-color);
+          color: white;
+        }
+      }
+    }
+
+    .p-tabview-panels {
+      background: transparent;
+      padding: 1.5rem 0;
+    }
+  }
+}

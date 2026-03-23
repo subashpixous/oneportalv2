@@ -1,0 +1,80 @@
+<form [formGroup]="preReqForm" class="col-12">
+    <div class=" p-fluid">
+        <div class="p-formgrid grid ">
+
+            <div class="col-10 flex" style="flex-wrap: wrap;">
+
+   <div class="field col-12  md:col-4  lg:col-4 mb-0">
+<label htmlFor="first_Name">முதல் பெயர் / First Name
+</label>
+<input pInputText formControlName="first_Name" type="text"
+                     [ngClass]="{
+      'is-invalid': preReqForm.errors?.['combinedNameTooLong']
+    }"
+     />
+<div
+  *ngIf="preReqForm.errors?.['combinedNameTooLong']"
+  class="text-danger mt-1"
+>
+  First Name and Last Name together should not exceed 30 characters.
+</div>
+<app-error-msg [control]="preReqForm.get('first_Name')"></app-error-msg>
+</div>
+<div class="field col-12  md:col-4  lg:col-4 mb-0">
+<label htmlFor="last_Name">கடைசி பெயர் / Initial
+</label>
+<input pInputText formControlName="last_Name" type="text"
+                                   [ngClass]="{
+      'is-invalid': preReqForm.errors?.['combinedNameTooLong']
+    }"
+   />
+<app-error-msg [control]="preReqForm.get('last_Name')"></app-error-msg>
+</div>
+                <div class="field col-12  md:col-4  lg:col-4 mb-0">
+                    <label htmlFor="email">மின்னஞ்சல் / Email
+                    </label>
+                    <input pInputText formControlName="email" type="text" />
+                    <app-error-msg [control]="preReqForm.get('email')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-4  lg:col-4 mb-0">
+                    <label htmlFor="phone_Number">தொலைபேசி எண் / Mobile Number
+                    </label>
+                    <div class="p-inputgroup">
+                        <input pInputText formControlName="phone_Number" type="text" [maxlength]="10" />
+                        <button type="button" pButton label="Send OTP " (click)="sendOtp()"
+                            styleClass="p-button-warn"></button>
+                    </div>
+                    <app-error-msg [control]="preReqForm.get('phone_Number')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-4  lg:col-4 mb-0" *ngIf="showotp">
+                    <label htmlFor="otp">கடவுச்சொல் / OTP
+                    </label>
+                    <input pInputText formControlName="otp" type="text" />
+                    <app-error-msg [control]="preReqForm.get('otp')"></app-error-msg>
+                    <div class="flex align-items-center flex-wrap ">
+                        <p *ngIf="showCounter" class="otpcls"> Resend OTP in {{ counter }} seconds</p>
+                        <a *ngIf="showResendOtp" class="otpcls font-medium underline ml-2 text-right cursor-pointer"
+                            style="color: var(--primary-color)" (click)="resendOTP()">Resend OTP</a>
+                    </div>
+                </div>
+                <div class="field col-12 md:col-4 lg:col-4">
+                    <label htmlFor="primaryDistrict">மாவட்டத்தின் பெயர் / District Name
+                    </label>
+                    <p-dropdown [options]="districts" optionLabel="text" optionValue="value"
+                        placeholder="Select a District" formControlName="primaryDistrict"
+                        [showClear]="true"></p-dropdown>
+                    <app-error-msg [control]="preReqForm.get('primaryDistrict')"></app-error-msg>
+                </div>
+            </div>
+            <div class="col-2 flex " style="justify-content: center;padding-bottom: 0px;align-self: center; ">
+                <div style="margin-right: 10px;">
+
+                    <p-button label="Submit" class="p-button-primary"
+                        [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+                        severity="success" (onClick)="save()" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog>

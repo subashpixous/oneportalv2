@@ -1,0 +1,9 @@
+<app-datatable-pagination [records]="configurationList" [defaultSortField]="defaultSortField"
+    [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Applications'" [rows]="rows" [total]="total"
+    [actions]="actions" (invokeAction)="actioInvoked($event)" [defaultstatus]="!currentStatus"
+    (changeStatus)="changeStatus($event)" [searchableColumns]="searchableColumns" [hasActiveInactive]="false"
+    [canShowAction]="true" (changefilter)="changefilter($event)" (actionalAction)="actionalAction($event)"
+    (exportRequest)="onExportRequest($event)"[canShowAction]="false" [excelExport]="true">
+</app-datatable-pagination>
+<p-toast></p-toast>
+<!-- modified by Sivasankar on 06-11-2025 for export functionality -->

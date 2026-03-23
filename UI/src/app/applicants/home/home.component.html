@@ -1,0 +1,252 @@
+<div class="custom-slider" (mouseenter)="pauseAutoSlide()" (mouseleave)="startAutoSlide()">
+
+  <div class="slides"
+       [class.no-transition]="!isTransitioning"
+       [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+
+    <div class="slide" *ngFor="let img of totalImages">
+      <img [src]="img" alt="Banner Image" />
+    </div>
+
+  </div>
+
+  <div class="bottom-nav">
+    <button (click)="prev()">❮</button>
+    <button (click)="next()">❯</button>
+  </div>
+</div>
+
+<div class="info-section" *ngIf="language === 'en'">
+
+  <div class="info-grid">
+
+    <!-- LEFT CARD -->
+    <div class="info-card">
+
+      <div class="info-header">
+        <i class="bi bi-file-earmark-text"></i>
+        HOW TO REGISTER IN TNCWWB PORTAL?
+      </div>
+
+      <ul class="info-list">
+
+        <li style="margin-bottom: 25px;">
+          Go to the TNCWWB Home Page and click
+          <span class="highlight" (click)="openUserTypeDialog()" style="cursor: pointer;">Member Register</span>.
+        </li>
+
+        <li style="margin-bottom: 25px;">
+          Select your Worker Category and enter your
+          <span class="highlight" (click)="goToMember()" style="cursor: pointer;">Aadhaar number</span>.
+        </li>
+
+        <li style="margin-bottom: 25px;">
+          Verify your mobile number using the OTP received.
+        </li>
+
+        <li style="margin-bottom: 25px;">
+          Fill in your personal, address, and bank details.
+        </li>
+
+        <li style="margin-bottom: 25px;">
+          Submit the application to complete your registration.
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="info-card">
+
+      <div class="info-header">
+        <i class="bi bi-file-earmark-text"></i>
+        APPLY FOR SCHEMES
+      </div>
+
+      <ul class="info-list">
+
+        <li>
+          If you are a registered member, you can apply for many schemes for:
+        </li>
+   </ul> 
+        <ul class="info-sub-list">
+
+          <li style="color:  #4f7f88;"> 
+            <span class="highlight">Yourself</span>
+          </li>
+
+          <li style="color:  #4f7f88;">
+            <span class="highlight">Your family members</span>
+          </li> 
+      </ul>
+
+
+      <div class="info-subtitle">
+        Keep These Documents Ready Before Applying:
+      </div>
+
+      <ul class="info-sub-list">
+
+        <li style="color:  #4f7f88;">
+          <span class="highlight">Aadhaar Card</span>
+         <span style="color: #131314;"> – for members</span>
+        </li>
+
+        <li style="color:  #4f7f88;">
+          <span class="highlight">Mobile Number</span>
+         <span style="color: #131314;"> – for rag pickers</span>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="info-section " *ngIf="language === 'ta'">
+
+  <div class="info-grid">
+
+    <div class="info-card">
+
+      <div class="info-header">
+        <i class="bi bi-file-earmark-text"></i>
+        தொழிலாளர் பதிவு செய்யும் முறை
+      </div>
+
+      <ul class="info-list">
+
+       <li> TNCWWB முகப்பு பக்கத்திற்கு செல்லவும் மற்றும் <span class="highlight" (click)="openUserTypeDialog()" style="cursor: pointer;">“உறுப்பினர் பதிவு” </span>என்பதைத் தேர்ந்தெடுக்கவும்.
+
+
+
+        
+<li>உங்கள் தொழிலாளர் வகையைத் தேர்ந்தெடுத்து,  <span class="highlight" (click)="goToMember()"  style="cursor: pointer;"> ஆதார் எண்ணை </span> பதிவு செய்யவும்.</li>
+<li>பெறப்பட்ட ஒருமுறை கடவுச்சொல் (OTP) மூலம் கைபேசி எண்ணை உறுதிப்படுத்தவும்.</li>
+        <!-- <li>
+          நீங்கள் ஒரு
+          <span class="highlight">குப்பை சேகரிப்பவர் (Rag Picker)</span>
+          அல்லது உங்களிடம் ஆதார் இல்லையெனில், பதிவு செய்ய உங்களுக்கு கைபேசி எண்ணை வழங்க வேண்டும்.
+        </li> -->
+        <li>தொடர்ந்து, உங்கள் தனிப்பட்ட விவரங்கள், முகவரி விவரங்கள் மற்றும் வங்கி கணக்கு விவரங்களை முழுமையாக நிரப்பவும்.</li>
+<li>அனைத்து தகவல்களும் சரிபார்க்கப்பட்ட பின், விண்ணப்பத்தை சமர்ப்பித்து பதிவு செயல்முறையை நிறைவு செய்யவும்.</li>
+
+      </ul>
+    </div>
+    <div class="info-card">
+
+      <div class="info-header">
+        <i class="bi bi-file-earmark-text"></i>
+        திட்டங்களுக்கு விண்ணப்பிக்க
+      </div>
+
+
+      <ul class="info-list">
+
+        <li>
+          நீங்கள் பதிவு செய்யப்பட்ட உறுப்பினராக இருந்தால்,
+          கீழ்க்கண்டவர்களுக்கான பல திட்டங்களுக்கு விண்ணப்பிக்கலாம்:
+        </li>
+
+      </ul>
+
+
+      <ul class="info-sub-list">
+
+        <li class="highlight">நீங்கள்</li>
+
+        <li class="highlight">உங்கள் குடும்ப உறுப்பினர்கள்</li>
+
+      </ul>
+
+
+      <div class="info-subtitle">
+        விண்ணப்பிக்கும் முன் இந்த ஆவணங்களை தயாராக வைத்துக் கொள்ளுங்கள்:
+      </div>
+
+
+      <ul class="info-sub-list">
+
+        <li>
+          <span class="highlight">ஆதார் அட்டை</span>
+          – உறுப்பினர்களுக்காக
+        </li>
+
+        <li>
+          <span class="highlight">கைபேசி எண்</span>
+          – குப்பை சேகரிப்பவர்களுக்காக
+        </li>
+
+      </ul>
+
+
+</div>
+  </div>
+
+</div>
+ 
+
+<p-dialog
+    [(visible)]="showUserTypeDialog"
+    [modal]="true"
+    [closable]="false"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '720px' }"
+    styleClass="tn-user-dialog">
+
+    <div class="tn-dialog-container">
+
+        <!-- CLOSE ICON -->
+        <button class="tn-close-btn"
+                type="button"
+                (click)="showUserTypeDialog=false">
+            <i class="pi pi-times"></i>
+        </button>
+
+        <!-- TITLE -->
+        <div class="tn-dialog-title">
+            Select Applicant type
+        </div>
+
+        <!-- OPTIONS -->
+        <div class="tn-user-options">
+
+            <!-- WORKER -->
+            <div class="tn-user-card"
+                 (click)="goToMember()">
+                <div class="tn-icon-circle">
+                    <i class="pi pi-user" style="font-size: 18px;"></i>
+                </div>
+                <div class="tn-user-text">
+                    <div class="tn-user-title">Worker</div>
+                    <div class="tn-user-subtitle">
+                        Self-registration by the applicant
+                    </div>
+                </div>
+            </div>
+
+            <!-- DATA OPERATOR -->
+            <div class="tn-user-card"
+                 (click)="goToDataCollector()">
+                <div class="tn-icon-circle">
+                    <i class="bi bi-person-fill" style="font-size: 18px;"></i>
+                </div>
+                <div class="tn-user-text">
+                    <div class="tn-user-title">
+                        Data Operator / Local body
+                    </div>
+                    <div class="tn-user-subtitle">
+                        Fills application for Worker
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</p-dialog>

@@ -1,0 +1,127 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;">
+        <div class="col">
+            <h4>{{title}}</h4>
+        </div>
+
+        <div class="col" style="text-align: center;">
+            <p-dropdown [options]="schemes" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                placeholder="Select a Role" (onChange)="changeRole($event)" [showClear]="false"
+                [(ngModel)]="selectedscheme"></p-dropdown>
+        </div>
+        <div class=" col">
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+    <div class="grid formgrid mb-3">
+        <div class="col-12">
+            <div class="card p-fluid" style="padding-bottom: 10px;margin-top: 10px;">
+                <div class="p-formgrid grid" *ngFor="let privilege of privileges; index as i;"
+                    style="margin-bottom: 10px;">
+                    <div class="col-12" style="margin-top: 20px">
+                        <h5 style="
+                        background-color: #f0eded;
+                        padding: 5px;
+                        border-radius: 5px;">{{privilege.status}}</h5>
+                    </div>
+                    <div class="col-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="width: 20%">Role</th>
+                                    <th rowspan="2" style="width: 10%">Create</th>
+                                    <th rowspan="2" style="width: 10%">Update </th>
+                                    <th rowspan="2" style="width: 10%">Approve</th>
+                                    <th rowspan="2" style="width: 10%">Return</th>
+
+                                    <th rowspan="2" style="width: 10%">View</th>
+                                    <th rowspan="2" style="width: 10%">Delete</th>
+                                    <th rowspan="2" style="width: 10%">Get Mail </th>
+                                    <th rowspan="2" style="width: 10%">Get SMS</th>
+                                    <th colspan="2" style="text-align: center; width: 30%">Form 3 </th>
+                                    <th colspan="2" style="text-align: center; width: 30%">UC</th>
+                                </tr>
+                                <tr>
+                                    <th style="width: 10%">View</th>
+                                    <th style="width: 10%">Create</th>
+                                    <th style="width: 10%">View</th>
+                                    <th style="width: 10%">Create</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let s of privilege.options; index as j;">
+                                    <td>{{s.role}}</td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.canCreate"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.canUpdate"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.canApprove"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.canReturn"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.canView"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.canDelete"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.canGetMail"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.canGetSMS"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.form3View"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.form3Upload"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.ucView"></p-inputSwitch>
+                                    </td>
+                                    <td>
+                                        <p-inputSwitch (onChange)="changeEvent($event, s)"
+                                            [disabled]="!getPerm(privleges. ROLE_SET_PRIVILEGE)"
+                                            [(ngModel)]="s.ucUpload"></p-inputSwitch>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <ng-template #norecwords>
+                                <p style="padding-top: 20px;">No records</p>
+                            </ng-template>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,327 @@
+/* --- EXACT FIGMA ACCORDION PANELS --- */
+.f-mem-container {
+    width: 100%;
+}
+
+.f-panel-container {
+    margin-bottom: 15px;
+    background: #FFFFFF;
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.f-panel-header {
+    background-color: #E5E5E5; 
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #DEDEDE;
+
+    span {
+        font-family: 'Poppins', sans-serif;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #595959;
+        text-transform: uppercase;
+    }
+    
+    .pi {
+        color: #5F6368;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .f-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Aadhar Badge on Headers */
+    .f-aadhar-badge {
+        background-color: #DEFFEF;
+        color: #16A05D;
+        padding: 4px 12px;
+        border-radius: 4.1px;
+        font-size: 11px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        text-transform: capitalize;
+    }
+}
+
+.f-panel-body {
+    background-color: #FFFFFF;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- SCHEME DETAILS DATA ALIGNMENT --- */
+.f-top-row {
+    display: flex;
+    align-items: center;
+    gap: 35px; 
+    flex-wrap: wrap;
+}
+
+.f-inline {
+    font-size: 12px;
+    .f-lbl { color: #555555; font-weight: 500; }
+    .f-val { font-weight: 600; margin-left: 5px; color: #222222;}
+    .text-blue { color: #1565C0; }
+    .text-green { color: #2E7D32; }
+}
+
+.f-solid-line {
+    border: 0;
+    border-top: 1px solid #EBEBEB;
+    margin: 0 0 20px 0;
+}
+
+.f-details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    row-gap: 25px; 
+    column-gap: 10px; 
+}
+
+.f-pair {
+    display: flex;
+    align-items: flex-start;
+    font-size: 11.5px;
+}
+
+.f-lbl-stack {
+    display: flex;
+    flex-direction: column;
+    color: #444444;
+    font-weight: 500;
+    min-width: 125px;
+    line-height: 1.5;
+}
+
+.f-colon {
+    margin: 0 8px;
+    color: #444444;
+    font-weight: 600;
+}
+
+.f-val {
+    color: #222222;
+    font-weight: 600;
+    flex: 1; 
+    word-break: break-word;
+}
+.f-span-2 { grid-column: span 2; }
+
+
+/* --- CLEAN TABLE FOR SUB-SCHEMES --- */
+.f-clean-table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    th {
+        background-color: #FAFAFA;
+        color: #333;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 12px 20px;
+        text-align: left;
+        border-bottom: 1px solid #EEEEEE;
+    }
+    
+    td {
+        padding: 12px 20px;
+        font-size: 12px;
+        color: #555;
+        border-bottom: 1px solid #EEEEEE;
+    }
+    .txt-green { color: #2E7D32; font-weight: 600; }
+    .txt-red { color: #D32F2F; font-weight: 600; }
+}
+
+/* --- FIGMA DOCUMENT THUMBNAIL GRID --- */
+// .f-doc-grid {
+//     display: flex;
+//     flex-wrap: wrap;
+//     gap: 25px;
+//     margin-top: 5px;
+// }
+
+// .f-doc-card {
+//     width: 250px; 
+    
+//     .f-doc-title {
+//         font-size: 11px;
+//         font-weight: 500;
+//         color: #797979;
+//         margin-bottom: 8px;
+//         text-align: center;
+//         line-height: 1.4;
+//     }
+    
+//     .f-doc-box {
+//         border: 1px solid #D1D1D1;
+//         border-radius: 4px;
+//         padding: 15px;
+//         height: 110px;
+//         background-color: #FAFAFA;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         justify-content: center;
+//         text-align: center;
+        
+//         .f-doc-icon {
+//             font-size: 28px;
+//             color: #90A4AE;
+//             margin-bottom: 10px;
+//         }
+        
+//         .f-doc-actions {
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             gap: 10px;
+//             width: 100%;
+
+//             .f-doc-link {
+//                 font-size: 11px;
+//                 color: #1976D2;
+//                 text-decoration: underline;
+//                 max-width: 140px;
+//                 overflow: hidden;
+//                 text-overflow: ellipsis;
+//                 white-space: nowrap; 
+//             }
+            
+//             .f-doc-download-btn {
+//                 background: none;
+//                 border: none;
+//                 color: #555;
+//                 cursor: pointer;
+//                 padding: 4px;
+//                 &:hover { color: #000; }
+//             }
+//         }
+//     }
+// }
+/* --- TABLE DESIGN (Figma Exact match) --- */
+.f-doc-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+        background: #E6F1F5; /* Light Blue Header */
+        padding: 12px 10px;
+        font-weight: 500;
+        font-size: 11.5px;
+        color: #000000;
+        border-bottom: 1px solid #D4D4D4;
+        border-right: 1px solid #D4D4D4;
+
+        &:last-child { border-right: none; }
+    }
+
+    td {
+        padding: 15px 10px;
+        font-weight: 400;
+        font-size: 11.5px;
+        color: #000000;
+        border-bottom: 1px solid #D4D4D4;
+        border-right: 1px solid #D4D4D4;
+        vertical-align: middle;
+
+        &:last-child { border-right: none; }
+    }
+    
+    tr:last-child td { border-bottom: none; }
+}
+
+/* --- DASHED UPLOAD BOX INSIDE TABLE --- */
+.f-upload-box-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.f-upload-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 280px;
+    height: 50px; /* Slim box to fit nicely in the table */
+    background: #FDFDFD;
+    border: 0.5px dashed #034772; /* Figma blue dashed border */
+    border-radius: 7px;
+    padding: 0 15px;
+    
+    &.empty {
+        background: #F9F9F9;
+        border-color: #D1D1D1;
+    }
+
+    .f-empty-text {
+        color: #A0A0A0;
+        font-size: 11px;
+        font-style: italic;
+    }
+
+    /* PDF Icon with Green Tick */
+    .f-icon-wrapper {
+        position: relative;
+        display: inline-flex;
+
+        .f-pdf-icon {
+            font-size: 24px;
+            color: #7A8489; 
+        }
+        .f-tick-icon {
+            position: absolute;
+            bottom: -2px;
+            right: -4px;
+            font-size: 12px;
+            color: #16A05D; /* Green Tick */
+            background: white;
+            border-radius: 50%;
+        }
+    }
+
+    /* File Name Link */
+    .f-doc-link {
+        font-family: 'Poppins', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: #1976D2; /* Exact figma blue */
+        text-decoration: underline;
+        max-width: 130px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; 
+    }
+
+    /* Download Button */
+    .f-doc-download-btn {
+        background: #F4F4F4;
+        border: 1px solid #D1D1D1;
+        border-radius: 4px;
+        color: #555;
+        cursor: pointer;
+        padding: 6px 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        margin-left: auto;
+        
+        i { font-size: 12px; }
+        &:hover { background: #EAEAEA; color: #000; }
+    }
+}

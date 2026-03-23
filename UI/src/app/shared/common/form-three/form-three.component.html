@@ -1,0 +1,58 @@
+<div class="mb-3 mt-3">
+
+    <div class="row" *ngIf="privilegemodel?.form3Upload &&  canshowform3">
+        <form [formGroup]="fornm3Form" (ngSubmit)="submit()" class="col-12">
+            <div class=" p-fluid">
+                <div class="flex grid formgrid">
+                    <div class="field  col-12  md:col-6  lg:col-6">
+                        <label htmlFor="nameAndAddress">Name and Address</label>
+                        <input pInputText formControlName="nameAndAddress" type="text" />
+                        <app-error-msg [control]="fornm3Form.get('nameAndAddress')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-6  lg:col-6">
+                        <label htmlFor="nameOfTrade">Name of the Trade</label>
+                        <input pInputText formControlName="nameOfTrade" type="text" />
+                        <app-error-msg [control]="fornm3Form.get('nameOfTrade')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="refNumber">Ref Number</label>
+                        <input pInputText formControlName="refNumber" type="text" />
+                        <app-error-msg [control]="fornm3Form.get('refNumber')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="subsidy">Subsidy (Rs)</label>
+                        <input pInputText formControlName="subsidy" type="text" />
+                        <app-error-msg [control]="fornm3Form.get('subsidy')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="promotorContribution">Promotor Contribution (Rs)</label>
+                        <input pInputText formControlName="promotorContribution" type="text" />
+                        <app-error-msg [control]="fornm3Form.get('promotorContribution')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="bankLoan">Bank Loan (Rs)</label>
+                        <input pInputText formControlName="bankLoan" type="text" />
+                        <app-error-msg [control]="fornm3Form.get('bankLoan')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="totalUtilCost">Total Util Cost (Rs)</label>
+                        <input pInputText formControlName="totalUtilCost" type="text" />
+                        <app-error-msg [control]="fornm3Form.get('totalUtilCost')"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-3 mt-1" style="justify-content: end;">
+                <p-button label="Submit" type="submit" />
+                <p-button label="Reset" (onClick)="resetform3()" class="p-button-secondary" />
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <app-datatable [records]="form3s" [defaultSortField]="defaultSortField" [defaultSortOrder]="defaultSortOrder"
+            [cols]="cols" [fileName]="'Configuration'" [rows]="10" [total]="form3s ? form3s.length : 0"
+            [actions]="actions" [searchableColumns]="searchableColumns" [hasActiveInactive]="false"
+            (invokeAction)="actioInvoked($event)" [canShowAction]="privilegemodel?.form3Upload?? false&&  canshowform3">
+        </app-datatable>
+    </div>
+</div>

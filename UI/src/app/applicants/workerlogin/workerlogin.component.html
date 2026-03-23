@@ -1,0 +1,256 @@
+<div class="registration-container">
+
+  <div class="grid align-items-stretch justify-content-center registration-grid">
+
+    <!-- LEFT SIDE -->
+    <div class="col-12 lg:col-5">
+
+      <div class="left-wrapper">
+
+        <div class="doc-header">
+          <i class="bi bi-file-earmark-text"></i>
+          தொடங்குவதற்கு முன் இந்த ஆவணங்களைத் தயாராக வைத்திருங்கள். /
+          KEEP THESE DOCUMENTS READY BEFORE APPLYING
+        </div>
+
+        <div class="doc-card">
+
+          <div class="doc-title">
+            <div>Please keep the following documents ready</div>
+            <div>before starting your application:</div>
+          </div>
+
+          <ul>
+            <li>Worker ID Card / தொழிலாளர் அடையாள அட்டை</li>
+            <li>Reference document image / சான்று ஆவணப் படம்</li>
+          </ul>
+
+          <div class="doc-images">
+            <img src="assets/worker-login-front.png" />
+            <img src="assets/worker-login-proof.png" />
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="col-12 lg:col-6">
+
+      <div class="form-card p-fluid">
+
+     
+        <div class="field">
+
+          <label class="form-label">
+            <div>நீங்கள் என்ன வேலை செய்கிறீர்கள்? /</div>
+            <div>
+              What type of work do you do?
+              <span class="required">*</span>
+            </div>
+          </label>
+
+          <div class="worker-row">
+
+            <div class="worker-dropdown">
+
+<p-dropdown
+  [options]="typeOfWork"
+  optionLabel="text"
+  optionValue="value"
+  [(ngModel)]="selectedWorkType"
+  (onChange)="onWorkTypeChange($event)"
+  placeholder="Select Worker category"
+  styleClass="custom-worker-dropdown"
+  [disabled]="isWorkTypeLocked">
+</p-dropdown>
+
+<small *ngIf="!selectedWorkType && errormessageforinput === 'Please select work type'" class="error-text">
+  Please select work type
+</small>
+            </div>
+    
+
+                 <div class="phone-check toggle-btn" *ngIf="!showOtpScreen"
+     (click)="toggleInputMode()"
+     [class.disabled-toggle]="selectedWorkType === RAG_PICKER_ID">
+
+
+              <i class="pi pi-mobile"></i>
+
+              <span>
+                {{ usePhoneNumber 
+                  ? ' உங்கள் ஆதார் எண்ணை பயன்படுத்தவும் /Use Your Aadhar Number'
+                  : 'உங்கள் கைப்பேசி எண்ணைப் பயன்படுத்தவும் /Use Your Mobile Number'
+                }}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+        <div class="field mt-4" *ngIf="!showOtpScreen">
+
+          <label class="form-label" >
+            {{ usePhoneNumber
+              ? 'உங்கள் கைப்பேசி எண் உள்ளிடவும் / Enter your Mobile  Number '
+              : 'உங்கள் ஆதார் எண்ணை உள்ளிடவும் / Enter your Aadhaar Number '
+            }}
+          </label>
+<div>
+          <small class="sub-text">
+            {{ usePhoneNumber
+              ? ' 10 இலக்க கைபேசி எண்ணை உள்ளிடவும் / Type your 10-digit Mobile  number'
+              : '12 இலக்க ஆதார் எண்ணை உள்ளிடவும் / Type your 12-digit Aadhaar number'
+            }}
+          </small>
+</div>
+       <input pInputText
+       [(ngModel)]="inputValue"
+       [maxlength]="usePhoneNumber ? 10 : 12"
+       [placeholder]="usePhoneNumber ? '9876543210' : '423456789012'"
+       class="w-full custom-input"
+       inputmode="numeric"
+       (keypress)="allowOnlyNumbers($event)"
+       (input)="validateInput()" 
+       (keydown.enter)="getOtp()"
+       style="margin: 15px;">
+
+          <small *ngIf="errorMessage"  class="error-text">
+            {{ errorMessage }}
+          </small>
+
+        </div>
+        <div class="button-group" *ngIf="!showOtpScreen" >
+
+          <button pButton
+                  label="Get OTP"
+                  (click)="getOtp()"
+                  class="generate-btn">
+          </button>
+
+          <button pButton
+                  label="Back"
+                  (click)="goback()"
+                  class="back-btn">
+          </button>
+
+        </div>
+     
+
+<!-- OTP SCREEN -->
+<div *ngIf="showOtpScreen" class="otp-section">
+
+  <div class="otp-title">
+    Please enter the OTP sent to the mobile number
+  </div>
+
+  <div class="masked-number">
+    {{ maskedValue }}
+  </div>
+
+  <!-- OTP INPUT BOXES -->
+<div class="otp-container">
+
+  <input
+    *ngFor="let digit of otpDigits; let i = index; trackBy: trackByIndex"
+    type="text"
+    inputmode="numeric"
+    maxlength="1"
+    class="otp-input"
+    [value]="otpDigits[i]"
+    [disabled]="otpTimer === 0"
+    (input)="onOtpInput($event, i)"
+    (keydown)="onOtpKeyDown($event, i)"
+    (keypress)="allowOnlyNumbers($event)"
+    (keydown.enter)="verifyOtp()"
+  />
+    
+
+</div>
+
+  <!-- TIMER + RESEND -->
+  <div class="otp-footer">
+    <div class="timer">
+      0:{{ otpTimer < 10 ? '0' + otpTimer : otpTimer }}
+    </div>
+  <small style="text-align: center;" *ngIf="otperrormessage"  class="error-text">
+            {{ otperrormessage }}
+          </small>
+    <div
+      class="resend"
+      [class.disabled]="otpTimer > 0"
+      (click)="resendOtp()">
+      Resend OTP?
+    </div>
+  </div>
+
+  <!-- VERIFY BUTTON -->
+  <button pButton
+          label="Verify OTP"
+          (click)="verifyOtp()"
+          class="generate-btn w-full mt-3"
+          [disabled]="otpTimer === 0">
+  </button>
+
+  <button pButton
+          label="Back"
+          (click)="resetOtpScreen()"
+          class="back-btn w-full mt-2">
+  </button>
+
+</div>
+
+
+<p-dialog
+  [(visible)]="showSuccessPopup"
+  [modal]="true"
+  [closable]="false"
+  [draggable]="false"
+  [style]="{width:'400px'}"
+  styleClass="success-popup">
+
+  <div class="popup-content success">
+    <i class="pi pi-check-circle"></i>
+    <h3>OTP Verified Successfully</h3>
+
+    <button pButton
+            label="Continue"
+            (click)="goNextPage()"
+            class="continue-btn">
+    </button>
+  </div>
+
+</p-dialog>
+
+<p-dialog
+  [(visible)]="showErrorPopup"
+  [modal]="true"
+  [closable]="false"
+  [draggable]="false"
+  [style]="{width:'400px'}"
+  styleClass="error-popup">
+
+  <div class="popup-content error">
+    <i class="pi pi-exclamation-circle"></i>
+    <h3>Error</h3>
+    <p>OTP verification failed.<br> Please verify and re-enter the 6 digits OTP</p>
+
+    <button pButton
+            label="Try Again"
+            (click)="clearOtp()"
+            class="try-btn">
+    </button>
+  </div>
+
+</p-dialog>
+
+      </div>
+    </div>   
+  </div>
+
+</div>

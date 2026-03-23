@@ -1,0 +1,696 @@
+<!-- <div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col">
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+    <div class="mb-3">
+        <app-mem-scheme-view [schemeDetails]="schemeDetails" [memberDetails]="memberDetail"></app-mem-scheme-view>
+    </div>
+    <div class="mb-3">
+        <div class="card">
+            <h5>Approval Form</h5>
+            <form [formGroup]="approvalForm" (ngSubmit)="submit()" class="col-12">
+                <div class=" p-fluid">
+                    <div class="flex grid formgrid">
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="status">Status</label>
+                            <input pInputText formControlName="status" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('status')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="date">Date</label>
+                            <input pInputText formControlName="date" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('date')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="name">Name</label>
+                            <input pInputText formControlName="name" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('name')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="jobTitle">Role</label>
+                            <input pInputText formControlName="jobTitle" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('jobTitle')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="dob">Approve/ Reject Status</label>
+                            <p-dropdown [options]="approvalStatuses" optionLabel="statusName" optionValue="statusId"
+                                (ngModelChange)="changeApproveStatus()" placeholder="Select a status"
+                                formControlName="approvalRejectedstatus" [showClear]="
+                            true"></p-dropdown>
+                            <app-error-msg [control]="approvalForm.get('approvalRejectedstatus')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="canshowreason">
+                            <label htmlFor="reason">Reason</label>
+                            <p-dropdown [options]="reasons" optionLabel="text" optionValue="text"
+                                placeholder="Select a reason" formControlName="reason" [showClear]="
+                            true"></p-dropdown>
+                            <app-error-msg [control]="approvalForm.get('reason')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="showAssertVerfication">
+                            <label htmlFor="assertVerificationVenue">Asset Verification Venue</label>
+                            <input pInputText formControlName="assertVerificationVenue" type="text" />
+                            <app-error-msg [control]="approvalForm.get('assertVerificationVenue')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="showAssertVerfication">
+                            <label htmlFor="assertVerificationDate">Asset Verification Date</label>
+                            <p-calendar [defaultDate]="endDate" [showIcon]="true" [showButtonBar]="true"
+                                [maxDate]="endDate" [readonlyInput]="true" formControlName="assertVerificationDate"
+                                inputId="icon"></p-calendar>
+                            <app-error-msg [control]="approvalForm.get('assertVerificationDate')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="showAssertVerfication">
+                            <label htmlFor="verifiedby">Asset Verfied By</label>
+                            <input pInputText formControlName="verifiedby" type="text" />
+                            <app-error-msg [control]="approvalForm.get('verifiedby')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="comments">Comments</label>
+                            <input pInputText formControlName="comments" type="text" />
+                            <app-error-msg [control]="approvalForm.get('comments')"></app-error-msg>
+                        </div>
+  already commented                      <div class="field  col-12  md:col-6  lg:col-6 ">
+                            <label htmlFor="dob" [innerHTML]="this.documentFieldLabel">Document</label><span
+                                style="color: #e24c4c;" *ngIf="isDocumentRequired"> *<span *ngIf="isDocumentRequired">
+                                    Required</span></span>
+                            <p-fileUpload mode="advanced" chooseLabel="Upload" class="" chooseIcon="pi pi-upload"
+                                accept=".pdf" [maxFileSize]="2000000" [customUpload]="true" [showUploadButton]="false"
+                                (onSelect)="onSelectDocumentFile($event)" (onClear)="removefile($event)" />
+                            <app-error-msg [control]="approvalForm.get('document')"></app-error-msg>
+    already commtend                    </div>
+
+                        <div class="outlayerdiv" style="width: 100%;margin-top: 10px;"
+                            *ngIf="documentsFormArray && documentsFormArray.length>0  &&!canshowreason">
+                            <div class="outlayerinnerdiv">
+                                <h5 class="outlarheader">Approval Documents</h5>
+                            </div>
+                            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;overflow-x: auto;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No </th>
+                                            <th style="min-width: 200px">Document Category
+                                            </th>
+                                            <th>File Upload
+                                                <br>
+                                                <span *ngIf="fileUploadErrorMsg"
+                                                    class="tableheadererrormsg">{{fileUploadErrorMsg}}</span>
+                                            </th>
+                                            <th>Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody formArrayName="documents">
+                                        <tr *ngFor="let itemrow of documentsFormArray.controls; let i=index;let l=last"
+                                            [formGroupName]="i">
+                                            <td>{{i+1}} </td>
+                                            <td>{{itemrow.get('docCategory')?.value}}<span
+                                                    *ngIf="itemrow.get('isRequired')?.value == true"
+                                                    class="tableheadererrormsg">*</span>
+                                            </td>
+                                            <td>
+
+                                                <p-fileUpload *ngIf="!itemrow.get('originalFileName')?.value"
+                                                    mode="basic" chooseLabel="Upload" class="" chooseIcon="pi pi-upload"
+                                                    [maxFileSize]="2000000" [auto]="true" [customUpload]="true"
+                                                    accept=".pdf"
+                                                    (uploadHandler)="onSelectDocumentFileuploadMul($event, itemrow.get('id')?.value)" />
+                                                <p *ngIf="itemrow.get('originalFileName')?.value">
+                                                    {{itemrow.get('originalFileName')?.value}}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <button type="button" style="background-color: aliceblue;"
+                                                    *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple
+                                                    icon="pi pi-download"
+                                                    (click)="approvalStatusFiledownloads(itemrow.get('originalFileName')?.value,itemrow.get('id')?.value)"
+                                                    class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                    title="Delete"></button>
+
+                                                <button type="button" style="background-color: aliceblue;"
+                                                    *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple
+                                                    icon="pi pi-times" (click)="removeFile(itemrow)"
+                                                    class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                    title="Delete"></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="declarDiv" *ngIf="showAssertVerfication">
+                            <h3>
+                                Declaration / பிரகடனம்
+                            </h3>
+                            <div style="display: flex; align-items: center; margin-top: 20px;">
+                                <p-checkbox [binary]="true" formControlName="assertVerificationDeclaration"
+                                    (ngModelChange)="updateError()" inputId="ny"></p-checkbox>
+                                <label for="ny" style="margin-left: 8px; color: #333; font-size: 14px;">
+                                    I hereby confirm that I have thoroughly verified the asset and found it to be in
+                                    proper condition as per the required standards.
+                                </label>
+                            </div>
+                            <p style="color: rgb(243, 46, 46);" *ngIf="showDecError"> Declaration is Required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-3 mt-1" style="justify-content: end;">
+                    <p-button label="Back" icon="pi pi-arrow-left" class="p-button-secondary" severity="secondary"
+                        (onClick)="back()" />
+                    <p-button label="Submit" type="submit" />
+                    <p-button label="Cancel" class="p-button-secondary" />
+                </div>
+            </form>
+        </div>
+        <p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog>
+    </div>
+
+</div> -->
+
+<!-- today -->
+
+<!-- <div class="f-page-wrapper">
+    
+    <h4 class="f-title">{{title || 'Scheme Approval'}}</h4>
+
+    <div class="f-meta-info" *ngIf="schemeDetails">
+        <div class="f-meta-row">
+            <span class="f-meta-text left">ID : {{memberDetail?.memberDetail?.memberId}}</span>
+<span class="f-meta-text right">Last Updated : {{ dcwt(schemeDetails?.submittedDate) }}</span>
+        </div>
+        <div class="f-meta-row mt-3">
+            <span class="f-meta-text left">Applicant name : {{ schemeDetails?.name }}</span>
+            <span class="f-meta-text center">Beneficiary Name : {{schemeDetails?.beneficiaryName }}</span>
+            <span class="f-meta-text right">Relationship : {{ schemeDetails?.relationship }}</span>
+        </div>
+    </div>
+
+    <div class="f-layout-grid">
+        
+        <div class="f-left-col">
+            <app-mem-scheme-view [schemeDetails]="schemeDetails" [memberDetails]="memberDetail"></app-mem-scheme-view>
+        </div>
+
+        <div class="f-right-col">
+            
+            <div class="f-blue-note">
+                Note: The DM will verify the entered organization details with the submitted proof.
+            </div>
+
+            <div class="f-approval-card">
+                <div class="f-card-header">
+                    <h3>APPROVAL [{{ userRole || 'DM' }}]</h3>
+                </div>
+                
+                <hr class="f-divider">
+
+                <form [formGroup]="approvalForm" (ngSubmit)="submit()">
+                    
+                    <div class="f-field-group">
+                        <label>Application status</label>
+                        <input pInputText formControlName="status" [readOnly]="true" type="text" class="f-custom-input" placeholder="DM Approved" />
+                        <app-error-msg [control]="approvalForm.get('status')"></app-error-msg>
+                    </div>
+
+                    <div class="f-field-group">
+                        <label>Approve/ Reject Status <span style="color: red;">*</span></label>
+                        <p-dropdown [options]="approvalStatuses" optionLabel="statusName" optionValue="statusId"
+                            (ngModelChange)="changeApproveStatus()" placeholder="Select a status"
+                            formControlName="approvalRejectedstatus" [showClear]="true" 
+                            styleClass="f-custom-input w-full"></p-dropdown>
+                        <app-error-msg [control]="approvalForm.get('approvalRejectedstatus')"></app-error-msg>
+                    </div>
+
+                    <div class="f-field-group" *ngIf="canshowreason">
+                        <label>Reason</label>
+                        <p-dropdown [options]="reasons" optionLabel="text" optionValue="text"
+                            placeholder="Select a reason" formControlName="reason" [showClear]="true" styleClass="f-custom-input"></p-dropdown>
+                        <app-error-msg [control]="approvalForm.get('reason')"></app-error-msg>
+                    </div>
+
+                    <ng-container *ngIf="showAssertVerfication">
+                        <div class="f-field-group">
+                            <label>Asset Verification Venue</label>
+                            <input pInputText formControlName="assertVerificationVenue" type="text" class="f-custom-input" />
+                            <app-error-msg [control]="approvalForm.get('assertVerificationVenue')"></app-error-msg>
+                        </div>
+                        <div class="f-field-group">
+                            <label>Asset Verification Date</label>
+                            <p-calendar [defaultDate]="endDate" [showIcon]="true" [showButtonBar]="true"
+                                [maxDate]="endDate" [readonlyInput]="true" formControlName="assertVerificationDate"
+                                inputId="icon" styleClass="f-custom-input"></p-calendar>
+                            <app-error-msg [control]="approvalForm.get('assertVerificationDate')"></app-error-msg>
+                        </div>
+                        <div class="f-field-group">
+                            <label>Asset Verified By</label>
+                            <input pInputText formControlName="verifiedby" type="text" class="f-custom-input" />
+                            <app-error-msg [control]="approvalForm.get('verifiedby')"></app-error-msg>
+                        </div>
+                    </ng-container>
+
+                    <div class="f-field-group" style="margin-top: 15px;" *ngIf="documentsFormArray && documentsFormArray.length > 0 && !canshowreason">
+                        <div class="outlayerinnerdiv" style="background: #F4F2F2; padding: 10px; border-radius: 5px;">
+                            <h5 style="margin:0; font-size: 13px; color: #595959;">Approval Documents</h5>
+                        </div>
+                        <div class="table-responsive mt-2">
+                            <table class="table w-full" style="border-collapse: collapse; font-size: 12px;">
+                                <thead style="background-color: #E6F1F5;">
+                                    <tr>
+                                        <th style="padding: 10px; border: 1px solid #CBCBCB;">S.No</th>
+                                        <th style="padding: 10px; border: 1px solid #CBCBCB; min-width: 150px;">Document Category</th>
+                                        <th style="padding: 10px; border: 1px solid #CBCBCB;">File Upload <br>
+                                            <span *ngIf="fileUploadErrorMsg" style="color: red;">{{fileUploadErrorMsg}}</span>
+                                        </th>
+                                        <th style="padding: 10px; border: 1px solid #CBCBCB;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody formArrayName="documents">
+                                    <tr *ngFor="let itemrow of documentsFormArray.controls; let i=index;" [formGroupName]="i">
+                                        <td style="padding: 10px; border: 1px solid #CBCBCB; text-align: center;">{{i+1}}</td>
+                                        <td style="padding: 10px; border: 1px solid #CBCBCB;">
+                                            {{itemrow.get('docCategory')?.value}}
+                                            <span *ngIf="itemrow.get('isRequired')?.value" style="color: red;">*</span>
+                                        </td>
+                                        <td style="padding: 10px; border: 1px solid #CBCBCB; text-align: center;">
+                                            <p-fileUpload *ngIf="!itemrow.get('originalFileName')?.value"
+                                                mode="basic" chooseLabel="Upload" chooseIcon="pi pi-upload"
+                                                [maxFileSize]="2000000" [auto]="true" [customUpload]="true"
+                                                accept=".pdf"
+                                                (uploadHandler)="onSelectDocumentFileuploadMul($event, itemrow.get('id')?.value)">
+                                            </p-fileUpload>
+                                            <p *ngIf="itemrow.get('originalFileName')?.value" style="margin:0; color:#0F5169; font-weight:600;">
+                                                {{itemrow.get('originalFileName')?.value}}
+                                            </p>
+                                        </td>
+                                        <td style="padding: 10px; border: 1px solid #CBCBCB; text-align: center;">
+                                            <button type="button" *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple
+                                                icon="pi pi-download" (click)="approvalStatusFiledownloads(itemrow.get('originalFileName')?.value,itemrow.get('id')?.value)"
+                                                class="p-button-outlined p-button-info p-button-sm mr-2" title="Download"></button>
+                                            
+                                            <button type="button" *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple
+                                                icon="pi pi-times" (click)="removeFile(itemrow)"
+                                                class="p-button-outlined p-button-danger p-button-sm" title="Delete"></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="f-field-group">
+                        <label>Comments</label>
+                        <textarea pInputTextarea formControlName="comments" rows="4" placeholder="Type comments..." class="f-custom-textarea"></textarea>
+                        <app-error-msg [control]="approvalForm.get('comments')"></app-error-msg>
+                    </div>
+
+                    <div class="f-field-group mt-3" *ngIf="showAssertVerfication">
+                        <h4 style="font-size: 13px; color: #595959; margin-bottom: 8px;">Declaration / பிரகடனம்</h4>
+                        <div class="flex align-items-start gap-2">
+                            <p-checkbox [binary]="true" formControlName="assertVerificationDeclaration" (ngModelChange)="updateError()" inputId="ny"></p-checkbox>
+                            <label for="ny" style="color: #333; font-size: 12px; cursor: pointer; margin-top: 2px;">
+                                I hereby confirm that I have thoroughly verified the asset and found it to be in proper condition as per the required standards.
+                            </label>
+                        </div>
+                        <p style="color: rgb(243, 46, 46); font-size: 11px; margin-top: 5px;" *ngIf="showDecError">Declaration is Required</p>
+                    </div>
+
+<div class="figma-action-buttons flex gap-3 mt-4" style="justify-content: flex-end;">
+                        <button type="button" class="figma-btn-back" (click)="back()">Back</button>
+                        
+                        <button type="button" class="figma-btn-preview" (click)="togglePreview()">
+                            <i class="pi pi-eye"></i> Preview
+                        </button>
+                        
+                        <button type="submit" class="figma-btn-submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog>
+</div> -->
+
+
+
+
+<div class="f-page-wrapper">
+    
+    <div class="flex justify-content-between align-items-center mb-4">
+        <h4 class="f-title m-0">{{title || 'Scheme Approval'}}</h4>
+        <span class="f-last-updated">Last Updated : {{ dcwt(schemeDetails?.submittedDate) }}</span>
+    </div>
+
+    <div class="f-layout-grid">
+        
+        <div class="f-left-col">
+            
+<div class="f-meta-section mb-3" *ngIf="schemeDetails">
+    
+    <div class="f-meta-left-content">
+        <div class="f-meta-row">
+            <span class="f-meta-text">ID : {{memberDetail?.memberDetail?.memberId}}</span>
+            <span class="f-meta-text">Applicant name : {{ schemeDetails?.memberName }}</span>
+        </div>
+        <div class="f-meta-row">
+            <span class="f-meta-text">Beneficiary Name : {{schemeDetails?.beneficiaryName }}</span>
+            <span class="f-meta-text">Relationship : {{ schemeDetails?.relationship }}</span>
+        </div>
+    </div>
+    
+    <div class="f-meta-right-btn">
+        <button type="button" class="f-btn-view-profile" (click)="togglePreview()">
+            <i class="pi pi-eye"></i> View Profile
+        </button>
+    </div>
+
+</div>
+<div class="f-note-container flex justify-content-between align-items-center mb-3"
+     *ngIf="hasSchemeVerifyPrivilege">
+                <div class="f-blue-note m-0 flex-1 text-left">
+                    Note :DM Needs To Verify The Uploaded Documents As Per The Required Document List
+                </div>
+                <button type="button" class="f-btn-gray ml-2" style="white-space: nowrap;" (click)="showSchemeDetailsPopup = true">Scheme Details</button>
+            </div>
+
+            <div class="f-doc-wrapper">
+                <app-mem-scheme-view [schemeDetails]="schemeDetails" [memberDetails]="memberDetail"></app-mem-scheme-view>
+                
+<div class="flex justify-content-end align-items-center mt-3 gap-2"
+     *ngIf="hasSchemeVerifyPrivilege">
+
+    <!-- Show button only if not verified -->
+    <button *ngIf="!isVerified"
+            type="button"
+            class="f-btn-orange"
+            (click)="onVerifyClick()">
+        <i class="pi pi-check-circle"></i> Verify
+    </button>
+
+    <!-- Show Verified text after click -->
+    <span *ngIf="isVerified"
+          style="color:#22C55E; font-weight:600;">
+        <i class="pi pi-check-circle"></i> Verified
+    </span>
+</div>
+            </div>
+            
+        </div>
+
+        <div class="f-right-col">
+            <div class="f-approval-card">
+                <div class="f-card-header">
+                    <h3>APPROVAL [{{ userRole || 'DM' }}]</h3>
+                </div>
+                
+                <hr class="f-divider">
+
+                <form [formGroup]="approvalForm" (ngSubmit)="submit()">
+                    
+                    <div class="f-field-group">
+                        <label>Application status</label>
+                        <input pInputText formControlName="status" [readOnly]="true" type="text" class="f-custom-input" placeholder="Application Status" />
+                        <app-error-msg [control]="approvalForm.get('status')"></app-error-msg>
+                    </div>
+<ng-container *ngIf="!hasSchemeVerifyPrivilege || isVerified || isAdditionalInfo">
+                    <div class="f-field-group">
+                        <label>Approve/ Reject Status <span style="color: red;">*</span></label>
+                        <p-dropdown [options]="approvalStatuses" optionLabel="statusName" optionValue="statusId"
+                            (ngModelChange)="changeApproveStatus()" placeholder="Select a status"
+                            formControlName="approvalRejectedstatus" [showClear]="true" 
+                            styleClass="f-custom-input w-full"></p-dropdown>
+                        <app-error-msg [control]="approvalForm.get('approvalRejectedstatus')"></app-error-msg>
+                    </div>
+
+                    <div class="f-field-group" *ngIf="canshowreason">
+                        <label>Reason</label>
+                        <p-dropdown [options]="reasons" optionLabel="text" optionValue="text"
+                            placeholder="Select a reason" formControlName="reason" [showClear]="true" styleClass="f-custom-input"></p-dropdown>
+                        <app-error-msg [control]="approvalForm.get('reason')"></app-error-msg>
+                    </div>
+</ng-container>
+<ng-container *ngIf="showAssertVerfication || isAdditionalInfo">
+    <div class="f-field-group">
+        <label>{{ isAdditionalInfo ? 'Additional Information' : 'Asset Verification Venue' }}</label>
+        
+        <input *ngIf="!isAdditionalInfo" pInputText formControlName="assertVerificationVenue" type="text" class="f-custom-input" />
+        
+        <textarea *ngIf="isAdditionalInfo" pInputTextarea formControlName="assertVerificationVenue" rows="4" placeholder="Enter additional information..." class="f-custom-textarea w-full"></textarea>
+        
+        <app-error-msg [control]="approvalForm.get('assertVerificationVenue')"></app-error-msg>
+    </div>
+</ng-container>
+                    <ng-container *ngIf="showAssertVerfication">
+                        <!-- <div class="f-field-group">
+                            <label>Asset Verification Venue</label>
+                            <input pInputText formControlName="assertVerificationVenue" type="text" class="f-custom-input" />
+                            <app-error-msg [control]="approvalForm.get('assertVerificationVenue')"></app-error-msg>
+                        </div> -->
+                        <div class="f-field-group">
+                            <label>Asset Verification Date</label>
+                            <p-calendar [defaultDate]="endDate" [showIcon]="true" [showButtonBar]="true"
+                                [maxDate]="endDate" [readonlyInput]="true" formControlName="assertVerificationDate"
+                                inputId="icon" styleClass="f-custom-input"></p-calendar>
+                            <app-error-msg [control]="approvalForm.get('assertVerificationDate')"></app-error-msg>
+                        </div>
+                        <div class="f-field-group">
+                            <label>Asset Verified By</label>
+                            <input pInputText formControlName="verifiedby" type="text" class="f-custom-input" />
+                            <app-error-msg [control]="approvalForm.get('verifiedby')"></app-error-msg>
+                        </div>
+                    </ng-container>
+
+                    <div class="f-field-group" style="margin-top: 15px;" *ngIf="documentsFormArray && documentsFormArray.length > 0 && !canshowreason">
+                        <div class="outlayerinnerdiv" style="background: #F4F2F2; padding: 10px; border-radius: 5px;">
+                            <h5 style="margin:0; font-size: 13px; color: #595959;">Approval Documents</h5>
+                        </div>
+                        <div class="table-responsive mt-2">
+                            <table class="table w-full" style="border-collapse: collapse; font-size: 12px;">
+                                <thead style="background-color: #E6F1F5;">
+                                    <tr>
+                                        <th style="padding: 10px; border: 1px solid #CBCBCB;">S.No</th>
+                                        <th style="padding: 10px; border: 1px solid #CBCBCB; min-width: 150px;">Document Category</th>
+                                        <th style="padding: 10px; border: 1px solid #CBCBCB;">File Upload <br>
+                                            <span *ngIf="fileUploadErrorMsg" style="color: red;">{{fileUploadErrorMsg}}</span>
+                                        </th>
+                                        <th style="padding: 10px; border: 1px solid #CBCBCB;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody formArrayName="documents">
+                                    <tr *ngFor="let itemrow of documentsFormArray.controls; let i=index;" [formGroupName]="i">
+                                        <td style="padding: 10px; border: 1px solid #CBCBCB; text-align: center;">{{i+1}}</td>
+                                        <td style="padding: 10px; border: 1px solid #CBCBCB;">
+                                            {{itemrow.get('docCategory')?.value}}
+                                            <span *ngIf="itemrow.get('isRequired')?.value" style="color: red;">*</span>
+                                        </td>
+                                        <td style="padding: 10px; border: 1px solid #CBCBCB; text-align: center;">
+                                            <p-fileUpload *ngIf="!itemrow.get('originalFileName')?.value"
+                                                mode="basic" chooseLabel="Upload" chooseIcon="pi pi-upload"
+                                                [maxFileSize]="2000000" [auto]="true" [customUpload]="true"
+                                                accept=".pdf"
+                                                (uploadHandler)="onSelectDocumentFileuploadMul($event, itemrow.get('id')?.value)">
+                                            </p-fileUpload>
+                                            <p *ngIf="itemrow.get('originalFileName')?.value" style="margin:0; color:#0F5169; font-weight:600;">
+                                                {{itemrow.get('originalFileName')?.value}}
+                                            </p>
+                                        </td>
+                                        <td style="padding: 10px; border: 1px solid #CBCBCB; text-align: center;">
+                                            <button type="button" *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple
+                                                icon="pi pi-download" (click)="approvalStatusFiledownloads(itemrow.get('originalFileName')?.value,itemrow.get('id')?.value)"
+                                                class="p-button-outlined p-button-info p-button-sm mr-2" title="Download"></button>
+                                            
+                                            <button type="button" *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple
+                                                icon="pi pi-times" (click)="removeFile(itemrow)"
+                                                class="p-button-outlined p-button-danger p-button-sm" title="Delete"></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="f-field-group">
+                        <label>Comments</label>
+                        <textarea pInputTextarea formControlName="comments" rows="4" placeholder="Type comments..." class="f-custom-textarea"></textarea>
+                        <app-error-msg [control]="approvalForm.get('comments')"></app-error-msg>
+                    </div>
+
+                    <div class="f-field-group mt-3" *ngIf="showAssertVerfication">
+                        <h4 style="font-size: 13px; color: #595959; margin-bottom: 8px;">Declaration / பிரகடனம்</h4>
+                        <div class="flex align-items-start gap-2">
+                            <p-checkbox [binary]="true" formControlName="assertVerificationDeclaration" (ngModelChange)="updateError()" inputId="ny"></p-checkbox>
+                            <label for="ny" style="color: #333; font-size: 12px; cursor: pointer; margin-top: 2px;">
+                                I hereby confirm that I have thoroughly verified the asset and found it to be in proper condition as per the required standards.
+                            </label>
+                        </div>
+                        <p style="color: rgb(243, 46, 46); font-size: 11px; margin-top: 5px;" *ngIf="showDecError">Declaration is Required</p>
+                    </div>
+
+                    <div class="figma-action-buttons flex gap-3 mt-4" style="justify-content: center;">
+                        <button type="button" class="figma-btn-back" (click)="back()">Back</button>
+                                                <button type="button" class="figma-btn-preview" (click)="togglePreview()">
+                            <i class="pi pi-eye"></i> Preview
+                        </button>
+                        <button type="submit" class="figma-btn-submit">Submit</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog>
+</div>
+
+<p-dialog [(visible)]="showSchemeDetailsPopup" [modal]="true" [style]="{width: '800px'}" [showHeader]="false" [dismissableMask]="true">
+    <div class="f-popup-container p-4">
+        
+        <div class="f-role-section mb-4">
+            <div class="flex mb-2">
+                <span class="f-lbl-blue w-6rem">Role:</span>
+                <span class="f-val-dark">{{ userRole || 'District manager(DM)' }}</span>
+            </div>
+            <div class="flex">
+                <span class="f-lbl-blue w-6rem">Purpose :</span>
+                <span class="f-val-dark">DM needs to verify the uploaded documents as per the required document list.</span>
+            </div>
+        </div>
+
+        <div class="f-about-scheme-box mb-4">
+            <h5>About Scheme - Education Assistance</h5>
+            <p>The Education Assistance Scheme is designed to provide financial support to eligible students from economically weaker sections to pursue higher education. The scheme aims to reduce financial barriers and promote equal educational opportunities.</p>
+        </div>
+
+        <div class="f-scheme-details-box mb-4">
+            <div class="f-sd-header">
+                திட்டத்தின் விவரங்கள் / Scheme Details
+            </div>
+            <div class="f-sd-body">
+                <div class="flex flex-wrap gap-4 mb-3">
+                    <div class="flex-1">
+                        <span class="f-sd-lbl block">திட்டம் / Scheme</span>
+                        <span class="f-sd-val block mt-1">: {{ schemeDetails?.schemeGroupName }}</span>
+                    </div>
+                    <div class="flex-1">
+                        <span class="f-sd-lbl block">திட்டம் / Scheme</span>
+                        <span class="f-sd-val block mt-1">: {{ schemeDetails?.scheme || '12th Std Passed (All Genders) – 1500/-' }}</span>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap gap-4 mb-3">
+                    <div class="flex-1">
+                        <span class="f-sd-lbl block">விண்ணப்பதாரர் பெயர் / Applicant Name</span>
+                        <span class="f-sd-val block mt-1">: {{ schemeDetails?.memberName }}</span>
+                    </div>
+                    <div class="flex-1">
+                        <span class="f-sd-lbl block">BeneficiaryName / பயனாளர் பெயர்</span>
+                        <span class="f-sd-val block mt-1">: {{ schemeDetails?.beneficiaryName }}</span>
+                    </div>
+                    <div class="flex-1">
+                        <span class="f-sd-lbl block">Relationship / உறவுமுறை</span>
+                        <span class="f-sd-val block mt-1">: {{ schemeDetails?.relationship }}</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex-1">
+                        <span class="f-sd-lbl block">தொகை / Amount</span>
+                        <span class="f-sd-val block mt-1">: {{ getAmount() }}/-</span>
+                    </div>
+                    <div class="flex-1" style="flex-grow: 2;">
+                        <span class="f-sd-lbl block">Total amount in words</span>
+                        <span class="f-sd-val block mt-1">: {{ CtoWords(getAmount()) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="f-checklist-box mb-4 flex gap-4">
+            <div class="flex-1">
+                <h5>DM Verification Checklist:</h5>
+                <p>Kindly verify the following uploaded documents:</p>
+                <ul>
+                    <ng-container *ngFor="let grp of schemeDetails?.applicationDocument">
+                        <ng-container *ngFor="let doc of grp.documents">
+                            <li>
+                                {{ doc.documentCategory }} 
+                                <span *ngIf="doc.isRequired" style="color: red;">*</span>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+                    
+<li *ngIf="!(schemeDetails?.applicationDocument?.length ?? 0)" class="text-gray-500 list-none">
+    No documents required.
+</li>
+                </ul>
+            </div>
+
+            <div class="f-ref-doc-section" style="flex: 1;">
+                <h5 class="text-center mb-2">Reference Documents</h5>
+                
+                <div class="f-doc-img-wrapper" style="display: flex; flex-direction: column; gap: 10px; padding: 10px; max-height: 200px; overflow-y: auto; background: #f9f9f9; border-radius: 8px; border: 1px solid #e4e4e4;">
+                    
+                    <ng-container *ngFor="let grp of schemeDetails?.applicationDocument">
+                        <ng-container *ngFor="let doc of grp.documents">
+                            
+                            <div *ngIf="doc.originalFileName" class="flex justify-content-between align-items-center p-2" style="background: white; border: 1px solid #e0e0e0; border-radius: 5px;">
+                                <div class="flex align-items-center gap-2 overflow-hidden">
+                                    <i class="pi pi-file-pdf text-red-500" style="font-size: 1.2rem"></i>
+                                    <span class="text-sm white-space-nowrap overflow-hidden text-overflow-ellipsis" style="max-width: 140px; color: #0F5169; font-weight: 500;" [title]="doc.originalFileName">
+                                        {{ doc.originalFileName }}
+                                    </span>
+                                </div>
+                               <button type="button" pButton icon="pi pi-download" 
+                                class="p-button-rounded p-button-text p-button-sm"  
+                                (click)="downloadFile(doc.originalFileName, doc.savedFileName)" title="Download"></button>
+                            </div>
+                            
+                            <div *ngIf="!doc.originalFileName" class="flex justify-content-between align-items-center p-2" style="background: #fdfdfd; border: 1px dashed #ccc; border-radius: 5px;">
+                                <span class="text-sm text-gray-500">{{ doc.documentCategory }}</span>
+                                <span class="text-xs text-red-400">Not Uploaded</span>
+                            </div>
+
+                        </ng-container>
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+
+
+
+<p-dialog [(visible)]="displayStatusPopup" appendTo="body" [modal]="true" [closable]="false" [showHeader]="false" [style]="{width: '450px', 'border-radius': '15px'}">
+    <div class="status-popup-container p-4 flex flex-column align-items-center">
+        
+        <div class="status-icon-circle mb-4" [ngClass]="isSuccessPopup ? 'bg-success' : 'bg-return'">
+            <i [class]="isSuccessPopup ? 'pi pi-check' : 'pi pi-directions'"></i>
+        </div>
+
+        <div class="status-message mb-5" [ngClass]="isSuccessPopup ? 'text-success' : 'text-dark'">
+            {{ statusPopupMessage }}
+        </div>
+
+        <div class="flex gap-3 justify-content-center w-full">
+            <ng-container *ngIf="isSuccessPopup">
+                <button type="button" class="btn-popup-gray flex align-items-center gap-2" (click)="back()">
+                    <i class="pi pi-arrow-left"></i> Back to Home
+                </button>
+            </ng-container>
+
+            <ng-container *ngIf="!isSuccessPopup">
+                <button type="button" class="btn-popup-gray" (click)="displayStatusPopup = false">
+                    Cancel
+                </button>
+<button type="button"
+        class="btn-popup-return"
+        (click)="confirmReturnAction()">
+    {{ selectedApprovalStatus?.status == 'REJECTED' ? 'Reject' : 'Return' }}
+</button>
+            </ng-container>
+        </div>
+    </div>
+</p-dialog>

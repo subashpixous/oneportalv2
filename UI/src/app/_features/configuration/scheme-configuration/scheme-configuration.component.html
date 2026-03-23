@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="">
+            <h4>{{title}}
+            </h4>
+        </div>
+    </div>
+    <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField"
+        [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Role'" [rows]="rows"
+        [total]="configurationList ? configurationList.length : 0" [actions]="actions"
+        (invokeAction)="actioInvoked($event)" [searchableColumns]="searchableColumns" [defaultstatus]="!currentStatus"
+        (changeStatus)="changeStatus($event)" [hasActiveInactive]="false">
+    </app-datatable>
+    <p-toast></p-toast>
+</div>

@@ -1,0 +1,1141 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col mb-2">
+            <button pButton pRipple printTitle="Member Details" [closeWindow]="false" [openNewTab]="true"
+                styleSheetFile="assets/printcss/printstylesteet.css" [style]="{'float': 'right', 'margin-left':'10px'}"
+                [useExistingCss]="true" type="button" label="Print" ngxPrint printSectionId="memberPrintSection"
+                class="p-button-primary"></button>
+            <button pButton pRipple label="Back to Home Page" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+    <app-current-user-time *ngIf="memberDetails"
+        [memberID]="memberDetails.memberDetail.memberId !='' ? memberDetails.memberDetail.memberId :memberDetails.memberDetail.firstName+' ' +memberDetails.memberDetail.lastName "></app-current-user-time>
+    <div class="mb-3">
+        <div class="" id="demo" *ngIf="memberDetails">
+
+            <!-- <div style="margin: 20px;" *ngIf="!isOrgHide">
+                <app-organization-detail-view
+                    [orgDetail]="memberDetails?.organizationalDetail"></app-organization-detail-view>
+            </div> -->
+            <div class="address-section" *ngIf="!isPersonalHide">
+                <app-mem-personal-detail-view
+                    [personalDetail]="memberDetails?.memberDetail"></app-mem-personal-detail-view>
+            </div>
+            <!-- <div style="margin: 20px;" *ngIf="!isMemberAddressHide">
+                <app-mem-permanent-address-view
+                    [addressDetail]="memberDetails?.permanentAddress"></app-mem-permanent-address-view>
+            </div>
+            <div style="margin: 20px;" *ngIf="!isMemberAddressHide">
+                <app-mem-temp-address-view
+                    [addressDetail]="memberDetails?.temproraryAddress"></app-mem-temp-address-view>
+            </div> -->
+
+
+              <!-- <div class="address-section" *ngIf="!isPersonalHide">
+
+        <div class="address-header">
+          <div class="address-header-col">
+            உங்கள் நிரந்தர முகவரி / Permanent Address
+          </div>
+
+          <div class="address-header-col">
+            உங்கள் தற்போதைய முகவரி / Your Current Address
+          </div>
+        </div>
+
+        <div class="address-body">
+
+          <div class="address-col">
+            <app-mem-permanent-address-view
+              [addressDetail]="memberDetails?.permanentAddress">
+            </app-mem-permanent-address-view>
+          </div>
+
+          <div class="address-col">
+            <app-mem-temp-address-view
+              [addressDetail]="memberDetails?.temproraryAddress">
+            </app-mem-temp-address-view>
+          </div>
+
+        </div>
+
+            <div class="address-section" *ngIf="!isMemberBankHide">
+                <app-mem-bank-detail-view [personalDetail]="memberDetails?.bankDetails"></app-mem-bank-detail-view>
+            </div>
+
+      </div> -->
+
+             
+         <div class="address-section">
+        <div class="address-header">
+          <div class="address-header-col">
+           இது உங்களுடைய நிரந்தர முகவரியா? / Is this your permanent address?
+          </div>
+
+          <div class="address-header-col">
+           இது உங்களுடைய தற்போதைய முகவரி? / Is this your current address?
+          </div>
+        </div>
+           <div class="address-body" >
+          <div class="address-col">
+            <app-mem-permanent-address-view
+              [addressDetail]="memberDetails?.permanentAddress"
+            >
+            </app-mem-permanent-address-view>
+          </div>
+
+          <div class="address-col">
+            <app-mem-temp-address-view
+              [addressDetail]="memberDetails?.temproraryAddress"
+            >
+            </app-mem-temp-address-view>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="family-card" *ngIf="!isFamilyHide">
+
+  <div class="family-header">
+    குடும்ப விவரங்கள் / Family Member Details
+  </div>
+
+  <table class="family-table">
+
+    <thead>
+      <tr>
+        <th>Name /<br>பெயர்</th>
+        <th>Aadhaar Number /<br>ஆதார் எண்</th>
+        <th>Mobile Number /<br>கைபேசி எண்</th>
+        <th>Relationship /<br>உறவு</th>
+        <th>Gender /<br>பாலினம்</th>
+        <th>Age /<br>வயது</th>
+        <th>School / College<br>பள்ளி / கல்லூரி</th>
+        <th>Details /<br>விவரங்கள்</th>
+        <th>Differently Abled?<br>உயர் மாற்றுத்திறனாளி?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let member of memberDetails?.familyMembers">
+
+        <td><span class="pill">{{member.name}}</span></td>
+
+        <td><span class="pill">{{member.aadharNumber || '-'}}</span></td>
+
+        <td><span class="pill">{{member.phone_number || '-'}}</span></td>
+
+        <td><span class="pill">{{member.relationShip || '-'}}</span></td>
+
+        <td><span class="pill">{{member.gender || '-'}}</span></td>
+
+        <td><span class="pill">{{member.age}}</span></td>
+
+        <td>
+          <span class="pill">
+            {{member.education}}
+          </span>
+        </td>
+
+        <td>
+          <button class="more-btn" (click)="openMore(member,$event)">
+            More :
+          </button>
+   
+        </td>
+
+        <td>
+          <span class="pill">{{member.differentlyAbled || 'No'}}</span>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+            <div >
+
+
+
+
+
+
+<!-- 
+           <div class="org-card">
+      <div class="org-header">நிறுவன விவரங்கள் / Organization Details</div>
+
+      <div class="org-body">
+        <div class="org-row">
+          <div class="org-item">
+            <div class="org-label">உங்கள் வேலை வகை /<br />Type of work</div>
+            <div class="org-value">
+              {{memberDetails?.organizationalDetail?.typeOfWork || "-" }}
+            </div>
+          </div>
+    
+      <div class="org-item">
+        <div class="org-label">
+         நிறுவனம் வகை/<br />Organization Type
+        </div>
+        <div class="org-value">
+          {{ memberDetails?.organizationalDetail?.organizationType || "-" }}
+        </div>
+      </div>
+
+
+          <div class="org-item" *ngIf="memberDetails?.organizationalDetail?.typeOfWork === 'Core Sanitary Workers'">
+            <div class="org-label">
+              சுகாதாரப் பணியாளர்<br />வகை/Type of Core<br />Sanitary Workers
+            </div>
+            <div class="org-value">
+              {{
+                memberDetails?.organizationalDetail?.typeOfCoreSanitoryWorker ||
+                  "-"
+              }}
+            </div>
+          </div>
+
+          
+           <div class="org-item" *ngIf="memberDetails?.organizationalDetail?.typeOfWork === 'Core Sanitary Workers'">
+            <div class="org-label">முக்கிய சுகாதார பணியாளர்களின் வகை / Type of Core Sanitory Workers</div>
+            <div class="org-value">
+              {{memberDetails?.organizationalDetail?.typeOfCoreSanitoryWorker || "-" }}
+            </div>
+          </div>
+    
+
+          <div class="org-item">
+            <div class="org-label">
+              வேலை கொடுப்பவர்<br />வகை/Type of employer
+            </div>
+            <div class="org-value">
+              {{memberDetails?.organizationalDetail?.employer_type || "-" }}
+            </div>
+          </div>
+        </div>
+
+        <div class="org-row">
+          <div class="org-item">
+            <div class="org-label">
+              நிரந்தரம் / தற்காலிகம் /<br />Permanent/ Temporary
+            </div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.natureOfJob || "-" }}
+            </div>
+          </div>
+
+          <div class="org-item">
+            <div class="org-label">
+              நீங்கள் வேலைக்கு<br />செல்லும் அலுவலகம்<br />எது? / Which office
+              do you<br />go to work in?
+            </div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.workOffice || "-" }}
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="org-subtitle">
+          <b><u>உள்ளாட்சி அமைப்பு / Local Body</u></b>
+        </div>
+
+        <div class="org-row">
+          <div class="org-item">
+            <div class="org-label">
+              நீங்கள் வேலை<br />செய்யும் மாவட்டம் /<br />District where you work
+            </div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.distritName || "-" }}
+            </div>
+          </div>
+
+          <div class="org-item">
+            <div class="org-label">உள்ளாட்சி அமைப்பு /<br />Local Body</div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.localBody || "-" }}
+            </div>
+          </div>
+
+
+          
+          <div class="org-item" *ngIf="memberDetails?.organizationalDetail?.localBody == 'URBAN'">
+            <div class="org-label">
+              உள்ளாட்சி அமைப்பின்<br />பெயர் / Name of the Local<br />Body
+            </div>
+            <div class="org-value">
+              {{
+                memberDetails?.organizationalDetail?.nameoftheLocalBody || "-"
+              }}
+            </div>
+          </div>
+  
+         <div class="org-item" *ngIf="memberDetails?.organizationalDetail?.nameoftheLocalBody == 'GCC'   ||memberDetails?.organizationalDetail?.nameoftheLocalBody == 'CMWS' ">
+            <div class="org-label">
+             மண்டலம்<br /> / Zone
+            </div>
+            <div class="org-value">
+              {{
+                memberDetails?.organizationalDetail?.zone || "-"
+              }}
+            </div>
+          </div>
+
+     
+          <div class="org-item" *ngIf="memberDetails?.organizationalDetail?.localBody?.toUpperCase() === 'RURAL'">
+            <div class="org-label">தொகுதி / Block</div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.block || "-" }}
+            </div>
+          </div>
+
+        
+          <div class="org-item" *ngIf="memberDetails?.organizationalDetail?.localBody?.toUpperCase() === 'RURAL'">
+            <div class="org-label">பஞ்சாயத்து / Village Panchayat</div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.villagePanchayat || "-" }}
+            </div>
+          </div>
+
+<div class="org-item"
+  *ngIf="
+    memberDetails?.organizationalDetail?.localBody?.toUpperCase() === 'URBAN' &&
+    memberDetails?.organizationalDetail?.nameoftheLocalBody !== 'GCC' &&
+    memberDetails?.organizationalDetail?.nameoftheLocalBody !== 'CMWS'
+  ">
+         <div class="org-label">மாநகராட்சி /<br />Town Panchayat</div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.townPanchayat || "-" }}
+            </div>
+            </div>
+          <div class="org-item">
+            <div class="org-label">சட்டமன்ற தொகுதி/<br />MLA Constituency</div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.mlaConstituency || "-" }}
+            </div>
+          </div>
+
+          <div class="org-item">
+            <div class="org-label">பாராளுமன்ற தொகுதி/<br />MP Constituency</div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.mpConstituency || "-" }}
+            </div>
+          </div>
+  
+            <div class="org-item">
+            <div class="org-label">சுகாதார அட்டை எண் / Health Id</div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.healthId || "-" }}
+            </div>
+          </div>
+    
+            <div class="org-item">
+            <div class="org-label">மஞ்சள் அட்டை எண் / Yellow Card Number</div>
+            <div class="org-value">
+              {{ memberDetails?.organizationalDetail?.yellowCardNumber || "-" }}
+            </div>
+          </div>
+    
+
+        
+ </div>
+        <div class="org-subtitle"  *ngIf="memberDetails?.organizationalDetail?.organizationType === 'Private / தனியார்'">
+          <b><u>பணியிடம் முகவரி / Work Address</u></b>
+      
+
+        <div class="org-row">
+          <div class="org-item">
+            <div class="org-label">
+              நிறுவனம் பெயர் /<br />Name of the Organization
+            </div>
+            <div class="org-value">
+              {{
+                memberDetails?.organizationalDetail?.private_Organisation_Name || "-"
+              }}
+            </div>
+             </div>
+                    <div class="org-item">
+            <div class="org-label">
+              பதவி /<br />Designation </div>
+            <div class="org-value">
+              {{
+               memberDetails?.organizationalDetail?.private_Designation || "-"
+              }}
+            </div>
+            </div>
+            <div class="org-item">
+            <div class="org-label">
+              முகவரி /<br />Address 
+            </div>
+            <div class="org-value">
+              {{
+                memberDetails?.organizationalDetail?.private_Address || "-"
+              }}
+            </div>
+            </div>
+         
+          </div>
+
+      </div>
+      
+      
+      </div>
+    </div> -->
+
+
+
+        <div class="org-card">
+  <div class="org-header">நிறுவன விவரங்கள் / Organization Details</div>
+
+  <div class="org-body">
+    <div class="org-row">
+
+      <!-- TYPE OF WORK -->
+      <div class="org-item">
+        <div class="org-label">உங்கள் வேலை வகை /<br />Type of work</div>
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.typeOfWork || "-" }}
+        </div>
+      </div>
+
+      <!-- ORGANIZATION TYPE -->
+      <div class="org-item">
+        <div class="org-label">
+          நிறுவனம் வகை/<br />Organization Type
+        </div>
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.organizationType || "-" }}
+        </div>
+      </div>
+
+      <!-- CORE SANITARY WORKER -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.typeOfWork?.includes('Core Sanitary Workers')">
+
+        <div class="org-label">
+          சுகாதாரப் பணியாளர்<br />வகை/Type of Core<br />Sanitary Workers
+        </div>
+
+        <div class="org-value">
+        :   {{ memberDetails?.organizationalDetail?.typeOfCoreSanitoryWorker || "-" }}
+        </div>
+      </div>
+
+      <!-- HEALTH WORKER -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.typeOfWork?.includes('Health Workers')">
+
+        <div class="org-label">
+          சுகாதார பணியாளர்களின் வகை /<br />
+          Type of Health Workers
+        </div>
+
+        <div class="org-value">
+        :  {{ memberDetails?.organizationalDetail?.healthWorkerType || "-" }}
+        </div>
+      </div>
+
+      <!-- EMPLOYER TYPE -->
+      <div class="org-item">
+        <div class="org-label">
+          வேலை கொடுப்பவர்<br />வகை/Type of employer
+        </div>
+        <div class="org-value">
+         :  {{ memberDetails?.organizationalDetail?.employer_type || "-" }}
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="org-row">
+
+      <!-- NATURE OF JOB -->
+      <div class="org-item">
+        <div class="org-label">
+          நிரந்தரம் / தற்காலிகம் /<br />Permanent / Temporary
+        </div>
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.natureOfJob || "-" }}
+        </div>
+      </div>
+
+      <!-- WORK OFFICE -->
+      <div class="org-item">
+        <div class="org-label">
+          நீங்கள் வேலைக்கு செல்லும்<br />அலுவலகம் எது? /<br />
+          Which office do you go to work in?
+        </div>
+        <div class="org-value">
+        :  {{ memberDetails?.organizationalDetail?.workOffice || "-" }}
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="org-subtitle">
+      <b><u>உள்ளாட்சி அமைப்பு / Local Body</u></b>
+    </div>
+
+
+    <div class="org-row">
+
+      <!-- DISTRICT -->
+      <div class="org-item">
+        <div class="org-label">
+          நீங்கள் வேலை செய்யும்<br />மாவட்டம் /<br />
+          District where you work
+        </div>
+        <div class="org-value">
+        :   {{ memberDetails?.organizationalDetail?.distritName || "-" }}
+        </div>
+      </div>
+
+      <!-- LOCAL BODY -->
+      <div class="org-item">
+        <div class="org-label">
+          உள்ளாட்சி அமைப்பு /<br />Local Body
+        </div>
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.localBody || "-" }}
+        </div>
+      </div>
+
+      <!-- NAME OF LOCAL BODY -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.localBody === 'URBAN'">
+
+        <div class="org-label">
+          உள்ளாட்சி அமைப்பின் பெயர் /<br />
+          Name of the Local Body
+        </div>
+
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.nameoftheLocalBody || "-" }}
+        </div>
+      </div>
+
+
+      <!-- CORPORATION -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.nameoftheLocalBody === 'CORPORATION'">
+
+        <div class="org-label">
+          கழகம் / Corporation
+        </div>
+
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.corporation || "-" }}
+        </div>
+      </div>
+
+
+      <!-- MUNICIPALITY -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.nameoftheLocalBody === 'MUNICIPALITY'">
+
+        <div class="org-label">
+          நகராட்சி / Municipality
+        </div>
+
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.municipality || "-" }}
+        </div>
+      </div>
+
+
+      <!-- ZONE -->
+      <div class="org-item"
+        *ngIf="
+        memberDetails?.organizationalDetail?.nameoftheLocalBody === 'GCC' ||
+        memberDetails?.organizationalDetail?.nameoftheLocalBody === 'CMWS'
+      ">
+
+        <div class="org-label">
+          மண்டலம் / Zone
+        </div>
+
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.zone || "-" }}
+        </div>
+      </div>
+
+
+      <!-- BLOCK -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.localBody === 'RURAL'">
+
+        <div class="org-label">
+          தொகுதி / Block
+        </div>
+
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.block || "-" }}
+        </div>
+      </div>
+
+
+      <!-- VILLAGE PANCHAYAT -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.localBody === 'RURAL'">
+
+        <div class="org-label">
+          பஞ்சாயத்து / Village Panchayat
+        </div>
+
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.villagePanchayat || "-" }}
+        </div>
+      </div>
+
+
+      <!-- TOWN PANCHAYAT -->
+      <div class="org-item"
+        *ngIf="memberDetails?.organizationalDetail?.nameoftheLocalBody === 'TOWNPANCHAYAT'">
+
+        <div class="org-label">
+          டவுன் பஞ்சாயத்து /<br />Town Panchayat
+        </div>
+
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.townPanchayat || "-" }}
+        </div>
+      </div>
+
+
+      <!-- MP -->
+      <div class="org-item">
+        <div class="org-label">
+          பாராளுமன்ற தொகுதி /<br />MP Constituency
+        </div>
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.mpConstituency || "-" }}
+        </div>
+      </div>
+
+
+      <!-- MLA -->
+      <div class="org-item">
+        <div class="org-label">
+          சட்டமன்ற தொகுதி /<br />MLA Constituency
+        </div>
+        <div class="org-value">
+          :  {{ memberDetails?.organizationalDetail?.mlaConstituency || "-" }}
+        </div>
+      </div>
+
+
+      <!-- HEALTH ID -->
+      <div class="org-item">
+        <div class="org-label">
+          சுகாதார அட்டை எண் / Health Id
+        </div>
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.healthId || "-" }}
+        </div>
+      </div>
+
+
+      <!-- YELLOW CARD -->
+      <div class="org-item">
+        <div class="org-label">
+          மஞ்சள் அட்டை எண் / Yellow Card Number
+        </div>
+        <div class="org-value">
+         :   {{ memberDetails?.organizationalDetail?.yellowCardNumber || "-" }}
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- PRIVATE SECTION -->
+
+    <div class="org-subtitle"
+      *ngIf="memberDetails?.organizationalDetail?.organizationType === 'Private / தனியார்'">
+
+      <b><u>பணியிடம் முகவரி / Work Address</u></b>
+
+      <div class="org-row">
+
+        <div class="org-item">
+          <div class="org-label">
+            நிறுவனம் பெயர் /<br />Name of the Organization
+          </div>
+
+          <div class="org-value">
+           :   {{ memberDetails?.organizationalDetail?.private_Organisation_Name || "-" }}
+          </div>
+        </div>
+
+
+        <div class="org-item">
+          <div class="org-label">
+            பதவி /<br />Designation
+          </div>
+
+          <div class="org-value">
+           :   {{ memberDetails?.organizationalDetail?.private_Designation || "-" }}
+          </div>
+        </div>
+
+
+        <div class="org-item">
+          <div class="org-label">
+            முகவரி /<br />Address
+          </div>
+
+          <div class="org-value">
+           :   {{ memberDetails?.organizationalDetail?.private_Address || "-" }}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+            </div> 
+
+            
+        
+
+
+            <div class="address-section" *ngIf="!isDocumentHide">
+  <div class="org-header">உறுப்பினர் ஆவணங்கள் / Member Documents</div>
+  <div class="f-body">
+    <div class="doc-grid-container" *ngIf="(memberDetails.memberDocuments && memberDetails.memberDocuments.length > 0) ; else noMemDocs">
+      
+      <ng-container *ngFor="let doc of memberDetails.memberDocuments">
+        <div class="doc-item">
+          <div class="doc-label mb-2">{{ doc.documentCategory }} <span class="req">*</span></div>
+          <div class="doc-box-item">
+            <ng-container *ngIf="doc.originalFileName; else noMemFile">
+              
+              <div class="doc-image-preview" *ngIf="getDocumentImageUrl(doc)">
+                <img [src]="getDocumentImageUrl(doc)" onerror="this.style.display='none'">
+              </div>
+              <div class="pdf-uploaded-state" *ngIf="!getDocumentImageUrl(doc)">
+                <i class="pi pi-check"></i>
+                <span>Uploaded</span>
+              </div>
+              
+              <div class="doc-action-bar">
+                <!-- <div class="flex align-items-center gap-1">
+                  <i class="pi" [ngClass]="doc.isVerified ? 'pi-check-circle text-green' : 'pi-info-circle text-gray-500'" style="font-size: 11px;"></i>
+                  <span class="status-text-small" [ngClass]="doc.isVerified ? 'text-green' : 'text-gray-500'">
+                    {{ doc.isVerified ? 'Verified' : 'Pending' }}
+                  </span>
+                </div> -->
+                <i class="pi pi-download cursor-pointer text-blue-500" style="font-size: 13px;" (click)="downloadFile(doc.id, doc.originalFileName)" title="Download"></i>
+              </div>
+
+            </ng-container>
+            <ng-template #noMemFile><span class="no-data-small">Not Uploaded</span></ng-template>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngFor="let doc of memberDetails.memberNonMandatoryDocuments" >
+         <div class="doc-item">
+                <div class="doc-label mb-2">{{ doc.documentCategory }}</div>
+  <div class="doc-box-item">
+
+  <ng-container *ngIf="doc.savedFileName; else noMemFile">
+
+    <!-- IMAGE PREVIEW -->
+    <div
+      class="doc-image-preview"
+      *ngIf="isImage(doc.savedFileName)"
+      (click)="openPreview(doc)"
+    >
+      <img [src]="getDocumentImageUrl(doc)" />
+    </div>
+
+    <!-- FILE PREVIEW (PDF / DOC / OTHER) -->
+    <div
+      class="file-preview-box"
+      *ngIf="!isImage(doc.savedFileName)"
+      (click)="openPreview(doc)"
+    >
+      <i class="pi pi-file"></i>
+      <span>View</span>
+    </div>
+
+    <!-- ACTION BAR -->
+    <div class="doc-action-bar">
+
+      <div class="status">
+        <i class="pi pi-info-circle text-gray-500"></i>
+        <span class="status-text-small">Pending</span>
+      </div>
+
+      <i
+        class="pi pi-download cursor-pointer text-blue-500"
+        (click)="downloadFile(doc.id, doc.originalFileName)"
+      ></i>
+
+    </div>
+
+  </ng-container>
+
+  <ng-template #noMemFile>
+    <span class="no-data-small">Not Uploaded</span>
+  </ng-template>
+
+  <div class="doc-preview-overlay" *ngIf="showPreview">
+
+  <div class="doc-preview-modal">
+
+    <div class="doc-preview-header">
+      Document Preview
+      <i class="pi pi-times close-btn" (click)="closePreview()"></i>
+    </div>
+
+    <div class="doc-preview-body">
+
+      <!-- IMAGE -->
+      <img
+        *ngIf="isImage(selectedDoc?.savedFileName)"
+        [src]="getDocumentImageUrl(selectedDoc)"
+      />
+
+      <!-- PDF -->
+<iframe
+  *ngIf="!isImage(selectedDoc?.savedFileName)"
+  [src]="pdfBlobUrl">
+</iframe>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+              </div>
+      </ng-container>
+
+    </div>
+    <ng-template #noMemDocs><div class="no-data">No member documents uploaded.</div></ng-template>
+  </div>
+</div>
+           
+
+            <div class="address-section" *ngIf="memberDetails && memberDetails.memberDetail.collectedByName">
+                            <div class="org-header">Collected By Information / பதிவு செய்த பயனர்
+                            </div>
+                            <div class="col-12 row " style="background-color:rgb(253, 253, 253);">
+                                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                                    <span>Name :
+                                    </span>{{this.memberDetails.memberDetail.collectedByName}}
+                                </div>
+                                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                                    <span>Phone Number :
+                                    </span>{{memberDetails.memberDetail?.collectedByPhoneNumber}}
+                                </div>
+                                <div class="lg:col-4 md:col-4 sm:col-12 boldlabelinsiderow">
+                                    <span>Date & Time :
+                                    </span>{{memberDetails.memberDetail?.collectedOn}}
+                                </div>
+                    </div>
+          
+            </div>
+
+            <!-- <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;" *ngIf="memberCardData && status === 'Completed' " >
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <div class="f-header">உறுப்பினர் அடையாள அட்டை / Member Identity Card</div>
+
+                <div id="id-card-container" class="id-card-wrapper">
+
+                    <div class="id-card text-white">
+
+                        <div class="row mt-4 front-side-content">
+                            <div class="col-md-3 text-center">
+                                <div class="photo-container">
+                                    <img [src]="url || 'assets/id-card/img_avatar.png'" alt="Person"
+                                        class="person-image">
+
+                                </div>
+                                 <div class="qr-section">
+                                    <img [src]="'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(trimmedApiUrl + '/#/member-qr-view/' + (this.memberId)) +'&size=80x80'"
+                                        alt="QR Code" class="qr-code">
+                                </div>
+                            </div>
+                            <div class="col-md-9 front-page-section">
+                                <div class="member-details">
+                                    <div class="detail-row">
+                                        <span class="label">பெயர் / NAME</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.nameEnglish">{{
+                                                    memberCardData.nameEnglish }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.nameEnglish && memberCardData.nameTamil"><br></ng-container>
+                                                <ng-container *ngIf="memberCardData.nameTamil">{{
+                                                    memberCardData.nameTamil }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">தந்தை / கணவர்<br>FATHER / HUSBAND</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.fatherNameEnglish">{{
+                                                    memberCardData.fatherNameEnglish }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.fatherNameEnglish && memberCardData.fatherNameTamil"><br></ng-container>
+                                                <ng-container *ngIf="memberCardData.fatherNameTamil">{{
+                                                    memberCardData.fatherNameTamil }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">உறுப்பினர் எண்<br>MEMBER ID</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">{{memberCardData.memberId }}</span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">பிறந்த தேதி / DOB</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">{{memberCardData.dateOfBirth | date:
+                                                'dd-MM-yyyy'}}</span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">மாவட்டம் / DISTRICT</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container *ngIf="memberCardData.districtTamil">{{
+                                                    memberCardData.districtTamil }}</ng-container>
+                                                <ng-container
+                                                    *ngIf="memberCardData.districtTamil && memberCardData.districtEnglish">
+                                                    / </ng-container>
+                                                <ng-container *ngIf="memberCardData.districtEnglish">{{
+                                                    memberCardData.districtEnglish }}</ng-container>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="id-card-back">
+
+                        <div class="row mt-4 back-side-content">
+                            <div class="col-md-12">
+                                <div class="back-details">
+                                    <div class="detail-row">
+                                        <span class="label">குடும்பத்தினர்/FAMILY MEMBERS</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                <ng-container
+                                                    *ngIf="getCommaSeparatedNamesFromFamily(memberCardData.familyMember, 'Tamil') as tamilNames">
+                                                    {{ tamilNames }}
+                                                    <ng-container
+                                                        *ngIf="getCommaSeparatedNamesFromFamily(memberCardData.familyMember, 'English')">
+                                                        <br>
+                                                    </ng-container>
+                                                </ng-container>
+                                                {{ getCommaSeparatedNamesFromFamily(memberCardData.familyMember,
+                                                'English') }}
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">முகவரி/ADDRESS</span>
+                                        <span class="colon-value">
+                                            <span class="colon">:</span>
+                                            <span class="value">
+                                                {{ getFormattedAddress(memberCardData) }}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+        <!-- <div id="historySection" style="margin: 20px;" >
+            <div style="margin: 20px;" *ngIf="memberDetails && memberDetails.memberDetail">
+                <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+                    <div class="p-formgrid grid ">
+                        <div class="col-12">
+
+                            <h5 class="divhighligher"> Member
+                                History</h5>
+                            <div class="row " style="text-align: center; margin-top:10px ;background-color: white;">
+                                <div class="col-12 flex justify-content-center "
+                                    style="padding-top: 10px;padding-bottom: 0px;flex-wrap: wrap;">
+
+                                    <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField"
+                                        [style]="{'width': '100%'}" [defaultSortOrder]="defaultSortOrder" [cols]="cols"
+                                        [fileName]="'Configuration'" [rows]="10"
+                                        [total]="configurationList ? configurationList.length : 0"
+                                        [searchableColumns]="searchableColumns" [hasActiveInactive]="false"
+                                        [canShowAction]="false">
+                                    </app-datatable>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <div style="margin: 20px;" *ngIf="memberDetails && memberDetails.memberDetail">
+                <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+                    <div class="p-formgrid grid ">
+                        <div class="col-12">
+
+                            <h5 class="divhighligher"> Member Card Status
+                                History</h5>
+                            <div class="row " style="text-align: center; margin-top:10px ;background-color: white;">
+                                <div class="col-12 flex justify-content-center "
+                                    style="padding-top: 10px;padding-bottom: 0px;flex-wrap: wrap;">
+
+                                    <app-datatable [records]="configurationList1" [defaultSortField]="defaultSortField"
+                                        [style]="{'width': '100%'}" [defaultSortOrder]="defaultSortOrder" [cols]="cols1"
+                                        [fileName]="'Configuration'" [rows]="10"
+                                        [total]="configurationList1 ? configurationList1.length : 0"
+                                        [searchableColumns]="searchableColumns" [hasActiveInactive]="false"
+                                        [canShowAction]="false">
+                                    </app-datatable>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     
+
+</div> -->
+       
+
+</div>
+    </div>
+
+    <div style="display:none;">
+        <div class="mb-3" id="memberPrintSection">
+            <app-mem-detail-view-print [memberDetails]="memberDetails"></app-mem-detail-view-print>
+        </div>
+    </div>
+</div>
+
+       <div class="education-popover"
+  *ngIf="showMorePopup"
+  [style.top.px]="popupPosition.top" [style.left.px]="popupPosition.left">
+  <div class="popover-title">
+    Education Details
+    <span style="padding-left: 140px" (click)="closeMore()">
+      <i class="bi bi-x"></i>
+    </span>
+  </div>
+
+  <!-- SCHOOL DETAILS -->
+  <ng-container *ngIf="selectedMember?.school?.educationalStatus.toUpperCase() === 'SCHOOL'">
+
+    <div class="popover-field">
+      <label>EMIS Number</label>
+      <div class="value">
+        {{ selectedMember?.school?.emisNo || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>Education Status</label>
+      <div class="value">
+        {{ selectedMember?.school?.educationalStatus || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>Standard</label>
+      <div class="value">
+        {{ selectedMember?.school?.standard || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>School Name</label>
+      <div class="value">
+        {{ selectedMember?.school?.school_Name || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>School Address</label>
+      <div class="value">
+        {{ selectedMember?.school?.nameandAddressofSchool || "-" }}
+      </div>
+    </div>
+
+  </ng-container>
+
+
+  <!-- COLLEGE DETAILS -->
+  <ng-container *ngIf="selectedMember?.college?.educationalStatus.toUpperCase() === 'COLLEGE'">
+
+    <div class="popover-field">
+      <label>Course</label>
+      <div class="value">
+        {{ selectedMember?.college?.course || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>Degree</label>
+      <div class="value">
+        {{ selectedMember?.college?.degreName || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>Education Status</label>
+      <div class="value">
+        {{ selectedMember?.college?.educationalStatus || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>College Name</label>
+      <div class="value">
+        {{ selectedMember?.college?.college_Name || "-" }}
+      </div>
+    </div>
+
+    <div class="popover-field">
+      <label>College Address</label>
+      <div class="value">
+        {{ selectedMember?.college?.college_Address || "-" }}
+      </div>
+    </div>
+
+  </ng-container>
+
+</div>
+
+

@@ -1,0 +1,1347 @@
+<!-- <form [formGroup]="personalForm" class="col-12">
+  <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+    <div class="p-formgrid grid ">
+      <div class="col-12 p-0 m-0 flex" style="flex-wrap: wrap; justify-content: center;">
+        <div class="col-3">
+          <div class="row col-12">
+            <div class="col-12" style="text-align: center;">
+              <label class="hoverable" for="">
+                <img [src]=" url && url !='' ? url : 'https://www.w3schools.com/howto/img_avatar.png'" />
+              </label>
+            </div> -->
+
+<!-- UPLOAD BUTTON - Show when no image -->
+<!-- <div class="col-12" *ngIf="!url" style="margin-top: 10px;display: flex;justify-content: center;">
+              <p-fileUpload mode="basic" chooseLabel="Upload" chooseIcon="pi pi-upload" accept="image/*"
+                [maxFileSize]="2000000" [auto]="true" [customUpload]="true" (uploadHandler)="onSelectFile($event)">
+              </p-fileUpload>
+            </div> -->
+
+<!-- REMOVE BUTTON - Show when image exists -->
+<!-- <div class="col-12" *ngIf="url" style="margin-top: 10px;display: flex;justify-content: center;">
+              <p-button label="Remove" class="p-button-secondary" (onClick)="removeImage()" />
+            </div>
+
+            <br />
+            <app-error-msg [style]="{'text-align':'center'}"
+              [control]="personalForm.get('profile_Picture')"></app-error-msg>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;" *ngIf="formDetail?">
+
+        <div class="field col-12  md:col-4 lg:col-4">
+          <label htmlFor="first_Name">முதல் பெயர் / First Name
+          </label>
+          <input pInputText formControlName="first_Name" type="text" [readonly]="isReadonly" />
+          <app-error-msg [control]="personalForm.get('first_Name')"></app-error-msg>
+        </div>
+        <div class="field col-12  md:col-4 lg:col-4">
+          <label htmlFor="last_Name">கடைசி பெயர் / Initial
+          </label>
+          <input pInputText formControlName="last_Name" type="text" [readonly]="isReadonly" />
+          <app-error-msg [control]="personalForm.get('last_Name')"></app-error-msg>
+        </div>
+        <div class="field col-12  md:col-4 lg:col-4">
+          <label htmlFor="father_Name">தந்தை (அ) கணவர் பெயர் / Father (or) Husband Name
+          </label>
+          <input pInputText formControlName="father_Name" type="text" />
+          <app-error-msg [control]="personalForm.get('father_Name')"></app-error-msg>
+        </div>
+        <div class="field col-12  md:col-4 lg:col-4">
+          <label htmlFor="gender">பாலினம் / Gender
+          </label>
+          <p-dropdown [options]="formDetail?.gender_SelectList ?? []" optionLabel="text" optionValue="value"
+            placeholder="Select a Gender" formControlName="gender" [showClear]="true"></p-dropdown>
+          <app-error-msg [control]="personalForm.get('gender')"></app-error-msg>
+        </div>
+        <div class="field col-12  md:col-4 lg:col-4">
+          <label htmlFor="marital_Status">திருமண நிலை / Marital Status
+          </label>
+          <p-dropdown [options]="formDetail?.marital_Status_SelectList ?? []" optionLabel="text" optionValue="value"
+            placeholder="Select a Marital Status" formControlName="marital_Status" [showClear]="true"></p-dropdown>
+          <app-error-msg [control]="personalForm.get('marital_Status')"></app-error-msg>
+        </div>
+        <div class="field col-12  md:col-4 lg:col-4">
+          <label htmlFor="education">கல்வி / Education</label>
+          <p-dropdown [options]="formDetail?.education_SelectList ?? []" optionLabel="text" optionValue="value"
+            placeholder="Select a Education" formControlName="education" [showClear]="true"></p-dropdown>
+          <app-error-msg [control]="personalForm.get('education')"></app-error-msg>
+        </div> -->
+
+<!-- <div class="field col-12  md:col-4 lg:col-4">
+                    <label htmlFor="religion">மதம் / Religion
+                    </label> <p-dropdown [options]="formDetail?.religion_SelectList ?? []" optionLabel="text"
+                        optionValue="value" placeholder="Select a Religion" formControlName="religion"
+                        [showClear]="true"></p-dropdown>
+
+                    <app-error-msg [control]="personalForm.get('religion')"></app-error-msg>
+                </div> -->
+<!-- <div class="field col-12  md:col-4 lg:col-4">
+          <label htmlFor="community">இனம் / Community
+          </label> <p-dropdown [options]="formDetail?.community_SelectList ?? []" optionLabel="text" optionValue="value"
+            placeholder="Select a Community" formControlName="community" [showClear]="true"></p-dropdown>
+
+          <app-error-msg [control]="personalForm.get('community')"></app-error-msg>
+        </div> -->
+<!-- <div class="field col-12  md:col-4 lg:col-4">
+                    <label htmlFor="caste">சாதி / Caste
+                    </label> <p-dropdown [options]="formDetail?.caste_SelectList ?? []" optionLabel="text"
+                        optionValue="value" placeholder="Select a Caste" formControlName="caste"
+                        [showClear]="true"></p-dropdown>
+
+                    <app-error-msg [control]="personalForm.get('caste')"></app-error-msg>
+                </div> -->
+<!-- <div class="field col-12">
+          <label htmlFor="date_Of_Birth">பிறந்த தேதி / Date Of Birth /
+            (பயனாளியின் பிறந்த தேதி மற்றும் மாதம் உங்களுக்குத் தெரியாவிட்டால், உங்கள் பிறந்த
+            ஆண்டின் ஜனவரி 1 ஆம் தேதியைத் தேர்ந்தெடுக்கலாம்)
+            (If you don't know the beneficiary's birth date and month, you can select January 1st of your
+            birth year)*
+          </label>
+          <p-calendar [maxDate]="maxDate" [style]="{'width':'max-content'}" [minDate]="minDate" [showIcon]="true"
+            formControlName="date_Of_Birth" dateFormat="dd-mm-yy" [appendTo]="'body'" inputId="icon"></p-calendar>
+          <app-error-msg [control]="personalForm.get('date_Of_Birth')"></app-error-msg>
+        </div>
+        <div class="field col-12  md:col-4 lg:col-4">
+          <label htmlFor="phone_Number">தொலைபேசி எண் / Phone Number
+          </label>
+          <input pInputText formControlName="phone_Number" maxlength="10" type="text" [readonly]="isReadonly" />
+          <app-error-msg [control]="personalForm.get('phone_Number')"></app-error-msg>
+        </div>
+        <div class="field col-12  md:col-4 lg:col-4">
+          <label htmlFor="email">மின்னஞ்சல் / Email
+          </label>
+          <input pInputText formControlName="email" type="text" />
+          <app-error-msg [control]="personalForm.get('email')"></app-error-msg>
+        </div>
+        <div class="field col-12  md:col-4 lg:col-4" *ngIf="!hideAadhaar">
+          <label htmlFor="ration_Card_Number">குடும்ப அட்டை எண் / Ration Card No
+          </label>
+          <input pInputText formControlName="ration_Card_Number" type="text" maxlength="12" />
+          <app-error-msg [control]="personalForm.get('ration_Card_Number')"></app-error-msg>
+        </div>
+        <div class="field col-12  md:col-4 lg:col-4" *ngIf="!hideAadhaar">
+          <label htmlFor="aadhaar_Number">ஆதார் எண் / Aadhaar Number
+          </label>
+          <input pInputText formControlName="aadhaar_Number" maxlength="12" type="text" />
+          <app-error-msg [control]="personalForm.get('aadhaar_Number')"></app-error-msg>
+        </div>
+        <div class="col-12 flex " style="justify-content: center;padding-bottom: 0px;" *ngIf="showNextButton">
+          <div style="margin-right: 10px;">
+            <p-button label="Next" class="p-button-secondary"
+              [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+              severity="secondary" (onClick)="save(true)" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> -->
+<!-- <div class="gov-form-wrapper">
+
+
+  <form [formGroup]="personalForm" class="col-12">
+
+
+    <div class="grid justify-content-center mb-4">
+      <div class="col-12 text-center">
+
+        <label class="profile-image-wrapper">
+          <img
+            [src]="url && url != '' ? url : 'https://www.w3schools.com/howto/img_avatar.png'"
+            class="profile-img"
+          />
+        </label>
+
+    
+        <div *ngIf="!url" class="mt-3">
+          <p-fileUpload
+            mode="basic"
+            chooseLabel="Upload"
+            chooseIcon="pi pi-upload"
+            accept="image/*"
+            [maxFileSize]="2000000"
+            [auto]="true"
+            [customUpload]="true"
+            (uploadHandler)="onSelectFile($event)">
+          </p-fileUpload>
+        </div>
+
+
+        <div *ngIf="url" class="mt-3">
+          <p-button
+            label="Remove"
+            class="p-button-secondary"
+            (onClick)="removeImage()">
+          </p-button>
+        </div>
+
+        <app-error-msg
+          class="mt-2"
+          [control]="personalForm.get('profile_Picture')">
+        </app-error-msg>
+
+      </div>
+    </div>
+
+
+    <div class="phone-display" *ngIf="personalForm.get('phone_Number')?.value">
+      கைபேசி எண் / Phone Number :
+      {{ personalForm.get('phone_Number')?.value }}
+      <i class="pi pi-check-circle text-success ml-2"></i>
+    </div>
+
+    <div class="form-grid" *ngIf="formDetail?">
+
+
+      <div class="form-row">
+        <label class="form-label">முதல் பெயர் / First Name</label>
+        <input pInputText formControlName="first_Name" type="text" [readonly]="isReadonly" />
+        <app-error-msg [control]="personalForm.get('first_Name')"></app-error-msg>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">கடைசி பெயர் / Initial</label>
+        <input pInputText formControlName="last_Name" type="text" [readonly]="isReadonly" />
+        <app-error-msg [control]="personalForm.get('last_Name')"></app-error-msg>
+      </div>
+
+
+      <div class="form-row">
+        <label class="form-label">தந்தை (அ) கணவர் பெயர் / Father (or) Husband Name</label>
+        <input pInputText formControlName="father_Name" type="text" />
+        <app-error-msg [control]="personalForm.get('father_Name')"></app-error-msg>
+      </div>
+
+    
+      <div class="form-row">
+        <label class="form-label">பாலினம் / Gender</label>
+        <p-dropdown
+          [options]="formDetail?.gender_SelectList ?? []"
+          optionLabel="text"
+          optionValue="value"
+          placeholder="Select Gender"
+          formControlName="gender"
+          [showClear]="true">
+        </p-dropdown>
+        <app-error-msg [control]="personalForm.get('gender')"></app-error-msg>
+      </div>
+
+
+      <div class="form-row">
+        <label class="form-label">பிறந்த தேதி / Date Of Birth</label>
+        <p-calendar
+          [maxDate]="maxDate"
+          [minDate]="minDate"
+          [showIcon]="true"
+          formControlName="date_Of_Birth"
+          dateFormat="dd-mm-yy"
+          appendTo="body">
+        </p-calendar>
+        <app-error-msg [control]="personalForm.get('date_Of_Birth')"></app-error-msg>
+      </div>
+
+     
+      <div class="form-row">
+        <label class="form-label">இனம் / Community</label>
+        <p-dropdown
+          [options]="formDetail?.community_SelectList ?? []"
+          optionLabel="text"
+          optionValue="value"
+          placeholder="Select Community"
+          formControlName="community"
+          [showClear]="true">
+        </p-dropdown>
+        <app-error-msg [control]="personalForm.get('community')"></app-error-msg>
+      </div>
+
+
+      <div class="form-row">
+        <label class="form-label">கல்வி / Education</label>
+        <p-dropdown
+          [options]="formDetail?.education_SelectList ?? []"
+          optionLabel="text"
+          optionValue="value"
+          placeholder="Select Education"
+          formControlName="education"
+          [showClear]="true">
+        </p-dropdown>
+        <app-error-msg [control]="personalForm.get('education')"></app-error-msg>
+      </div>
+
+ 
+      <div class="form-row">
+        <label class="form-label">திருமண நிலை / Marital Status</label>
+        <p-dropdown
+          [options]="formDetail?.marital_Status_SelectList ?? []"
+          optionLabel="text"
+          optionValue="value"
+          placeholder="Select Marital Status"
+          formControlName="marital_Status"
+          [showClear]="true">
+        </p-dropdown>
+        <app-error-msg [control]="personalForm.get('marital_Status')"></app-error-msg>
+      </div>
+
+   
+      <div class="form-row">
+        <label class="form-label">தொலைபேசி எண் / Phone Number</label>
+        <input pInputText formControlName="phone_Number" maxlength="10" [readonly]="isReadonly" />
+        <app-error-msg [control]="personalForm.get('phone_Number')"></app-error-msg>
+      </div>
+
+ 
+      <div class="form-row">
+        <label class="form-label">மின்னஞ்சல் / Email</label>
+        <input pInputText formControlName="email" />
+        <app-error-msg [control]="personalForm.get('email')"></app-error-msg>
+      </div>
+
+
+      <div class="form-row" *ngIf="!hideAadhaar">
+        <label class="form-label">குடும்ப அட்டை எண் / Ration Card No</label>
+        <input pInputText formControlName="ration_Card_Number" maxlength="12" />
+        <app-error-msg [control]="personalForm.get('ration_Card_Number')"></app-error-msg>
+      </div>
+
+      <div class="form-row" *ngIf="!hideAadhaar">
+        <label class="form-label">ஆதார் எண் / Aadhaar Number</label>
+        <input pInputText formControlName="aadhaar_Number" maxlength="12" />
+        <app-error-msg [control]="personalForm.get('aadhaar_Number')"></app-error-msg>
+      </div>
+
+    </div>
+
+
+    <div class="text-center mt-4" *ngIf="showNextButton">
+      <p-button
+        label="Next"
+        class="p-button-secondary gov-next-btn"
+        (onClick)="save(true)">
+      </p-button>
+    </div>
+
+  </form>
+</div> -->
+<!-- <div class="three-column-layout" *ngIf="formDetail?">
+
+  <div class="column">
+    <div class="field">
+      <div class="label"> கைபேசி எண் / Phone Number </div>
+      <div class="colon">:</div>
+      <span class="phone-value">
+        {{ personalForm.get('phone_Number')?.value }}
+      </span>
+      <i class="pi pi-check-circle verified-icon"></i>
+    </div>
+
+    <div class="field">
+      <div class="label">முதல் பெயர் / First Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="first_Name" />
+    </div>
+
+    <div class="field">
+      <div class="label">பாலினம் / Gender</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.gender_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="gender">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <div class="label">சமூகம் / Community</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="community" />
+    </div>
+  </div>
+
+
+
+  <div class="column">
+    <div class="field">
+      <div class="label">ஆதார் எண் / Aadhaar Number</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="aadhaar_Number" />
+    </div>
+
+    <div class="field">
+      <div class="label">கடைசி பெயர் / Last Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="last_Name" />
+    </div>
+
+    <div class="field">
+      <div class="label">பிறந்த தேதி / Date Of Birth</div>
+      <div class="colon">:</div>
+      <p-calendar
+        [showIcon]="true"
+        formControlName="date_Of_Birth"
+        dateFormat="dd-mm-yy"
+        appendTo="body">
+      </p-calendar>
+    </div>
+
+    <div class="field">
+      <div class="label">சாதி / Caste</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.caste_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="caste">
+      </p-dropdown>
+    </div>
+  </div>
+
+
+
+  <div class="column">
+
+  
+    <div class="profile-wrapper">
+      <div class="profile-img-wrapper">
+        <img
+          [src]="url && url != '' ? url : 'https://www.w3schools.com/howto/img_avatar.png'"
+          class="profile-img"
+        />
+      </div>
+
+      <div *ngIf="!url" class="mt-2">
+        <p-fileUpload
+          mode="basic"
+          chooseLabel="Upload"
+          chooseIcon="pi pi-upload"
+          accept="image/*"
+          [auto]="true"
+          [customUpload]="true"
+          (uploadHandler)="onSelectFile($event)">
+        </p-fileUpload>
+      </div>
+
+      <div *ngIf="url" class="remove-text" (click)="removeImage()">
+        Remove
+      </div>
+    </div>
+
+
+    <div class="field">
+      <div class="label">தந்தை பெயர் / Father Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="father_Name" />
+    </div>
+
+    <div class="field">
+      <div class="label">திருமண நிலை / Marital Status</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.marital_Status_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="marital_Status">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <div class="label">கல்வி / Education</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.education_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="education">
+      </p-dropdown>
+    </div>
+
+  </div>
+
+</div> -->
+<!-- <div class="three-column-layout" *ngIf="formDetail?">
+
+
+  <div class="column">
+    <div class="field">
+      <div class="label"> கைபேசி எண் / Phone Number </div>
+      <div class="colon">:</div>
+      <span class="phone-value">
+        {{ personalForm.get('phone_Number')?.value }}
+      </span>
+      <i class="pi pi-check-circle verified-icon"></i>
+    </div>
+
+    <div class="field">
+      <div class="label">முதல் பெயர் / First Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="first_Name" />
+    </div>
+
+    <div class="field">
+      <div class="label">பாலினம் / Gender</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.gender_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="gender">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <div class="label">சமூகம் / Community</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="community" />
+    </div>
+  </div>
+
+
+
+  <div class="column">
+    <div class="field">
+      <div class="label">ஆதார் எண் / Aadhaar Number</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="aadhaar_Number" />
+    </div>
+
+    <div class="field">
+      <div class="label">கடைசி பெயர் / Last Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="last_Name" />
+    </div>
+
+    <div class="field">
+      <div class="label">பிறந்த தேதி / Date Of Birth</div>
+      <div class="colon">:</div>
+      <p-calendar
+        [showIcon]="true"
+        formControlName="date_Of_Birth"
+        dateFormat="dd-mm-yy"
+        appendTo="body">
+      </p-calendar>
+    </div>
+
+    <div class="field">
+      <div class="label">சாதி / Caste</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.caste_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="caste">
+      </p-dropdown>
+    </div>
+  </div>
+
+
+  <div class="column">
+
+
+    <div class="profile-wrapper">
+      <div class="profile-img-wrapper">
+        <img
+          [src]="url && url != '' ? url : 'https://www.w3schools.com/howto/img_avatar.png'"
+          class="profile-img"
+        />
+      </div>
+
+      <div *ngIf="!url" class="mt-2">
+        <p-fileUpload
+          mode="basic"
+          chooseLabel="Upload"
+          chooseIcon="pi pi-upload"
+          accept="image/*"
+          [auto]="true"
+          [customUpload]="true"
+          (uploadHandler)="onSelectFile($event)">
+        </p-fileUpload>
+      </div>
+
+      <div *ngIf="url" class="remove-text" (click)="removeImage()">
+        Remove
+      </div>
+    </div>
+
+
+    <div class="field">
+      <div class="label">தந்தை பெயர் / Father Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="father_Name" />
+    </div>
+
+    <div class="field">
+      <div class="label">திருமண நிலை / Marital Status</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.marital_Status_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="marital_Status">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <div class="label">கல்வி / Education</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.education_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="education">
+      </p-dropdown>
+    </div>
+
+  </div>
+
+</div> -->
+<!-- <div class="gov-form-wrapper">
+  <form [formGroup]="personalForm">
+  <div class="form-grid" >
+
+ 
+    <div class="field">
+      <div class="label">கைபேசி எண் / Phone Number</div>
+      <div class="colon">:</div>
+      <span class="phone-value">
+        {{ personalForm.get('phone_Number')?.value }}
+           <i class="pi pi-check-circle verified-icon"></i>
+      </span>
+   
+    </div>
+
+    <div class="field">
+      <div class="label">ஆதார் எண் / Aadhaar Number</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="aadhaar_Number" />
+    </div>
+
+    <div class="profile-cell">
+      <div class="profile-wrapper">
+
+        <img
+          [src]="url && url != '' ? url : 'https://www.w3schools.com/howto/img_avatar.png'"
+          class="profile-img"
+        />
+
+        <div *ngIf="!url" class="upload-btn">
+          <p-fileUpload
+            mode="basic"
+            chooseLabel="Upload"
+            chooseIcon="pi pi-upload"
+            accept="image/*"
+            [auto]="true"
+            [customUpload]="true"
+            (uploadHandler)="onSelectFile($event)">
+          </p-fileUpload>
+        </div>
+
+        <div *ngIf="url" class="remove-text" (click)="removeImage()">
+          Remove
+        </div>
+
+      </div>
+    </div>
+
+ 
+    <div class="field">
+      <div class="label">முதல் பெயர் / First Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="first_Name" />
+    </div>
+
+    <div class="field">
+      <div class="label">கடைசி பெயர் / Last Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="last_Name" />
+    </div>
+
+    <div class="field">
+      <div class="label">தந்தை பெயர் / Father Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="father_Name" />
+    </div>
+
+  
+    <div class="field">
+      <div class="label">பாலினம் / Gender</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.gender_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="gender">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <div class="label">பிறந்த தேதி / Date Of Birth</div>
+      <div class="colon">:</div>
+      <p-calendar
+        [showIcon]="true"
+        formControlName="date_Of_Birth"
+        dateFormat="dd-mm-yy"
+        appendTo="body">
+      </p-calendar>
+    </div>
+
+    <div class="field">
+      <div class="label">திருமண நிலை / Marital Status</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.marital_Status_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="marital_Status">
+      </p-dropdown>
+    </div>
+
+ 
+    <div class="field">
+      <div class="label">சமூகம் / Community</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="community" />
+    </div>
+
+    <div class="field">
+      <div class="label">சாதி / Caste</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.caste_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="caste">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <div class="label">கல்வி / Education</div>
+      <div class="colon">:</div>
+      <p-dropdown
+        [options]="formDetail?.education_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="education">
+      </p-dropdown>
+    </div>
+
+  </div>
+  </form>
+</div> -->
+
+<div class="gov-form-wrapper">
+  <form [formGroup]="personalForm">
+    <div class="form-grid">
+      <!-- ================= PHONE ================= -->
+      <div class="field">
+        <div class="label">
+          கைபேசி எண் /Phone Number<span class="required-star"> *</span>
+        </div>
+
+        <div class="colon">:</div>
+
+        <span
+          *ngIf="phone_numberGet && phone_numberGet !== ''; else phoneInput"
+          class="phone-value"
+        >
+          {{ phone_numberGet }}
+          <i class="pi pi-check-circle verified-icon"></i>
+        </span>
+
+        <ng-template #phoneInput>
+          <div class="control" *ngIf="aadhaarVerified">
+            <input
+              pInputText
+              formControlName="phone_Number"
+              placeholder="Enter Phone Number"
+              maxlength="10"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              [ngClass]="{ 'invalid-input': isInvalid('phone_Number') }"
+            />
+
+            <small class="error-msg" *ngIf="isInvalid('phone_Number')">
+              Invalid Phone number.
+            </small>
+          </div>
+          <div class="control" *ngIf="!aadhaarVerified">
+            <input
+              pInputText
+              formControlName="phone_Number"
+              placeholder="Enter Phone Number"
+              maxlength="10"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              [readonly]="isReadonlyy"
+              [ngClass]="{ 'invalid-input': isInvalid('phone_Number') }"
+            />
+
+            <small class="error-msg" *ngIf="isInvalid('phone_Number')">
+              Invalid Phone number.
+            </small>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- ================= AADHAAR ================= -->
+      <div class="field">
+        <div class="label">
+          ஆதார் எண் / Aadhaar Number<span
+            class="required-star"
+            *ngIf="!IsRagpicker"
+          >
+            *</span
+          >
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <input
+            *ngIf="!aadhaarVerified"
+            pInputText
+            formControlName="aadhaar_Number"
+            maxlength="12"
+            placeholder="Enter aadhaar"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            [ngClass]="{ 'invalid-input': isInvalid('aadhaar_Number') }"
+          />
+          <input
+            *ngIf="aadhaarVerified"
+            pInputText
+            formControlName="aadhaar_Number"
+            maxlength="12"
+            placeholder="Enter aadhaar"
+                    [style.pointer-events]="aadhaarVerified ? 'none' : 'auto'"
+  [style.opacity]="aadhaarVerified ? '0.6' : '1'"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            [ngClass]="{ 'invalid-input': isInvalid('aadhaar_Number') }"
+          />
+          <!-- <span *ngIf="aadhaarVerified" class="aadhaar-text">
+            {{ personalForm.get("aadhaar_Number")?.value }}
+          </span> -->
+
+          <small class="error-msg" *ngIf="isInvalid('aadhaar_Number')">
+            Aadhaar Number is invalid.
+          </small>
+        </div>
+      </div>
+
+      <!-- ================= PROFILE ================= -->
+      <div class="profile-cell">
+        <div
+          class="profile-wrapper"
+          [ngClass]="{ 'invalid-profile': isInvalid('profile_Picture') }"
+        >
+          <img
+            *ngIf="Issafeurl"
+            [src]="safeurl || 'https://www.w3schools.com/howto/img_avatar.png'"
+            class="profile-img"
+          />
+
+          <img
+            *ngIf="!Issafeurl"
+            [src]="url || 'https://www.w3schools.com/howto/img_avatar.png'"
+            class="profile-img"
+          />
+
+          <div *ngIf="!safeurl && !aadhaarVerified" class="upload-btn">
+              <p-fileUpload
+                  #fileUploadRef 
+              mode="basic"
+              chooseLabel="Upload"
+              chooseIcon="pi pi-upload"
+              accept="image/*"
+              [auto]="true"
+              [customUpload]="true"
+              (uploadHandler)="onSelectFile($event,fileUploadRef)"
+            >
+            </p-fileUpload>
+          </div>
+
+          <!-- <div
+            *ngIf="url"
+            class="remove-text"
+            (click)="removeImage()"
+          >
+            Remove
+          </div> -->
+             <div
+            *ngIf="safeurl && !aadhaarVerified "
+            class="remove-text"
+            (click)="removeImage()"
+          >
+            Remove
+          </div>
+        </div>
+        <small class="profile-error" *ngIf="isInvalid('profile_Picture')">
+          Profile image is required.
+        </small>
+      </div>
+
+      <!-- ================= FIRST NAME ================= -->
+      <div class="field">
+        <div class="label">
+          முதல் பெயர் / First Name<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <!-- <input *ngIf="!aadhaarVerified"
+                 pInputText
+                 formControlName="first_Name"
+                   pattern="[A-Za-z ]*"
+                 [ngClass]="{'invalid-input': isInvalid('first_Name')}" /> -->
+          <input
+            *ngIf="!aadhaarVerified"
+            pInputText
+            formControlName="first_Name"
+            placeholder="Enter name"
+            maxlength="100"
+            oninput="
+              this.value = this.value
+                .replace(/[^a-zA-Z ]/g, '')
+                .replace(/^\s+/g, '')
+            "
+            pattern="[A-Za-z ]*"
+            inputmode="text"
+            [ngClass]="{ 'invalid-input': isInvalid('first_Name') }"
+          />
+            <input
+            *ngIf="aadhaarVerified"
+            pInputText
+            formControlName="first_Name"
+            placeholder="Enter name"
+            maxlength="100"
+            oninput="
+              this.value = this.value
+                .replace(/[^a-zA-Z ]/g, '')
+                .replace(/^\s+/g, '')
+            "
+              [style.pointer-events]="aadhaarVerified ? 'none' : 'auto'"
+  [style.opacity]="aadhaarVerified ? '0.6' : '1'"
+            pattern="[A-Za-z ]*"
+            inputmode="text"
+            [ngClass]="{ 'invalid-input': isInvalid('first_Name') }"
+          />
+          <!-- <span *ngIf="aadhaarVerified" class="aadhaar-text">
+            {{ personalForm.get("first_Name")?.value }}
+          </span> -->
+
+          <small class="error-msg" *ngIf="isInvalid('first_Name')">
+               <span *ngIf="personalForm.get('first_Name')?.errors?.['required']">
+      First name is required.
+    </span>
+
+    <!-- Min length -->
+    <span *ngIf="personalForm.get('first_Name')?.errors?.['minlength']">
+      Name must be at least 3 characters.
+    </span>
+          </small>
+        </div>
+      </div>
+
+      <!-- ================= LAST NAME ================= -->
+      <div class="field">
+        <div class="label">
+          கடைசி பெயர் / Last Name<span class="required-star">*</span>
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <!-- Editable if NOT from Aadhaar -->
+          <input
+            *ngIf="!aadhaarVerified || !isLastNameFromAadhaar"
+            pInputText
+            formControlName="last_Name"
+            placeholder="Enter name"
+            oninput="
+              this.value = this.value
+                .replace(/[^a-zA-Z ]/g, '')
+                .replace(/^\s+/g, '')
+            "
+            pattern="[A-Za-z ]*"
+            inputmode="text"
+            [ngClass]="{ 'invalid-input': isInvalid('last_Name') }"
+          />
+    <input
+            *ngIf="aadhaarVerified && isLastNameFromAadhaar"
+            pInputText
+            formControlName="last_Name"
+            placeholder="Enter name"
+           [readonly]="aadhaarVerified"
+           [style.opacity]="aadhaarVerified ? '0.6' : '1'"
+            pattern="[A-Za-z ]*"
+            inputmode="text"
+            [ngClass]="{ 'invalid-input': isInvalid('last_Name') }"
+          />
+          <!-- Readonly only if Aadhaar provided last name -->
+          <!-- <span
+            *ngIf="aadhaarVerified && isLastNameFromAadhaar"
+            class="aadhaar-text"
+          >
+            {{ personalForm.get("last_Name")?.value }}
+          </span> -->
+
+          <small class="error-msg" *ngIf="isInvalid('last_Name')">
+            Last name is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- ================= FATHER NAME ================= -->
+      <div class="field">
+        <div class="label">
+          தந்தை பெயர் /Father Name<span class="required-star">*</span>
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <input
+            *ngIf="!aadhaarVerified || !isFatherNameFromAadhaar"
+            pInputText
+            formControlName="father_Name"
+            placeholder="Enter name"
+            oninput="
+              this.value = this.value
+                .replace(/[^a-zA-Z ]/g, '')
+                .replace(/^\s+/g, '')
+            "
+            pattern="[A-Za-z ]*"
+            inputmode="text"
+            [ngClass]="{ 'invalid-input': isInvalid('father_Name') }"
+          />
+                  <input
+            *ngIf="aadhaarVerified && isFatherNameFromAadhaar"
+            pInputText
+            formControlName="father_Name"
+            placeholder="Enter name"
+       
+[readonly]="aadhaarVerified"
+  [style.opacity]="aadhaarVerified ? '0.6' : '1'"
+            pattern="[A-Za-z ]*"
+            inputmode="text"
+            [ngClass]="{ 'invalid-input': isInvalid('father_Name') }"
+          />
+
+          <!-- <span
+            *ngIf="aadhaarVerified && isFatherNameFromAadhaar"
+            class="aadhaar-text"
+          >
+            {{ personalForm.get("father_Name")?.value }}
+          </span> -->
+
+          <small class="error-msg" *ngIf="isInvalid('father_Name')">
+            Father name is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- ================= GENDER ================= -->
+      <div class="field">
+        <div class="label">
+          பாலினம் / Gender<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <p-dropdown
+            *ngIf="!aadhaarVerified"
+            [options]="formDetail?.gender_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="gender"
+            placeholder="Select gender"
+            [ngClass]="{ 'invalid-input': isInvalid('gender') }"
+          >
+          </p-dropdown>
+
+          <!-- <span *ngIf="aadhaarVerified" class="aadhaar-text">
+            {{ genderDisplayText }}
+          </span> -->
+         <p-dropdown
+            *ngIf="aadhaarVerified"
+            [options]="formDetail?.gender_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            [style.pointer-events]="aadhaarVerified ? 'none' : 'auto'"
+  [style.opacity]="aadhaarVerified ? '0.6' : '1'"
+            formControlName="gender"
+            placeholder="Select gender"
+            [ngClass]="{ 'invalid-input': isInvalid('gender') }"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('gender')">
+            Gender is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- ================= DOB ================= -->
+      <div class="field">
+        <div class="label">
+          பிறந்த தேதி / Date Of Birth<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <p-calendar
+            *ngIf="!aadhaarVerified"
+            [showIcon]="true"
+            formControlName="date_Of_Birth"
+            dateFormat="dd-mm-yy"
+            placeholder="Select date of birth"
+            [maxDate]="maxDate"
+            [readonlyInput]="true"
+            appendTo="body"
+            [ngClass]="{ 'invalid-input': isInvalid('date_Of_Birth') }"
+          >
+          </p-calendar>
+              <p-calendar
+            *ngIf="aadhaarVerified"
+            [showIcon]="true"
+            formControlName="date_Of_Birth"
+            dateFormat="dd-mm-yy"
+            placeholder="Select date of birth"
+            [maxDate]="maxDate"
+            [readonlyInput]="true"
+            appendTo="body"
+              [style.pointer-events]="aadhaarVerified ? 'none' : 'auto'"
+  [style.opacity]="aadhaarVerified ? '0.6' : '1'"
+            [ngClass]="{ 'invalid-input': isInvalid('date_Of_Birth') }"
+          >
+          </p-calendar>
+
+          <!-- <span *ngIf="aadhaarVerified" class="aadhaar-text">
+            {{ personalForm.get("date_Of_Birth")?.value | date: "dd-MM-yyyy" }}
+          </span> -->
+
+          <small class="error-msg" *ngIf="isInvalid('date_Of_Birth')">
+            Date of birth is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- ================= MARITAL STATUS ================= -->
+      <div class="field">
+        <div class="label">
+          திருமண நிலை / Marital Status<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.marital_Status_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="marital_Status"
+            placeholder="Select marital status"
+            [ngClass]="{ 'invalid-input': isInvalid('marital_Status') }"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('marital_Status')">
+            Marital status is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- ================= COMMUNITY ================= -->
+      <div class="field">
+        <div class="label">
+          சமூகம் / Community<span class="required-star">*</span>
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <!-- <input pInputText
+                 formControlName="community"
+                 [ngClass]="{'invalid-input': isInvalid('community')}" /> -->
+          <p-dropdown
+            [options]="formDetail?.community_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="community"
+            placeholder="Select community"
+            [ngClass]="{ 'invalid-input': isInvalid('community') }"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('community')">
+            Community is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- ================= CASTE ================= -->
+      <div class="field">
+        <div class="label">
+          சாதி / Caste<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.caste_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="caste"
+            placeholder="Select caste"
+            [ngClass]="{ 'invalid-input': isInvalid('caste') }"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('caste')">
+            Caste is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- ================= EDUCATION ================= -->
+      <div class="field">
+        <div class="label">
+          கல்வி / Education<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.education_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="education"
+            placeholder="Select education"
+            [ngClass]="{ 'invalid-input': isInvalid('education') }"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('education')">
+            Education is required.
+          </small>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<p-dialog
+  header="Profile Image Check"
+  [(visible)]="showCropDialog"
+  [modal]="true"
+  [closable]="true"
+  [style]="{ width: '90vw', maxWidth: '520px', height: 'auto' }"
+  [styleClass]="'modern-crop-dialog'"
+  (onShow)="onDialogShow()"
+  (onHide)="onDialogHide()"
+  [draggable]="false"
+  [resizable]="false"
+  [breakpoints]="{ '768px': '95vw' }"
+>
+  <div *ngIf="imageBase64ForCropper; else noImage" class="modern-crop-content">
+    <!-- Main Content Area -->
+    <div class="crop-main-section">
+      <div class="image-crop-container">
+        <div class="crop-frame">
+          <image-cropper
+            [imageBase64]="imageBase64ForCropper"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="1"
+            [resizeToWidth]="400"
+            format="jpeg"
+            (imageCropped)="imageCropped($event)"
+          >
+          </image-cropper>
+
+          <!-- Corner Indicators -->
+          <div class="corner-indicator top-left"></div>
+          <div class="corner-indicator top-right"></div>
+          <div class="corner-indicator bottom-left"></div>
+          <div class="corner-indicator bottom-right"></div>
+
+          <!-- Zoom Controls -->
+          <div class="zoom-controls-modern">
+            <button
+              class="zoom-btn-modern"
+              (click)="zoomOut()"
+              title="Zoom Out"
+            >
+              <i class="pi pi-search-minus"></i>
+            </button>
+            <span class="zoom-level-modern">{{ zoomLevel }}%</span>
+            <button class="zoom-btn-modern" (click)="zoomIn()" title="Zoom In">
+              <i class="pi pi-search-plus"></i>
+            </button>
+            <button
+              class="zoom-btn-modern reset"
+              (click)="resetZoom()"
+              title="Reset Zoom"
+            >
+              <i class="pi pi-refresh"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Message -->
+      <div class="analyzing-status" *ngIf="!isImageCropped">
+        <i class="pi pi-spin pi-spinner" style="margin-right: 8px"></i>
+        Analyzing your photo...
+      </div>
+
+      <!-- Preview Section (shown after crop) -->
+      <div class="preview-section-modern" *ngIf="previewImage">
+        <h4>Live Preview</h4>
+        <div class="preview-container-modern">
+          <img
+            [src]="previewImage"
+            alt="Cropped Preview"
+            class="preview-image-modern"
+          />
+        </div>
+        <div class="preview-info-modern">
+          <span class="dimensions"
+            >{{ previewWidth }} × {{ previewHeight }} px</span
+          >
+          <span class="file-size">{{ previewSize }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons-modern">
+      <button
+        pButton
+        label="Cancel"
+        icon="pi pi-times"
+        (click)="cancelCrop()"
+        class="p-button-outlined modern-btn cancel-btn"
+      ></button>
+      <button
+        pButton
+        label="Auto Crop"
+        icon="pi pi-cog"
+        (click)="autoCropFromServerBox()"
+        [disabled]="!serverBox"
+        class="p-button-outlined modern-btn auto-crop-btn"
+      ></button>
+      <button
+        pButton
+        label="Continue"
+        icon="pi pi-check"
+        (click)="saveCroppedImage()"
+        [disabled]="!isImageCropped"
+        class="modern-btn continue-btn"
+      ></button>
+    </div>
+  </div>
+
+  <ng-template #noImage>
+    <div class="no-image-modern">
+      <i class="pi pi-image"></i>
+      <p>Please select an image first</p>
+    </div>
+  </ng-template>
+</p-dialog>

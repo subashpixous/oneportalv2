@@ -1,0 +1,93 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;">
+        <div class="col">
+            <h4>{{title}}</h4>
+        </div>
+
+        <div class="col" style="text-align: center;">
+            <p-dropdown [options]="schemes" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                placeholder="Select a Scheme" (ngModelChange)="changeScheme($event)" [showClear]="false"
+                [(ngModel)]="selectedscheme"></p-dropdown>
+        </div>
+    </div>
+
+    <form [formGroup]="statusForm" (ngSubmit)="submit()" class="col-12" *ngIf="t">
+        <div class="card p-fluid" style="padding-bottom: 10px;">
+            <div class="p-formgrid grid " style="overflow-x: auto;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th style="min-width: 300px">Status Name</th>
+                            <th style="min-width: 100px">is Asset Verification Status </th>
+                            <th> Document Section</th>
+                            <th>Action </th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="statuses">
+                        <tr *ngFor="let itemrow of t.controls; let i=index;let l=last" [formGroupName]="i">
+                            <td> {{ i+1 }} </td>
+                            <td> {{ statusList[i].controls['statusName'].value }} </td>
+                            <td> <p-inputSwitch formControlName="isAssertVerificationStatus"
+                                    [style]="{'display':'flex'}" /></td>
+                            <td>
+                                <button pButton type="button"
+                                    (click)="showform(statusList[i].controls['statusId'].value, selectedscheme)"
+                                    *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                                    label="Document Section"></button>
+                            </td>
+                            <td>
+                                <button pButton type="button" (click)="save(itemrow)"
+                                    *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                                    label="Save"></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+
+    <p-dialog header="Document Section" [modal]="true" [(visible)]="visible" [style]="{width: '70vw', height:'70vh'}"
+        (onHide)="resetForm()" [maximizable]="true" [draggable]="false">
+        <div class="grid formgrid mb-3 mt-4">
+            <form [formGroup]="roleForm" (ngSubmit)="submit()" class="col-12">
+                <div class="card p-fluid" style="padding-bottom: 10px;">
+                    <div class="p-formgrid grid">
+
+                        <div class="field col-12  md:col-6  lg:col-6">
+                            <label htmlFor="docCategoryId">Document Category</label>
+                            <p-dropdown [options]="documentCategories" optionLabel="text" optionValue="value"
+                                placeholder="Select a catgory" formControlName="docCategoryId"
+                                [showClear]="true"></p-dropdown>
+                            <app-error-msg [control]="roleForm.get('docCategoryId')"></app-error-msg>
+                        </div>
+                        <div class="field col-12  md:col-3  lg:col-3">
+                            <label htmlFor="isRequired">Is Required</label>
+                            <p-inputSwitch formControlName="isRequired" [style]="{'display':'flex'}" />
+                            <app-error-msg [control]="roleForm.get('isRequired')"></app-error-msg>
+                        </div>
+                        <div class="col-12 md:col-3 flex  lg:col-3" style="margin-top: 25px">
+                            <div class="col">
+                                <button pButton type="submit"
+                                    *ngxPermissionsOnly="[privleges.CONFIG_UPDATE, privleges.CONFIG_CREATE]"
+                                    [disabled]="!roleForm.valid" label="Submit"></button>
+                            </div>
+                            <div class="col">
+                                <button pButton type="button" class="p-button-secondary" label="Reset"
+                                    (click)="resetForm()"></button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField"
+            [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'document'" [rows]="rows"
+            [total]="configurationList ? configurationList.length : 0" [actions]="actions"
+            (invokeAction)="actioInvoked($event)" [searchableColumns]="searchableColumns"
+            [defaultstatus]="!currentStatus" [hasActiveInactive]="false">
+        </app-datatable>
+    </p-dialog>
+</div>

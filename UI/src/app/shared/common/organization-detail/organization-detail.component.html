@@ -1,0 +1,566 @@
+<form [formGroup]="organizationForm" class="col-12 full-wrapper">
+  <div class="p-fluid" style="padding-top: 20px">
+    <!-- <div class=""> -->
+    <!-- <div class="col-12"  > -->
+    <!-- <div class="p-formgrid grid"  > -->
+
+    <div class="form-grid">
+      <!-- TYPE OF WORK -->
+      <div class="field">
+        <div class="label">
+          உங்கள் வேலை வகை / Type of work <span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.type_of_Work_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="type_of_Work"
+            [showClear]="true"
+            placeholder="Select work type"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('type_of_Work')">
+            Type of Work is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- CORE SANITARY -->
+      <div class="field" *ngIf="IsCoreSanitoryworkkerOrg">
+        <div class="label">
+          முக்கிய சுகாதார பணியாளர்களின் வகை / Type of Core Sanitory Workers<span
+            class="required-star"
+          >
+            *</span
+          >
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.core_Sanitary_Worker_Type_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="core_Sanitary_Worker_Type"
+            [showClear]="true"
+            placeholder="Select type"
+          >
+          </p-dropdown>
+          <small
+            class="error-msg"
+            *ngIf="isInvalid('core_Sanitary_Worker_Type')"
+          >
+            Core Sanitary Worker Type is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- HEALTH WORKER -->
+      <div class="field" *ngIf="IshealthworkkersOrg">
+        <div class="label">
+          சுகாதார பணியாளர்களின் வகை / Type of Health Workers<span
+            class="required-star"
+          >
+            *</span
+          >
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.health_Worker_Type_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="health_Worker_Type"
+            [showClear]="true"
+            placeholder="Select type"
+          >
+          </p-dropdown>
+          <!-- <app-error-msg [control]="organizationForm.get('health_Worker_Type')"></app-error-msg> -->
+          <small class="error-msg" *ngIf="isInvalid('health_Worker_Type')">
+            Health Worker Type is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- ORGANIZATION TYPE -->
+      <div class="field">
+        <div class="label">
+          அமைப்பு வகை / Organization Type<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.organization_Type_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="organization_Type"
+            [showClear]="true"
+            placeholder="Select organization type"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('organization_Type')">
+            Organization Type is required.
+          </small>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          வேலை கொடுப்பவர் வகை / Type of employer
+          <span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.employer_Type_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="employer_Type"
+            [showClear]="true"
+            placeholder="Select employer"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('employer_Type')">
+            Type of Employer is required.
+          </small>
+        </div>
+      </div>
+      <!-- NATURE OF JOB -->
+      <div class="field">
+        <div class="label">
+          நிரந்தரம் / தற்காலிகம் / Permanent / Temporary<span
+            class="required-star"
+          >
+            *</span
+          >
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.nature_of_Job_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="nature_of_Job"
+            [showClear]="true"
+            placeholder="Select nature of job"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('nature_of_Job')">
+            Nature of Job is required.
+          </small>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          நீங்கள் வேலைக்கு செல்லும் அலுவலகம் எது / Which office do you go to
+          work in?
+          <span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.work_Office_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="work_Office"
+            [showClear]="true"
+            placeholder="Select office"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('work_Office')">
+            Work Office is required.
+          </small>
+        </div>
+      </div>
+      <div class="field" *ngIf="workoffice">
+        <div class="label">
+          Others / மற்றவர்கள்
+          <span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <input
+            pInputText
+            formControlName="work_Office_Others"
+            maxlength="500"
+          />
+
+          <small class="error-msg" *ngIf="isInvalid('work_Office_Others')">
+            Work Office Detail is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- LOCAL BODY HEADING -->
+      <div class="col-12 section-heading">
+        உள்ளாட்சி அமைப்பு / <span>Local Body</span>
+      </div>
+      <!-- DISTRICT -->
+      <div class="field">
+        <div class="label">
+          மாவட்டத்தின் பெயர் / District Name<span class="required-star">
+            *</span
+          >
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.district_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="district_Id"
+            [showClear]="true"
+            placeholder="Select district"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('district_Id')">
+            District is required.
+          </small>
+          <!--  <app-error-msg [control]="organizationForm.get('district_Id')"></app-error-msg> -->
+        </div>
+      </div>
+      <!-- LOCAL BODY -->
+      <div class="field">
+        <div class="label">
+          உள்ளாட்சி அமைப்பு / Local Body<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.local_Body_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="local_Body"
+            [showClear]="true"
+            placeholder="Select local body"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('local_Body')">
+            Local Body is required.
+          </small>
+          <!-- <app-error-msg [control]="organizationForm.get('local_Body')"></app-error-msg> -->
+        </div>
+      </div>
+
+      <!-- URBAN -->
+      <div class="field" *ngIf="localbodyValue === 'URBAN'">
+        <div class="label">
+          உள்ளாட்சி அமைப்பின் பெயர் / Name of the Local Body<span
+            class="required-star"
+          >
+            *</span
+          >
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.name_of_Local_Body_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="name_of_Local_Body"
+            [showClear]="true"
+            placeholder="Select name of local body"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('name_of_Local_Body')">
+            Name of Local Body is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- BLOCK -->
+      <div class="field" *ngIf="localbodyValue === 'RURAL'">
+        <div class="label">
+          தொகுதி / Block<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.block_SelectList"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="block"
+            [showClear]="true"
+            placeholder="Select block"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('block')">
+            Block is required.
+          </small>
+        </div>
+      </div>
+      <div class="field" *ngIf="nameoflocalbodyValue === 'CORPORATION'">
+        <div class="label">
+          கழகம் / Corporation<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.corporation_SelectList"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="corporation"
+            [showClear]="true"
+            placeholder="Select corporation"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('corporation')">
+            Corporation is required.
+          </small>
+        </div>
+      </div>
+
+      <div class="field" *ngIf="nameoflocalbodyValue === 'MUNICIPALITY'">
+        <div class="label">
+          நகராட்சி / Municipality<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.municipality_SelectList"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="municipality"
+            [showClear]="true"
+            placeholder="Select municipality"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('municipality')">
+            Municipality is required.
+          </small>
+        </div>
+      </div>
+
+      <div class="field" *ngIf="nameoflocalbodyValue === 'TOWNPANCHAYAT'">
+        <div class="label">
+          டவுன் பஞ்சாயத்து / Town Panchayat<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.town_Panchayat_SelectList"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="town_Panchayat"
+            [showClear]="true"
+            placeholder="Select town panchayat"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('town_Panchayat')">
+            Town Panchayat is required.
+          </small>
+        </div>
+      </div>
+      <div class="field" *ngIf="localbodyValue === 'RURAL'">
+        <div class="label">
+          பஞ்சாயத்து / Village Panchayat <span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.village_Panchayat_SelectList"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="village_Panchayat"
+            [showClear]="true"
+            placeholder="Select village panchayat"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('village_Panchayat')">
+            Village Panchayat is required.
+          </small>
+        </div>
+      </div>
+      <!-- ZONE -->
+      <div
+        class="field"
+        *ngIf="
+          nameoflocalbodyValue === 'GCC' || nameoflocalbodyValue === 'CMWS'
+        "
+      >
+        <div class="label">
+          மண்டலம் / Zone<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.zone_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="zone"
+            [showClear]="true"
+            placeholder="Select zone"
+          >
+          </p-dropdown>
+          <small class="error-msg" *ngIf="isInvalid('zone')">
+            Zone is required.
+          </small>
+          <!-- <app-error-msg [control]="organizationForm.get('zone')"></app-error-msg> -->
+        </div>
+      </div>
+      <!-- MP CONSTITUENCY -->
+      <div class="field">
+        <div class="label">
+          பாராளுமன்ற தொகுதி / MP Constituency<span class="required-star">
+            *</span
+          >
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.mp_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="mP_Constituency"
+            [showClear]="true"
+            placeholder="Select constituency"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('mP_Constituency')">
+            MP Constituency is required.
+          </small>
+        </div>
+      </div>
+
+      <!-- MLA CONSTITUENCY -->
+      <div class="field">
+        <div class="label">
+          சட்டமன்ற தொகுதி / MLA Constituency<span class="required-star">
+            *</span
+          >
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <p-dropdown
+            [options]="formDetail?.mla_SelectList ?? []"
+            optionLabel="text"
+            optionValue="value"
+            formControlName="mLA_Constituency"
+            [showClear]="true"
+            placeholder="Select constituency"
+          >
+          </p-dropdown>
+
+          <small class="error-msg" *ngIf="isInvalid('mLA_Constituency')">
+            MLA Constituency is required.
+          </small>
+        </div>
+      </div>
+      <!-- HEALTH ID -->
+      <div class="field">
+        <div class="label">சுகாதார அட்டை எண் / Health Id</div>
+        <div class="colon">:</div>
+        <div class="control">
+          <input pInputText formControlName="health_Id" maxlength="75" />
+          <small class="error-msg" *ngIf="isInvalid('health_Id')">
+            minimum 3 and maximum 75 characters allowed.
+          </small>
+        </div>
+      </div>
+
+      <!-- YELLOW CARD -->
+      <div class="field">
+        <div class="label">மஞ்சள் அட்டை எண் / Yellow Card Number</div>
+        <div class="colon">:</div>
+        <div class="control">
+          <input
+            pInputText
+            formControlName="new_Yellow_Card_Number"
+            maxlength="75"
+          />
+          <small class="error-msg" *ngIf="isInvalid('new_Yellow_Card_Number')">
+            minimum 3 and maximum 75 characters allowed.
+          </small>
+        </div>
+      </div>
+
+      <!-- PRIVATE SECTION -->
+      <div class="col-12 section-heading" *ngIf="IsPrivateOrg">
+        பணியிட விவரங்கள் / <span>Work Place Details</span>
+      </div>
+
+      <div class="field" *ngIf="IsPrivateOrg">
+        <div class="label">
+          அமைப்பின் பெயர் / Organisation Name<span class="required-star">
+            *</span
+          >
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <input
+            pInputText
+            formControlName="private_Organisation_Name"
+            placeholder="Enter Organisation Name"
+            oninput="
+              this.value = this.value
+                .replace(/[^a-zA-Z ]/g, '')
+                .replace(/^\s+/g, '')
+            "
+          />
+          <small
+            class="error-msg"
+            *ngIf="isInvalid('private_Organisation_Name')"
+          >
+            Organisation Name is required
+          </small>
+        </div>
+      </div>
+
+      <div class="field" *ngIf="IsPrivateOrg">
+        <div class="label">
+          பதவி / Designation<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <input
+            pInputText
+            formControlName="private_Designation"
+            placeholder="Enter Designation"
+            oninput="
+              this.value = this.value
+                .replace(/[^a-zA-Z ]/g, '')
+                .replace(/^\s+/g, '')
+            "
+          />
+          <small class="error-msg" *ngIf="isInvalid('private_Designation')">
+            Designation is required
+          </small>
+        </div>
+      </div>
+
+      <div class="field" *ngIf="IsPrivateOrg">
+        <div class="label">
+          முகவரி / Address<span class="required-star"> *</span>
+        </div>
+        <div class="colon">:</div>
+        <div class="control">
+          <input
+            pInputText
+            formControlName="private_Address"
+            placeholder="Enter Address"
+            oninput="this.value = this.value.replace(/^\s+/, '')"
+          />
+          <small class="error-msg" *ngIf="isInvalid('private_Address')">
+            Address is required
+          </small>
+        </div>
+      </div>
+
+      <!-- NEXT BUTTON -->
+      <!-- <div class="col-12 flex" style="justify-content:center;padding-bottom:0px;" *ngIf="showNextButton">
+          <p-button
+            label="Next"
+            class="p-button-secondary"
+            (onClick)="save(true)">
+          </p-button>
+        </div> -->
+    </div>
+    <!-- </div> -->
+  </div>
+</form>

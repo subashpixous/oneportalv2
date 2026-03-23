@@ -1,0 +1,312 @@
+<!-- 
+<p-toast></p-toast>
+<div class="header" style="padding: 0px 0px;margin-bottom:10px;">
+    <div class="logo-div">
+        <div class="row" style="padding: 10px 0px;">
+            <div class="col-sm-12 col-md-2 imagediv">
+                <img src="../../../assets/LogoImages/logo_tn_govt.png" class="img-responsive imgsize">
+            </div>
+            <div class="logo_txt col-sm-12 col-md-8">
+                <div style="text-align: center;">
+                    <h3 style="font-weight: bold;
+                        margin-bottom: 2px !important;
+                        margin-top: 2px !important;">தமிழ்நாடு தூய்மைப் பணியாளர்கள் நல வாரியம்</h3>
+                    <h4 class="schenamestyle" style="
+                        margin-bottom: 2px !important;
+                        margin-top: 2px !important;"> Tamil Nadu Cleanliness Workers Welfare Board</h4>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 imagediv">
+                <img src="../../../assets/LogoImages/tncwwblogo.png" class="img-responsive imgsize">
+            </div>
+        </div>
+        <div class="centercard">
+            <p class="portalp"> உறுப்பினர்கள் நலத் திட்டம் / WELFARE SCHEME PORTAL</p>
+        </div>
+        <div style="min-height: 50vh; ">
+            <div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;">
+                <div class="flex align-items-center  mr-4">
+                    <p class="">TNCWWB Login</p>
+                </div>
+                <div class="flex align-items-center  mr-4">
+                    <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+                </div>
+            </div>
+
+
+            <div class="container container-md cntdtyle">
+<div class="mb-3" [ngClass]="isEmailLogin ? 'flex justify-content-end' : 'flex justify-content-start'">
+  <p-toggleButton
+      [(ngModel)]="isEmailLogin"
+      onLabel="Username/Mobile"
+      offLabel="Email/Username"
+      onIcon="pi pi-mobile"
+      offIcon="pi pi-envelope"
+      [style]="{width:'200px'}">
+  </p-toggleButton>
+</div>
+
+                <div  class="text-align-center" style="text-align:center">
+                    <span class="p-error " *ngIf=" isError">{{ErrorMessage}}</span>
+                </div>
+                <div *ngIf="isEmailLogin">
+                <label for="email1" style="font-size: 12px;margin-bottom: 5px;">Username</label>
+                <input id="email1" type="text" (change)="clearErrormessage($event)" [(ngModel)]="username"
+                    placeholder="Email address" pInputText class=" mb-3" [style]="{'padding':'5px','width':'100%'}">
+
+                <label for="password1" style="font-size: 12px;margin-bottom: 5px;">Password</label>
+                <p-password id="password1" (change)="clearErrormessage($event)" [(ngModel)]="password"
+                    placeholder="Password" [toggleMask]="true" class=" mb-3"
+                    [style]="{'padding':'5px 0px','width':'100%'}"></p-password>
+
+                <div class="flex align-items-center justify-content-center  mb-3 gap-5">
+                    <a class="no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)"
+                        routerLink="/applicant/login/forgetPassword/">Forgot
+                        password?</a>
+                </div>
+                <div class="mt-3 flex justify-content-center flex-wrap ">
+                    <p-button severity="secondary" styleClass="bcbtn" (onClick)="bckClick()" label="Back" />
+                    <p-button severity="primary" styleClass="bcbtn" (onClick)="onSubmit()" label="Login" />
+                </div>
+                </div>
+<div *ngIf="!isEmailLogin">
+  <label for="identifier" style="font-size:12px;margin-bottom:5px;">Email or Mobile</label>
+  <input id="identifier" type="text" maxlength="50" [(ngModel)]="identifier"
+      placeholder="Enter Email or Mobile Number"
+      pInputText class="mb-3" [disabled]="showotp"
+      (change)="clearErrormessage($event)" [style]="{'padding':'5px','width':'100%'}" />
+
+  <label *ngIf="showotp" for="otp" style="font-size:12px;margin-bottom:5px;">OTP</label>
+  <input *ngIf="showotp" id="otp" type="text" maxlength="6" [(ngModel)]="otp" placeholder="OTP"
+      pInputText class="mb-3" [style]="{'padding':'5px','width':'100%'}" (change)="clearErrormessage($event)" />
+
+  <div class="flex align-items-center flex-wrap mb-3">
+      <p *ngIf="showCounter">Resend OTP in {{ counter }} seconds</p>
+      <a *ngIf="showResendOtp" class="cursor-pointer" (click)="resendOTP()">Resend OTP</a>
+  </div>
+
+  <div class="flex justify-content-center flex-wrap">
+      <p-button severity="secondary" styleClass="bcbtn" (onClick)="bckClick()" label="Back"></p-button>
+      <p-button severity="primary" styleClass="bcbtn" (onClick)="onMobileSubmit()"
+          [label]="showotp ? 'Verify OTP' : 'Send OTP'"></p-button>
+  </div>
+</div>
+
+            </div>
+        </div>
+        <div class="layout-footer" style="background-color: #E5FFFE;">
+            <div class="col-12 row flex">
+                <div class="col-12  md:col-1  lg:col-1">
+                    <p-button label="Feedback" [link]="true" [style]="{'text-decoration':'underline'}" />
+                </div>
+                <div class="col-12  md:col-3  lg:col-3">
+                    <input type="text" pInputText [style]="{'padding':'5px','width':'100%'}" placeholder="Name" />
+                </div>
+                <div class="col-12  md:col-3  lg:col-3">
+                    <input type="text" pInputText [style]="{'padding':'5px','width':'100%'}"
+                        placeholder="Mobile Number" />
+                </div>
+                <div class="col-12  md:col-4  lg:col-4">
+                    <input type="text" pInputText [style]="{'padding':'5px','width':'100%'}"
+                        placeholder="Feedback Notes" />
+                </div>
+                <div class="col-12  md:col-1  lg:col-1">
+                    <p-button
+                        [style]="{ 'border-radius':'18px; !important','width':'100%', 'padding':'5px 15px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+                        label="Submit" />
+                </div>
+                <div class="col-12  md:col-6  lg:col-6 pl-5 pt-0">
+                    <div>Site Map|Disclaimer</div>
+                    <div>© TAMILNADU CLEANLINESS WORKERS WELFARE BOARD. All rights Reserved. </div>
+                    <div>LLA Building, Rangoon St, Anna Salai, Thousand Lights, Chennai, Tamil Nadu 600006. </div>
+                    <div>tnswwbgmail.com | 91 44 24310221</div>
+                </div>
+                <div class="col-12  md:col-6  lg:col-6 imagediv justify-content-end pt-0 ">
+                    <img src="../../../assets/LogoImages/independencelogo.png" class="img-responsive imgsizefooter">
+                </div>
+                <div class="col-12 imagediv justify-content-center">
+                    Developed by <a style="color: #06568E;text-decoration: underline;margin-left: 2px;"
+                        href="https://pixoustech.com/" target="_blank"> Pixous Technologies</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<p-toast></p-toast>
+<div class="header" style="padding: 0px 0px;margin-bottom:10px;">
+    <div class="logo-div">
+        
+        <div class="row" style="padding: 10px 0px;">
+            <div class="col-sm-12 col-md-2 imagediv">
+                <img src="../../../assets/LogoImages/logo_tn_govt.png" class="img-responsive imgsize">
+            </div>
+            <div class="logo_txt col-sm-12 col-md-8">
+                <div style="text-align: center;">
+                    <h3 style="font-weight: bold; margin-bottom: 2px !important; margin-top: 2px !important;">
+                        தமிழ்நாடு தூய்மைப் பணியாளர்கள் நல வாரியம்
+                    </h3>
+                    <h4 class="schenamestyle" style="margin-bottom: 2px !important; margin-top: 2px !important;"> 
+                        Tamil Nadu Cleanliness Workers Welfare Board
+                    </h4>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-2 imagediv">
+                <img src="../../../assets/LogoImages/tncwwblogo.png" class="img-responsive imgsize">
+            </div>
+        </div>
+        <div class="centercard">
+            <p class="portalp"> உறுப்பினர்கள் நலத் திட்டம் / WELFARE SCHEME PORTAL</p>
+        </div>
+        <div style="min-height: 50vh; background-color: #F8F9FA; padding-bottom: 40px;">
+            <div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;">
+                <div class="flex align-items-center  mr-4">
+                    <p class="">TNCWWB Login</p>
+                </div>
+                <div class="flex align-items-center  mr-4">
+                    <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+                </div>
+            </div>
+
+            <div class="container container-md pt-5">
+                <div class="grid flex justify-content-center gap-4">
+                    
+                    <div class="col-12 md:col-5">
+                        <div class="instructions-container">
+                            <div class="instructions-header shadow-2">
+                                <i class="pi pi-file"></i> MEMBER APPLICATION VERIFICATION – INSTRUCTIONS
+                            </div>
+                            <div class="instructions-body shadow-1">
+                                <p class="font-medium text-lg mb-3" style="color: #000;">
+                                    Please review the application carefully before taking action.
+                                </p>
+                                <hr style="border-top: 1px solid #525252; margin-bottom: 20px;">
+                                <ul>
+                                    <li>Please verify applicant details, Aadhaar status, worker category, and uploaded documents before taking action.</li>
+                                    <li>Approve the application if all information is correct and complete.</li>
+                                    <li>If any detail is missing or incorrect, return the application with proper remarks for correction.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+<div class="col-12 md:col-5">
+    <div class="login-wrapper shadow-1">
+        
+        <div class="flex justify-content-end mb-4">
+            <button class="toggle-btn" (click)="toggleLoginType()">
+                <i [class]="isEmailLogin ? 'pi pi-mobile' : 'pi pi-envelope'"></i> 
+                {{ isEmailLogin ? 'Use Phone Number' : 'Use Username' }}
+            </button>
+        </div>
+
+        <div class="text-align-center" style="text-align:center">
+            <span class="p-error block mb-3" *ngIf="isError">{{ErrorMessage}}</span>
+        </div>
+
+        <div *ngIf="isEmailLogin">
+            <div class="field mb-4">
+                <label for="email1" class="custom-label">Username</label>
+                <input id="email1" type="text" (change)="clearErrormessage($event)" [(ngModel)]="username"
+                    placeholder="Enter your Username" pInputText class="custom-input w-full">
+            </div>
+
+            <div class="field mb-2">
+                <label for="password1" class="custom-label">Password</label>
+                <p-password id="password1" (change)="clearErrormessage($event)" [(ngModel)]="password"
+                    placeholder="Enter your Password" [toggleMask]="true" styleClass="w-full" inputStyleClass="custom-input w-full">
+                </p-password>
+            </div>
+
+            <div class="flex justify-content-end mb-4">
+                <a class="forgot-link cursor-pointer" routerLink="/applicant/login/forgetPassword/">
+                    Forgot Password?
+                </a>
+            </div>
+
+            <div class="flex flex-column gap-3 mt-4">
+                <p-button severity="primary" styleClass="btn-login w-full" (onClick)="onSubmit()" label="Login"></p-button>
+                <p-button severity="secondary" styleClass="btn-back w-full" (onClick)="bckClick()" label="Back"></p-button>
+            </div>
+        </div>
+
+        <div *ngIf="!isEmailLogin">
+            <div class="field mb-4">
+                <label for="identifier" class="custom-label">Email or Mobile</label>
+                <input id="identifier" type="text" maxlength="50" [(ngModel)]="identifier"
+                    placeholder="Enter Email or Mobile Number"
+                    pInputText class="custom-input w-full" [disabled]="showotp"
+                    (change)="clearErrormessage($event)" />
+            </div>
+
+            <div class="field mb-4" *ngIf="showotp">
+                <label for="otp" class="custom-label">OTP</label>
+                <input id="otp" type="text" maxlength="6" [(ngModel)]="otp" placeholder="Enter OTP"
+                    pInputText class="custom-input w-full" (change)="clearErrormessage($event)" />
+            </div>
+
+            <div class="flex align-items-center justify-content-between mb-4">
+                <p *ngIf="showCounter" class="m-0 text-sm text-600">Resend OTP in {{ counter }} seconds</p>
+                <a *ngIf="showResendOtp" class="cursor-pointer text-primary text-sm font-medium" (click)="resendOTP()">Resend OTP</a>
+            </div>
+
+            <div class="flex flex-column gap-3 mt-4">
+                <p-button severity="primary" styleClass="btn-login w-full" (onClick)="onMobileSubmit()"
+                    [label]="showotp ? 'Verify OTP' : 'Send OTP'"></p-button>
+                <p-button severity="secondary" styleClass="btn-back w-full" (onClick)="bckClick()" label="Back"></p-button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<p-dialog [(visible)]="isLoginSuccess" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false" styleClass="success-dialog">
+    <div class="success-panel">
+        <div class="success-icon">
+            <i class="pi pi-check"></i>
+        </div>
+        <h2 class="success-text">{{ successMessage }}</h2>
+        <p-button label="Continue" styleClass="btn-continue" (onClick)="onContinue()"></p-button>
+    </div>
+</p-dialog>
+
+                </div>
+            </div>
+        </div>
+        <div class="layout-footer" style="background-color: #E5FFFE;">
+            <div class="col-12 row flex">
+                <div class="col-12  md:col-1  lg:col-1">
+                    <p-button label="Feedback" [link]="true" [style]="{'text-decoration':'underline'}" />
+                </div>
+                <div class="col-12  md:col-3  lg:col-3">
+                    <input type="text" pInputText [style]="{'padding':'5px','width':'100%'}" placeholder="Name" />
+                </div>
+                <div class="col-12  md:col-3  lg:col-3">
+                    <input type="text" pInputText [style]="{'padding':'5px','width':'100%'}"
+                        placeholder="Mobile Number" />
+                </div>
+                <div class="col-12  md:col-4  lg:col-4">
+                    <input type="text" pInputText [style]="{'padding':'5px','width':'100%'}"
+                        placeholder="Feedback Notes" />
+                </div>
+                <div class="col-12  md:col-1  lg:col-1">
+                    <p-button
+                        [style]="{ 'border-radius':'18px; !important','width':'100%', 'padding':'5px 15px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+                        label="Submit" />
+                </div>
+                <div class="col-12  md:col-6  lg:col-6 pl-5 pt-0">
+                    <div>Site Map|Disclaimer</div>
+                    <div>© TAMILNADU CLEANLINESS WORKERS WELFARE BOARD. All rights Reserved. </div>
+                    <div>LLA Building, Rangoon St, Anna Salai, Thousand Lights, Chennai, Tamil Nadu 600006. </div>
+                    <div>tnswwbgmail.com | 91 44 24310221</div>
+                </div>
+                <div class="col-12  md:col-6  lg:col-6 imagediv justify-content-end pt-0 ">
+                    <img src="../../../assets/LogoImages/independencelogo.png" class="img-responsive imgsizefooter">
+                </div>
+                <div class="col-12 imagediv justify-content-center">
+                    Developed by <a style="color: #06568E;text-decoration: underline;margin-left: 2px;"
+                        href="https://pixoustech.com/" target="_blank"> Pixous Technologies</a>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>

@@ -1,0 +1,780 @@
+.registration-container {
+  padding: 40px 20px;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+.registration-grid {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+// .left-wrapper,
+// .form-card {
+//   width: 100%;
+//   height: 90%;
+// }
+
+/* LEFT CARD */
+.left-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+.doc-header {
+  background: #0F5169;
+  color: #ffffff;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-family: Poppins;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doc-header i {
+  font-size: 20px;
+}
+
+.doc-card {
+  background: #F6FAFE;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.doc-title-main {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.divider-line {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 15px 0;
+}
+
+.doc-title {
+  color: #d88b32; /* Orange color matched from image */
+  font-family: Poppins;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.doc-list {
+  font-family: Poppins;
+  font-size: 14px;
+  color: #333;
+  line-height: 2;
+  padding-left: 20px;
+}
+
+.doc-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.doc-images img {
+  width: 120px;
+  height: auto;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+/* RIGHT CARD */
+.form-card {
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 14px;
+  box-shadow: 0 3px 15px rgba(204,204,204,1);
+}
+
+/* NEW INFO BOX */
+.info-box-right {
+  background-color: #fdf3e7;
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.info-box-right .info-icon {
+  color: #d88b32;
+  font-size: 18px;
+  margin-top: 3px;
+}
+
+.info-box-right .info-text {
+  font-family: Poppins;
+  font-size: 13px;
+  color: #4a4a4a;
+  line-height: 1.5;
+}
+
+.form-label {
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.sub-text {
+  font-size: 12px;
+  color: #888;
+}
+
+/* INPUT */
+.custom-input {
+  height: 48px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding-left: 15px;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+/* BUTTONS */
+.button-group {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.generate-btn {
+  background: #d88b32 !important;
+  color: white !important;
+  border: none !important;
+  height: 48px;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.back-btn {
+  background: #e6e6e6 !important;
+  color: #333 !important;
+  border: none !important;
+  height: 48px;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+}
+
+/* OTP SECTION */
+.otp-section {
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.otp-title {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.masked-number {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  color: #0F5169;
+  margin-bottom: 10px;
+}
+
+.otp-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.otp-input {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.otp-input:focus {
+  border-color: #d88b32;
+  outline: none;
+}
+
+.otp-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.resend {
+  color: #0F5169;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.resend.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* POPUPS */
+.popup-content {
+  text-align: center;
+  padding: 20px;
+}
+
+.popup-content i {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.success i {
+  color: #22a559;
+}
+
+.error i {
+  color: #e53935;
+}
+
+.continue-btn {
+  background: #22a559 !important;
+  border: none !important;
+  margin-top: 15px;
+  width: 150px;
+}
+
+.try-btn {
+  background: #e53935 !important;
+  border: none !important;
+  margin-top: 15px;
+  width: 150px;
+}
+.reference-images-container {
+  .image-preview-box {
+    display: flex;
+    flex-direction: row; /* Forces horizontal alignment */
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: #f1f8fc; /* Light blue background */
+    border: 3px solid #148df1; /* Blue border */
+    border-radius: 1.5rem;     /* Rounded corners */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    flex-wrap: nowrap; /* Prevents them from dropping to the next line */
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(20, 141, 241, 0.2);
+    }
+
+    .preview-item {
+      position: relative;
+      flex: 1; /* Allows both items to take up exactly 50% of the available space */
+      height: 250px; /* Fixed height so they are uniform */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      overflow: hidden;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* Keeps the whole image visible without stretching */
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); /* Adds a slight shadow behind the document */
+      }
+
+      .more-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.65);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 1.5rem;
+        font-weight: 700;
+        backdrop-filter: blur(3px);
+        border-radius: 8px;
+        transition: background 0.2s;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.75);
+        }
+      }
+    }
+  }
+}
+
+/* Modal styling */
+::ng-deep .reference-dialog .p-dialog-content {
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+
+/* Family Verify Dialog Styling */
+::ng-deep .family-verify-dialog {
+    /* 1. Apply radius and overflow to the MAIN wrapper to cleanly clip edges */
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    /* 2. COMPLETELY HIDE the default PrimeNG header causing the weird curves */
+    .p-dialog-header {
+        display: none !important;
+    }
+
+    .p-dialog-content {
+        padding: 40px 30px !important;
+        border-radius: 0 !important; /* Reset this so the parent wrapper handles the curves */
+    }
+
+    /* Keep your existing inner content styles below */
+    .family-verify-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .info-icon-circle {
+            background-color: #d88b32;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+
+            i {
+                color: white;
+                font-size: 28px;
+                font-weight: bold;
+            }
+        }
+
+        .verify-title {
+            color: #d88b32;
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            margin: 0 0 15px 0;
+        }
+
+        .verify-message {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .verify-actions {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+
+            button {
+                width: 180px;
+                height: 48px;
+                border-radius: 10px;
+                font-size: 16px;
+                font-weight: 500;
+                border: none;
+            }
+
+            .verify-cancel-btn {
+                background: #f0f0f0 !important;
+                color: #999 !important;
+            }
+
+            .verify-confirm-btn {
+                background: #d88b32 !important;
+                color: white !important;
+            }
+        }
+    }
+}
+
+
+/* --- Family Verification Table Dialog --- */
+::ng-deep .family-table-dialog {
+    border-radius: 20px !important;
+    border: none !important;
+    background: transparent !important; /* Hides the sharp white corners */
+    box-shadow: none !important;
+
+    .p-dialog-header {
+        display: none !important;
+    }
+
+    .p-dialog-content {
+        padding: 40px !important;
+        background-color: #ffffff !important;
+        border-radius: 20px !important; /* Curve the actual content */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .family-table-content {
+        .table-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 29px;
+            font-weight: 400;
+            color: #000000;
+            margin-bottom: 25px;
+            margin-top: 0;
+        }
+
+        .table-container {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #E5E5E5;
+            overflow-x: auto;
+            margin-bottom: 30px;
+            
+            .figma-table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: center;
+                min-width: 1100px; /* Forces scroll if screen is too small */
+
+                th {
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 11px;
+                    font-weight: 500;
+                    color: #000000;
+                    padding: 15px 10px;
+                    border-bottom: 1px solid #E5E5E5;
+                    border-right: 1px solid #E5E5E5;
+                    vertical-align: middle;
+                    line-height: 1.4;
+
+                    &:last-child {
+                        border-right: none;
+                    }
+                }
+
+                td {
+                    padding: 12px 10px;
+                    border-bottom: 1px solid #E5E5E5;
+                    border-right: 1px solid #E5E5E5;
+                    vertical-align: middle;
+
+                    &:last-child {
+                        border-right: none;
+                    }
+                }
+
+                /* Data Box matched to Figma properties */
+                .cell-box {
+                    background: #EDEDED;
+                    border: 1px solid #F0F0F0;
+                    border-radius: 10px;
+                    padding: 8px 10px;
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 12px;
+                    color: #888888;
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-width: 80px;
+                }
+
+                /* Custom Action Buttons */
+                .more-btn {
+                    background: #7E9797; /* Grayish teal from design */
+                    color: #ffffff;
+                    border: none;
+                    border-radius: 20px;
+                    padding: 6px 15px;
+                    font-size: 12px;
+                    cursor: pointer;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 5px;
+
+                    span {
+                        font-weight: bold;
+                    }
+                }
+
+
+            }
+        }
+
+        /* Footer Buttons */
+        .dialog-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+
+            button {
+                height: 45px;
+                border-radius: 8px;
+                font-family: 'Poppins', sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+                padding: 0 30px;
+                border: none;
+            }
+
+            .cancel-btn {
+                background: #EEEEEE !important;
+                color: #666666 !important;
+            }
+
+            .confirm-btn {
+                background: #189e5a !important; /* Green from Figma */
+                color: #ffffff !important;
+            }
+        }
+    }
+}
+::ng-deep .family-table-dialog .delete-btn {
+    border: none !important;
+    border-radius: 6px !important; 
+    
+    /* Lock the size so it doesn't stretch */
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    padding: 0 !important; 
+    margin: 0 auto;
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer;
+
+    i {
+        font-size: 13px !important;
+        margin: 0 !important;
+    }
+}
+.education-popover {
+    position: fixed; /* THIS IS THE MAGIC FIX - prevents table clipping */
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    width: 200px; /* Made slightly narrower like Figma */
+    z-index: 100000; /* Force it to the very front */
+    padding: 12px;
+    font-family: 'Poppins', sans-serif;
+
+    .popover-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        i { font-size: 12px; }
+    }
+
+    .popover-field {
+        margin-bottom: 6px;
+        
+        label {
+            font-size: 9px; /* Smaller text to match Figma */
+            color: #888;
+            display: block;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        .value {
+            font-size: 11px;
+            color: #333;
+            font-weight: 600;
+        }
+    }
+}
+/* --- DELETE CONFIRMATION DIALOG --- */
+::ng-deep .delete-confirm-dialog {
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    border: none !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    .p-dialog-header {
+        display: none !important;
+    }
+
+    .p-dialog-content {
+        padding: 40px 30px !important;
+        background-color: #ffffff !important;
+        border-radius: 20px !important;
+    }
+
+    .delete-confirm-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        /* Figma: Group 3138 (51x51 circle) */
+        .trash-icon-circle {
+            background-color: #E45036; /* Figma Orange/Red */
+            width: 51px;
+            height: 51px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+
+            i {
+                color: white;
+                font-size: 24px;
+            }
+        }
+
+        /* Figma Text Properties */
+        .confirm-message {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 1.45; /* 29px / 20px */
+            text-align: center;
+            color: #2A2A2A;
+            margin: 0 0 35px 0;
+            padding: 0 15px;
+        }
+
+        /* Figma Button Properties (160x40 with 9.95px radius) */
+        .confirm-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            width: 100%;
+
+            button {
+                width: 160px;
+                height: 40px;
+                border-radius: 10px; /* Matched 9.95px */
+                font-family: 'Poppins', sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+                border: none;
+                cursor: pointer;
+            }
+
+            .cancel-btn {
+                background: #EDEDED !important;
+                color: #2A2A2A !important;
+            }
+
+            .delete-btn-action {
+                background: #E45036 !important;
+                color: #ffffff !important;
+            }
+        }
+    }
+}
+/* --- ACTION SUCCESS DIALOG (DELETE / VERIFY) --- */
+::ng-deep .action-success-dialog {
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    border: none !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    .p-dialog-header {
+        display: none !important;
+    }
+
+    .p-dialog-content {
+        padding: 40px 30px !important;
+        background-color: #ffffff !important;
+        border-radius: 20px !important;
+    }
+
+    .action-success-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        /* Figma Green Circle: 51x51 */
+        .success-icon-circle {
+            background-color: #16A05D;
+            width: 51px;
+            height: 51px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+
+            i {
+                color: white;
+                font-size: 24px;
+                font-weight: bold;
+            }
+        }
+
+        /* Figma Text: 24px Poppins Light */
+        .success-message {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            font-size: 24px;
+            line-height: 1.5; /* Matches 36px line-height */
+            text-align: center;
+            color: #16A05D;
+            margin: 0 0 35px 0;
+        }
+
+        /* Figma Button: 160x40, #F9F8F8 bg, #F0F0F0 border */
+        .continue-outline-btn {
+            background: #F9F8F8 !important;
+            color: #888888 !important; /* Soft grey text */
+            border: 1px solid #F0F0F0 !important;
+            border-radius: 10px !important; /* 9.95px */
+            width: 160px;
+            height: 40px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            /* Add a slight hover effect for better UX */
+            &:hover {
+                background: #f0f0f0 !important;
+                color: #555 !important;
+            }
+        }
+    }
+}

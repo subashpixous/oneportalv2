@@ -1,0 +1,285 @@
+<!-- <form [formGroup]="bankForm" class="col-12">
+    <div class=" p-fluid">
+        <div class="p-formgrid grid ">
+            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+
+                              <div class="field col-12  md:col-4  lg:col-4 pb-0">
+                    <label htmlFor="account_Holder_Name">கணக்கு வைத்திருப்பவரின் பெயர் / Account Holder Name
+                    </label>
+                    <input pInputText formControlName="account_Holder_Name" type="text" />
+                    <app-error-msg [control]="bankForm.get('account_Holder_Name')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-4  lg:col-4 pb-0">
+                    <label htmlFor="account_Number">கணக்கு எண் / Account Number
+                    </label>
+                    <input pInputText formControlName="account_Number" type="text" />
+                    <app-error-msg [control]="bankForm.get('account_Number')"></app-error-msg>
+                </div>
+                <div class="field col-12  md:col-4  lg:col-4 pb-0">
+                    <label htmlFor="iFSC_Code">IFSC குறியீடு / IFSC Code
+                    </label>
+                    <p-autoComplete formControlName="iFSC_Code" field="text" [suggestions]="suggestions"
+                        (completeMethod)="search($event)" [forceSelection]="true" [showClear]="true" [minLength]="3"
+                        (onClear)="clearIfsc($event)" (onSelect)="selectifsc($event)"
+                        optionLabel="text"></p-autoComplete>
+                    <app-error-msg [control]="bankForm.get('iFSC_Code')"></app-error-msg>
+                </div>
+
+                <div class="field col-12  md:col-4  lg:col-4 pb-0">
+                    <label htmlFor="branch">கிளையின் பெயர் / Branch Name</label>
+                    <input pInputText formControlName="branch" type="text" readonly />
+                    <app-error-msg [control]="bankForm.get('branch')"></app-error-msg>
+                </div>
+                                <div class="field col-12  md:col-4  lg:col-4 pb-0">
+                    <label htmlFor="bank_Name">வங்கியின் பெயர் / Name of the Bank
+                    </label>
+                    <input pInputText formControlName="bank_Name" type="text" readonly />
+                    <app-error-msg [control]="bankForm.get('bank_Name')"></app-error-msg>
+                </div>
+
+                <div class="col-12 flex " style="justify-content: center;padding-bottom: 0px;" *ngIf="showNextButton">
+                    <div style="margin-right: 10px;">
+                        <p-button label="Next" class="p-button-secondary"
+                            [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+                            severity="secondary" (onClick)="save(true)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> -->
+<!-- <form [formGroup]="bankForm" class="bank-wrapper"> -->
+
+<!-- TITLE -->
+<!-- <div class="bank-header">
+    வங்கி விவரங்கள் / <span>BANK DETAILS</span>
+  </div> -->
+
+<!-- NOTE STRIP -->
+<!-- <div class="bank-note">
+
+  <div class="note-left"> -->
+
+<!-- <div class="note-content">
+
+      <span class="note-label">NOTE :</span>
+
+      <span class="note-text">
+        உங்கள் வங்கி கணக்கு ஆதாருடன் இணைக்கப்பட்டுள்ளதா? /
+        Is your bank account linked with Aadhaar?
+      </span>
+
+      <span class="note-dot">•</span>
+
+      <span class="note-text">
+        திட்ட நலன்களை பெற, உங்கள் வங்கி கணக்கு ஆதாருடன் இணைக்கப்பட வேண்டும்.
+        இல்லையெனில், கீழ்க்கண்ட படிகளை பின்பற்றவும் /
+        To receive scheme benefits, your bank account must be linked with Aadhaar.
+        If not, follow these steps.
+      </span>
+
+    </div> -->
+<!-- <div class="note-content">
+    <i class="pi pi-file note-icon"></i> -->
+<!-- LEFT SIDE -->
+<!-- <div class="note-left-text">
+    <span class="note-label">NOTE :</span>
+    உங்கள் வங்கி கணக்கு ஆதாருடன் இணைக்கப்பட்டுள்ளதா? /
+    Is your bank account linked with Aadhaar?
+  </div> -->
+
+<!-- RIGHT SIDE -->
+<!-- <div class="note-right-text">
+    திட்ட நலன்களை பெற, உங்கள் வங்கி கணக்கு ஆதாருடன் இணைக்கப்பட வேண்டும். 
+    இல்லையெனில், கீழ்க்கண்ட படிகளை பின்பற்றவும் /
+    To receive scheme benefits, your bank account must be linked with Aadhaar.
+    If not, follow these steps.
+
+  </div>
+     <button type="button" class="know-more-btn ">
+    Know More
+  </button>
+</div>
+
+  </div>
+
+ 
+
+</div> -->
+
+<!-- ROW 1 -->
+<!-- <div class="bank-row">
+
+    <div class="bank-field">
+      <div class="label">IFSC குறியீடு / IFSC Code</div>
+      <div class="colon">:</div>
+      <p-autoComplete
+        formControlName="iFSC_Code"
+        field="text"
+        [suggestions]="suggestions"
+        (completeMethod)="search($event)"
+        [forceSelection]="true"
+        [minLength]="3"
+        (onSelect)="selectifsc($event)"
+        optionLabel="text">
+      </p-autoComplete>
+    </div>
+
+    <div class="bank-field">
+      <div class="label">வங்கியின் பெயர் / Name of the Bank</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="bank_Name" readonly />
+    </div>
+
+    <div class="bank-field">
+      <div class="label">கிளையின் பெயர் / Branch Name</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="branch" readonly />
+    </div>
+
+  </div> -->
+
+<!-- ROW 2 -->
+<!-- <div class="bank-row">
+
+    <div class="bank-field">
+      <div class="label">கணக்கு எண் / Account Number</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="account_Number" />
+    </div>
+
+    <div class="bank-field">
+      <div class="label">கணக்கு வைத்திருப்பவரின் பெயர் / Account Holder</div>
+      <div class="colon">:</div>
+      <input pInputText formControlName="account_Holder_Name" />
+    </div>
+
+  </div>
+
+</form> -->
+<form [formGroup]="bankForm" class="bank-wrapper">
+  <!-- ROW 1 -->
+  <div class="bank-row">
+    <!-- IFSC -->
+    <div class="bank-field">
+      <div class="label">
+        IFSC குறியீடு / IFSC Code <span class="required-star"> *</span>
+      </div>
+      <div class="colon">:</div>
+
+      <p-autoComplete
+        formControlName="iFSC_Code"
+        [suggestions]="suggestions"
+        (completeMethod)="search($event)"
+        [forceSelection]="true"
+        [minLength]="3"
+        [maxlength]="11"
+        (onSelect)="selectifsc($event)"
+        (onClear)="clearIfsc($event)"
+        optionLabel="text"
+        [class.p-invalid]="isInvalid('iFSC_Code')"
+(keydown)="blockInvalidIFSCInput($event)"
+(paste)="onPasteIFSC($event)"
+       
+      >
+      </p-autoComplete>
+
+      <small class="error-msg" *ngIf="isInvalid('iFSC_Code')">
+        <span *ngIf="bankForm.get('iFSC_Code')?.errors?.['required']">
+          IFSC Code is required.
+        </span>
+
+        <span *ngIf="bankForm.get('iFSC_Code')?.errors?.['invalidIFSC']">
+          Invalid IFSC code format.
+        </span>
+      </small>
+    </div>
+
+    <!-- BANK NAME -->
+    <div class="bank-field">
+      <div class="label">
+        வங்கியின் பெயர் / Name of the Bank<span class="required-star"> *</span>
+      </div>
+      <div class="colon">:</div>
+
+      <input
+        pInputText
+        formControlName="bank_Name"
+        readonly
+        [class.p-invalid]="isInvalid('bank_Name')"
+      />
+
+      <small class="error-msg" *ngIf="isInvalid('bank_Name')">
+        Bank name is required.
+      </small>
+    </div>
+
+    <!-- BRANCH -->
+    <div class="bank-field">
+      <div class="label">
+        கிளையின் பெயர் / Branch Name<span class="required-star"> *</span>
+      </div>
+      <div class="colon">:</div>
+
+      <input
+        pInputText
+        formControlName="branch"
+        readonly
+        [class.p-invalid]="isInvalid('branch')"
+      />
+
+      <small class="error-msg" *ngIf="isInvalid('branch')">
+        Branch name is required.
+      </small>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="bank-row">
+    <!-- ACCOUNT NUMBER -->
+    <div class="bank-field">
+      <div class="label">
+        கணக்கு எண் / Account Number<span class="required-star"> *</span>
+      </div>
+      <div class="colon">:</div>
+
+      <input
+        pInputText
+        formControlName="account_Number"
+        maxlength="18"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        [class.p-invalid]="isInvalid('account_Number')"
+        (keydown)="blockSpace($event)"
+      />
+
+      <small class="error-msg" *ngIf="isInvalid('account_Number')">
+        Account number must be 9–18 digits.
+      </small>
+    </div>
+
+    <!-- ACCOUNT HOLDER -->
+    <div class="bank-field">
+      <div class="label">
+        கணக்கு வைத்திருப்பவர் / Account Holder<span class="required-star">
+          *</span
+        >
+      </div>
+      <div class="colon">:</div>
+
+      <input
+        pInputText
+        formControlName="account_Holder_Name"
+        oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '')"
+        pattern="[A-Za-z ]*"
+        inputmode="text"
+        [class.p-invalid]="isInvalid('account_Holder_Name')"
+      />
+
+      <small class="error-msg" *ngIf="isInvalid('account_Holder_Name')">
+        Account Holder is required. White space is not allowed.
+      </small>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,18 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+    </div>
+    <div class="mb-3 mt-3">
+        <div class="row">
+            <app-datatable-pagination [records]="configurationList" [defaultSortField]="defaultSortField"
+                [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Status'" [rows]="rows" [total]="total"
+                [actions]="actions" (invokeAction)="actioInvoked($event)" [defaultstatus]="!currentStatus"
+                (changeStatus)="changeStatus($event)" [searchableColumns]="searchableColumns"
+                [hasActiveInactive]="false" (changefilter)="changefilter($event)" [canShowAction]="false">
+            </app-datatable-pagination>
+
+        </div>
+    </div>
+</div>

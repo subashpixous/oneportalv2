@@ -1,0 +1,1440 @@
+<!-- <div style="padding: 20px;overflow-x: auto;">
+
+
+    <form [formGroup]="familyMembersForm">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S.No / வ.எண்
+                    </th>
+                    <th>Name / பெயர்
+                        <br>
+                        <span *ngIf="nameErrorMsg" class="tableheadererrormsg">{{nameErrorMsg}}</span>
+                    </th>
+                    <th>Relationship / உறவு
+                        <br>
+                        <span *ngIf="relationErrorMsg" class="tableheadererrormsg">{{relationErrorMsg}}</span>
+                    </th>
+                    <th> Gender / பாலினம்
+                        <br>
+                        <span *ngIf="genderErrorMsg" class="tableheadererrormsg">{{genderErrorMsg}}</span>
+                    </th>
+                    <th>Age / வயது
+                        <br>
+                        <span *ngIf="ageErrorMsg" class="tableheadererrormsg">{{ageErrorMsg}}</span>
+                    </th>
+                    <th>Education / கல்வி
+                        <br>
+                        <span *ngIf="eduErrorMsg" class="tableheadererrormsg">{{eduErrorMsg}}</span>
+                    </th>
+                    <th>Education Details / கல்வி விவரங்கள்
+                        <br>
+                        <span *ngIf="eduDetErrorMsg" class="tableheadererrormsg">{{eduDetErrorMsg}}</span>
+                    </th>
+                    <th>Occupation / தொழில்
+                        <br>
+                        <span *ngIf="occuErrorMsg" class="tableheadererrormsg">{{occuErrorMsg}}</span>
+                    </th>
+                    <th>Differently Abled / மாற்றுத் திறனாளி
+                        <br>
+                        <span *ngIf="diffAbledErrorMsg" class="tableheadererrormsg">{{diffAbledErrorMsg}}</span>
+                    </th>
+                    <th>Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody formArrayName="familyMember">
+                <tr *ngFor="let itemrow of familyMembersFormArray.controls; let i=index;let l=last" [formGroupName]="i">
+                    <td>{{ i+1 }} </td>
+                    <td>
+                        <input pInputText [maxlength]="250" formControlName="name" type="text" />
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.family_Member_SelectList" optionLabel="text"
+                            [appendTo]="'body'" optionValue="value" placeholder="Select a Relation"
+                            formControlName="relation" [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.gender_SelectList" optionLabel="text" optionValue="value"
+                            [appendTo]="'body'" placeholder="Select a Gender" formControlName="sex"
+                            [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <input pInputText [maxlength]="250" formControlName="age" type="text" [maxlength]="3" />
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.education_SelectList" optionLabel="text" optionValue="value"
+                            [appendTo]="'body'" placeholder="Select a Eduation" formControlName="education"
+                            [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <input pInputText [maxlength]="250" formControlName="course" type="text" />
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.occupation_SelectList" optionLabel="text" optionValue="value"
+                            [appendTo]="'body'" placeholder="Select a Occupation" formControlName="occupation"
+                            [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.disability_SelectList" optionLabel="text" optionValue="value"
+                            [appendTo]="'body'" placeholder="Select a Disability" formControlName="disability"
+                            [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <p-button icon="pi pi-trash" [rounded]="true" [text]="true" (onClick)="remove(i)" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div> -->
+
+<!-- <p-toast />
+<div class=" memeachtab  flex flex-wrap  ">
+
+    <div class="col-12   md:col-4  lg:col-4 p-2" *ngFor="let item of familyMemberList">
+        <div class="col-12 flex flex-wrap  fmcontainer " [style.backgroundColor]="item.isSaved?'#7cf67c':'#ffbaba'">
+            <div class="col-12 p-0 m-0 text-center title-div" [style.backgroundColor]="item.isSaved?'green':'#ff4f4f'">
+                <h5 class="mt-2 text-white">{{item.name}}</h5>
+            </div>
+            <div class="col-12 p-0 m-0 justify-content-between flex">
+                <p *ngIf="item.relationString">{{item.relationString}}</p>
+                <p *ngIf="item.sexString">{{item.sexString}}</p>
+            </div>
+            <div class="col-12 p-0 m-0  justify-content-between flex">
+                <p *ngIf="item.age">{{item.age}} years</p>
+                <p *ngIf="item.education">{{item.education}}</p>
+            </div>
+            <div class="col-12 p-0 m-0  justify-content-center flex">
+                <button type="button" [style.backgroundColor]="item.isSaved?'#7cf67c':'#ff4f4f'" pButton pRipple
+                    icon="pi pi-arrow-right" (click)="openPopup(item)"
+                    class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                    [title]="'Click to Proceed'"></button>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-12   md:col-4  lg:col-4 p-2">
+        <div class="col-12 flex flex-wrap  addcontainer ">
+            <button pButton type="button" style="width: auto;" (click)="addFamilyMember()">Add</button>
+        </div>
+    </div>
+    <div class="col-12 flex justify-content-center " *ngIf="showNextButton">
+        <p-button label="Next" class="p-button-secondary"
+            [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+            severity="secondary" (onClick)="move()" />
+    </div>
+</div>
+<p-dialog header="Add new family member" (onHide)="close()" [closable]="false" [modal]="true" [(visible)]="visible"
+    [style]="{ width: '25rem' }">
+
+    <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+        <div class="p-formgrid grid ">
+            <div class="field col-12 ">
+                <label htmlFor="iFSC_Code">Name
+                </label>
+                <input pInputText [(ngModel)]="name" pattern="^[a-zA-Z ]*$" type="text" />
+
+            </div>
+            <div class="col-12 flex justify-content-center gap-2">
+                <p-button label="Cancel" severity="secondary" (onClick)="close()" />
+                <p-button label="Save" (onClick)="add()" />
+            </div>
+        </div>
+    </div>
+</p-dialog>
+<p-dialog header="Family Member Details" (onHide)="closefd()" [closable]="false" [modal]="true" [(visible)]="visiblefd"
+    [style]="{ width: '70%' }">
+    <form [formGroup]="bankForm" class="col-12">
+        <div class=" memeachtab p-fluid" style="padding: 20px 0px 0px 0px;">
+            <div class="p-formgrid grid ">
+                <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;" *ngIf="formDetail">
+
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="name"> பெயர் / Name
+                        </label>
+                        <input pInputText formControlName="name" type="text" />
+                        <app-error-msg [control]="bankForm.get('name')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="relationShip">உறவு / Relationship
+                        </label>
+                        <p-dropdown [options]="formDetail.family_Member_SelectList" optionLabel="text"
+                            optionValue="value" placeholder="Select a Relationship" formControlName="relationShip"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('relationShip')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="gender">பாலினம் / Gender
+                        </label>
+                        <p-dropdown [options]="formDetail.gender_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Gender" formControlName="gender"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('gender')"></app-error-msg>
+                    </div>
+
+                    <div class="field col-12  md:col-4  lg:col-4">
+
+                        <label htmlFor="dob"> DOB</label>
+                        <p-calendar [maxDate]="maxDate" [style]="{'width':'max-content'}" [minDate]="minDate"
+                            [showIcon]="true" formControlName="dob" dateFormat="dd-mm-yy" [appendTo]="'body'"
+                            (ngModelChange)="updateAge()" inputId="icon" readonly></p-calendar>
+                        <app-error-msg [control]="bankForm.get('dob')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="age">வயது / Age
+                        </label>
+                        <input pInputText formControlName="age" type="text" readonly />
+                        <app-error-msg [control]="bankForm.get('age')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="aadharNumber">ஆதார் எண் / Aadhar Number
+                        </label>
+                        <input pInputText formControlName="aadharNumber" type="text" maxlength="12" />
+                        <app-error-msg [control]="bankForm.get('aadharNumber')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="phone_number">தொலைபேசி எண் / Phone number
+                        </label>
+                        <input pInputText formControlName="phone_number" type="text" maxlength="10" />
+                        <app-error-msg [control]="bankForm.get('phone_number')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="education"> கல்வி / Education</label>
+                        <p-dropdown [options]="formDetail.education_2_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Education" formControlName="education"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('education')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'SCHOOL'">
+                        <label htmlFor="standard">Standard</label>
+                        <p-dropdown [options]="formDetail.education_Standard_SelectList??[]" optionLabel="text"
+                            optionValue="value" placeholder="Select a Standard" formControlName="standard"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('standard')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="getEducation == 'SCHOOL' || getEducation == 'COLLEGE'">
+                        <label htmlFor="educationalStatus">Education Status / படிப்பின் நிலை</label>
+                        <p-dropdown [options]="formDetail.education_Status_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Status" formControlName="educationalStatus"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('educationalStatus')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="getEducation == 'SCHOOL' && educationalStatus == 'STUDYING'">
+                        <label htmlFor="eMISNo">EMIS No</label>
+                        <input pInputText formControlName="eMISNo" type="text" />
+                        <app-error-msg [control]="bankForm.get('eMISNo')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="(getEducation == 'COLLEGE'||getEducation == 'SCHOOL') && educationalStatus == 'COMPLETED'">
+                        <label htmlFor="year_Of_Completion">Completed Year</label>
+                        <p-calendar [maxDate]="maxDate" [style]="{'width':'max-content'}" [minDate]="minDate"
+                            view="year" [showIcon]="true" formControlName="year_Of_Completion" dateFormat="yy"
+                            [appendTo]="'body'" inputId="icon"></p-calendar>
+                        <app-error-msg [control]="bankForm.get('year_Of_Completion')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="getEducation == 'COLLEGE' && educationalStatus == 'DISCONTINUED'">
+
+                        <label htmlFor="discontinuedYear">Discontinued Year</label>
+                        <p-calendar [maxDate]="maxDate" [style]="{'width':'max-content'}" [minDate]="minDate"
+                            [showIcon]="true" formControlName="discontinuedYear" dateFormat="yy" [appendTo]="'body'"
+                            view="year" inputId="icon"></p-calendar>
+                        <app-error-msg [control]="bankForm.get('discontinuedYear')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'SCHOOL'">
+                        <label htmlFor="nameandAddressofSchool">Name & Address of the school</label>
+                        <input pInputText formControlName="nameandAddressofSchool" type="text" />
+                        <app-error-msg [control]="bankForm.get('nameandAddressofSchool')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'COLLEGE'">
+                        <label htmlFor="course">Course</label>
+                        <p-dropdown [options]="formDetail.education_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Course" formControlName="course"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('course')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'COLLEGE'">
+                        <label htmlFor="degreName">Degree Name</label>
+                        <input pInputText formControlName="degreName" type="text" />
+                        <app-error-msg [control]="bankForm.get('degreName')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="getEducation == 'COLLEGE'&& educationalStatus == 'STUDYING'">
+                        <label htmlFor="year"> Year</label>
+                        <p-dropdown [options]="formDetail.education_Year_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Year" formControlName="year"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('year')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'COLLEGE'">
+                        <label htmlFor="nameandAddressofCollege">Name & Address of College/Institution</label>
+                        <input pInputText formControlName="nameandAddressofCollege" type="text" />
+                        <app-error-msg [control]="bankForm.get('nameandAddressofCollege')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="occupation">தொழில் / Occupation</label>
+                        <input pInputText formControlName="occupation" type="text" />
+                        <app-error-msg [control]="bankForm.get('occupation')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="differentlyAbled">மாற்றுத் திறனாளி / Differently Abled </label>
+                        <p-dropdown [options]="formDetail.disability_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Differently Abled"
+                            formControlName="differentlyAbled" [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('differentlyAbled')"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h5 class="divhighligher"> ஆவணங்கள் / Documents </h5>
+        <app-mem-document-detail #manDatoryDocuments [memPersonalInfo]="[]" *ngIf="visiblefd" [ismandatory]="true"
+            [isFamilyMember]="true" [member_Id]="this.bankForm.get('id')?.value"></app-mem-document-detail>
+        <h5 class="divhighligher">கூடுதல் ஆவணங்கள் / Additional Documents </h5>
+        <app-mem-document-detail [memPersonalInfo]="[]" [ismandatory]="false" *ngIf="visiblefd" [isFamilyMember]="true"
+            [member_Id]="this.bankForm.get('id')?.value"></app-mem-document-detail>
+
+        <p style="color: red;">{{errorMessage}}</p>
+        <div class="col-12 flex " style="justify-content: center;padding-bottom: 0px;">
+            <div style="margin-right: 10px;">
+                <p-button label="Save" class="p-button-secondary"
+                    [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+                    severity="primary" (onClick)="save( true)" />
+            </div>
+            <div style="margin-right: 10px;" *ngIf="canDelete">
+                <p-button label="Delete" class="p-button-danger"
+                    [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+                    severity="secondary" (onClick)="save(false)" />
+            </div>
+            <div style="margin-right: 10px;">
+                <p-button label="Cancel" class="p-button-danger"
+                    [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+                    severity="secondary" (onClick)="closefd()" />
+            </div>
+        </div>
+    </form>
+
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog> -->
+
+<!-- <div style="padding: 20px;overflow-x: auto;">
+
+
+    <form [formGroup]="familyMembersForm">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S.No / வ.எண்
+                    </th>
+                    <th>Name / பெயர்
+                        <br>
+                        <span *ngIf="nameErrorMsg" class="tableheadererrormsg">{{nameErrorMsg}}</span>
+                    </th>
+                    <th>Relationship / உறவு
+                        <br>
+                        <span *ngIf="relationErrorMsg" class="tableheadererrormsg">{{relationErrorMsg}}</span>
+                    </th>
+                    <th> Gender / பாலினம்
+                        <br>
+                        <span *ngIf="genderErrorMsg" class="tableheadererrormsg">{{genderErrorMsg}}</span>
+                    </th>
+                    <th>Age / வயது
+                        <br>
+                        <span *ngIf="ageErrorMsg" class="tableheadererrormsg">{{ageErrorMsg}}</span>
+                    </th>
+                    <th>Education / கல்வி
+                        <br>
+                        <span *ngIf="eduErrorMsg" class="tableheadererrormsg">{{eduErrorMsg}}</span>
+                    </th>
+                    <th>Education Details / கல்வி விவரங்கள்
+                        <br>
+                        <span *ngIf="eduDetErrorMsg" class="tableheadererrormsg">{{eduDetErrorMsg}}</span>
+                    </th>
+                    <th>Occupation / தொழில்
+                        <br>
+                        <span *ngIf="occuErrorMsg" class="tableheadererrormsg">{{occuErrorMsg}}</span>
+                    </th>
+                    <th>Differently Abled / மாற்றுத் திறனாளி
+                        <br>
+                        <span *ngIf="diffAbledErrorMsg" class="tableheadererrormsg">{{diffAbledErrorMsg}}</span>
+                    </th>
+                    <th>Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody formArrayName="familyMember">
+                <tr *ngFor="let itemrow of familyMembersFormArray.controls; let i=index;let l=last" [formGroupName]="i">
+                    <td>{{ i+1 }} </td>
+                    <td>
+                        <input pInputText [maxlength]="250" formControlName="name" type="text" />
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.family_Member_SelectList" optionLabel="text"
+                            [appendTo]="'body'" optionValue="value" placeholder="Select a Relation"
+                            formControlName="relation" [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.gender_SelectList" optionLabel="text" optionValue="value"
+                            [appendTo]="'body'" placeholder="Select a Gender" formControlName="sex"
+                            [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <input pInputText [maxlength]="250" formControlName="age" type="text" [maxlength]="3" />
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.education_SelectList" optionLabel="text" optionValue="value"
+                            [appendTo]="'body'" placeholder="Select a Eduation" formControlName="education"
+                            [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <input pInputText [maxlength]="250" formControlName="course" type="text" />
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.occupation_SelectList" optionLabel="text" optionValue="value"
+                            [appendTo]="'body'" placeholder="Select a Occupation" formControlName="occupation"
+                            [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <p-dropdown [options]="formDetail.disability_SelectList" optionLabel="text" optionValue="value"
+                            [appendTo]="'body'" placeholder="Select a Disability" formControlName="disability"
+                            [showClear]="true"></p-dropdown>
+                    </td>
+                    <td>
+                        <p-button icon="pi pi-trash" [rounded]="true" [text]="true" (onClick)="remove(i)" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div> -->
+
+<!-- <p-toast />
+<div class=" memeachtab  flex flex-wrap  ">
+
+    <div class="col-12   md:col-4  lg:col-4 p-2" *ngFor="let item of familyMemberList">
+        <div class="col-12 flex flex-wrap  fmcontainer " [style.backgroundColor]="item.isSaved?'#7cf67c':'#ffbaba'">
+            <div class="col-12 p-0 m-0 text-center title-div" [style.backgroundColor]="item.isSaved?'green':'#ff4f4f'">
+                <h5 class="mt-2 text-white">{{item.name}}</h5>
+            </div>
+            <div class="col-12 p-0 m-0 justify-content-between flex">
+                <p *ngIf="item.relationString">{{item.relationString}}</p>
+                <p *ngIf="item.sexString">{{item.sexString}}</p>
+            </div>
+            <div class="col-12 p-0 m-0  justify-content-between flex">
+                <p *ngIf="item.age">{{item.age}} years</p>
+                <p *ngIf="item.education">{{item.education}}</p>
+            </div>
+            <div class="col-12 p-0 m-0  justify-content-center flex">
+                <button type="button" [style.backgroundColor]="item.isSaved?'#7cf67c':'#ff4f4f'" pButton pRipple
+                    icon="pi pi-arrow-right" (click)="openPopup(item)"
+                    class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                    [title]="'Click to Proceed'"></button>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-12   md:col-4  lg:col-4 p-2">
+        <div class="col-12 flex flex-wrap  addcontainer ">
+            <button pButton type="button" style="width: auto;" (click)="addFamilyMember()">Add</button>
+        </div>
+    </div>
+    <div class="col-12 flex justify-content-center " *ngIf="showNextButton">
+        <p-button label="Next" class="p-button-secondary"
+            [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+            severity="secondary" (onClick)="move()" />
+    </div>
+</div>
+<p-dialog header="Add new family member" (onHide)="close()" [closable]="false" [modal]="true" [(visible)]="visible"
+    [style]="{ width: '25rem' }">
+
+    <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+        <div class="p-formgrid grid ">
+            <div class="field col-12 ">
+                <label htmlFor="iFSC_Code">Name
+                </label>
+                <input pInputText [(ngModel)]="name" pattern="^[a-zA-Z ]*$" type="text" />
+
+            </div>
+            <div class="col-12 flex justify-content-center gap-2">
+                <p-button label="Cancel" severity="secondary" (onClick)="close()" />
+                <p-button label="Save" (onClick)="add()" />
+            </div>
+        </div>
+    </div>
+</p-dialog>
+<p-dialog header="Family Member Details" (onHide)="closefd()" [closable]="false" [modal]="true" [(visible)]="visiblefd"
+    [style]="{ width: '70%' }">
+    <form [formGroup]="bankForm" class="col-12">
+        <div class=" memeachtab p-fluid" style="padding: 20px 0px 0px 0px;">
+            <div class="p-formgrid grid ">
+                <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;" *ngIf="formDetail">
+
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="name"> பெயர் / Name
+                        </label>
+                        <input pInputText formControlName="name" type="text" />
+                        <app-error-msg [control]="bankForm.get('name')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="relationShip">உறவு / Relationship
+                        </label>
+                        <p-dropdown [options]="formDetail.family_Member_SelectList" optionLabel="text"
+                            optionValue="value" placeholder="Select a Relationship" formControlName="relationShip"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('relationShip')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="gender">பாலினம் / Gender
+                        </label>
+                        <p-dropdown [options]="formDetail.gender_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Gender" formControlName="gender"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('gender')"></app-error-msg>
+                    </div>
+
+                    <div class="field col-12  md:col-4  lg:col-4">
+
+                        <label htmlFor="dob"> DOB</label>
+                        <p-calendar [maxDate]="maxDate" [style]="{'width':'max-content'}" [minDate]="minDate"
+                            [showIcon]="true" formControlName="dob" dateFormat="dd-mm-yy" [appendTo]="'body'"
+                            (ngModelChange)="updateAge()" inputId="icon" readonly></p-calendar>
+                        <app-error-msg [control]="bankForm.get('dob')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="age">வயது / Age
+                        </label>
+                        <input pInputText formControlName="age" type="text" readonly />
+                        <app-error-msg [control]="bankForm.get('age')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="aadharNumber">ஆதார் எண் / Aadhar Number
+                        </label>
+                        <input pInputText formControlName="aadharNumber" type="text" maxlength="12" />
+                        <app-error-msg [control]="bankForm.get('aadharNumber')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="phone_number">தொலைபேசி எண் / Phone number
+                        </label>
+                        <input pInputText formControlName="phone_number" type="text" maxlength="10" />
+                        <app-error-msg [control]="bankForm.get('phone_number')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="education"> கல்வி / Education</label>
+                        <p-dropdown [options]="formDetail.education_2_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Education" formControlName="education"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('education')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'SCHOOL'">
+                        <label htmlFor="standard">Standard</label>
+                        <p-dropdown [options]="formDetail.education_Standard_SelectList??[]" optionLabel="text"
+                            optionValue="value" placeholder="Select a Standard" formControlName="standard"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('standard')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="getEducation == 'SCHOOL' || getEducation == 'COLLEGE'">
+                        <label htmlFor="educationalStatus">Education Status / படிப்பின் நிலை</label>
+                        <p-dropdown [options]="formDetail.education_Status_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Status" formControlName="educationalStatus"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('educationalStatus')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="getEducation == 'SCHOOL' && educationalStatus == 'STUDYING'">
+                        <label htmlFor="eMISNo">EMIS No</label>
+                        <input pInputText formControlName="eMISNo" type="text" />
+                        <app-error-msg [control]="bankForm.get('eMISNo')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="(getEducation == 'COLLEGE'||getEducation == 'SCHOOL') && educationalStatus == 'COMPLETED'">
+                        <label htmlFor="year_Of_Completion">Completed Year</label>
+                        <p-calendar [maxDate]="maxDate" [style]="{'width':'max-content'}" [minDate]="minDate"
+                            view="year" [showIcon]="true" formControlName="year_Of_Completion" dateFormat="yy"
+                            [appendTo]="'body'" inputId="icon"></p-calendar>
+                        <app-error-msg [control]="bankForm.get('year_Of_Completion')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="getEducation == 'COLLEGE' && educationalStatus == 'DISCONTINUED'">
+
+                        <label htmlFor="discontinuedYear">Discontinued Year</label>
+                        <p-calendar [maxDate]="maxDate" [style]="{'width':'max-content'}" [minDate]="minDate"
+                            [showIcon]="true" formControlName="discontinuedYear" dateFormat="yy" [appendTo]="'body'"
+                            view="year" inputId="icon"></p-calendar>
+                        <app-error-msg [control]="bankForm.get('discontinuedYear')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'SCHOOL'">
+                        <label htmlFor="nameandAddressofSchool">Name & Address of the school</label>
+                        <input pInputText formControlName="nameandAddressofSchool" type="text" />
+                        <app-error-msg [control]="bankForm.get('nameandAddressofSchool')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'COLLEGE'">
+                        <label htmlFor="course">Course</label>
+                        <p-dropdown [options]="formDetail.education_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Course" formControlName="course"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('course')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'COLLEGE'">
+                        <label htmlFor="degreName">Degree Name</label>
+                        <input pInputText formControlName="degreName" type="text" />
+                        <app-error-msg [control]="bankForm.get('degreName')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4"
+                        *ngIf="getEducation == 'COLLEGE'&& educationalStatus == 'STUDYING'">
+                        <label htmlFor="year"> Year</label>
+                        <p-dropdown [options]="formDetail.education_Year_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Year" formControlName="year"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('year')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4" *ngIf="getEducation == 'COLLEGE'">
+                        <label htmlFor="nameandAddressofCollege">Name & Address of College/Institution</label>
+                        <input pInputText formControlName="nameandAddressofCollege" type="text" />
+                        <app-error-msg [control]="bankForm.get('nameandAddressofCollege')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="occupation">தொழில் / Occupation</label>
+                        <input pInputText formControlName="occupation" type="text" />
+                        <app-error-msg [control]="bankForm.get('occupation')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="differentlyAbled">மாற்றுத் திறனாளி / Differently Abled </label>
+                        <p-dropdown [options]="formDetail.disability_SelectList ?? []" optionLabel="text"
+                            optionValue="value" placeholder="Select a Differently Abled"
+                            formControlName="differentlyAbled" [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="bankForm.get('differentlyAbled')"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h5 class="divhighligher"> ஆவணங்கள் / Documents </h5>
+        <app-mem-document-detail #manDatoryDocuments [memPersonalInfo]="[]" *ngIf="visiblefd" [ismandatory]="true"
+            [isFamilyMember]="true" [member_Id]="this.bankForm.get('id')?.value"></app-mem-document-detail>
+        <h5 class="divhighligher">கூடுதல் ஆவணங்கள் / Additional Documents </h5>
+        <app-mem-document-detail [memPersonalInfo]="[]" [ismandatory]="false" *ngIf="visiblefd" [isFamilyMember]="true"
+            [member_Id]="this.bankForm.get('id')?.value"></app-mem-document-detail>
+
+        <p style="color: red;">{{errorMessage}}</p>
+        <div class="col-12 flex " style="justify-content: center;padding-bottom: 0px;">
+            <div style="margin-right: 10px;">
+                <p-button label="Save" class="p-button-secondary"
+                    [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+                    severity="primary" (onClick)="save( true)" />
+            </div>
+            <div style="margin-right: 10px;" *ngIf="canDelete">
+                <p-button label="Delete" class="p-button-danger"
+                    [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+                    severity="secondary" (onClick)="save(false)" />
+            </div>
+            <div style="margin-right: 10px;">
+                <p-button label="Cancel" class="p-button-danger"
+                    [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+                    severity="secondary" (onClick)="closefd()" />
+            </div>
+        </div>
+    </form>
+
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog> -->
+<div class="ration-section">
+  <label for="rationNo" class="ration-label">
+    குடும்ப அட்டை எண் / Ration Card Number
+  </label>
+
+  <!-- <input
+  pInputText
+  [(ngModel)]="rationNumber"
+  (keyup.enter)="loadPDSData(rationNumber)"
+  maxlength="12"
+/> -->
+  <div class="ration-input-wrapper">
+    <input
+      pInputText
+      [(ngModel)]="rationNumber"
+      (keyup.enter)="loadPDSData(rationNumber)"
+      maxlength="12"
+      placeholder="Ration Card Number"
+    />
+
+    <button
+      pButton
+      type="button"
+      icon="pi pi-arrow-right"
+      class="search-btn"
+      (click)="loadPDSData(rationNumber)"
+    ></button>
+  </div>
+</div>
+
+<!-- <button
+  pButton
+  type="button"
+  label="Generate 5 Test Members"
+  class="p-button-warning"
+  (click)="generateFiveMembers()"
+></button> -->
+<form [formGroup]="familyForm" class="family-wrapper">
+  <div class="family-table">
+    <!-- ================= HEADER ================= -->
+    <!-- <div class="table-header">
+      <div>Name</div>
+      <div>Aadhaar Number</div>
+      <div>Mobile Number</div>
+      <div>Relationship</div>
+      <div>Gender</div>
+      <div>Age / DOB</div>
+      <div>Education</div>
+      <div>Details</div>
+      <div>Differently Abled</div>
+      <div>Action</div>
+    </div> -->
+    <div class="table-header">
+      <div>Name / பெயர் <span style="color: red;">*</span></div> 
+      <div>Aadhaar Number / ஆதார் எண்</div>
+      <div>Mobile Number / கைப்பேசி எண்</div>
+      <div>Relationship / உறவு<span style="color: red;">*</span></div>
+      <div>Gender / பாலினம் <span style="color: red;">*</span></div>
+      <div>Age / வயது <span style="color: red;">*</span></div>
+      <div>School / College / பள்ளி / கல்லூரி <span style="color: red;">*</span></div>
+      <div>Details / விவரங்கள் <span style="color: red;">*</span></div>
+      <div>differently abled?/மாற்றுத்திறனாளரா? <span style="color: red;">*</span></div>
+      <div>Action / செயல் <span style="color: red;">*</span></div>
+    </div>
+    <!-- ================= BODY ================= -->
+    <div formArrayName="members">
+      <div
+        *ngFor="let member of members.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="table-row">
+          <!-- NAME -->
+          <div class="cell">
+            <input pInputText formControlName="name" placeholder="Name" />
+            <small
+              class="error-msg"
+              *ngIf="member.get('name')?.invalid && member.get('name')?.touched"
+            >
+              <span *ngIf="member.get('name')?.errors?.['required']">
+      Name is required.
+    </span>
+
+    <!-- Min length -->
+    <span *ngIf="member.get('name')?.errors?.['minlength']">
+      Name must be at least 3 characters.
+    </span>
+            </small>
+
+    <!-- Min length -->
+
+
+            
+          </div>
+
+          <!-- AADHAAR -->
+          <div class="cell">
+            <input
+              pInputText
+              formControlName="aadharNumber"
+              maxlength="12"
+              placeholder="Aadhaar"
+            />
+            <small
+              class="error-msg"
+              *ngIf="
+                member.get('aadharNumber')?.invalid &&
+                member.get('aadharNumber')?.touched
+              "
+            >
+              Aadhar Number is Invalid.
+            </small>
+          </div>
+
+          <!-- MOBILE -->
+          <div class="cell">
+            <input
+              pInputText
+              formControlName="phone_number"
+              maxlength="10"
+              placeholder="Phone No"
+            />
+            <small
+              class="error-msg"
+              *ngIf="
+                member.get('phone_number')?.invalid &&
+                member.get('phone_number')?.touched
+              "
+            >
+              Phone Number is Invalid.
+            </small>
+          </div>
+
+          <!-- RELATIONSHIP -->
+          <div class="cell">
+            <!-- <p-dropdown
+            class="relation-dropdown"
+              [options]="formDetail?.family_Member_SelectList ?? []"
+              optionLabel="text"
+              optionValue="value"
+              formControlName="relation"
+              placeholder="Select"
+            >
+            </p-dropdown> -->
+            <p-dropdown
+              [options]="formDetail?.family_Member_SelectList ?? []"
+              optionLabel="text"
+              optionValue="value"
+              formControlName="relation"
+              placeholder="Select"
+              [style]="{ width: '140px' }"
+            >
+              <!-- Selected value -->
+              <ng-template pTemplate="selectedItem" let-item>
+                <span>{{ truncate(item?.text) }}</span>
+              </ng-template>
+
+              <!-- Dropdown list items -->
+              <ng-template pTemplate="item" let-item>
+                {{ item?.text }}
+              </ng-template>
+            </p-dropdown>
+            <small
+              class="error-msg"
+              *ngIf="
+                member.get('relation')?.invalid &&
+                member.get('relation')?.touched
+              "
+            >
+              Relationship is required.
+            </small>
+          </div>
+
+          <!-- GENDER -->
+          <div class="cell">
+            <p-dropdown
+              [options]="formDetail?.gender_SelectList ?? []"
+              optionLabel="text"
+              optionValue="value"
+              formControlName="sex"
+              placeholder="Select"
+              [style]="{ width: '100px' }"
+            >
+              <!-- Selected value -->
+              <ng-template pTemplate="selectedItem" let-item>
+                <span>{{ truncate(item?.text) }}</span>
+              </ng-template>
+
+              <!-- Dropdown list items -->
+              <ng-template pTemplate="item" let-item>
+                {{ item?.text }}
+              </ng-template>
+            </p-dropdown>
+            <small
+              class="error-msg"
+              *ngIf="member.get('sex')?.invalid && member.get('sex')?.touched"
+            >
+              Gender is required.
+            </small>
+          </div>
+
+          <!-- AGE / DOB -->
+          <div class="cell">
+            <p-calendar
+              formControlName="date_of_birth"
+              dateFormat="dd-mm-yy"
+              [maxDate]="maxDate"
+              [readonlyInput]="true"
+              appendTo="body"
+              [showIcon]="true"
+            >
+            </p-calendar>
+            <small
+              class="error-msg"
+              *ngIf="
+                member.get('date_of_birth')?.invalid &&
+                member.get('date_of_birth')?.touched
+              "
+            >
+              Date of Birth is required.
+            </small>
+          </div>
+
+          <!-- EDUCATION -->
+          <div class="cell">
+            <p-dropdown
+              [options]="formDetail?.education_2_SelectList ?? []"
+              optionLabel="text"
+              optionValue="value"
+              formControlName="education"
+              (onChange)="onEducationChange(i, $event)"
+              placeholder="Select"
+            >
+            </p-dropdown>
+            <small
+              class="error-msg"
+              *ngIf="
+                member.get('education')?.invalid &&
+                member.get('education')?.touched
+              "
+            >
+              Education is required.
+            </small>
+          </div>
+
+          <!-- DETAILS BUTTON -->
+          <div class="cell">
+            <button
+              pButton
+              type="button"
+              class="p-button-secondary p-button-sm"
+              [label]="expandedRowIndex === i ? 'Less' : 'More'"
+              [icon]="
+                expandedRowIndex === i ? 'pi pi-angle-up' : 'pi pi-angle-down'
+              "
+              iconPos="right"
+              (click)="toggleDetails(i)"
+            ></button>
+          </div>
+
+          <!-- DIFFERENTLY ABLED -->
+          <div class="cell">
+            <p-dropdown
+              [options]="formDetail?.disability_SelectList ?? []"
+              optionLabel="text"
+              optionValue="value"
+              formControlName="disability"
+              placeholder="Select"
+            >
+            </p-dropdown>
+            <small
+              class="error-msg"
+              *ngIf="
+                member.get('disability')?.invalid &&
+                member.get('disability')?.touched
+              "
+            >
+              This field is required.
+            </small>
+          </div>
+
+          <!-- ACTION BUTTONS -->
+          <div class="cell action-buttons">
+            <button
+              pButton
+              icon="pi pi-plus"
+              type="button"
+              class="p-button-rounded p-button-primary"
+              (click)="addRow()"
+            ></button>
+
+            <button
+              pButton
+              icon="pi pi-trash"
+              type="button"
+              class="p-button-rounded p-button-primary"
+              (click)="removeRow(i)"
+              *ngIf="members.length > 1"
+            ></button>
+          </div>
+        </div>
+
+        <!-- ================= EXPANDABLE DETAILS ================= -->
+        <div class="details-section" *ngIf="expandedRowIndex === i">
+          <div class="details-grid">
+            <!-- ================= SCHOOL DETAILS ================= -->
+            <ng-container *ngIf="member.get('education')?.value === 'SCHOOL'">
+              <!-- <div class="detail-cell">
+                <label>EMIS No<span class="required-star"> *</span></label>
+                <input pInputText formControlName="eMIS_No" />
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('eMIS_No')?.invalid &&
+                    member.get('eMIS_No')?.touched
+                  "
+                >
+                  EMIS No is required.
+                </small>
+              </div> -->
+              <div class="detail-cell">
+                <label>EMIS No</label>
+
+                <div class="emis-input-wrapper">
+                  <input
+                    pInputText
+                    formControlName="eMIS_No"
+                    maxlength="16"
+                    placeholder="Enter EMIS Number"
+                    (keyup.enter)="
+                      loadEMISData(member.get('eMIS_No')?.value, i)
+                    "
+                  />
+
+                  <button
+                    pButton
+                    type="button"
+                    icon="pi pi-arrow-right"
+                    class="search-btn"
+                    (click)="loadEMISData(member.get('eMIS_No')?.value, i)"
+                  ></button>
+                </div>
+
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('eMIS_No')?.invalid &&
+                    member.get('eMIS_No')?.touched
+                  "
+                >
+                  EMIS No is required.
+                </small>
+              </div>
+
+              <div class="detail-cell">
+                <label
+                  >Educational Status
+                  <span class="required-star"> *</span></label
+                >
+                <p-dropdown
+                  [options]="formDetail?.education_Status_SelectList ?? []"
+                  optionLabel="text"
+                  optionValue="value"
+                  formControlName="school_Status"
+                >
+                </p-dropdown>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('school_Status')?.invalid &&
+                    member.get('school_Status')?.touched
+                  "
+                >
+                  Educational Status is required.
+                </small>
+              </div>
+
+              <div
+                class="detail-cell"
+                *ngIf="member.get('school_Status')?.value === 'STUDYING'"
+              >
+                <label>Standard<span class="required-star"> *</span></label>
+                <p-dropdown
+                  [options]="formDetail?.education_Standard_SelectList ?? []"
+                  optionLabel="text"
+                  optionValue="value"
+                  formControlName="standard"
+                >
+                </p-dropdown>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('standard')?.invalid &&
+                    (member.get('standard')?.touched ||
+                      member.get('standard')?.dirty)
+                  "
+                >
+                  Standard is required.
+                </small>
+              </div>
+
+              <div
+                class="detail-cell"
+                *ngIf="member.get('school_Status')?.value === 'COMPLETED'"
+              >
+                <label
+                  >Completed Year<span class="required-star"> *</span></label
+                >
+                <p-calendar
+                  formControlName="year_Of_Completion"
+                  view="year"
+                  dateFormat="yy"
+                  appendTo="body"
+                  [maxDate]="maxDate"
+                >
+                </p-calendar>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('year_Of_Completion')?.invalid &&
+                    member.get('year_Of_Completion')?.touched
+                  "
+                >
+                  Completed Year is required.
+                </small>
+              </div>
+              <div
+                class="detail-cell"
+                *ngIf="member.get('school_Status')?.value === 'STUDYING'"
+              >
+                <label
+                  >Completion Year<span class="required-star"> *</span></label
+                >
+                <p-calendar
+                  formControlName="year_Of_Completion"
+                  view="year"
+                  dateFormat="yy"
+                  appendTo="body"
+                   [minDate]="comp_minDate"
+                   >
+                </p-calendar>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('year_Of_Completion')?.invalid &&
+                    member.get('year_Of_Completion')?.touched
+                  "
+                >
+                  Completion Year is required.
+                </small>
+              </div>
+              <div
+                class="detail-cell"
+                *ngIf="member.get('school_Status')?.value === 'DISCONTINUED'"
+              >
+                <label
+                  >Discontinued Year<span class="required-star"> *</span></label
+                >
+                <p-calendar
+                  formControlName="discontinuedYear"
+                  view="year"
+                  dateFormat="yy"
+                  appendTo="body"
+                >
+                </p-calendar>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('discontinuedYear')?.invalid &&
+                    member.get('discontinuedYear')?.touched
+                  "
+                >
+                  Discontinued Year is required.
+                </small>
+              </div>
+
+              <div class="detail-cell">
+                <label>School Name </label>
+                <input pInputText formControlName="school_Name" />
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('school_Name')?.invalid &&
+                    member.get('school_Name')?.touched
+                  "
+                >
+                  School Name required.
+                </small>
+              </div>
+              <div class="detail-cell">
+                <label>District Name of School</label>
+                <p-dropdown
+                  [options]="formDetail?.district_SelectList ?? []"
+                  optionLabel="text"
+                  optionValue="value"
+                  formControlName="school_District"
+                >
+                </p-dropdown>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('school_District')?.invalid &&
+                    member.get('school_District')?.touched
+                  "
+                >
+                  District Name is required.
+                </small>
+              </div>
+              <div class="detail-cell">
+                <label>School Address</label>
+                <input pInputText formControlName="school_Address" />
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('school_Address')?.invalid &&
+                    member.get('school_Address')?.touched
+                  "
+                >
+                  School Address is required.
+                </small>
+              </div>
+            </ng-container>
+
+            <!-- ================= COLLEGE DETAILS ================= -->
+            <ng-container *ngIf="member.get('education')?.value === 'COLLEGE'">
+              <!-- <div class="detail-cell">
+                <label>UMIS ID<span class="required-star"> *</span></label>
+                <input pInputText formControlName="uMIS_No" />
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('uMIS_No')?.invalid &&
+                    member.get('uMIS_No')?.touched
+                  "
+                >
+                  UMIS ID is required.
+                </small>
+              </div> -->
+              <div class="detail-cell">
+                <label>UMIS ID</label>
+
+                <div class="emis-input-wrapper">
+                  <input
+                    pInputText
+                    formControlName="uMIS_No"
+                    maxlength="10"
+                    placeholder="Enter UMIS ID"
+                    (keyup.enter)="
+                      loadUMISData(member.get('uMIS_No')?.value, i)
+                    "
+                  />
+
+                  <button
+                    pButton
+                    type="button"
+                    icon="pi pi-arrow-right"
+                    class="search-btn"
+                    (click)="loadUMISData(member.get('uMIS_No')?.value, i)"
+                  ></button>
+                </div>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('uMIS_No')?.invalid &&
+                    member.get('uMIS_No')?.touched
+                  "
+                >
+                  UMIS ID is required.
+                </small>
+              </div>
+              <div class="detail-cell">
+                <label>Course<span class="required-star"> *</span></label>
+                <p-dropdown
+                  [options]="formDetail?.education_SelectList ?? []"
+                  optionLabel="text"
+                  optionValue="value"
+                  formControlName="course"
+                >
+                </p-dropdown>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('course')?.invalid &&
+                    member.get('course')?.touched
+                  "
+                >
+                  Course is required.
+                </small>
+              </div>
+
+              <div class="detail-cell">
+                <label
+                  >Degree Course<span class="required-star"> *</span></label
+                >
+                <input pInputText formControlName="degree_Name" />
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('degree_Name')?.invalid &&
+                    member.get('degree_Name')?.touched
+                  "
+                >
+                  Degree Name is required.
+                </small>
+              </div>
+
+              <div class="detail-cell">
+                <label
+                  >Educational Status<span class="required-star">
+                    *</span
+                  ></label
+                >
+                <p-dropdown
+                  [options]="formDetail?.education_Status_SelectList ?? []"
+                  optionLabel="text"
+                  optionValue="value"
+                  formControlName="college_Status"
+                >
+                </p-dropdown>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('college_Status')?.invalid &&
+                    member.get('college_Status')?.touched
+                  "
+                >
+                  Educational Status is required.
+                </small>
+              </div>
+
+              <div
+                class="detail-cell"
+                *ngIf="member.get('college_Status')?.value === 'STUDYING'"
+              >
+                <label
+                  >Studying Year<span class="required-star"> *</span></label
+                >
+                <p-dropdown
+                  [options]="formDetail?.education_Year_SelectList ?? []"
+                  optionLabel="text"
+                  optionValue="value"
+                  formControlName="year"
+                >
+                </p-dropdown>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('year')?.invalid &&
+                    member.get('year')?.touched
+                  "
+                >
+                  Studying Year is required.
+                </small>
+              </div>
+
+              <div
+                class="detail-cell"
+                *ngIf="member.get('college_Status')?.value === 'COMPLETED'"
+              >
+                <label
+                  >Completed Year<span class="required-star"> *</span></label
+                >
+                <p-calendar
+                  formControlName="year_Of_Completion"
+                  view="year"
+                  dateFormat="yy"
+                  appendTo="body"
+                  [maxDate]="maxDate"
+                >
+                </p-calendar>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('year_Of_Completion')?.invalid &&
+                    member.get('year_Of_Completion')?.touched
+                  "
+                >
+                  Completed Year is required.
+                </small>
+              </div>
+              <div
+                class="detail-cell"
+                *ngIf="member.get('college_Status')?.value === 'STUDYING'"
+              >
+                <label
+                  >Completion Year<span class="required-star"> *</span></label
+                >
+                <p-calendar
+                  formControlName="year_Of_Completion"
+                  view="year"
+                  dateFormat="yy"
+                  appendTo="body"
+                   [minDate]="comp_minDate"
+                   >
+                </p-calendar>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('year_Of_Completion')?.invalid &&
+                    member.get('year_Of_Completion')?.touched
+                  "
+                >
+                  Completion Year is required.
+                </small>
+              </div>
+              <div
+                class="detail-cell"
+                *ngIf="member.get('college_Status')?.value === 'DISCONTINUED'"
+              >
+                <label
+                  >Discontinued Year<span class="required-star"> *</span></label
+                >
+                <p-calendar
+                  formControlName="discontinuedYear"
+                  view="year"
+                  dateFormat="yy"
+                  appendTo="body"
+                >
+                </p-calendar>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('discontinuedYear')?.invalid &&
+                    member.get('discontinuedYear')?.touched
+                  "
+                >
+                  Discontinued Year is required.
+                </small>
+              </div>
+
+              <div class="detail-cell">
+                <label>College Name</label>
+                <input pInputText formControlName="college_Name" />
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('college_Name')?.invalid &&
+                    member.get('college_Name')?.touched
+                  "
+                >
+                  College Name required.
+                </small>
+              </div>
+              <div class="detail-cell">
+                <label>District Name of College</label>
+                <p-dropdown
+                  [options]="formDetail?.district_SelectList ?? []"
+                  optionLabel="text"
+                  optionValue="value"
+                  formControlName="college_District"
+                >
+                </p-dropdown>
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('college_District')?.invalid &&
+                    member.get('college_District')?.touched
+                  "
+                >
+                  District Name is required.
+                </small>
+              </div>
+              <div class="detail-cell">
+                <label>College Address</label>
+                <input pInputText formControlName="college_Address" />
+                <small
+                  class="error-msg"
+                  *ngIf="
+                    member.get('college_Address')?.invalid &&
+                    member.get('college_Address')?.touched
+                  "
+                >
+                  College Address is required.
+                </small>
+              </div>
+            </ng-container>
+
+            <!-- ================= OCCUPATION (COMMON) ================= -->
+            <!-- <div class="detail-cell occupation-cell" *ngIf="member.get('education')?.value === 'NA'">
+  <label>Occupation</label>
+  <input pInputText formControlName="occupation" />
+    <small class="error-msg"
+        *ngIf="member.get('occupation')?.invalid && member.get('occupation')?.touched">
+Occupation is required.
+</small>
+</div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- <button
+  pButton
+  type="button"
+  label="Check Validation"
+  (click)="checkValidationErrors()"
+></button> -->

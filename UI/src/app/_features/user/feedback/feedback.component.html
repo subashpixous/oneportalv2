@@ -1,0 +1,24 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="col-12 lg:col-3 md:col-3 " style="text-align: end;">
+
+        </div>
+    </div>
+    <div class="mb-3 mt-3">
+        <div class="row">
+            <app-datatable-pagination [records]="configurationList" [defaultSortField]="defaultSortField"
+                [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'User'" [rows]="rows" [total]="total"
+                [actions]="actions" (invokeAction)="actioInvoked($event)" [defaultstatus]="!currentStatus"
+                (changeStatus)="changeStatus($event)" [searchableColumns]="searchableColumns" [canShowAction]="false"
+                [hasActiveInactive]="false" (changefilter)="changefilter($event)"    [exportedData]="exportedData"
+      (exportRequest)="onExportRequest($event)">
+            </app-datatable-pagination>
+
+             <!-- modified by Sivasankar on 31-10-2025 for export functionality -->
+
+        </div>
+    </div>
+</div>

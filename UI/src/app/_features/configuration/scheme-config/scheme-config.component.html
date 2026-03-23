@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="grid formgrid" style="justify-content: space-between;padding: 0rem 1rem;margin-bottom: 10px;">
+        <div class="col-12  lg:col-4">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="col" style="text-align: left;">
+            <p-dropdown [options]="schemes" optionLabel="text" [style]="{'width': '70%'}" optionValue="value"
+                placeholder="Select a Scheme" (onChange)="changeScheme($event)" [showClear]="false"
+                [(ngModel)]="selectedscheme"></p-dropdown>
+        </div>
+    </div>
+    <form [formGroup]="schemeConfigForm" (ngSubmit)="submit()" class="col-12">
+        <div class=" p-fluid">
+            <div class="flex grid formgrid">
+                <div class="field  col-12  md:col-6  lg:col-6">
+                    <label htmlFor="callLetterStatusId">CallLetter Status</label>
+                    <p-multiSelect [options]="statuses" optionLabel="text" optionValue="value" display="chip"
+                        placeholder="Select a catgory" formControlName="callLetterStatusId" [showClear]="
+                    false"></p-multiSelect>
+                    <app-error-msg [control]="schemeConfigForm.get('callLetterStatusId')"></app-error-msg>
+                </div>
+                <div class="col-12 md:col-12 flex lg:col-12" style="margin-top: 25px; justify-content: end;">
+                    <div class="col-1" style="text-align: end;">
+                        <button pButton type="submit" label="Submit"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

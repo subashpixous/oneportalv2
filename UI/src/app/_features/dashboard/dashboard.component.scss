@@ -1,0 +1,665 @@
+/* --- FIGMA DASHBOARD STYLES --- */
+    .top-gradient-banner {
+        background: linear-gradient(0deg, #467C88 -31.03%, #007FD0 118.53%);
+        border-radius: 17px;
+        padding: 0 2rem;
+        height: 116px;
+        
+        .banner-title {
+            /* Forced white text overriding framework */
+            h2 { color: #FFFFFF !important; margin: 0; font-size: 18px; font-weight: 500; }
+            p { color: #FFFFFF !important; margin: 0; font-size: 12px; font-weight: 500; }
+        }
+
+        .banner-stats {
+            /* Set the precise gap between the boxes based on Figma layout */
+            gap: 121px;
+            
+            .stat-box {
+                background: #FFFFFF;
+                border-radius: 9px;
+                padding: 0.75rem 1rem;
+                width: 278px;
+                height: 78px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+                .stat-icon-wrapper {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #F3F8FB;
+                    margin-right: 1rem;
+                    font-size: 1.5rem;
+                    border: 1.5px solid #EEEEEE;
+                    &.blue-icon { color: #013B60; }
+                }
+
+                .stat-text {
+                    display: flex;
+                    flex-direction: column;
+                    .label { font-size: 14px; color: #7F7F7F; margin-bottom: 4px; }
+                    .value { font-size: 18px; color: #013B60; font-weight: 600; }
+                }
+            }
+        }
+    }
+.figma-dashboard {
+    font-family: 'Poppins';
+    
+
+
+    .dropdown-mock {
+        background: #F1F1F1;
+        border-radius: 6px;
+        padding: 6px 12px;
+        font-size: 14px;
+        color: #858585;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        &.sm { padding: 4px 8px; font-size: 12px; }
+    }
+
+    .scheme-btn-mock {
+        background: #F3FCFF;
+        border: 0.4px solid #013B60;
+        border-radius: 6px;
+        padding: 6px 12px;
+        font-size: 14px;
+        color: #013B60;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    .status-cards-wrapper {
+        .status-card {
+            border-radius: 13px;
+            border: 0.8px solid #EAEAEA;
+            padding: 1.5rem;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 206px;
+            text-align: center;
+            transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+
+            &.cursor-pointer:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dim unselected cards slightly to make the active one pop */
+        &.cursor-pointer:not(.active-tab) {
+            opacity: 0.8; 
+        }
+
+        /* Make the active tab stand out perfectly */
+        &.active-tab {
+            opacity: 1;
+            transform: scale(1.02);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+            /* Optional: add a subtle border to the active one */
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        }
+
+            &.blue-gradient { background: linear-gradient(180deg, #0A7FC6 0%, #66B4E4 100%); }
+            &.green-gradient { background: linear-gradient(180deg, #00B14A 0%, #00C653 100%); }
+            &.yellow-gradient { background: linear-gradient(180deg, #F8A409 0%, #DEB870 100%); }
+            &.red-gradient { background: linear-gradient(180deg, #EC3630 0%, #FF9592 100%); }
+
+            .card-icon {
+                width: 52px;
+                height: 52px;
+                background: #FBF8F8;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #E3B63D;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .card-title { font-size: 14px; font-weight: 500; margin-bottom: 1rem; }
+            .card-value { font-size: 18px; font-weight: 600; }
+        }
+
+        .flex-2 { flex: 2; }
+        
+        /* Layout override to make the Red Card a row */
+        .red-layout-override {
+            flex-direction: row !important;
+            justify-content: space-around !important;
+            /* Restored top/bottom padding so the boxes don't touch the edges */
+            padding: 1.5rem !important; 
+            align-items: center !important;
+            
+            .red-card-left {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                
+                .card-icon { 
+                    margin-bottom: 0; 
+                    background: #FFFFFF; /* Ensures the circle is pure white like Figma */
+                }
+                .card-title { 
+                    text-align: center; 
+                    font-size: 16px; 
+                    line-height: 1.3;
+                    margin-bottom: 0; 
+                    white-space: nowrap; /* Prevents awkward text wrapping */
+                }
+            }
+            
+            .red-card-right {
+                display: flex;
+                gap: 16px;
+                align-items: center; 
+                
+                .white-delay-box {
+                    background: #FFFFFF;
+                    border-radius: 11px;
+                    width: 109px;
+                    height: 111px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    color: #000000;
+                    padding: 10px;
+                    
+                    &.has-dropdown {
+                        position: relative; 
+                    }
+                    
+.days-dropdown {
+    position: absolute;
+    bottom: calc(100% + 6px); /* creates space above the box */
+    right: 0;
+    background: #F47C7C;
+    border: 1px solid #E86565;
+    border-radius: 8px; /* full rounded since it's separated */
+    color: white;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 4px 12px;
+    z-index: 10;
+}
+
+                    .alert-icon { 
+                        color: #BA0000; 
+                        font-size: 1.1rem; 
+                        margin-bottom: 4px; 
+                    }
+                    
+                    .delay-label { 
+                        font-size: 13px; 
+                        font-weight: 500;
+                        text-align: center; 
+                        border-bottom: 1px solid #EAEAEA; /* The exact thin separator line */
+                        padding-bottom: 6px; 
+                        margin-bottom: 6px; 
+                        width: 85%; 
+                        line-height: 1.2;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        min-height: 34px; /* Keeps the separator line perfectly level across both boxes */
+                    }
+                    
+                    .delay-val { 
+                        font-size: 22px; 
+                        font-weight: 700; 
+                    }
+                }
+            }
+        }
+    } /* <-- THIS IS THE BRACKET YOU WERE MISSING! */
+
+/* --- OVERRIDES FOR CHARTS SECTION TO MATCH FIGMA --- */
+
+.chart-card {
+    background: #FFFFFF !important; /* Pure white instead of translucent */
+    border: 1px solid #E4E7EB !important;
+    border-radius: 10px !important;
+    box-shadow: none !important; /* Removed box shadow to match flat Figma look */
+}
+
+.more-details-link {
+    color: #8C8C8C !important;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.more-details-link:hover {
+    color: #4F70E8 !important;
+}
+
+/* CSS Native Bar Chart Styles */
+.bar-chart-container {
+    .bar-fill { 
+        transition: width 0.5s ease-in-out; 
+        border-radius: 0 6px 6px 0; /* Rounds only the right side of the bars */
+    }
+    
+    .blue-bg { 
+        background-color: #1A84C6 !important; /* Lighter, vibrant blue from screenshot */
+    }
+    
+    .val-badge {
+        background: #FFFFFF;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.08); /* Softer, wider shadow */
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #333;
+    }
+}
+
+/* CSS Native Donut Chart Styles */
+.donut-chart-container {
+    width: 170px !important;
+    height: 170px !important;
+    position: relative;
+    margin: 0 auto;
+    
+    .donut-chart {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        /* Adjusted colors and gap based on image */
+        background: conic-gradient(
+            #5A99EB 0% 82%, 
+            transparent 82% 84%, 
+            #53527D 84% 98%, 
+            transparent 98% 100%
+        );
+    }
+
+    .donut-inner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        background: #FFFFFF;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* Changed from inset to an outer drop-shadow to pop out like the image */
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08) !important; 
+    }
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-dot.light-blue-bg { background: #5A99EB; }
+.legend-dot.dark-purple-bg { background: #53527D; }
+
+/* Refined Dropdown */
+.dropdown-mock {
+    background: #F4F6F8 !important;
+    border: 1px solid #EAEAEA;
+}
+/* --- CUSTOM DROPDOWN MENU STYLES --- */
+
+.relative { position: relative; }
+.cursor-pointer { cursor: pointer; }
+
+/* The shared style for the floating dropdown list */
+.custom-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: #FFFFFF;
+    border: 1px solid #EAEAEA;
+    border-radius: 8px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08); /* Soft floating shadow */
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+    width: 200px;
+    z-index: 1000;
+    display: none; /* Hidden by default */
+}
+
+/* Toggled via Angular [class.show] */
+.custom-dropdown-menu.show {
+    display: block;
+    animation: fadeInDown 0.15s ease-out forwards;
+}
+
+/* Individual list items */
+.custom-dropdown-item {
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #333333;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.custom-dropdown-item:hover {
+    background: #F4F6F8;
+    color: #0A7FC6; /* Changes to blue on hover */
+}
+
+/* --- OVERRIDES SPECIFIC TO THE RED CARD DROPDOWN --- */
+
+/* We shift the absolute positioning from the button to the container 
+   so the menu floats relative to the container, not the white box. */
+.days-dropdown-container {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    right: 0;
+    z-index: 10;
+}
+
+/* Override your existing `.days-dropdown` to sit inside the new container safely */
+.days-dropdown-container .days-dropdown {
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
+}
+
+/* Customize the red dropdown menu size and align it to the right */
+.days-menu-override {
+    width: 130px;
+    left: auto;
+    right: 0;
+}
+
+/* Smooth opening animation */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+// Schemes
+/* --- SCHEME VIEW SPECIFIC STYLES --- */
+
+.finance-data-btn {
+    background: #FFFFFF;
+    border: 1px solid #D2D5DA;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #013B60;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: background 0.2s;
+}
+.finance-data-btn:hover { background: #F3F8FB; }
+
+/* Full-width Teal Card */
+.full-width-approved-card {
+    background: linear-gradient(90deg, #188E9E 0%, #2BB2C7 100%); /* Teal gradient from image */
+    border-radius: 13px;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    color: #FFFFFF;
+}
+.full-width-approved-card .approved-icon {
+    width: 44px;
+    height: 44px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1FA2B3;
+    font-size: 1.3rem;
+}
+.full-width-approved-card .title { font-size: 14px; font-weight: 500; line-height: 1.2; }
+.full-width-approved-card .val { font-size: 20px; font-weight: 700; line-height: 1.2; }
+
+/* Multi-colored Donut Chart for Scheme */
+.scheme-donut {
+    background: conic-gradient(
+        #9D65E0 0% 10%, transparent 10% 11%,
+        #E95959 11% 40%, transparent 40% 41%,
+        #F1C40F 41% 55%, transparent 55% 56%,
+        #2ECC71 56% 70%, transparent 70% 71%,
+        #3498DB 71% 83%, transparent 83% 84%,
+        #95A5A6 84% 94%, transparent 94% 95%,
+        #D35400 95% 100%
+    ) !important;
+}
+
+/* 2-Column Grid Legend for Schemes */
+.scheme-legend-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+.scheme-legend-item {
+    display: flex;
+    align-items: flex-start;
+    font-size: 10px;
+    line-height: 1.2;
+    color: #6B7280;
+}
+.scheme-legend-dot {
+    min-width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    margin-top: 2px;
+}
+.scheme-legend-val {
+    margin-left: auto;
+    font-weight: 700;
+    color: #111827;
+    padding-left: 4px;
+}
+
+// financedata
+/* --- FINANCE DATA ACTIVE STATE --- */
+.finance-data-btn.active-finance {
+    background: #013B60 !important;
+    color: #FFFFFF !important;
+    border-color: #013B60 !important;
+}
+.finance-data-btn.active-finance i {
+    color: #FFFFFF !important;
+}
+
+/* --- NEW 3-CARD FINANCE LAYOUT COLORS --- */
+.full-width-approved-card.purple-card {
+    background: linear-gradient(90deg, #A855F7 0%, #C383F9 100%);
+}
+.full-width-approved-card.purple-card .approved-icon {
+    color: #A855F7;
+}
+
+.full-width-approved-card.light-green-card {
+    background: linear-gradient(90deg, #B1D135 0%, #D1EC5B 100%);
+}
+.full-width-approved-card.light-green-card .approved-icon {
+    color: #B1D135;
+}
+}
+
+/* =========================================
+   DASHBOARD RESPONSIVE OVERRIDES
+   ========================================= */
+
+@media screen and (max-width: 991px) {
+    /* Top Banner */
+    .top-gradient-banner {
+        height: auto !important;
+        flex-direction: column !important;
+        padding: 1.5rem !important;
+        gap: 1.5rem !important;
+        align-items: center !important;
+    }
+    .banner-title {
+        text-align: center !important;
+    }
+    .banner-stats {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100% !important;
+    }
+    .stat-box {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Dashboard Header */
+    .dashboard-header-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1rem !important;
+    }
+    .header-actions {
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
+    }
+
+    /* Status Cards */
+    .status-cards-wrapper {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+    .status-card {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 150px !important;
+        flex: none !important;
+        padding: 1.5rem !important;
+    }
+
+    /* Red Card Override */
+    .red-layout-override {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+    }
+    .red-card-right {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 1rem !important;
+    }
+    .white-delay-box {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+    }
+
+    /* Finance & Approved Cards */
+    .flex.gap-3.mb-4.w-full {
+        flex-direction: column !important;
+    }
+    .full-width-approved-card {
+        height: auto !important;
+        padding: 1.5rem !important;
+        flex-direction: column !important;
+        text-align: center !important;
+        width: 100% !important;
+        flex: none !important;
+    }
+
+    /* Charts Section */
+    .charts-section > .flex {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+    .chart-controls {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        margin-top: 1rem !important;
+    }
+    
+    /* Bar Chart Overrides */
+    .bar-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    .bar-label {
+        width: 100% !important;
+        text-align: left !important;
+        padding-right: 0 !important;
+    }
+    .bar-track {
+        width: 100% !important;
+    }
+    .bar-val {
+        width: 100% !important;
+        text-align: right !important;
+        justify-content: flex-end !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* Tablet Layout for Dashboard */
+@media screen and (min-width: 576px) and (max-width: 991px) {
+    .status-cards-wrapper {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+    }
+    .status-card {
+        width: calc(50% - 0.5rem) !important;
+        flex: 1 1 calc(50% - 0.5rem) !important;
+    }
+    .red-layout-override {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+    .red-card-right {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+    }
+    .white-delay-box {
+        width: calc(50% - 0.5rem) !important;
+    }
+    .flex.gap-3.mb-4.w-full {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+    }
+    .full-width-approved-card {
+        width: calc(50% - 0.5rem) !important;
+        flex: 1 1 calc(50% - 0.5rem) !important;
+    }
+}

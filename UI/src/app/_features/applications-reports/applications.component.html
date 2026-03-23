@@ -1,0 +1,73 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-4 md:col-4  mb-2">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col-12 lg:col-4 md:col-4 mb-2">
+            <div class="justify-content-center flex">
+                <p-selectButton *ngIf="showSelect" [options]="mainOptions" [(ngModel)]="mainValue" (ngModelChange)="generateMainFilter()"
+                    [multiple]="false" optionLabel="name" optionValue="value" [allowEmpty]="false" class="selectdash">
+                    <ng-template let-item pTemplate>
+                        <span>{{item.name}}</span>
+                    </ng-template>
+                </p-selectButton>
+            </div>
+        </div>
+        <div class=" col-12 lg:col-4 md:col-4 mb-2">
+        </div>
+        <div class="col-12 row   lg:col-12 md:col-12 flex">
+
+            <div class="col-12 lg:col-2 md:col-2 ">
+                <p-dropdown [options]="datefilter" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a Date Range" [showClear]="false" [(ngModel)]="selecteddatefilter"></p-dropdown>
+            </div>
+            <div class="col-12 lg:col-2 md:col-2 " *ngIf="mainValue=='SCHEME'">
+
+                <p-dropdown [options]="activeStatuses" optionLabel="text" [style]="{'width': '100%'}"
+                    optionValue="value" placeholder="Select a Status" [showClear]="false"
+                    [(ngModel)]="selectedActiveStatuses"></p-dropdown>
+            </div>
+            <div class="col-12 lg:col-2 md:col-2 " *ngIf="mainValue=='SCHEME'">
+                <p-multiSelect [options]="schemes" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a Scheme" (ngModelChange)="changescheme($event)" [showClear]="false"
+                    [(ngModel)]="selectedSchemes"></p-multiSelect>
+            </div>
+            <div class="col-12 lg:col-2 md:col-2 ">
+
+                <p-multiSelect [options]="districts" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a District" [showClear]="false" [(ngModel)]="selectedDistricts"></p-multiSelect>
+            </div>
+            <div class="col-12 lg:col-2 md:col-2 " *ngIf="mainValue=='SCHEME'">
+
+                <p-multiSelect [options]="statuses" optionLabel="text" [style]="{'width': '100%'}" optionValue="value"
+                    placeholder="Select a Status" [showClear]="false" [(ngModel)]="selectedStatuses"></p-multiSelect>
+            </div>
+            <div class="col-12 lg:col-2 md:col-2 ">
+                <button pButton pRipple class="p-button-secondary" icon="pi pi-arrow-right"
+                    (click)="generate()"></button>
+                <p-button icon="pi pi-times " [outlined]="true" (click)="reset()"
+                    [style]="{'margin-left': '10px'}"></p-button>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 mt-3" *ngIf="mainValue=='SCHEME'">
+        <div class="row">
+            <app-datatable-pagination [records]="configurationList" [defaultSortField]="defaultSortField"
+                [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Applications'" [rows]="rows"
+                [total]="total" [actions]="actions" (invokeAction)="actioInvoked($event)"
+                [defaultstatus]="!currentStatus" (changeStatus)="changeStatus($event)"
+                [searchableColumns]="searchableColumns" [hasActiveInactive]="false"
+                [canShowAction]="false"
+                (changefilter)="changefilter($event)" (actionalAction)="actionalAction($event)"
+                [normallyExportedData]="true">
+            </app-datatable-pagination>
+             <!-- modified by Sivasankar on 06-11-2025 for export functionality -->
+
+        </div>
+    </div>
+    <div class="mb-3 mt-3" *ngIf="mainValue=='MEMBER'">
+        <div class="row">
+            <app-member-list [filtermodel]="memberfilter"></app-member-list>
+        </div>
+    </div>
+</div>

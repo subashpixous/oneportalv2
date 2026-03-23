@@ -1,0 +1,162 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-4 md:col-4  mb-2">
+            <h4>{{title}}</h4>
+        </div>
+        <form [formGroup]="organizationForm" class="col-12">
+            <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+                <div class="p-formgrid grid ">
+                    <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;" *ngIf="formDetail">
+
+                        <div class="field col-12 md:col-4 lg:col-4">
+                            <label htmlFor="firstName">Type of work
+                            </label>
+                            <p-dropdown [options]="formDetail?.type_of_Work_SelectList ?? []" optionLabel="text"
+                                optionValue="value" placeholder="Select a Type of work" formControlName="type_of_Work"
+                                [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4" *ngIf="IsCoreSanitoryworkkerOrg">
+                            <label htmlFor="lastName"> Type of Core Sanitory Workers
+                            </label>
+                            <p-dropdown [options]="formDetail?.core_Sanitary_Worker_Type_SelectList ?? []"
+                                optionLabel="text" optionValue="value"
+                                placeholder="Select a Type of Core Sanitory Workers"
+                                formControlName="core_Sanitary_Worker_Type" [showClear]="true"></p-dropdown>
+                        </div>
+
+                      <!-- Updated By Sivasankar K on 14/01/2026 for Health Worker Type filter -->
+
+                              <div class="field col-12 md:col-4 lg:col-4" *ngIf="IsHealthWorkerOrg">
+                            <label htmlFor="lastName"> Type of Health Workers
+                            </label>
+                            <p-dropdown [options]="formDetail?.health_Worker_Type_SelectList ?? []"
+                                optionLabel="text" optionValue="value"
+                                placeholder="Select a Type of Health Workers"
+                                formControlName="health_Worker_Type" [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4">
+                            <label htmlFor="servedIn">Organization Type
+                            </label>
+                            <p-dropdown [options]="formDetail?.organization_Type_SelectList ?? []" optionLabel="text"
+                                optionValue="value" placeholder="Select a Organization Type"
+                                formControlName="organization_Type" [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4">
+                            <label htmlFor="serviceNumber"> Nature of Job
+                            </label>
+                            <p-dropdown [options]="formDetail?.nature_of_Job_SelectList ?? []" optionLabel="text"
+                                optionValue="value" placeholder="Select a Nature of Job" formControlName="nature_of_Job"
+                                [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4">
+                            <label htmlFor="rank">District Name
+                            </label>
+                            <p-dropdown [options]="formDetail?.district_SelectList ?? []" optionLabel="text"
+                                optionValue="value" placeholder="Select a District" formControlName="district_Id"
+                                [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4">
+                            <label htmlFor="isSelf"> Local Body
+                            </label>
+                            <p-dropdown [options]="formDetail?.local_Body_SelectList ?? []" optionLabel="text"
+                                optionValue="value" placeholder="Select a Local Body" formControlName="local_Body"
+                                [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4" *ngIf="localbodyValue === 'URBAN'">
+                            <label htmlFor="dependents">Name of the Local Body
+                            </label>
+                            <p-dropdown [options]="formDetail?.name_of_Local_Body_SelectList ?? []" optionLabel="text"
+                                optionValue="value" placeholder="Select a Name of the Local Body"
+                                formControlName="name_of_Local_Body" [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4" *ngIf="localbodyValue === 'RURAL'">
+                            <label htmlFor="block">Block</label>
+                            <p-dropdown [options]="formDetail?.block_SelectList" optionLabel="text" optionValue="value"
+                                placeholder="Select a Block" formControlName="block" [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4" *ngIf="nameoflocalbodyValue === 'CORPORATION'">
+                            <label htmlFor="corporation">Corporation</label>
+                            <p-dropdown [options]="formDetail?.corporation_SelectList" optionLabel="text"
+                                optionValue="value" placeholder="Select a Corporation" formControlName="corporation"
+                                [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4" *ngIf="nameoflocalbodyValue === 'MUNICIPALITY'">
+                            <label htmlFor="municipality">Municipality</label>
+                            <p-dropdown [options]="formDetail?.municipality_SelectList" optionLabel="text"
+                                optionValue="value" placeholder="Select a Municipality" formControlName="municipality"
+                                [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4" *ngIf="nameoflocalbodyValue== 'TOWNPANCHAYAT'">
+                            <label htmlFor="town_Panchayat"> Town Panchayat</label>
+                            <p-dropdown [options]="formDetail?.town_Panchayat_SelectList" optionLabel="text"
+                                optionValue="value" placeholder="Select a Town Panchayat"
+                                formControlName="town_Panchayat" [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4" *ngIf="localbodyValue== 'RURAL'">
+                            <label htmlFor="village_Panchayat">Village Panchayat</label>
+                            <p-dropdown [options]="formDetail?.village_Panchayat_SelectList" optionLabel="text"
+                                optionValue="value" placeholder="Select a Village Panchayat"
+                                formControlName="village_Panchayat" [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4"
+                            *ngIf="nameoflocalbodyValue && nameoflocalbodyValue != 'CORPORATION' && nameoflocalbodyValue != 'MUNICIPALITY'  && nameoflocalbodyValue != 'TOWNPANCHAYAT'">
+                            <label htmlFor="dependents"> Zone
+                            </label>
+                            <p-dropdown [options]="formDetail?.zone_SelectList ?? []" optionLabel="text"
+                                optionValue="value" placeholder="Select a Zone" formControlName="zone"
+                                [showClear]="true"></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4">
+                            <label htmlFor="collectedByPhoneNumber">Collected By Phone Number
+                            </label>
+                            <input pInputText formControlName="collectedByPhoneNumber" type="text" maxlength="75" />
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4">
+                            <label htmlFor="collectedByName">Collected By Name
+                            </label>
+                            <input pInputText formControlName="collectedByName" type="text" maxlength="75" />
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4">
+                            <label htmlFor="fromDate">From Date
+                            </label>
+                            <p-calendar [maxDate]="maxDate" [style]="{'width':'100%'}" [minDate]="minDate"
+                                [showIcon]="true" formControlName="fromDate" dateFormat="dd-mm-yy" [appendTo]="'body'"
+                                inputId="icon"></p-calendar>
+                        </div>
+                        <div class="field col-12 md:col-4 lg:col-4">
+                            <label htmlFor="toDate">To Date
+                            </label>
+                            <p-calendar [maxDate]="maxDate" [style]="{'width':'100%'}" [minDate]="minDate"
+                                [showIcon]="true" formControlName="toDate" dateFormat="dd-mm-yy" [appendTo]="'body'"
+                                inputId="icon"></p-calendar>
+                        </div>
+                        <div class="col-12 lg:col-2 md:col-2 ">
+                            <button pButton pRipple class="p-button-primary" icon="pi pi-arrow-right"
+                                [label]="'Generate'" (click)="generate()"></button>
+                        </div>
+                        <div class="col-12 lg:col-2 md:col-2 ">
+                            <button pButton pRipple label="Reset" class="p-button-secondary"
+                                [style]="{'margin-left': '10px'}" icon="pi pi-times" (click)="reset()"></button>
+                        </div>
+                        <div class="col-12 lg:col-2 md:col-2 ">
+                            <button pButton pRipple class="p-button-info" icon="pi pi-arrow-right"
+                                [label]="'Download Dump'" (click)="download()"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="mb-3 mt-3" *ngIf="configurationList">
+        <div class="row">
+            <app-datatable-pagination [records]="configurationList" [defaultSortField]="defaultSortField"
+                [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Applications'" [rows]="rows"
+                [total]="total" [actions]="actions" (invokeAction)="actioInvoked($event)"
+                [defaultstatus]="!currentStatus" (changeStatus)="changeStatus($event)"
+                [searchableColumns]="searchableColumns" [hasActiveInactive]="false" [canShowAction]="false"
+                (changefilter)="changefilter($event)" (actionalAction)="actionalAction($event)">
+            </app-datatable-pagination>
+
+        </div>
+    </div>
+</div>

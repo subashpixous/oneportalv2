@@ -1,0 +1,145 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col">
+
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+
+            <button pButton *ngIf="!isNewForm" pRipple printTitle="Call Letter"
+                styleSheetFile="assets/printcss/printstylesteet.css" [closeWindow]="false" [openNewTab]="true"
+                [style]="{'float': 'right', 'margin-right':'10px'}" [useExistingCss]="true" type="button" label="Print"
+                ngxPrint printSectionId="dwemo" class="p-button-primary"></button>
+        </div>
+    </div>
+    <div class="mb-3">
+
+        <form [formGroup]="callLetterForm" (ngSubmit)="submit()" class="col-12">
+
+            <div class=" p-fluid">
+                <div class="flex grid formgrid">
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="scheme">Scheme</label>
+                        <p-dropdown [options]="schemes" optionLabel="text" optionValue="value"
+                            placeholder="Select a Scheme" formControlName="scheme" [showClear]="
+                            true"></p-dropdown>
+                        <app-error-msg [control]="callLetterForm.get('scheme')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="district">District</label>
+                        <p-dropdown [options]="districts" optionLabel="text" optionValue="value"
+                            placeholder="Select a District" formControlName="district" [showClear]="
+                            true"></p-dropdown>
+                        <app-error-msg [control]="callLetterForm.get('district')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="status">Status</label>
+                        <p-dropdown [options]="statuses" optionLabel="text" optionValue="value"
+                            placeholder="Select a status" formControlName="status" [showClear]="
+                            true"></p-dropdown>
+                        <app-error-msg [control]="callLetterForm.get('status')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="meetingDate">Meeting Date</label>
+                        <p-calendar [defaultDate]="defaultDate" [minDate]="defaultDate" [showIcon]="true"
+                            dateFormat="dd-mm-yy" [showButtonBar]="true" formControlName="meetingDate"
+                            inputId="icon"></p-calendar>
+                        <app-error-msg [control]="callLetterForm.get('meetingDate')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="meetingTimeFrom">Starts From</label>
+                        <p-calendar [defaultDate]="defaultDate" [showIcon]="true" [timeOnly]="true"
+                            formControlName="meetingTimeFrom" inputId="icon"></p-calendar>
+                        <app-error-msg [control]="callLetterForm.get('meetingTimeFrom')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-4  lg:col-4">
+                        <label htmlFor="meetingTimeTo">Ends at</label>
+                        <p-calendar [defaultDate]="defaultDate" [showIcon]="true" [timeOnly]="true"
+                            formControlName="meetingTimeTo" inputId="icon"></p-calendar>
+                        <app-error-msg [control]="callLetterForm.get('meetingTimeTo')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-12  lg:col-12">
+                        <label htmlFor="venue">Venue</label>
+                        <input pInputText formControlName="venue" type="text" />
+                        <app-error-msg [control]="callLetterForm.get('venue')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-12  lg:col-12">
+                        <label htmlFor="applicationIds">Application</label>
+                        <p-chips formControlName="applicationIds" *ngIf="!isNewForm" />
+                        <p-multiSelect [options]="applications" *ngIf="isNewForm" optionLabel="text"
+                            [displaySelectedLabel]="true" optionValue="value" display="comma"
+                            placeholder="Select applications" formControlName="applicationIds" [showClear]="
+                            true"></p-multiSelect>
+                        <app-error-msg [control]="callLetterForm.get('applicationIds')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-6  lg:col-6">
+                        <label htmlFor="callletterName">Call Letter Name</label>
+                        <input pInputText formControlName="callletterName" type="text" />
+                        <app-error-msg [control]="callLetterForm.get('callletterName')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-6  lg:col-6">
+                        <label htmlFor="callletterSubject">Call Letter Subject</label>
+                        <input pInputText formControlName="callletterSubject" type="text" />
+                        <app-error-msg [control]="callLetterForm.get('callletterSubject')"></app-error-msg>
+                    </div>
+                    <div class="field  col-12  md:col-12  lg:col-12">
+                        <label htmlFor="comments">Comment</label>
+                        <textarea rows="3" cols="30" pInputTextarea formControlName="comments"></textarea>
+                        <app-error-msg [control]="callLetterForm.get('comments')"></app-error-msg>
+                    </div>
+                    <div class="col-12 row" style="display: flex;justify-content: end;">
+                        <div class=" md:col-8  lg:col-8">
+                            <div
+                                style="margin-top:5px;font-size:20px;background-color: #f0f0f0;padding: 10px;border-radius: 10px;">
+                                <h4>
+                                    Note:
+                                </h4>
+                                <ol style="padding-left: 20px; color: #555; line-height: 1.6;">
+                                    <li>Call letter has been prepared and inorder to sent use the action in below
+                                        table.</li>
+                                    <li>Please bring the original documents for the meeting and add a venue text field.
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="md:col-4  lg:col-4">
+                            <div class="  flex  gap-3 justify-content-center" *ngIf="isNewForm">
+                                <button pButton type="submit" *ngxPermissionsOnly="[privleges.CALLLETTER_CREATE]"
+                                    label="Submit"></button>
+                                <button pButton type="button" class="p-button-secondary" label="Reset"
+                                    (click)="resetForm()"></button>
+
+                                <button pButton type="button" class="p-button-secondary" label="Cancel"
+                                    (click)="back()"></button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title1}}</h4>
+        </div>
+    </div>
+    <div class="mb-3 mt-3">
+        <div class="row">
+            <app-datatable [records]="configurationList" [defaultSortField]="defaultSortField"
+                [defaultSortOrder]="defaultSortOrder" [cols]="cols" [fileName]="'Configuration'" [rows]="10"
+                [total]="configurationList ? configurationList.length : 0" [actions]="actions"
+                (invokeAction)="actioInvoked($event)" [defaultstatus]="true" [searchableColumns]="searchableColumns"
+                [hasActiveInactive]="false" [canShowAction]="true">
+            </app-datatable>
+
+        </div>
+    </div>
+
+    <div style="display:none;">
+        <app-call-letter-print id="dwemo" [configurationList]="configurationList"
+            [callLetterDetails]="callLetterDetails"></app-call-letter-print>
+    </div>
+</div>

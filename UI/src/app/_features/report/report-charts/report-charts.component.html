@@ -1,0 +1,83 @@
+<div class="mb-5" *ngIf="chartoption">
+    <div class="chartContainer">
+        <h5></h5>
+        <h5>Scheme Count Planned vs Actual</h5>
+        <p-inputSwitch [(ngModel)]="chartoptionswitch" (ngModelChange)="chartoptionswitchchange($event)"
+            [style]="{'display':'flex'}" />
+    </div>
+    <div class="card chartCard">
+        <app-chart [chartopt]="chartoption"></app-chart>
+    </div>
+</div>
+<div class="mb-5" *ngIf="achievementschartoption">
+    <div class="chartContainer">
+        <h5></h5>
+        <h5>Scheme Acheivements Count</h5>
+        <p-inputSwitch [(ngModel)]="achievementschartoptionswitch"
+            (ngModelChange)="achievementschartoptionswitchChange($event)" [style]="{'display':'flex'}" />
+    </div>
+    <div class="card chartCard">
+        <app-chart [chartopt]="achievementschartoption"></app-chart>
+    </div>
+</div>
+
+<div class="mb-5" *ngIf="districtWiseCountCostchartoption">
+    <div class="chartContainer">
+        <h5></h5>
+        <h5>Scheme Count by District</h5>
+        <p-inputSwitch [(ngModel)]="districtWiseCountCostchartoptionswitch"
+            (ngModelChange)="DistrictDistributionchartoptionswitchchange($event)" [style]="{'display':'flex'}" />
+    </div>
+    <div class="card chartCard">
+        <app-chart [chartopt]="districtWiseCountCostchartoption"></app-chart>
+    </div>
+</div>
+
+<div class="mb-5" *ngIf="ProjectSubsidychartoption">
+    <div class="chartContainer">
+        <h5></h5>
+        <h5>Scheme Subsidy vs Project Amount</h5>
+        <h5></h5>
+    </div>
+    <div class="card chartCard">
+        <app-chart [chartopt]="ProjectSubsidychartoption"></app-chart>
+    </div>
+</div>
+
+<div class="mb-5" *ngIf="FinancialYearchartoption">
+    <div class="chartContainer">
+        <h5></h5>
+        <h5>
+            Application Count by Scheme and Financial Year </h5>
+        <p-inputSwitch [(ngModel)]="FinancialYearchartoptionswitch"
+            (ngModelChange)="FinancialYearchartoptionswitchchange($event)" [style]="{'display':'flex'}" />
+    </div>
+    <div class="card chartCard">
+        <app-chart [chartopt]="FinancialYearchartoption"></app-chart>
+    </div>
+</div>
+
+<div class="col-12 flex">
+
+    <div class="mb-5 col-6" *ngIf="slefChartOption">
+        <div class="chartContainer">
+            <h5></h5>
+            <h5>Self</h5>
+            <h5></h5>
+        </div>
+        <div class="card chartCard">
+            <app-chart [chartopt]="slefChartOption"></app-chart>
+        </div>
+    </div>
+
+    <div class="mb-5 col-6" *ngIf="dependentChartOption">
+        <div class="chartContainer">
+            <h5></h5>
+            <h5>Dependents</h5>
+            <h5></h5>
+        </div>
+        <div class="card chartCard">
+            <app-chart [chartopt]="dependentChartOption"></app-chart>
+        </div>
+    </div>
+</div>

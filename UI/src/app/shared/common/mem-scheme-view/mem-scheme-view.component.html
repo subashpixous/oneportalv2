@@ -1,0 +1,291 @@
+<div class="f-mem-container" id="demo" *ngIf="schemeDetails">
+
+    <div class="f-panel-container">
+        <div class="f-panel-header" (click)="isSchemeDetailsOpen = !isSchemeDetailsOpen">
+            <span>திட்டத்தின் விவரங்கள் / Scheme Details</span>
+            <i class="pi" [ngClass]="isSchemeDetailsOpen ? 'pi-minus' : 'pi-plus'"></i>
+        </div>
+        <div class="f-panel-body" *ngIf="isSchemeDetailsOpen">
+            <div class="f-top-row">
+                <div class="f-inline" *ngIf="CheckNullorEmpty(schemeDetails?.applicationNumber)">
+                    <span class="f-lbl">ID :</span> <span class="f-val text-blue">{{schemeDetails?.applicationNumber}}</span>
+                </div>
+                <div class="f-inline" *ngIf="CheckNullorEmpty(schemeDetails?.scheme)">
+                    <span class="f-lbl">திட்டம் / Scheme :</span> <span class="f-val text-green">{{schemeDetails?.scheme}}</span>
+                </div>
+                <!-- <div class="f-inline" *ngIf="CheckNullorEmpty(schemeDetails?.temporaryNumber)">
+                    <span class="f-lbl">Temp No :</span> <span class="f-val">{{schemeDetails?.temporaryNumber}}</span>
+                </div> -->
+            </div>
+            
+            <hr class="f-solid-line">
+
+            <div class="f-details-grid">
+                <div class="f-pair" *ngIf="CheckNullorEmpty(schemeDetails?.memberName)">
+                    <div class="f-lbl-stack"><span>விண்ணப்பதாரர் பெயர்</span><span>/ Applicant Name</span></div>
+                    <div class="f-colon">:</div>
+                    <div class="f-val">{{schemeDetails?.memberName}}</div>
+                </div>
+                <div class="f-pair" *ngIf="CheckNullorEmpty(schemeDetails?.beneficiaryName)">
+                    <div class="f-lbl-stack"><span>Beneficiary Name</span><span>/ பயனாளர் பெயர்</span></div>
+                    <div class="f-colon">:</div>
+                    <div class="f-val">{{schemeDetails?.beneficiaryName}}</div>
+                </div>
+                <div class="f-pair" *ngIf="CheckNullorEmpty(schemeDetails?.relationship)">
+                    <div class="f-lbl-stack"><span>Relationship</span><span>/ உறவுமுறை</span></div>
+                    <div class="f-colon">:</div>
+                    <div class="f-val">{{schemeDetails?.relationship}}</div>
+                </div>
+                <div class="f-pair">
+                    <div class="f-lbl-stack"><span>தொகை</span><span>/ Amount</span></div>
+                    <div class="f-colon">:</div>
+                    <div class="f-val">{{getAmount()}}/-</div>
+                </div>
+                <div class="f-pair f-span-2">
+                    <div class="f-lbl-stack"><span>Total amount in</span><span>words</span></div>
+                    <div class="f-colon">:</div>
+                    <div class="f-val">{{CtoWords(getAmount())}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="f-panel-container">
+        <div class="f-panel-header" (click)="isSubSchemesOpen = !isSubSchemesOpen">
+            <span>துணை திட்டம் / Sub Schemes</span>
+            <i class="pi" [ngClass]="isSubSchemesOpen ? 'pi-minus' : 'pi-plus'"></i>
+        </div>
+        <div class="f-panel-body p-0" *ngIf="isSubSchemesOpen">
+             <table class="f-clean-table">
+                <thead>
+                    <tr>
+                        <th>Selected</th>
+                        <th>Category</th>
+                        <th>Community</th>
+                        <th>Amount</th>
+                        <th>Reccurrence</th>
+                        <th>Occurrence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let itemrow of schemeCateDetail?.schemeSubCategory">
+                        <td>
+                            <span *ngIf="itemrow.isSelected" class="txt-green">YES</span>
+                            <span *ngIf="!itemrow.isSelected" class="txt-red">NO</span>
+                        </td>
+                        <td>{{itemrow.subCategory}}</td>
+                        <td>{{itemrow.community}}</td>
+                        <td>{{itemrow.amount}}</td>
+                        <td>{{itemrow.recurrence}}</td>
+                        <td>{{itemrow.occurrence}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> -->
+
+<!-- <div class="f-panel-container" *ngIf="schemeDetails?.applicationDocument">
+        <div class="f-panel-header" (click)="isSchemeDocumentsOpen = !isSchemeDocumentsOpen">
+            <span>ஆவண விவரங்கள் / Documents details</span>
+            <i class="pi" [ngClass]="isSchemeDocumentsOpen ? 'pi-minus' : 'pi-plus'"></i>
+        </div>
+        <div class="f-panel-body" *ngIf="isSchemeDocumentsOpen">
+            <div *ngFor="let grp of schemeDetails.applicationDocument" class="f-doc-group">
+                <div class="f-doc-grid">
+                    <div class="f-doc-card" *ngFor="let itemrow of grp.documents">
+                        <div class="f-doc-title">
+                            {{itemrow.documentCategory}} <span *ngIf="itemrow.isRequired" style="color: #E45A46;">*</span>
+                        </div>
+                        <div class="f-doc-box">
+                            <i class="pi pi-file-pdf f-doc-icon"></i>
+                            <div class="f-doc-actions">
+                                <a target="_blank" [title]="itemrow.originalFileName" [href]="openimg('',itemrow.savedFileName)" class="f-doc-link">
+                                    {{itemrow.originalFileName || 'View Document'}}
+                                </a>
+                                <button *ngIf="itemrow.originalFileName" type="button" 
+                                    (click)="downloadFile(itemrow.originalFileName,itemrow.savedFileName)" 
+                                    class="f-doc-download-btn" title="Download">
+                                    <i class="pi pi-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+<div class="f-panel-container" *ngIf="schemeDetails?.applicationDocument">
+    <div class="f-panel-header" (click)="isSchemeDocumentsOpen = !isSchemeDocumentsOpen">
+        <span>ஆவண விவரங்கள் / DOCUMENTS DETAILS</span>
+        <i class="pi" [ngClass]="isSchemeDocumentsOpen ? 'pi-minus' : 'pi-plus'"></i>
+    </div>
+    
+    <div class="f-panel-body p-0" *ngIf="isSchemeDocumentsOpen">
+        <table class="f-doc-table">
+            <thead>
+                <tr>
+                    <th style="width: 15%; text-align: center;">வ.எண் / S.No</th>
+                    <th style="width: 40%; text-align: left; padding-left: 20px;">ஆவணங்கள் / Documents</th>
+                    <th style="width: 45%; text-align: center;">பதிவேற்றப்பட்ட ஆவணம் / Uploaded Document</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let grp of schemeDetails.applicationDocument">
+                    <tr *ngFor="let itemrow of grp.documents; let i=index">
+                        
+                        <td style="text-align: center;">{{i+1}}</td>
+                        
+                        <td style="text-align: left; padding-left: 20px;">
+                            {{itemrow.documentCategory}} 
+                            <span *ngIf="itemrow.isRequired" style="color: #E45A46;">*</span>
+                        </td>
+                        
+                        <td style="text-align: center;">
+                            <div class="f-upload-box-wrapper">
+                                
+                                <div class="f-upload-box" *ngIf="itemrow.originalFileName">
+                                    <div class="f-icon-wrapper">
+                                        <i class="pi pi-file-pdf f-pdf-icon"></i>
+                                        <i class="pi pi-check-circle f-tick-icon"></i>
+                                    </div>
+                                    
+<a href="javascript:void(0)" 
+               (click)="openDocumentInPopup(itemrow.savedFileName)" 
+               class="f-doc-link">
+                {{itemrow.originalFileName}}
+            </a>
+
+                                    <button type="button" (click)="downloadFile(itemrow.originalFileName,itemrow.savedFileName)" class="f-doc-download-btn" title="Download">
+                                        <i class="pi pi-download"></i>
+                                    </button>
+                                </div>
+
+                                <div class="f-upload-box empty" *ngIf="!itemrow.originalFileName">
+                                    <span class="f-empty-text">No Document Uploaded</span>
+                                </div>
+
+                            </div>
+                        </td>
+
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- <div class="f-panel-container">
+        <div class="f-panel-header" (click)="isYourDetailsOpen = !isYourDetailsOpen">
+            <span>உங்கள் விவரங்கள் / Your Details</span>
+            <div class="f-header-actions">
+                <span class="f-aadhar-badge"><i class="pi pi-check-circle"></i> Aadhar</span>
+                <i class="pi" [ngClass]="isYourDetailsOpen ? 'pi-minus' : 'pi-plus'"></i>
+            </div>
+        </div>
+        
+        <div class="f-panel-body p-0" *ngIf="isYourDetailsOpen">
+            <div class="p-3">
+                <app-mem-personal-detail-view [personalDetail]="memberDetails?.memberDetail"></app-mem-personal-detail-view>
+            </div>
+            
+            <hr class="f-solid-line m-0">
+            
+            <div class="grid p-3 m-0">
+                <div class="col-12 md:col-6">
+                    <app-mem-permanent-address-view [addressDetail]="memberDetails?.permanentAddress"></app-mem-permanent-address-view>
+                </div>
+                <div class="col-12 md:col-6 border-left-1 border-gray-300">
+                    <app-mem-temp-address-view [addressDetail]="memberDetails?.temproraryAddress"></app-mem-temp-address-view>
+                </div>
+            </div>
+            
+            <hr class="f-solid-line m-0">
+
+            <div class="p-3">
+                <app-mem-bank-detail-view [personalDetail]="memberDetails?.bankDetails"></app-mem-bank-detail-view>
+            </div>
+        </div>
+    </div>
+
+    <div class="f-panel-container">
+        <div class="f-panel-header" (click)="isFamilyDetailsOpen = !isFamilyDetailsOpen">
+            <span>குடும்ப விவரங்கள் / Family Member Details</span>
+            <div class="f-header-actions">
+                <span class="f-aadhar-badge"><i class="pi pi-check-circle"></i> Aadhar</span>
+                <i class="pi" [ngClass]="isFamilyDetailsOpen ? 'pi-minus' : 'pi-plus'"></i>
+            </div>
+        </div>
+        <div class="f-panel-body p-3" *ngIf="isFamilyDetailsOpen">
+            <app-mem-family-detail-view [familyMemberList]="memberDetails?.familyMembers"></app-mem-family-detail-view>
+        </div>
+    </div>
+
+    <div class="f-panel-container">
+        <div class="f-panel-header" (click)="isOrgDetailsOpen = !isOrgDetailsOpen">
+            <span>நிறுவன விவரங்கள் / Organization details</span>
+            <i class="pi" [ngClass]="isOrgDetailsOpen ? 'pi-minus' : 'pi-plus'"></i>
+        </div>
+        <div class="f-panel-body p-3" *ngIf="isOrgDetailsOpen">
+            <app-organization-detail-view [orgDetail]="memberDetails?.organizationalDetail"></app-organization-detail-view>
+        </div>
+    </div> -->
+
+</div>
+
+<p-dialog header="Document Section" [modal]="true" [(visible)]="visible" [style]="{width: '70vw', height:'70vh'}" (onHide)="resetForm()" [maximizable]="true" [draggable]="false">
+    <div class="grid formgrid mb-3 mt-4">
+        <div class="outlayerdiv" style="width: 100%;">
+            <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> வ.எண் / S.No </th>
+                            <th style="min-width: 200px"> ஆவண வகை / Document Category </th>
+                            <th> கோப்பு பதிவேற்றம் / File Upload </th>
+                            <th> செயல் / Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itemrow of documents; let i=index">
+                            <td>{{i+1}} </td>
+                            <td>{{itemrow.docCategory}}</td>
+                            <td>
+                                <a target="_blank" [title]="itemrow.originalFileName" [href]="openimg('',itemrow.savedFileName)">
+                                    {{itemrow.originalFileName}}
+                                </a>
+                            </td>
+                            <td>
+                                <button type="button" style="background-color: aliceblue;" *ngIf="itemrow.originalFileName" pButton pRipple icon="pi pi-download" (click)="approvalStatusFiledownloads(itemrow.originalFileName,itemrow.ida)" class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button" title="Delete"></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog 
+    [(visible)]="displayDocPopup" 
+    [modal]="true" 
+    [maximizable]="true" 
+    [style]="{width: '80vw', height: '90vh'}" 
+    [contentStyle]="{'height': '100%', 'padding': '0'}"
+    header="Document Viewer"
+    (onHide)="selectedDocUrl = null">
+    
+    <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: #f4f4f4;">
+        
+        <iframe *ngIf="isPdf && selectedDocUrl" 
+                [src]="selectedDocUrl" 
+                width="100%" 
+                height="100%" 
+                frameborder="0">
+        </iframe>
+
+        <img *ngIf="!isPdf && selectedDocUrl" 
+             [src]="selectedDocUrl" 
+             style="max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+             
+    </div>
+</p-dialog>

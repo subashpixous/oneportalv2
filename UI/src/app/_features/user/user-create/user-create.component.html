@@ -1,0 +1,430 @@
+<div class="card noborderRad">
+  <div class="grid formgrid">
+    <div class="col-12 lg:col-9 md:col-9">
+      <h4>{{ title }}</h4>
+    </div>
+    <div class="col">
+      <button
+        pButton
+        pRipple
+        label="Back"
+        class="p-button-secondary"
+        [style]="{ float: 'right' }"
+        icon="pi pi-arrow-left"
+        (click)="back()"
+      ></button>
+    </div>
+  </div>
+  <div class="mb-3">
+    <form [formGroup]="userForm" (ngSubmit)="submit()" class="col-12">
+      <div class="p-fluid">
+        <div class="flex grid formgrid">
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="firstName">First Name</label>
+            <input pInputText formControlName="firstName" type="text" />
+            <app-error-msg
+              [control]="userForm.get('firstName')"
+            ></app-error-msg>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="lastName">Last Name</label>
+            <input pInputText formControlName="lastName" type="text" />
+            <app-error-msg [control]="userForm.get('lastName')"></app-error-msg>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="dob">Date of Birth</label>
+            <p-calendar
+              [defaultDate]="defaultDate"
+              [showIcon]="true"
+              formControlName="dob"
+              dateFormat="dd-mm-yy"
+              inputId="icon"
+            ></p-calendar>
+            <app-error-msg [control]="userForm.get('dob')"></app-error-msg>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="gender">Gender</label>
+            <p-dropdown
+              [options]="genders"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Gender"
+              formControlName="gender"
+              [showClear]="true"
+            ></p-dropdown>
+            <app-error-msg [control]="userForm.get('gender')"></app-error-msg>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="email">Email (Username)</label>
+            <input
+              pInputText
+              formControlName="email"
+              [placeholder]=""
+              type="text"
+            />
+            <app-error-msg [control]="userForm.get('email')"></app-error-msg>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="password"
+              >Password
+              <p-button
+                icon="pi pi-info-circle"
+                [style]="{ height: '1.5rem', padding: '0px' }"
+                [pTooltip]="BUILDING_COST"
+                [escape]="false"
+                [rounded]="true"
+                tooltipStyleClass="ttopte"
+                [text]="true"
+              ></p-button>
+            </label>
+            <p-password
+              formControlName="password"
+              [placeholder]=""
+              [toggleMask]="true"
+              placeholder="Example: P@ssw0rd123"
+              styleClass="mb-3 custome-style-p-password"
+              inputStyleClass="w-full p-3"
+            ></p-password>
+            <app-error-msg [control]="userForm.get('password')"></app-error-msg>
+
+            <ng-template #BUILDING_COST>
+              <div [innerHTML]="passTooltip"></div>
+            </ng-template>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="mobile">Mobile Number</label>
+            <input
+              pInputText
+              formControlName="mobile"
+              type="text"
+              [maxlength]="10"
+            />
+            <app-error-msg [control]="userForm.get('mobile')"></app-error-msg>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="telephone">Office Number</label>
+            <p-inputMask
+              mask="99999-999 999"
+              formControlName="telephone"
+              class="mb-3"
+            ></p-inputMask>
+            <app-error-msg
+              [control]="userForm.get('telephone')"
+            ></app-error-msg>
+          </div>
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="role">Role</label>
+            <p-dropdown
+              [options]="roles"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Role"
+              formControlName="role"
+              [filter]="true"
+              [showClear]="true"
+            ></p-dropdown>
+            <app-error-msg [control]="userForm.get('role')"></app-error-msg>
+          </div>
+        
+          <!--Urban Rural Login Logic Begin-->
+
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="district">Districts</label>
+     
+            <!-- When localbodytrue = true → show dropdown -->
+            <!-- <p-dropdown
+              *ngIf="localbodytrue"
+              [options]="districts"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a district"
+              formControlName="district"
+              [filter]="true"
+              [showClear]="true"
+            >
+            </p-dropdown> -->
+
+            <!-- When localbodytrue = false → show multiSelect -->
+            <p-multiSelect
+              [options]="districts"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a district"
+              formControlName="district"
+              [showClear]="true"
+            >
+            </p-multiSelect>
+
+            <app-error-msg [control]="userForm.get('district')"></app-error-msg>
+          </div>
+
+          <div
+            class="field col-12 md:col-6 lg:col-6"
+            *ngIf="nameoflocalbodytrue"
+          >
+            <label htmlFor="localbody">Local Body</label>
+            <p-multiSelect
+              [options]="localbody"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Local Body"
+              formControlName="localbody"
+              [showClear]="true"
+            >
+            </p-multiSelect>
+
+            <app-error-msg
+              [control]="userForm.get('localbody')"
+            ></app-error-msg>
+          </div>
+
+          <div
+            class="field col-12 md:col-6 lg:col-6"
+            *ngIf="localbodyValue == 'URBAN'"
+          >
+            <label htmlFor="nameoflocalbody">Name of the LocalBody</label>
+            <p-multiSelect
+              [options]="nameoflocalbody"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select the Name of the Local Body"
+              formControlName="nameoflocalbody"
+              [showClear]="true"
+            ></p-multiSelect>
+            <app-error-msg
+              [control]="userForm.get('nameoflocalbody')"
+            ></app-error-msg>
+          </div>
+
+          <div
+            class="field col-12 md:col-4 lg:col-4"
+            *ngIf="localbodyValue == 'RURAL'"
+          >
+            <label htmlFor="block"> Block</label>
+            <p-multiSelect
+              [options]="block_SelectList"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Block"
+              formControlName="block"
+              [showClear]="true"
+            ></p-multiSelect>
+            <app-error-msg [control]="userForm.get('block')"></app-error-msg>
+          </div>
+
+          <div
+            class="field col-12 md:col-4 lg:col-4"
+            *ngIf="nameoflocalbodyValue == 'CORPORATION'"
+          >
+            <label htmlFor="corporation">Corporation</label>
+            <p-multiSelect
+              [options]="corporation_SelectList"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Corporation"
+              formControlName="corporation"
+              [showClear]="true"
+            ></p-multiSelect>
+            <app-error-msg
+              [control]="userForm.get('corporation')"
+            ></app-error-msg>
+          </div>
+
+          <div
+            class="field col-12 md:col-4 lg:col-4"
+            *ngIf="nameoflocalbodyValue == 'MUNICIPALITY'"
+          >
+            <label htmlFor="municipality">Municipality</label>
+            <p-multiSelect
+              [options]="municipality_SelectList"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Municipality"
+              formControlName="municipality"
+              [showClear]="true"
+            ></p-multiSelect>
+            <app-error-msg
+              [control]="userForm.get('municipality')"
+            ></app-error-msg>
+          </div>
+
+          <div
+            class="field col-12 md:col-4 lg:col-4"
+            *ngIf="nameoflocalbodyValue == 'TOWNPANCHAYAT'"
+          >
+            <label htmlFor="town_Panchayat">Town Panchayat</label>
+            <p-multiSelect
+              [options]="town_Panchayat_SelectList"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Town Panchayat"
+              formControlName="town_Panchayat"
+              [showClear]="true"
+            ></p-multiSelect>
+            <app-error-msg
+              [control]="userForm.get('town_Panchayat')"
+            ></app-error-msg>
+          </div>
+
+          <div
+            class="field col-12 md:col-4 lg:col-4"
+            *ngIf="localbodyValue == 'RURAL'"
+          >
+            <label htmlFor="village_Panchayat">Village Panchayat</label>
+            <p-multiSelect
+              [options]="village_Panchayat_SelectList"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Village Panchayat"
+              formControlName="village_Panchayat"
+              [showClear]="true"
+            ></p-multiSelect>
+            <app-error-msg
+              [control]="userForm.get('village_Panchayat')"
+            ></app-error-msg>
+          </div>
+
+          <div
+            class="field col-12 md:col-4 lg:col-4"
+            *ngIf="nameoflocalbodyValue == 'GCC/CMWS'"
+          >
+            <label htmlFor="dependents">Zone</label>
+            <p-multiSelect
+              [options]="zone_SelectList"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Zone"
+              formControlName="zone"
+              [showClear]="true"
+            ></p-multiSelect>
+            <app-error-msg [control]="userForm.get('zone')"></app-error-msg>
+          </div>
+
+          <!--Urban Rural Login Logic End-->
+
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="scheme">Schemes</label>
+            <p-multiSelect
+              [options]="schemes"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Scheme"
+              formControlName="scheme"
+              [showClear]="true"
+            ></p-multiSelect>
+            <app-error-msg [control]="userForm.get('scheme')"></app-error-msg>
+          </div>
+
+          <div class="field col-12 md:col-6 lg:col-6">
+            <label htmlFor="cardPrintStatusIdList"
+              >Card Print Status List</label
+            >
+            <p-multiSelect
+              [options]="cardPrintStatusList"
+              optionLabel="text"
+              optionValue="value"
+              placeholder="Select a Scheme"
+              formControlName="cardPrintStatusIdList"
+              [showClear]="true"
+            ></p-multiSelect>
+            <app-error-msg
+              [control]="userForm.get('cardPrintStatusIdList')"
+            ></app-error-msg>
+          </div>
+
+          <div class="field col-12 md:col-12 lg:col-12">
+            <label htmlFor="address">Address</label>
+            <textarea
+              rows="3"
+              cols="30"
+              pInputTextarea
+              formControlName="address"
+            ></textarea>
+            <app-error-msg [control]="userForm.get('address')"></app-error-msg>
+          </div>
+          <div class="col-12" style="display: flex; justify-content: end">
+            <div class="flex gap-3 justify-content-center">
+              <button
+                pButton
+                type="submit"
+                *ngxPermissionsOnly="[
+                  privleges.USER_CREATE,
+                  privleges.USER_UPDATE
+                ]"
+                label="Submit"
+              ></button>
+              <button
+                pButton
+                type="button"
+                class="p-button-secondary"
+                label="Cancel"
+                (click)="resetForm()"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<p-dialog
+  header="Set Branches"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '70vw' }"
+  [maximizable]="true"
+  [draggable]="false"
+>
+  <form [formGroup]="branchForm" (ngSubmit)="submit()" class="col-12">
+    <div class="card p-fluid" style="padding-bottom: 10px">
+      <div class="p-formgrid grid" style="overflow-x: auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th style="min-width: 300px">Bank Name</th>
+              <th style="min-width: 100px">Is All Branches</th>
+              <th>Branches</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="branchs">
+            <tr
+              *ngFor="let itemrow of t.controls; let i = index; let l = last"
+              [formGroupName]="i"
+            >
+              <td>{{ i + 1 }}</td>
+              <td>{{ branchList[i].controls["bankName"].value }}</td>
+              <td>
+                <p-inputSwitch
+                  formControlName="isAllBranch"
+                  (onChange)="isAllBranchchange($event, branchList[i])"
+                  [style]="{ display: 'flex' }"
+                />
+              </td>
+              <td>
+                <div *ngIf="!branchList[i].controls['isAllBranch'].value">
+                  <p-multiSelect
+                    [options]="itemrow.get('branchList')?.value"
+                    optionLabel="text"
+                    [group]="false"
+                    optionValue="value"
+                    [virtualScroll]="true"
+                    [virtualScrollItemSize]="30"
+                    placeholder="Select a Branches"
+                    appendTo="body"
+                    formControlName="selectedBranchIds"
+                    [showClear]="true"
+                  >
+                  </p-multiSelect>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p-confirmPopup key="confirm2"></p-confirmPopup>
+      </div>
+    </div>
+  </form>
+</p-dialog>

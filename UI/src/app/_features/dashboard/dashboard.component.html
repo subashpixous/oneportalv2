@@ -1,0 +1,752 @@
+<div class="card noborderRad" id="print-section">
+    <div class="grid formgrid">
+        <!-- <div class="col-12 lg:col-9 md:col-9">
+            <h4>{{title}}</h4>
+        </div> -->
+
+        <!-- <div class="col-12 row" style="padding: 0px;">
+            <div class="justify-content-center flex">
+                <p-selectButton [options]="mainOptions" [(ngModel)]="mainValue" (ngModelChange)="generateMainFilter()"
+                    [multiple]="false" optionLabel="name" optionValue="value" [allowEmpty]="false" class="selectdash">
+                    <ng-template let-item pTemplate>
+                        <span>{{item.name}}</span>
+                    </ng-template>
+                </p-selectButton>
+            </div>
+        </div> -->
+        <!-- <div class="col-12 row" style="padding: 0px;">
+            <div class="col-12 lg:col-7 md:col-7 pl-6">
+                <p-selectButton [options]="options" *ngIf="mainValue=='SCHEME'" [(ngModel)]="value"
+                    (ngModelChange)="generate()" [multiple]="false" optionLabel="name" optionValue="value"
+                    [allowEmpty]="false" class="selectdash">
+                    <ng-template let-item pTemplate>
+                        <span>{{item.name}}</span>
+                    </ng-template>
+                </p-selectButton>
+            </div> -->
+            <!-- <div class="col-12 lg:col-5 md:col-5" style="text-align: end;">
+                <p-button *ngIf="mainValue=='MEMBER'"
+                    [style]="{ 'border-radius':'18px !important', 'margin-left':'5px','padding':'5px 15px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+                    label="Export" (onClick)="generatePDF()" />
+
+                <p-button *ngIf="mainValue=='MEMBER'"
+                    [style]="{ 'border-radius':'18px !important', 'margin-left':'5px','padding':'5px 15px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+                    label="PDF" (onClick)="export()" />
+            </div> -->
+        <!-- </div> -->
+    </div>
+    <div class="top-gradient-banner flex align-items-center justify-content-between">
+    <div class="banner-title">
+        <h2>Dashboard</h2>
+        <p>({{ userRole }})</p>
+    </div>
+    <div class="banner-stats flex gap-custom"> 
+        <div class="stat-box flex align-items-center">
+            <div class="stat-icon-wrapper blue-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.54688 9.95312C6.40451 8.81076 5.83333 7.4375 5.83333 5.83333C5.83333 4.22917 6.40451 2.8559 7.54688 1.71354C8.68924 0.571181 10.0625 0 11.6667 0C13.2708 0 14.6441 0.571181 15.7865 1.71354C16.9288 2.8559 17.5 4.22917 17.5 5.83333C17.5 7.4375 16.9288 8.81076 15.7865 9.95312C14.6441 11.0955 13.2708 11.6667 11.6667 11.6667C10.0625 11.6667 8.68924 11.0955 7.54688 9.95312ZM0 20.4167V19.25C0 18.4236 0.212917 17.6643 0.63875 16.9721C1.06458 16.2799 1.62944 15.751 2.33333 15.3854C3.84028 14.6319 5.37153 14.0671 6.92708 13.6908C8.48264 13.3146 10.0625 13.126 11.6667 13.125C13.2708 13.124 14.8507 13.3126 16.4062 13.6908C17.9618 14.069 19.4931 14.6339 21 15.3854C21.7049 15.75 22.2702 16.2789 22.696 16.9721C23.1219 17.6653 23.3343 18.4246 23.3333 19.25V20.4167C23.3333 21.2188 23.048 21.9056 22.4773 22.4773C21.9066 23.049 21.2197 23.3343 20.4167 23.3333H2.91667C2.11458 23.3333 1.42819 23.048 0.8575 22.4773C0.286805 21.9066 0.000972222 21.2197 0 20.4167ZM2.91667 20.4167H20.4167V19.25C20.4167 18.9826 20.3501 18.7396 20.2169 18.5208C20.0837 18.3021 19.9072 18.1319 19.6875 18.0104C18.375 17.3542 17.0503 16.8622 15.7135 16.5346C14.3767 16.2069 13.0278 16.0426 11.6667 16.0417C10.3056 16.0407 8.9566 16.205 7.61979 16.5346C6.28299 16.8642 4.95833 17.3561 3.64583 18.0104C3.42708 18.1319 3.25063 18.3021 3.11646 18.5208C2.98229 18.7396 2.91569 18.9826 2.91667 19.25V20.4167ZM13.7273 7.89396C14.298 7.32229 14.5833 6.63542 14.5833 5.83333C14.5833 5.03125 14.298 4.34486 13.7273 3.77417C13.1566 3.20347 12.4697 2.91764 11.6667 2.91667C10.8636 2.91569 10.1772 3.20153 9.6075 3.77417C9.03778 4.34681 8.75194 5.03319 8.75 5.83333C8.74806 6.63347 9.03389 7.32035 9.6075 7.89396C10.1811 8.46757 10.8675 8.75292 11.6667 8.75C12.4658 8.74708 13.1527 8.46174 13.7273 7.89396Z" fill="#013B60"/>
+                </svg>
+            </div>
+            <div class="stat-text">
+                <span class="label">Member application</span>
+                <span class="value">{{memberApplicationCount}}</span>
+            </div>
+        </div>
+        <div class="stat-box flex align-items-center">
+            <div class="stat-icon-wrapper blue-icon">
+                <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.5 23.624V21.374C4.5 20.7553 4.7205 20.2258 5.1615 19.7855C5.6025 19.3453 6.132 19.1248 6.75 19.124H7.3125V16.874H6.75C6.13125 16.874 5.60175 16.6539 5.1615 16.2136C4.72125 15.7734 4.50075 15.2435 4.5 14.624V12.374C4.5 11.7553 4.7205 11.2258 5.1615 10.7855C5.6025 10.3453 6.132 10.1248 6.75 10.124H7.3125V7.87402H6.75C6.13125 7.87402 5.60175 7.6539 5.1615 7.21365C4.72125 6.7734 4.50075 6.24352 4.5 5.62402V3.37402C4.5 2.75527 4.7205 2.22577 5.1615 1.78552C5.6025 1.34527 6.132 1.12477 6.75 1.12402H10.125C10.7438 1.12402 11.2736 1.34452 11.7146 1.78552C12.1556 2.22652 12.3758 2.75602 12.375 3.37402V5.62402C12.375 6.24277 12.1549 6.77265 11.7146 7.21365C11.2744 7.65465 10.7445 7.87477 10.125 7.87402H9.5625V10.124H10.125C10.7438 10.124 11.2736 10.3445 11.7146 10.7855C12.1556 11.2265 12.3758 11.756 12.375 12.374H15.75C15.75 11.7553 15.9705 11.2258 16.4115 10.7855C16.8525 10.3453 17.382 10.1248 18 10.124H21.375C21.9938 10.124 22.5236 10.3445 22.9646 10.7855C23.4056 11.2265 23.6258 11.756 23.625 12.374V14.624C23.625 15.2428 23.4049 15.7726 22.9646 16.2136C22.5244 16.6546 21.9945 16.8748 21.375 16.874H18C17.3813 16.874 16.8518 16.6539 16.4115 16.2136C15.9713 15.7734 15.7508 15.2435 15.75 14.624H12.375C12.375 15.2428 12.1549 15.7726 11.7146 16.2136C11.2744 16.6546 10.7445 16.8748 10.125 16.874H9.5625V19.124H10.125C10.7438 19.124 11.2736 19.3445 11.7146 19.7855C12.1556 20.2265 12.3758 20.756 12.375 21.374V23.624C12.375 24.2428 12.1549 24.7726 11.7146 25.2136C11.2744 25.6546 10.7445 25.8748 10.125 25.874H6.75C6.13125 25.874 5.60175 25.6539 5.1615 25.2136C4.72125 24.7734 4.50075 24.2435 4.5 23.624ZM6.75 23.624H10.125V21.374H6.75V23.624ZM6.75 14.624H10.125V12.374H6.75V14.624ZM18 14.624H21.375V12.374H18V14.624ZM6.75 5.62402H10.125V3.37402H6.75V5.62402Z" fill="#013B60"/>
+                </svg>
+            </div>
+            <div class="stat-text">
+                <span class="label">Scheme application</span>
+                <span class="value">{{schemeApplicationCount}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- <div class="mb-3" *ngIf="mainValue=='SCHEME'">
+        <div class="row flex">
+            <div [ngClass]="getmbookStyleClass()">
+                <div class="workLiskContainer row flex col-12">
+                    <div class="col-12 flex" style="justify-content: space-between;">
+                        <div>
+                            <h6>My Work List</h6>
+                        </div>
+                        <div style="margin-top: -10px;">
+                            <p-button icon="pi pi-window-maximize" *ngIf="isMimimized" [rounded]="true" [text]="true"
+                                (click)="togglembookStable()" severity="primary "></p-button>
+                            <p-button icon="pi pi-window-minimize" *ngIf="!isMimimized" [rounded]="true" [text]="true"
+                                (click)="togglembookStable()" severity="primary "></p-button>
+                        </div>
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 flex justify-content-center">
+                        <button pButton type="button" [style]="{ 'width':'100%'}" [ngClass]="getbtnclass('DISTRICT')"
+                            label="District" (click)="setSelected('DISTRICT')"></button>
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 flex justify-content-center">
+                        <button pButton type="button" [style]="{ 'width':'100%'}" [ngClass]="getbtnclass('SCHEME')"
+                            label="Scheme" (click)="setSelected('SCHEME')"></button>
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 flex justify-content-center">
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 ">
+                    </div>
+                    <div class="col-12 lg:col-3 md:col-3 " *ngFor="let item of countcards;let i = index">
+                        <div style="text-align: center;color: white;border-radius: 5px;cursor: pointer;"
+                            (click)="navigateToApplications(item)" [ngClass]="getclassbasedonIndex(i)">
+                            <p style="margin-bottom: 0px;padding-top: 5px;font-size: 14px;">{{item.label}}</p>
+                            <p style="font-size: x-large;font-weight: 500;">{{prependZero(item.count)}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="workLiskContainer row flex col-12">
+                    <app-map-view [markerPositions]="markerPositions"></app-map-view>
+                </div>
+            </div>
+            <div [ngClass]="getStyleClass()">
+                <div class="workLiskContainer  row flex col-12">
+                    <div class="col-12 flex" style="justify-content: space-between;">
+                        <div>
+                            <h6>Status</h6>
+                        </div>
+                        <div style="margin-top: -10px;">
+                            <p-button icon="pi pi-arrow-right" [rounded]="true" [text]="true" (click)="navigate()"
+                                severity="primary "></p-button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p-dropdown [options]="schemes" optionLabel="text" (ngModelChange)="schemeChanged($event)"
+                            [style]="{'width': '100%','background': 'rgba(0, 0, 0, 0.02)'}" optionValue="value"
+                            placeholder="Select a Scheme" [showClear]="false"
+                            [(ngModel)]="selectedSchemes"></p-dropdown>
+                    </div>
+                    <div *ngFor="let item of applicationCountModel;let i = index">
+                        <div class="col-12 flex justify-content-between pb-0">
+                            <p style="display: flex;align-items: center;">{{item.status}}</p>
+                            <p style="display: flex;align-items: center;font-size: 16px;">
+                                {{item.count}}<p-button icon="pi pi-arrow-right" [rounded]="true" [text]="true"
+                                    (click)="expand(item.statusId)" severity="primary "></p-button>
+                            </p>
+                        </div>
+                        <p-progressBar [value]="item.percentage" [showValue]="false"
+                            [style]="{'height':'.5rem'}"></p-progressBar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+<div class="mb-3 figma-dashboard" *ngIf="mainValue=='MEMBER'">
+        
+
+<div class="dashboard-header-row flex justify-content-between align-items-center mt-4 mb-3">
+    <h3 class="m-0 text-900 font-medium text-lg" style="font-size: 16px; color: #000;">Member</h3>
+    <div class="header-actions flex gap-2">
+<div class="relative category-dropdown-wrapper" (click)="$event.stopPropagation()">
+    <div class="dropdown-mock work-category cursor-pointer" (click)="toggleWorkCategory()">
+        <span>{{selectedWorkCategory}}</span>
+        <i class="pi pi-angle-down"></i>
+    </div>
+    
+    <ul class="custom-dropdown-menu" [class.show]="showWorkCategoryMenu">
+        <li *ngFor="let cat of workCategories" class="custom-dropdown-item" (click)="selectWorkCategory(cat)">
+            {{cat}}
+        </li>
+    </ul>
+</div>
+        <div class="dropdown-mock this-year">
+            <span>This Year</span>
+            <i class="pi pi-angle-down"></i>
+        </div>
+        <div class="scheme-btn-mock cursor-pointer" (click)="mainValue = 'SCHEME'; generate()">
+            <svg width="16" height="16" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 23.624V21.374C4.5 20.7553 4.7205 20.2258 5.1615 19.7855C5.6025 19.3453 6.132 19.1248 6.75 19.124H7.3125V16.874H6.75C6.13125 16.874 5.60175 16.6539 5.1615 16.2136C4.72125 15.7734 4.50075 15.2435 4.5 14.624V12.374C4.5 11.7553 4.7205 11.2258 5.1615 10.7855C5.6025 10.3453 6.132 10.1248 6.75 10.124H7.3125V7.87402H6.75C6.13125 7.87402 5.60175 7.6539 5.1615 7.21365C4.72125 6.7734 4.50075 6.24352 4.5 5.62402V3.37402C4.5 2.75527 4.7205 2.22577 5.1615 1.78552C5.6025 1.34527 6.132 1.12477 6.75 1.12402H10.125C10.7438 1.12402 11.2736 1.34452 11.7146 1.78552C12.1556 2.22652 12.3758 2.75602 12.375 3.37402V5.62402C12.375 6.24277 12.1549 6.77265 11.7146 7.21365C11.2744 7.65465 10.7445 7.87477 10.125 7.87402H9.5625V10.124H10.125C10.7438 10.124 11.2736 10.3445 11.7146 10.7855C12.1556 11.2265 12.3758 11.756 12.375 12.374H15.75C15.75 11.7553 15.9705 11.2258 16.4115 10.7855C16.8525 10.3453 17.382 10.1248 18 10.124H21.375C21.9938 10.124 22.5236 10.3445 22.9646 10.7855C23.4056 11.2265 23.6258 11.756 23.625 12.374V14.624C23.625 15.2428 23.4049 15.7726 22.9646 16.2136C22.5244 16.6546 21.9945 16.8748 21.375 16.874H18C17.3813 16.874 16.8518 16.6539 16.4115 16.2136C15.9713 15.7734 15.7508 15.2435 15.75 14.624H12.375C12.375 15.2428 12.1549 15.7726 11.7146 16.2136C11.2744 16.6546 10.7445 16.8748 10.125 16.874H9.5625V19.124H10.125C10.7438 19.124 11.2736 19.3445 11.7146 19.7855C12.1556 20.2265 12.3758 20.756 12.375 21.374V23.624C12.375 24.2428 12.1549 24.7726 11.7146 25.2136C11.2744 25.6546 10.7445 25.8748 10.125 25.874H6.75C6.13125 25.874 5.60175 25.6539 5.1615 25.2136C4.72125 24.7734 4.50075 24.2435 4.5 23.624ZM6.75 23.624H10.125V21.374H6.75V23.624ZM6.75 14.624H10.125V12.374H6.75V14.624ZM18 14.624H21.375V12.374H18V14.624ZM6.75 5.62402H10.125V3.37402H6.75V5.62402Z" fill="#013B60"/>
+            </svg>
+            <span>Scheme</span>
+        </div>
+    </div>
+</div>
+
+<div class="status-cards-wrapper flex gap-3 mt-4 mb-4 flex-wrap">
+<div *ngIf="pendingApprovalData?.labels?.length === 1" 
+     class="status-card flex-1 cursor-pointer" 
+     style="min-width: 160px; background: linear-gradient(135deg, #8e44ad, #9b59b6);"
+     [class.active-tab]="selectedStatusTab === 'Pending Approval'"
+     (click)="selectStatusTab('Pending Approval')">
+    
+<div class="card-icon">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#8e44ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</div>
+    
+    <div class="card-title text-white" style="text-transform: capitalize;">
+        {{ pendingApprovalData.labels[0] }}<br>Approval Pending
+    </div>
+    
+    <div class="card-value text-white">
+        {{ pendingApprovalData.values[0] }}
+    </div>
+</div>
+<div *ngIf="
+  applicationSubmittedCount > 0 &&
+  !(pendingApprovalData?.labels?.length === 1 && approvedData?.labels?.length === 1)
+"class="status-card flex-1 cursor-pointer" style="min-width: 160px; background: linear-gradient(135deg, #3498db, #2980b9);"
+         [class.active-tab]="selectedStatusTab === 'Application Submitted'"
+         (click)="selectStatusTab('Application Submitted')">
+<div class="card-icon">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 7C4 5.114 4 4.172 4.586 3.586C5.172 3 6.114 3 8 3H16C17.886 3 18.828 3 19.414 3.586C20 4.172 20 5.114 20 7V15C20 17.828 20 19.243 19.121 20.121C18.243 21 16.828 21 14 21H10C7.172 21 5.757 21 4.879 20.121C4 19.243 4 17.828 4 15V7Z" stroke="#3498db" stroke-width="2"/>
+        <path d="M15 18V21M9 18V21M9 8H15M9 12H15" stroke="#3498db" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+</div>
+        <div class="card-title text-white">Application<br>Submitted</div>
+        <div class="card-value text-white">{{ applicationSubmittedCount }}</div>
+    </div>
+
+<ng-container *ngIf="approvedData?.labels?.length > 0">
+        <div class="status-card flex-1 cursor-pointer" style="min-width: 160px;"
+             *ngFor="let label of approvedData.labels; let i = index"
+             [style.background]="approvedCardColors[i % approvedCardColors.length]"
+             [class.active-tab]="selectedStatusTab === ('Approved ' + label)"
+             (click)="selectStatusTab('Approved ' + label)">
+<div class="card-icon">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 7C4 5.114 4 4.172 4.586 3.586C5.172 3 6.114 3 8 3H16C17.886 3 18.828 3 19.414 3.586C20 4.172 20 5.114 20 7V15C20 17.828 20 19.243 19.121 20.121C18.243 21 16.828 21 14 21H10C7.172 21 5.757 21 4.879 20.121C4 19.243 4 17.828 4 15V7Z" stroke="#27ae60" stroke-width="2"/>
+        <path d="M15 18V21M9 18V21M9 8H15M9 12H15" stroke="#27ae60" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+</div>
+            <div class="card-title text-white" style="text-transform: capitalize;">{{ label }}<br>Approved</div>
+            <div class="card-value text-white">{{ approvedData.values[i] }}</div>
+        </div>
+    </ng-container>
+    <div class="status-card yellow-gradient flex-1 cursor-pointer" style="min-width: 160px;"
+         [class.active-tab]="selectedStatusTab === 'Card printed'"
+         (click)="selectStatusTab('Card printed')">
+        <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7C4 5.114 4 4.172 4.586 3.586C5.172 3 6.114 3 8 3H16C17.886 3 18.828 3 19.414 3.586C20 4.172 20 5.114 20 7V15C20 17.828 20 19.243 19.121 20.121C18.243 21 16.828 21 14 21H10C7.172 21 5.757 21 4.879 20.121C4 19.243 4 17.828 4 15V7Z" stroke="#E3B63D" stroke-width="2"/>
+                <path d="M15 18V21M9 18V21M9 8H15M9 12H15" stroke="#E3B63D" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="card-title">Card<br>printed</div>
+        <div class="card-value">{{cardPrinted}}</div>
+    </div>
+
+    <div class="status-card red-gradient flex-2 red-layout-override" style="min-width: 250px;"
+         *ngIf="pendingApprovalData?.labels?.length <= 1 && approvedData?.labels?.length <= 1">
+        
+        <div class="red-card-left">
+            <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 7C4 5.114 4 4.172 4.586 3.586C5.172 3 6.114 3 8 3H16C17.886 3 18.828 3 19.414 3.586C20 4.172 20 5.114 20 7V15C20 17.828 20 19.243 19.121 20.121C18.243 21 16.828 21 14 21H10C7.172 21 5.757 21 4.879 20.121C4 19.243 4 17.828 4 15V7Z" stroke="#E3B63D" stroke-width="2"/>
+                    <path d="M15 18V21M9 18V21M9 8H15M9 12H15" stroke="#E3B63D" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="card-title m-0">Work Delayed<br>(Limbo Status)</div>
+        </div>
+        
+        <div class="red-card-right">
+            <div class="white-delay-box cursor-pointer" 
+                 [class.active-tab]="selectedStatusTab === 'Approval delay'"
+                 [style.boxShadow]="selectedStatusTab === 'Approval delay' ? '0 0 0 3px rgba(0,0,0,0.2)' : 'none'"
+                 (click)="selectStatusTab('Approval delay')">
+                <div class="alert-icon"><i class="pi pi-exclamation-triangle"></i></div>
+                <div class="delay-label">Approval<br>delay</div>
+                <div class="delay-val">{{approvalDelay}}</div>
+            </div>
+            
+            <div class="white-delay-box has-dropdown cursor-pointer" 
+                 [class.active-tab]="selectedStatusTab === 'Card delay'"
+                 [style.boxShadow]="selectedStatusTab === 'Card delay' ? '0 0 0 3px rgba(0,0,0,0.2)' : 'none'"
+                 (click)="selectStatusTab('Card delay')">
+                
+                <div class="days-dropdown-container" (click)="$event.stopPropagation()">
+                    <div class="days-dropdown cursor-pointer" (click)="toggleDaysMenu()">
+                        <span>{{selectedDays}}</span> <i class="pi pi-angle-down"></i>
+                    </div>
+                    
+                    <ul class="custom-dropdown-menu days-menu-override" [class.show]="showDaysMenu">
+                        <li *ngFor="let day of delayDays" class="custom-dropdown-item" (click)="selectDays(day)">
+                            {{day}}
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="alert-icon"><i class="pi pi-exclamation-triangle"></i></div>
+                <div class="delay-label">Card<br>delay</div>
+                <div class="delay-val">{{cardDelay}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="charts-section mt-4">
+    <div class="flex justify-content-between align-items-center mb-3 px-2">
+        <h3 class="m-0 text-900 font-semibold text-sm" style="font-size: 14px;">{{ selectedStatusTab }}</h3>
+        <div class="chart-controls flex align-items-center gap-4">
+<div class="radio-group flex gap-3">
+    <label class="flex align-items-center gap-2 text-sm text-700 cursor-pointer">
+        <input type="radio" name="sort" value="Most" [(ngModel)]="selectedSort" (change)="applyDistrictFilter()" class="cursor-pointer"> Most
+    </label>
+    <label class="flex align-items-center gap-2 text-sm text-500 cursor-pointer">
+        <input type="radio" name="sort" value="Least" [(ngModel)]="selectedSort" (change)="applyDistrictFilter()" class="cursor-pointer"> Least
+    </label>
+</div>
+            <a href="#" class="more-details-link text-sm text-500 font-medium flex align-items-center gap-1">
+                More details <i class="pi pi-arrow-right text-xs"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- <div class="grid">
+        <div class="col-12 md:col-8">
+            <div class="chart-card p-4 h-full">
+                <div class="flex justify-content-between border-bottom-1 surface-border pb-3 mb-4">
+                    <span class="font-medium text-900">Members by District</span>
+                    <div class="dropdown-mock sm">
+                        <span>All</span>
+                        <i class="pi pi-angle-down"></i>
+                    </div>
+                </div>
+                
+                <div class="bar-chart-container">
+                    <div class="bar-header flex justify-content-between px-2 mb-3">
+                        <span class="font-semibold text-sm underline text-800">District</span>
+                        <span class="font-semibold text-sm underline text-800 pr-2">Count</span>
+                    </div>
+                    
+                    <div class="bar-row flex align-items-center mb-3">
+                        <div class="bar-label w-2 text-right pr-3 text-sm text-600">Chennai</div>
+                        <div class="bar-track w-9 border-left-1 surface-border pl-0 relative h-1rem">
+                            <div class="bar-fill blue-bg h-full" style="width: 100%;"></div>
+                        </div>
+                        <div class="bar-val w-1 text-center"><span class="val-badge">150</span></div>
+                    </div>
+
+                    <div class="bar-row flex align-items-center mb-3">
+                        <div class="bar-label w-2 text-right pr-3 text-sm text-600">Madurai</div>
+                        <div class="bar-track w-9 border-left-1 surface-border pl-0 relative h-1rem">
+                            <div class="bar-fill blue-bg h-full" style="width: 80%;"></div>
+                        </div>
+                        <div class="bar-val w-1 text-center"><span class="val-badge">120</span></div>
+                    </div>
+
+                    <div class="bar-row flex align-items-center mb-3">
+                        <div class="bar-label w-2 text-right pr-3 text-sm text-600">Sivagangai</div>
+                        <div class="bar-track w-9 border-left-1 surface-border pl-0 relative h-1rem">
+                            <div class="bar-fill blue-bg h-full" style="width: 60%;"></div>
+                        </div>
+                        <div class="bar-val w-1 text-center"><span class="val-badge">100</span></div>
+                    </div>
+
+                    <div class="bar-row flex align-items-center mb-3">
+                        <div class="bar-label w-2 text-right pr-3 text-sm text-600">Viruthunagar</div>
+                        <div class="bar-track w-9 border-left-1 surface-border pl-0 relative h-1rem">
+                            <div class="bar-fill blue-bg h-full" style="width: 50%;"></div>
+                        </div>
+                        <div class="bar-val w-1 text-center"><span class="val-badge">90</span></div>
+                    </div>
+
+                    <div class="bar-row flex align-items-center mb-4">
+                        <div class="bar-label w-2 text-right pr-3 text-sm text-600">Coimbatore</div>
+                        <div class="bar-track w-9 border-left-1 surface-border pl-0 relative h-1rem">
+                            <div class="bar-fill blue-bg h-full" style="width: 40%;"></div>
+                        </div>
+                        <div class="bar-val w-1 text-center"><span class="val-badge">85</span></div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="w-2"></div>
+                        <div class="w-9 border-top-2 surface-border flex justify-content-between pt-2 text-xs text-500 font-medium">
+                            <span>0</span><span>500</span><span>1000</span><span>1500</span><span>2000</span><span>2500</span>
+                        </div>
+                        <div class="w-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 md:col-4">
+            <div class="chart-card p-4 h-full flex flex-column">
+                <div class="border-bottom-1 surface-border pb-3 mb-4">
+                    <span class="font-medium text-900">Members by Gender</span>
+                </div>
+
+                <div class="flex flex-column align-items-center justify-content-center flex-grow-1 pb-2">
+                    <div class="donut-chart-container relative mb-5">
+                        <div class="donut-chart"></div>
+                        <div class="donut-inner text-center">
+                            <div class="text-500 text-sm font-medium mb-1">Total</div>
+                            <div class="text-900 text-xl font-bold">3000</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-column w-full px-2 gap-3 mt-2">
+                        <div class="flex justify-content-between align-items-center">
+                            <div class="flex align-items-center gap-2 text-600 font-medium text-sm">
+                                <span class="legend-dot light-blue-bg"></span> Male
+                            </div>
+                            <span class="font-bold text-900 text-sm">2500</span>
+                        </div>
+                        <div class="flex justify-content-between align-items-center">
+                            <div class="flex align-items-center gap-2 text-600 font-medium text-sm">
+                                <span class="legend-dot dark-purple-bg"></span> Female
+                            </div>
+                            <span class="font-bold text-900 text-sm">500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="grid">
+        <div class="col-12 md:col-8">
+            <div class="chart-card p-4 h-full">
+<div class="flex justify-content-between border-bottom-1 surface-border pb-3 mb-4">
+    <span class="font-medium text-900">Members by District</span>
+    
+    <div class="dropdown-mock sm relative cursor-pointer" (click)="showDistrictMenu = !showDistrictMenu; $event.stopPropagation()">
+        <span>{{ selectedDistrict }}</span>
+        <i class="pi pi-angle-down"></i>
+        
+        <ul class="custom-dropdown-menu" [class.show]="showDistrictMenu" style="position: absolute; top: 100%; right: 0; z-index: 100; max-height: 250px; overflow-y: auto;">
+            <li *ngFor="let dist of districtsList" class="custom-dropdown-item" (click)="onDistrictChange(dist)">
+                {{ dist }}
+            </li>
+        </ul>
+    </div>
+</div>
+                
+                <div class="bar-chart-container" style="max-height: 350px; overflow-y: auto; overflow-x: hidden; padding-right: 10px;">
+                    <div class="bar-header flex justify-content-between px-2 mb-3">
+                        <span class="font-semibold text-sm underline text-800">District</span>
+                        <span class="font-semibold text-sm underline text-800 pr-2">Count</span>
+                    </div>
+                    
+                    <div class="bar-row flex align-items-center mb-3" *ngFor="let bar of currentBarData">
+                        <div class="bar-label w-2 text-right pr-3 text-sm text-600">{{ bar.district }}</div>
+                        <div class="bar-track w-9 border-left-1 surface-border pl-0 relative h-1rem">
+                            <div class="bar-fill blue-bg h-full" [style.width]="bar.width"></div>
+                        </div>
+                        <div class="bar-val w-1 text-center"><span class="val-badge">{{ bar.count }}</span></div>
+                    </div>
+
+                    <div class="flex mt-4">
+                        <div class="w-2"></div>
+                        <div class="w-9 border-top-2 surface-border flex justify-content-between pt-2 text-xs text-500 font-medium">
+                            <span>0</span><span>500</span><span>1000</span><span>1500</span><span>2000</span><span>2500</span>
+                        </div>
+                        <div class="w-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 md:col-4">
+            <div class="chart-card p-4 h-full flex flex-column">
+                <div class="border-bottom-1 surface-border pb-3 mb-4">
+                    <span class="font-medium text-900">Members by Gender</span>
+                </div>
+
+                <div class="flex flex-column align-items-center justify-content-center flex-grow-1 pb-2">
+                    <div class="donut-chart-container relative mb-5">
+                        <div class="donut-chart" [style.background]="getDonutGradient()"></div>
+                        <div class="donut-inner text-center">
+                            <div class="text-500 text-sm font-medium mb-1">Total</div>
+                            <div class="text-900 text-xl font-bold">{{ currentDonutData.total }}</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-column w-full px-2 gap-3 mt-2">
+<div class="flex justify-content-between align-items-center" *ngFor="let gender of currentDonutData.genders">
+    <div class="flex align-items-center gap-2 text-600 font-medium text-sm">
+        <span class="legend-dot" 
+              [ngClass]="gender.colorClass" 
+              [ngStyle]="{'background-color': gender.colorClass === 'fallback' ? '#9CA3AF' : ''}">
+        </span> 
+        {{ gender.label }}
+    </div>
+    <span class="font-bold text-900 text-sm">{{ gender.count }}</span>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+
+<div class="mb-3 figma-dashboard" *ngIf="mainValue=='SCHEME'">
+    
+    <div class="dashboard-header-row flex justify-content-between align-items-center mt-4 mb-3">
+        <div class="flex align-items-center gap-3">
+            <h3 class="m-0 text-900 font-medium text-lg" style="font-size: 16px; color: #000;">Scheme</h3>
+            <button class="finance-data-btn" [class.active-finance]="isFinanceData" (click)="toggleFinanceData()">
+                <i class="pi pi-chart-line"></i> Finance data
+            </button>
+        </div>
+        
+        <div class="header-actions flex gap-2">
+<!-- <p-dropdown 
+        [options]="configurationList" 
+        [(ngModel)]="selectedSchemeGroup" 
+        optionLabel="groupName" 
+        optionValue="id"
+        placeholder="All schemes"
+        (onChange)="onSchemeGroupChange($event.value)"
+        [style]="{'width': '180px', 'height': '38px', 'display': 'flex', 'align-items': 'center'}"
+        styleClass="dropdown-mock sm">
+        
+        <ng-template let-item pTemplate="item">
+            <div class="flex align-items-center">
+                <span>{{item.groupName}}</span>
+            </div>
+        </ng-template>
+    </p-dropdown> -->
+                <div class="dropdown-mock" style="width: 140px; justify-content: space-between;">
+
+                <span>All schemes</span>
+
+                <i class="pi pi-angle-down"></i>
+
+            </div>    
+    <div class="dropdown-mock this-year">
+                <span>This Year</span>
+                <i class="pi pi-angle-down"></i>
+            </div>
+            <div class="scheme-btn-mock cursor-pointer" (click)="mainValue = 'MEMBER'">
+                <i class="pi pi-user text-sm"></i>
+                <span>Member</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-cards-wrapper flex gap-3 mt-4 mb-3">
+        <div class="status-card green-gradient flex-1 cursor-pointer"
+             [class.active-tab]="selectedStatusTab === 'Eligible applications'"
+             (click)="selectStatusTab('Eligible applications')">
+            <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7C4 5.114 4 4.172 4.586 3.586C5.172 3 6.114 3 8 3H16C17.886 3 18.828 3 19.414 3.586C20 4.172 20 5.114 20 7V15C20 17.828 20 19.243 19.121 20.121C18.243 21 16.828 21 14 21H10C7.172 21 5.757 21 4.879 20.121C4 19.243 4 17.828 4 15V7Z" stroke="#E3B63D" stroke-width="2"/>
+                <path d="M15 18V21M9 18V21M9 8H15M9 12H15" stroke="#E3B63D" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            </div>
+            <div class="card-title">Eligible<br>applications</div>
+            <div class="card-value">{{ isFinanceData ? ('₹ ' + eligibleApplicantAmount) : eligibleApplicantCount }}</div>
+        </div>
+
+        <div class="status-card yellow-gradient flex-1 cursor-pointer"
+             [class.active-tab]="selectedStatusTab === 'Applied applications'"
+             (click)="selectStatusTab('Applied applications')">
+            <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7C4 5.114 4 4.172 4.586 3.586C5.172 3 6.114 3 8 3H16C17.886 3 18.828 3 19.414 3.586C20 4.172 20 5.114 20 7V15C20 17.828 20 19.243 19.121 20.121C18.243 21 16.828 21 14 21H10C7.172 21 5.757 21 4.879 20.121C4 19.243 4 17.828 4 15V7Z" stroke="#E3B63D" stroke-width="2"/>
+                <path d="M15 18V21M9 18V21M9 8H15M9 12H15" stroke="#E3B63D" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            </div>
+            <div class="card-title">Applied<br>applications</div>
+            <div class="card-value">{{ isFinanceData ? ('₹ ' + schemeApplicationCount) : schemeApplicationCount }}</div>
+        </div>
+
+        <div class="status-card blue-gradient flex-1 cursor-pointer"
+             [class.active-tab]="selectedStatusTab === 'Pending Approval'"
+             (click)="selectStatusTab('Pending Approval')">
+            <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7C4 5.114 4 4.172 4.586 3.586C5.172 3 6.114 3 8 3H16C17.886 3 18.828 3 19.414 3.586C20 4.172 20 5.114 20 7V15C20 17.828 20 19.243 19.121 20.121C18.243 21 16.828 21 14 21H10C7.172 21 5.757 21 4.879 20.121C4 19.243 4 17.828 4 15V7Z" stroke="#E3B63D" stroke-width="2"/>
+                <path d="M15 18V21M9 18V21M9 8H15M9 12H15" stroke="#E3B63D" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            </div>
+            <div class="card-title">Pending<br>Approval</div>
+            <div class="card-value">{{ isFinanceData ? ('₹ ' + pendingApprovalAmount) : pendingApprovalCount }}</div>
+        </div>
+
+        <div class="status-card red-gradient flex-2 red-layout-override">
+            <div class="red-card-left">
+                <div class="card-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7C4 5.114 4 4.172 4.586 3.586C5.172 3 6.114 3 8 3H16C17.886 3 18.828 3 19.414 3.586C20 4.172 20 5.114 20 7V15C20 17.828 20 19.243 19.121 20.121C18.243 21 16.828 21 14 21H10C7.172 21 5.757 21 4.879 20.121C4 19.243 4 17.828 4 15V7Z" stroke="#E3B63D" stroke-width="2"/>
+                <path d="M15 18V21M9 18V21M9 8H15M9 12H15" stroke="#E3B63D" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+                </div>
+                <div class="card-title m-0">Schemes<br>(Limbo Status)</div>
+            </div>
+            <div class="red-card-right">
+                <div class="white-delay-box cursor-pointer" style="width: 120px;"
+                      [class.active-tab]="selectedStatusTab === 'Member Applied'"
+                      [style.boxShadow]="selectedStatusTab === 'Member Applied' ? '0 0 0 3px rgba(0,0,0,0.2)' : 'none'"
+                      (click)="selectStatusTab('Member Applied')">
+                    <div class="alert-icon"><i class="pi pi-exclamation-triangle"></i></div>
+                    <div class="delay-label">Member</div>
+                    <div class="delay-val" [style.fontSize]="isFinanceData ? '18px' : '22px'">{{ isFinanceData ? ('₹ ' + memberAppliedAmount) : memberAppliedCount }}</div>
+                </div>
+                <div class="white-delay-box has-dropdown cursor-pointer" style="width: 120px;"
+                      [class.active-tab]="selectedStatusTab === 'Beneficiary Applied'"
+                      [style.boxShadow]="selectedStatusTab === 'Beneficiary Applied' ? '0 0 0 3px rgba(0,0,0,0.2)' : 'none'"
+                      (click)="selectStatusTab('Beneficiary Applied'); $event.stopPropagation()">
+                    <div class="days-dropdown-container">
+                        <div class="days-dropdown cursor-pointer" (click)="toggleDaysMenu()">
+                            <span>{{selectedDays}}</span> <i class="pi pi-angle-down"></i>
+                        </div>
+                        <ul class="custom-dropdown-menu days-menu-override" [class.show]="showDaysMenu">
+                            <li *ngFor="let day of delayDays" class="custom-dropdown-item" (click)="selectDays(day)">{{day}}</li>
+                        </ul>
+                    </div>
+                    <div class="alert-icon"><i class="pi pi-exclamation-triangle"></i></div>
+                    <div class="delay-label">Beneficiary</div>
+                    <div class="delay-val" [style.fontSize]="isFinanceData ? '18px' : '22px'">{{ isFinanceData ? ('₹ ' + beneficiaryAppliedAmount) : beneficiaryAppliedCount }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="full-width-approved-card mb-4 cursor-pointer" *ngIf="!isFinanceData"
+         [class.active-tab]="selectedStatusTab === 'Approved Applications'"
+         [style.boxShadow]="selectedStatusTab === 'Approved Applications' ? '0 0 0 3px rgba(0,0,0,0.2)' : 'none'"
+         (click)="selectStatusTab('Approved Applications')">
+        <div class="approved-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7C4 5.114 4 4.172 4.586 3.586C5.172 3 6.114 3 8 3H16C17.886 3 18.828 3 19.414 3.586C20 4.172 20 5.114 20 7V15C20 17.828 20 19.243 19.121 20.121C18.243 21 16.828 21 14 21H10C7.172 21 5.757 21 4.879 20.121C4 19.243 4 17.828 4 15V7Z" stroke="#E3B63D" stroke-width="2"/>
+                <path d="M15 18V21M9 18V21M9 8H15M9 12H15" stroke="#E3B63D" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="approved-text text-center">
+            <div class="title">Approved Applications</div>
+            <div class="val">{{approvedApplicantsCount}}</div>
+        </div>
+    </div>
+
+    <div class="flex gap-3 mb-4 w-full" *ngIf="isFinanceData">
+        <div class="full-width-approved-card flex-1 m-0 align-items-center justify-content-evenly px-4">
+            <div class="flex align-items-center gap-3">
+                <div class="approved-icon"><i class="pi pi-file-check"></i></div>
+                <div class="title text-left" style="font-size: 13px;">Approved<br>Applications</div>
+            </div>
+            <div class="val">₹ {{approvedApplicantsAmount}}</div>
+        </div>
+        <div class="full-width-approved-card purple-card flex-1 m-0 align-items-center justify-content-evenly px-4">
+            <div class="flex align-items-center gap-3">
+                <div class="approved-icon"><i class="pi pi-file-excel"></i></div>
+                <div class="title text-left" style="font-size: 13px;">Amount<br>Disbursed</div>
+            </div>
+            <div class="val">₹ {{amountDisbursed}}</div>
+        </div>
+        <div class="full-width-approved-card light-green-card flex-1 m-0 align-items-center justify-content-evenly px-4">
+            <div class="flex align-items-center gap-3">
+                <div class="approved-icon"><i class="pi pi-file"></i></div>
+                <div class="title text-left" style="font-size: 13px;">Amount<br>Sanctioned</div>
+            </div>
+            <div class="val">₹ {{amountSanctioned}}</div>
+        </div>
+    </div>
+
+    <div class="charts-section mt-4">
+        <div class="flex justify-content-between align-items-center mb-3 px-2">
+            <h3 class="m-0 text-900 font-semibold text-sm" style="font-size: 14px;">{{ selectedStatusTab || 'Pending Approval' }}</h3>
+            <div class="chart-controls flex align-items-center gap-4">
+                <div class="radio-group flex gap-3">
+                    <label class="flex align-items-center gap-2 text-sm text-700 cursor-pointer">
+                        <input type="radio" name="sort_scheme" checked class="cursor-pointer"> Most
+                    </label>
+                    <label class="flex align-items-center gap-2 text-sm text-500 cursor-pointer">
+                        <input type="radio" name="sort_scheme" class="cursor-pointer"> Least
+                    </label>
+                </div>
+                <a href="#" class="more-details-link text-sm text-500 font-medium flex align-items-center gap-1">
+                    More details <i class="pi pi-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-12 md:col-8">
+                <div class="chart-card p-4 h-full">
+<div class="flex justify-content-between border-bottom-1 surface-border pb-3 mb-4">
+    <span class="font-medium text-900">{{ isFinanceData ? 'Amount by District' : 'Members by District' }}</span>
+    
+    <div class="dropdown-mock sm relative cursor-pointer" (click)="showDistrictMenu = !showDistrictMenu; $event.stopPropagation()">
+        <span>{{ selectedDistrict }}</span>
+        <i class="pi pi-angle-down"></i>
+        
+        <ul class="custom-dropdown-menu" [class.show]="showDistrictMenu" style="position: absolute; top: 100%; right: 0; z-index: 100; max-height: 250px; overflow-y: auto; background: white; border: 1px solid #ddd; padding: 0; margin: 0; list-style: none;">
+            <li *ngFor="let dist of districtsList" class="custom-dropdown-item" (click)="onDistrictChange(dist)" style="padding: 8px 12px; border-bottom: 1px solid #f0f0f0;">
+                {{ dist }}
+            </li>
+        </ul>
+    </div>
+</div>
+                    <div class="bar-chart-container" style="max-height: 350px; overflow-y: auto; overflow-x: hidden; padding-right: 10px;">
+                        <div class="bar-header flex justify-content-between px-2 mb-3">
+                            <span class="font-semibold text-sm underline text-800">District</span>
+                            <span class="font-semibold text-sm underline text-800 pr-2">{{ isFinanceData ? 'Amount' : 'Count' }}</span>
+                        </div>
+                        
+                        <div class="bar-row flex align-items-center mb-3" *ngFor="let bar of currentBarData">
+                            <div class="bar-label w-2 text-right pr-3 text-sm text-600">{{ bar.district }}</div>
+                            <div class="bar-track w-8 border-left-1 surface-border pl-0 relative h-1rem">
+                                <div class="bar-fill blue-bg h-full" [style.width]="bar.width"></div>
+                            </div>
+                            
+                            <div class="bar-val w-2 text-center flex justify-content-end pr-2">
+                                <span *ngIf="!isFinanceData" class="val-badge">{{ bar.count }}</span>
+                                <span *ngIf="isFinanceData" class="font-bold text-sm text-800">₹ {{ bar.financeValue }}</span>
+                            </div>
+                        </div>
+
+                        <div class="flex mt-4">
+                            <div class="w-2"></div>
+                            <div class="w-8 border-top-2 surface-border flex justify-content-between pt-2 text-xs text-500 font-medium" *ngIf="!isFinanceData">
+                                <span>0</span><span>500</span><span>1000</span><span>1500</span><span>2000</span><span>2500</span>
+                            </div>
+                            <div class="w-8 border-top-2 surface-border flex justify-content-between pt-2 text-xs text-500 font-medium" *ngIf="isFinanceData">
+                                <span>0</span><span>20,000</span><span>40,000</span><span>60,000</span><span>80,000</span><span>1,00,000</span>
+                            </div>
+                            <div class="w-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 md:col-4">
+                <div class="chart-card p-4 h-full flex flex-column">
+                    <div class="border-bottom-1 surface-border pb-3 mb-4">
+                        <span class="font-medium text-900">{{ isFinanceData ? 'Amount by schemes' : 'Schemes by types' }}</span>
+                    </div>
+
+                    <div class="flex flex-column align-items-center justify-content-center flex-grow-1 pb-2">
+                        <div class="donut-chart-container relative mb-4">
+                            <div class="donut-chart scheme-donut"></div>
+<div class="donut-inner text-center flex flex-column align-items-center justify-content-center">
+    <div class="text-500 text-xs font-medium mb-1">Total</div>
+    <div class="text-900 font-bold" [ngClass]="isFinanceData ? 'text-md' : 'text-xl'">
+        <span *ngIf="isFinanceData" class="block text-xs font-medium">₹</span>
+        {{ isFinanceData ? amountSanctioned : currentSchemeTotal }}
+    </div>
+</div>
+</div>
+
+<div class="scheme-legend-grid">
+    <div class="scheme-legend-item" *ngFor="let scheme of schemeTypeChart">
+        <span class="scheme-legend-dot" [style.background]="getSchemeColor(scheme.label)"></span>
+        
+        <div [innerHTML]="formatSchemeLabel(scheme.label)"></div>
+        
+        <span class="scheme-legend-val">
+            <span *ngIf="isFinanceData">₹ </span>{{ scheme.value }}
+        </span>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,16 @@
+<div class="card">
+  <p-tabView [(activeIndex)]="activeIndex">
+    <p-tabPanel header="Block Report" leftIcon="pi pi-map-marker mr-2">
+      <app-block-wise-report></app-block-wise-report>
+    </p-tabPanel>
+    <p-tabPanel header="Corporation Report" leftIcon="pi pi-building mr-2">
+      <app-corporation-report></app-corporation-report>
+    </p-tabPanel>
+    <p-tabPanel header="Village Report" leftIcon="pi pi-home mr-2">
+      <app-village-panchayat-report></app-village-panchayat-report>
+    </p-tabPanel>
+        <p-tabPanel header="Municipality Report" leftIcon="pi pi-home mr-2">
+      <app-municipality-report></app-municipality-report>
+    </p-tabPanel>
+  </p-tabView>
+</div>

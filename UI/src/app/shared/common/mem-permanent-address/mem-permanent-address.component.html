@@ -1,0 +1,301 @@
+<!-- <form [formGroup]="addressPermForm" class="col-12">
+    <div class="outlayerdiv">
+        <div class="outlayerinnerdiv">
+            <h5 class="outlarheader">நிலையான முகவரி / Permanent Address
+            </h5>
+        </div>
+        <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+            <div class="p-formgrid grid ">
+                <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;"  >
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="doorNo">கதவு எண் / Door No
+                        </label>
+                        <input pInputText id="doorno" formControlName="doorNo" type="text" />
+                        <app-error-msg [control]="addressPermForm.get('doorNo')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="streetName">தெரு பெயர் / Street Name
+                        </label>
+                        <input pInputText formControlName="streetName" type="text" />
+                        <app-error-msg [control]="addressPermForm.get('streetName')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="district">மாவட்டம் / District
+                        </label>
+                        <p-dropdown [options]="formDetail?.district_SelectList ??[]" optionLabel="text"
+                            optionValue="value" placeholder="Select a District" formControlName="district"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="addressPermForm.get('district')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="taluk">தாலுக்கா / Taluk
+                        </label>
+                        <p-dropdown [options]="formDetail?.taluk_SelectList??[]" optionLabel="text" optionValue="value"
+                            placeholder="Select a Taluk" formControlName="taluk" [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="addressPermForm.get('taluk')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="villlageTownCity">கிராமம் / Village
+                        </label>
+                        <input pInputText formControlName="villlageTownCity" type="text" />
+                        <app-error-msg [control]="addressPermForm.get('villlageTownCity')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="pincode">பின்கோடு / Pincode
+                        </label>
+                        <p-dropdown [options]="formDetail?.pincode_SelectList??[]" optionLabel="text"
+                            optionValue="value" placeholder="Select a District" formControlName="pincode"
+                            [showClear]="true"[filter]="true"
+  filterBy="text"></p-dropdown>
+                        <app-error-msg [control]="addressPermForm.get('pincode')"></app-error-msg>
+                    </div>
+                                     <div *ngIf="addressPermForm.errors?.['combinedFieldsTooLong'] " class="text-danger">
+  Total length of all address fields should not exceed 150 characters.
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;">
+    <div class="field col-12">
+        <label htmlFor="isSame">Is Temporary Address same as Permanent Address? / நிலையான முகவரியும்
+            தற்காலிக முகவரியும் ஒன்றா?
+        </label>
+        <p-inputSwitch [(ngModel)]="isSame" (ngModelChange)="isameChange($event)" [style]="{'display':'flex'}" />
+    </div>
+</div>
+<form [formGroup]="addressForm" class="col-12" *ngIf="isSame==false">
+    <div class="outlayerdiv">
+        <div class="outlayerinnerdiv">
+            <h5 class="outlarheader">தற்காலிக முகவரி / Temporary Address
+            </h5>
+        </div>
+        <div class=" p-fluid" style="padding: 20px 0px 0px 0px;">
+            <div class="p-formgrid grid ">
+                <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;" *ngIf="formtempDetail">
+ 
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="doorNo">கதவு எண் / Door No
+                        </label>
+                        <input pInputText id="doorno" formControlName="doorNo" type="text" />
+                        <app-error-msg [control]="addressForm.get('doorNo')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="streetName">தெரு பெயர் / Street Name
+                        </label>
+                        <input pInputText formControlName="streetName" type="text" />
+                        <app-error-msg [control]="addressForm.get('streetName')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="district">மாவட்டம் / District
+                        </label>
+                        <p-dropdown [options]="formtempDetail.district_SelectList" optionLabel="text"
+                            optionValue="value" placeholder="Select a District" formControlName="district"
+                            [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="addressForm.get('district')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="taluk">தாலுக்கா / Taluk
+                        </label>
+                        <p-dropdown [options]="formtempDetail.taluk_SelectList" optionLabel="text" optionValue="value"
+                            placeholder="Select a Taluk" formControlName="taluk" [showClear]="true"></p-dropdown>
+                        <app-error-msg [control]="addressForm.get('taluk')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="villlageTownCity">கிராமம் / Village
+                        </label>
+                        <input pInputText formControlName="villlageTownCity" type="text" />
+                        <app-error-msg [control]="addressForm.get('villlageTownCity')"></app-error-msg>
+                    </div>
+                    <div class="field col-12  md:col-4  lg:col-4">
+                        <label htmlFor="pincode">பின்கோடு / Pincode
+                        </label>
+                        <p-dropdown [options]="formtempDetail.pincode_SelectList" optionLabel="text" optionValue="value"
+                            placeholder="Select a District" formControlName="pincode" [showClear]="true"[filter]="true"
+  filterBy="text"></p-dropdown>
+                        <app-error-msg [control]="addressForm.get('pincode')"></app-error-msg>
+                    </div>
+                                  <div *ngIf="addressForm.errors?.['combinedFieldsTooLong'] " class="text-danger">
+  Total length of all address fields should not exceed 150 characters.
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> -->
+<!-- <form [formGroup]="addressPermForm" class="address-wrapper">
+
+  <div class="address-card">
+
+    <div class="address-strip">
+      <span>
+        இது உங்களுடைய நிரந்தர முகவரியா? / Is this your permanent address?
+      </span>
+    </div>
+
+    <div class="address-grid"  >
+
+      <div class="field">
+        <label>முகவரி / Enter your address</label>
+        <input pInputText formControlName="streetName" placeholder="Enter your address">
+      </div>
+
+      <div class="field">
+        <label>மாவட்டம் / District</label>
+        <p-dropdown
+          [options]="formDetail?.district_SelectList ?? []"
+          optionLabel="text"
+          optionValue="value"
+          formControlName="district"
+          placeholder="Select District">
+        </p-dropdown>
+      </div>
+
+      <div class="field">
+        <label>அஞ்சல் குறியீடு / Pincode</label>
+        <p-dropdown
+          [options]="formDetail?.pincode_SelectList ?? []"
+          optionLabel="text"
+          optionValue="value"
+          formControlName="pincode"
+          placeholder="Select Pincode">
+        </p-dropdown>
+      </div>
+
+    </div>
+
+  </div>
+
+</form> -->
+<!-- <form [formGroup]="addressPermForm" class="address-wrapper">
+
+  <div class="address-strip">
+    
+    <p-checkbox [binary]="true" formControlName="isPermanent"></p-checkbox>
+
+    <span >
+      இது உங்களுடைய நிரந்தர முகவரியா? /
+      Is this your permanent address?
+    </span>
+
+  </div>
+
+  <div class="address-grid"  >
+
+    <div class="field">
+      <label>முகவரி / Enter your address</label>
+      <input pInputText formControlName="streetName">
+    </div>
+
+    <div class="field">
+      <label>மாவட்டம் / District</label>
+      <p-dropdown
+        [options]="formDetail?.district_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="district">
+      </p-dropdown>
+    </div>
+
+    <div class="field">
+      <label>அஞ்சல் குறியீடு / Pincode</label>
+      <p-dropdown
+        [options]="formDetail?.pincode_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="pincode">
+      </p-dropdown>
+    </div>
+
+  </div>
+
+</form> -->
+<form [formGroup]="addressPermForm" class="address-wrapper">
+  <div class="address-strip" [class.hidden-strip]="!aadhaarVerified">
+    <p-checkbox [binary]="true" formControlName="isPermanent"></p-checkbox>
+
+    <span>
+      இது உங்களுடைய நிரந்தர முகவரியா? / Is this your permanent address?
+    </span>
+  </div>
+
+  <div class="address-grid">
+    <!-- STREET NAME -->
+    <div class="field">
+      <label
+        >முகவரி / Enter your address <span class="fieldspan"> </span>
+        <span class="required-star"> *</span></label
+      >
+
+      <input
+        pInputText
+        formControlName="streetName"
+        placeholder="Enter address"
+        [ngClass]="{ 'invalid-input': isInvalid('streetName') }"
+      />
+
+      <small class="error-msg" *ngIf="isInvalid('streetName')">
+        Address Details are required. White space is not allowed.
+      </small>
+    </div>
+
+    <!-- DISTRICT -->
+    <div class="field">
+      <label>மாவட்டம் / District <span class="required-star"> *</span></label>
+
+      <p-dropdown
+        [options]="formDetail?.district_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="district"
+        placeholder="Select district"
+        [ngClass]="{ 'invalid-input': isInvalid('district') }"
+        [style.pointer-events]="isAadhar ? 'none' : 'auto'"
+        [style.opacity]="isAadhar ? 0.6 : 1"
+      >
+      </p-dropdown>
+
+      <small class="error-msg" *ngIf="isInvalid('district')">
+        District is required.
+      </small>
+    </div>
+
+    <!-- PINCODE -->
+    <div class="field">
+      <label
+        >அஞ்சல் குறியீடு / <span class="fieldspan">Pincode</span>
+        <span class="required-star"> *</span></label
+      >
+
+      <p-dropdown
+        [options]="formDetail?.pincode_SelectList ?? []"
+        optionLabel="text"
+        optionValue="value"
+        formControlName="pincode"
+        placeholder="Select pincode"
+        [ngClass]="{ 'invalid-input': isInvalid('pincode') }"
+        [style.pointer-events]="isAadhar ? 'none' : 'auto'"
+        [style.opacity]="isAadhar ? 0.6 : 1"
+      >
+      </p-dropdown>
+
+      <small class="error-msg" *ngIf="isInvalid('pincode')">
+        Pincode is required.
+      </small>
+    </div>
+  </div>
+  <div
+    class="error-msg"
+    *ngIf="addressForm.errors?.['combinedFieldsTooLong'] && addressForm.touched"
+  >
+    Total address length should not exceed 150 characters.
+  </div>
+</form>
+<!-- <div class="col-12 flex " style="justify-content: center;padding-bottom: 0px;" *ngIf="showNextButton">
+    <div style="margin-right: 10px;">
+        <p-button label="Next" class="p-button-secondary"
+            [style]="{'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','margin-right': '10px'}"
+            severity="secondary" (onClick)="save(true)" />
+    </div>
+</div> -->

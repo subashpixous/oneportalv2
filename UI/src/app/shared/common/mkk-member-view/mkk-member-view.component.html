@@ -1,0 +1,457 @@
+<div class="mkk-figma-wrapper">
+
+  <!-- ================= PERSONAL DETAILS ================= -->
+
+  <div class="f-card relative-card">
+
+    <div class="profile-avatar">
+      <img
+        [src]="personalDetail?.profile_Picture"
+        alt="Profile"
+        onerror="this.src='assets/default-profile.png'">
+    </div>
+
+    <div class="f-header">
+      உங்கள் விவரங்கள் / Your Details
+    </div>
+
+    <div class="f-body">
+
+      <div class="grid-layout-2 mb-compact align-center">
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.aadharNumber)">
+
+          <div class="lbl bold-lbl">
+            ஆதார் எண் / Aadhaar Number
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue flex align-center gap-1">
+
+            {{ personalDetail.aadharNumber }}
+
+            <i class="pi pi-check-circle text-green"></i>
+
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.phoneNumber)">
+
+          <div class="lbl bold-lbl">
+            கைப்பேசி எண் / Mobile Number
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue flex align-center gap-1">
+
+            {{ personalDetail.phoneNumber }}
+
+            <i class="pi pi-check-circle text-green"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid-layout-3">
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.firstName)">
+
+          <div class="lbl">
+            முதல் பெயர் / First Name
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ personalDetail.firstName }}
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.lastName)">
+
+          <div class="lbl">
+            கடைசி பெயர் / Last Name
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ personalDetail.lastName }}
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.fathersName)">
+
+          <div class="lbl">
+            தந்தை / பாதுகாவலர்
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ personalDetail.fathersName }}
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.gender)">
+
+          <div class="lbl">
+            பாலினம் / Gender
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ personalDetail.gender }}
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.dob)">
+
+          <div class="lbl">
+            பிறந்த தேதி / Date Of Birth
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ dc(personalDetail.dob) }}
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.maritalStatus)">
+
+          <div class="lbl">
+            திருமண நிலை
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ personalDetail.maritalStatus }}
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.community)">
+
+          <div class="lbl">
+            சமூகம்
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ personalDetail.community }}
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(personalDetail?.education)">
+
+          <div class="lbl">
+            கல்வி
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ personalDetail.education }}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ================= ADDRESS ================= -->
+
+  <div class="grid-layout-2 align-stretch">
+
+
+    <!-- Permanent -->
+
+    <div class="f-card">
+
+      <div class="f-header">
+        நிரந்தர முகவரி / Permanent Address
+      </div>
+
+      <div class="f-body">
+
+        <div class="blue-tick-box">
+          <i class="pi pi-check-square"></i>
+          இது உங்களுடைய நிரந்தர முகவரியா?
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(permanentAddress?.doorNo)">
+
+          <div class="lbl long-lbl">
+            முகவரி
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+
+            {{ permanentAddress.doorNo }},
+            {{ permanentAddress.streetName }},
+            {{ permanentAddress.villageorCity }}
+
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(permanentAddress?.district)">
+
+          <div class="lbl long-lbl">
+            மாவட்டம்
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ permanentAddress.district }}
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(permanentAddress?.pincode)">
+
+          <div class="lbl long-lbl">
+            அஞ்சல் குறியீடு
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ permanentAddress.pincode }}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Temporary -->
+
+    <div class="f-card">
+
+      <div class="f-header">
+        தற்போதைய முகவரி / Current Address
+      </div>
+
+      <div class="f-body">
+
+        <div class="blue-tick-box">
+          <i class="pi pi-check-square"></i>
+          இது உங்களுடைய தற்போதைய முகவரியா?
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(temporaryAddress?.doorNo)">
+
+          <div class="lbl long-lbl">
+            முகவரி
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+
+            {{ temporaryAddress.doorNo }},
+            {{ temporaryAddress.streetName }},
+            {{ temporaryAddress.villageorCity }}
+
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(temporaryAddress?.district)">
+
+          <div class="lbl long-lbl">
+            மாவட்டம்
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ temporaryAddress.district }}
+          </div>
+
+        </div>
+
+
+        <div class="kv-pair"
+             *ngIf="hasValue(temporaryAddress?.pincode)">
+
+          <div class="lbl long-lbl">
+            அஞ்சல் குறியீடு
+          </div>
+
+          <div class="colon">:</div>
+
+          <div class="val-blue">
+            {{ temporaryAddress.pincode }}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ================= BANK ================= -->
+
+  <div class="f-card">
+
+    <div class="f-header">
+      வங்கி விவரங்கள் / Bank Details
+    </div>
+
+    <div class="f-body">
+
+      <div class="grid-layout-3">
+
+        <div class="kv-pair" *ngIf="hasValue(bankDetail?.ifsc)">
+          <div class="lbl">IFSC</div>
+          <div class="colon">:</div>
+          <div class="val-blue">{{ bankDetail.ifsc }}</div>
+        </div>
+
+        <div class="kv-pair" *ngIf="hasValue(bankDetail?.bankName)">
+          <div class="lbl">Bank Name</div>
+          <div class="colon">:</div>
+          <div class="val-blue">{{ bankDetail.bankName }}</div>
+        </div>
+
+        <div class="kv-pair" *ngIf="hasValue(bankDetail?.accountNumber)">
+          <div class="lbl">Account Number</div>
+          <div class="colon">:</div>
+          <div class="val-blue">{{ bankDetail.accountNumber }}</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ================= FAMILY ================= -->
+
+  <div class="f-card">
+
+    <div class="f-header">
+      குடும்ப விவரங்கள் / Family Member Details
+    </div>
+
+    <div class="f-body p-0">
+
+      <table class="figma-tbl">
+
+        <thead>
+
+          <tr>
+
+            <th>Name</th>
+            <th>Relation</th>
+            <th>Gender</th>
+            <th>Age</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let fam of familyMemberList">
+
+            <td>{{ fam.name || '-' }}</td>
+            <td>{{ fam.relationShip || '-' }}</td>
+            <td>{{ fam.gender || '-' }}</td>
+            <td>{{ fam.age || '-' }}</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ================= DECLARATION ================= -->
+
+<div class="dec-box mt-3 mb-2">
+    <div class="dec-badge"><i class="pi pi-file"></i> Declaration</div>
+    <div class="dec-list">
+      <p>1. நான் மத்திய அரசு, மாநில அரசு அல்லது உள்ளாட்சி அமைப்புகளின் கீழ் நிரந்தர அரசுப் பணியில் பணியாற்றவில்லை என்று இதன்மூலம் அறிவிக்கிறேன் / I hereby declare that I am not employed in a permanent Government post under Central, State, or Local Body services.</p>
+      <p>2. நிரந்தர அரசுப் பணியில் உள்ளவர்கள் தமிழ்நாடு தூய்மைப் பணியாளர் நல வாரியம் (TNCWWB) உறுப்பினராக சேர தகுதி இல்லை என்பதை நான் புரிந்துகொள்கிறேன் / I understand that permanent Government employees are not eligible for membership under the Tamil Nadu Cleanliness Workers Welfare Board (TNCWWB).</p>
+      <p>3. நான் வழங்கிய தகவல்கள் அனைத்தும் உண்மையானவை மற்றும் சரியானவை என்பதை உறுதிப்படுத்துகிறேன். இதில் ஏதேனும் தவறான தகவல் இருப்பது கண்டறியப்பட்டால், எனது உறுப்பினர் பதிவு மற்றும் பெற்ற நலன்கள் ரத்து செய்யப்படலாம் என்பதை ஏற்றுகொள்கிறேன் / I further confirm that the information provided by me is true and correct. If found otherwise, my membership and any benefits availed are liable to be cancelled.</p>
+    </div>
+<div class="dec-agree">
+      <i *ngIf="declarationChecked" class="pi pi-check-square orange-tick"></i>
+      
+      <i *ngIf="!declarationChecked" class="pi pi-stop disabled-box"></i>
+      
+      <span>நான் ஒப்புக்கொள்கிறேன் / I agree</span>
+    </div>
+  </div>
+
+
+</div>

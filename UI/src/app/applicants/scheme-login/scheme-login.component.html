@@ -1,0 +1,378 @@
+<div class="registration-container">
+<div class="grid align-items-start justify-content-center registration-grid">
+
+    <div class="col-10 lg:col-5">
+<div class="left-wrapper">
+  <div class="doc-header">
+    <i class="bi bi-file-earmark-text"></i>
+    தொடங்குவதற்கு முன் இந்த ஆவணங்களைத் தயாராக வைத்திருங்கள். / 
+    KEEP THESE DOCUMENTS READY BEFORE APPLYING
+  </div>
+
+  <div class="doc-card">
+    <div class="doc-title-main">
+      <div>Please keep the following documents ready before starting your application:</div>
+    </div>
+    
+    <hr class="divider-line">
+
+    <div *ngIf="requiredDocuments.length === 0" class="mt-3 text-gray-500">
+      Loading required documents...
+    </div>
+
+    <ng-container *ngFor="let group of requiredDocuments">
+      <div class="doc-title mt-3">
+  {{ schemeGroupNameDisplay }}
+
+      </div>
+
+      <ul class="doc-list">
+        <li *ngFor="let doc of group.requiredDocumentCategory">
+          {{ doc.categoryName }}
+          <span *ngIf="doc.applicableDocuments && doc.applicableDocuments.length > 0" style="font-size: 12px; color: #666;">
+            (e.g., {{ doc.applicableDocuments.join(', ') }})
+          </span>
+        </li>
+      </ul>
+    </ng-container>
+<div class="reference-images-container mt-4" *ngIf="displayImages.length > 0">
+  <div class="reference-title mb-2" style="font-weight: 600; color: #0F5169;">
+    Reference Images / குறிப்பு படங்கள்:
+  </div>
+
+  <div class="image-preview-box" (click)="openImageModal()">
+    
+    <div class="preview-item" *ngIf="displayImages.length > 0">
+      <img [src]="displayImages[0]" alt="Reference Document 1" />
+    </div>
+
+    <div class="preview-item" *ngIf="displayImages.length > 1">
+      <img [src]="displayImages[1]" alt="Reference Document 2" />
+      
+      <div class="more-overlay" *ngIf="displayImages.length > 2">
+        <span>+{{ displayImages.length - 2 }} More</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
+    </div>
+
+
+    <div class="col-10 lg:col-5">
+      <div class="form-card p-fluid">
+
+        <div class="info-box-right mb-4" *ngIf="!showOtpScreen">
+          <i class="pi pi-exclamation-circle info-icon"></i>
+          <div class="info-text">
+            <span>திட்டங்களை பயன்படுத்த நீங்கள் பதிவு செய்யப்பட்ட உறுப்பினராக இருக்க வேண்டும் /</span><br>
+            <span>You must be a registered member to use the schemes.</span>
+          </div>
+        </div>
+
+        <div class="field mt-2" *ngIf="!showOtpScreen">
+          <label class="form-label">
+            உங்கள் கைப்பேசி எண் உள்ளிடவும் / Enter your Mobile Number
+          </label>
+
+          <small class="sub-text block mb-2">
+            10 இலக்க கைபேசி எண்ணை உள்ளிடவும் / Type your 10-digit Mobile number
+          </small>
+
+          <input pInputText
+                 [(ngModel)]="inputValue"
+                 [maxlength]="10"
+                 placeholder="123 987 1203"
+                 class="w-full custom-input"
+                 (input)="validateInput()" />
+
+          <small *ngIf="errorMessage" class="error-text mt-1 block">
+            {{ errorMessage }}
+          </small>
+        </div>
+
+        <div class="button-group" *ngIf="!showOtpScreen">
+          <button pButton
+                  label="Get OTP"
+                  (click)="getOtp()"
+                  class="generate-btn">
+          </button>
+
+          <button pButton
+                  label="Back"
+                  (click)="goback()"
+                  class="back-btn">
+          </button>
+
+          <div class="text-center mt-4 text-sm" *ngIf="!showOtpScreen">
+  நீங்கள் உறுப்பினராக இல்லையெனில் / If you are not a member. <br>
+  <a routerLink="/applicant/mem-detail/0/0" style="color: #0F5169; font-weight: bold; text-decoration: none;">Register Now</a>
+</div>
+        </div>
+
+        <div *ngIf="showOtpScreen" class="otp-section">
+          <div class="otp-title">
+            Please enter the OTP sent to the mobile number
+          </div>
+
+          <div class="masked-number">
+            {{ maskedValue }}
+          </div>
+
+          <div class="otp-container">
+            <input
+              *ngFor="let digit of otpDigits; let i = index; trackBy: trackByIndex"
+              type="text"
+              inputmode="numeric"
+              maxlength="1"
+              class="otp-input"
+              [value]="otpDigits[i]"
+              (input)="onOtpInput($event, i)"
+              (keydown)="onOtpKeyDown($event, i)"
+            />
+          </div>
+
+          <div class="otp-footer">
+            <div class="timer">
+              0:{{ otpTimer < 10 ? '0' + otpTimer : otpTimer }}
+            </div>
+            <div
+              class="resend"
+              [class.disabled]="otpTimer > 0"
+              (click)="resendOtp()">
+              Resend OTP?
+            </div>
+          </div>
+
+          <button pButton
+                  label="Verify OTP"
+                  (click)="verifyOtp()"
+                  class="generate-btn w-full mt-3">
+          </button>
+
+          <button pButton
+                  label="Back"
+                  (click)="resetOtpScreen()"
+                  class="back-btn w-full mt-2">
+          </button>
+        </div>
+
+        <p-dialog
+          [(visible)]="showSuccessPopup"
+          [modal]="true"
+          [closable]="false"
+          [draggable]="false"
+          [style]="{width:'400px'}"
+          styleClass="success-popup">
+
+          <div class="popup-content success">
+            <i class="pi pi-check-circle"></i>
+            <h3>OTP Verified Successfully</h3>
+
+            <button pButton
+                    label="Continue"
+                    (click)="goNextPage()"
+                    class="continue-btn">
+            </button>
+          </div>
+        </p-dialog>
+
+        <p-dialog
+          [(visible)]="showErrorPopup"
+          [modal]="true"
+          [closable]="false"
+          [draggable]="false"
+          [style]="{width:'400px'}"
+          styleClass="error-popup">
+
+          <div class="popup-content error">
+            <i class="pi pi-exclamation-circle"></i>
+            <h3>Error</h3>
+            <p>OTP verification failed. Please verify and re-enter the 6 digits OTP</p>
+
+            <button pButton
+                    label="Try Again"
+                    (click)="showErrorPopup=false"
+                    class="try-btn">
+            </button>
+          </div>
+        </p-dialog>
+
+      </div>
+    </div>
+  </div>
+</div>
+<p-dialog [(visible)]="showImageModal" 
+          [modal]="true" 
+          header="Reference Documents" 
+          [style]="{ width: '70vw', zIndex: 10000 }" 
+          [maximizable]="true" 
+          [draggable]="false" 
+          [resizable]="false"
+          styleClass="reference-dialog">
+  
+  <div class="grid">
+    <div class="col-12 md:col-6 lg:col-4 p-3 text-center" *ngFor="let img of displayImages">
+      <img [src]="img" alt="Document" class="w-full shadow-2 border-round" style="max-height: 400px; object-fit: contain; background: #f8f9fa;" />
+    </div>
+  </div>
+
+</p-dialog>
+
+
+<p-dialog 
+  [(visible)]="showFamilyPromptPopup" [modal]="true" 
+  [closable]="false" 
+  [draggable]="false" 
+  [style]="{width: '500px'}" 
+  styleClass="family-verify-dialog">
+
+  <div class="family-verify-content">
+    <div class="info-icon-circle"><i class="pi pi-info"></i></div>
+    <h2 class="verify-title">Family Members Verification</h2>
+    <p class="verify-message">
+      Your family member details have been updated. Please verify the details and remove duplicate entries
+    </p>
+
+    <div class="verify-actions">
+      <button pButton label="Cancel" 
+              (click)="showFamilyPromptPopup = false; navigateToTarget()" 
+              class="verify-cancel-btn"></button>
+      
+      <button pButton label="Verify" 
+              (click)="onVerifyClick()" 
+              class="verify-confirm-btn"></button>
+    </div>
+  </div>
+</p-dialog>
+<p-dialog 
+  [(visible)]="showFamilyTablePopup" [modal]="true" 
+  [closable]="false" 
+  [draggable]="false" 
+  [style]="{width: '95vw', maxWidth: '1400px'}" 
+  styleClass="family-table-dialog">
+  <div class="family-table-content">
+    <h2 class="table-title">Verify Family Members</h2>
+
+    <div class="table-container">
+      <table class="figma-table">
+        <thead>
+          <tr>
+            <th>Name /<br>பெயர்</th>
+            <th>Aadhaar Number /<br>ஆதார் எண்</th>
+            <th>Mobile Number /<br>கைப்பேசி எண்</th>
+            <th>Relationship /<br>உறவு</th>
+            <th>Gender /<br>பாலினம்</th>
+            <th>Age /<br>வயது</th>
+            <th>School/ College<br>பள்ளி / கல்லூரி</th>
+            <th>Details /<br>விவரங்கள்</th>
+            <th>Are they differently abled? /<br>இவர் மாற்றுத்திறனாளியா?</th>
+            <th>Action /<br>செயல்</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let member of familyMembersList">
+            <td><div class="cell-box">{{ member.name || member.first_Name || 'N/A' }}</div></td>
+            <td><div class="cell-box">{{ member.aadharNumber || 'Null' }}</div></td>
+            <td><div class="cell-box">{{ member.mobileNumber || member.phone_number || 'Null' }}</div></td>
+            <td><div class="cell-box">{{ member.relationString || 'Null' }}</div></td>
+            <td><div class="cell-box">{{ member.sexString || 'Null' }}</div></td>
+            <td><div class="cell-box">{{ member.age || 'Null' }}</div></td>
+            <td><div class="cell-box">{{ member.college_Status || member.school_Status || 'NA' }}</div></td>
+<td>
+      <button class="more-btn" (click)="openMore(member, $event)">More <span>⋮</span></button>
+    </td>
+            <td><div class="cell-box">No</div></td>
+<td>
+  <button class="delete-btn" (click)="deleteFamilyMember(member, $event)"><i class="pi pi-trash"></i></button>
+</td>
+          </tr>
+
+          <tr *ngIf="familyMembersList.length === 0">
+            <td colspan="10" class="text-center p-4" style="color: #666;">No family members found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="education-popover" *ngIf="showMorePopup"
+         [style.top.px]="popupPosition.top" 
+         [style.left.px]="popupPosition.left">
+      <div class="popover-title">
+        Education Details
+        <span style="float:right; cursor:pointer;" (click)="closeMore()">
+          <i class="pi pi-times"></i> </span>
+      </div>
+
+      <ng-container *ngIf="selectedMember?.school_Status?.toUpperCase() === 'SCHOOL' || selectedMember?.college_Status?.toUpperCase() === 'SCHOOL'">
+        <div class="popover-field">
+          <label>EMIS Number</label>
+          <div class="value">{{ selectedMember?.school_EmisNo || "-" }}</div>
+        </div>
+        <div class="popover-field">
+          <label>School Name</label>
+          <div class="value">{{ selectedMember?.school_Name || "-" }}</div>
+        </div>
+        </ng-container>
+
+      <ng-container *ngIf="selectedMember?.college_Status?.toUpperCase() === 'COLLEGE' || selectedMember?.school_Status?.toUpperCase() === 'COLLEGE'">
+        <div class="popover-field">
+          <label>Course</label>
+          <div class="value">{{ selectedMember?.college_Course || "-" }}</div>
+        </div>
+        <div class="popover-field">
+          <label>College Name</label>
+          <div class="value">{{ selectedMember?.college_Name || "-" }}</div>
+        </div>
+        </ng-container>
+    </div>
+
+    <div class="dialog-footer">
+      <button pButton label="Cancel" class="cancel-btn" (click)="finalVerifyAction()"></button>
+      <button pButton label="Yes, Correct" class="confirm-btn" (click)="finalVerifyAction()"></button>
+    </div>
+  </div>
+</p-dialog>
+<p-dialog 
+  [(visible)]="showDeleteConfirmModal" 
+  [modal]="true" 
+  [closable]="false" 
+  [draggable]="false" 
+  [style]="{width: '500px'}" 
+  styleClass="delete-confirm-dialog">
+  
+  <div class="delete-confirm-content">
+    <div class="trash-icon-circle">
+      <i class="pi pi-trash"></i>
+    </div>
+    
+    <p class="confirm-message">
+      Are you sure you want to delete this family member? Once deleted, the record cannot be restored.
+    </p>
+
+    <div class="confirm-actions">
+      <button pButton label="Cancel" class="cancel-btn" (click)="cancelDelete()"></button>
+      <button pButton label="Delete" class="delete-btn-action" [loading]="isDeleting" (click)="confirmDelete()"></button>
+    </div>
+  </div>
+</p-dialog>
+<p-dialog 
+  [(visible)]="showActionSuccessPopup" 
+  [modal]="true" 
+  [closable]="false" 
+  [draggable]="false" 
+  [style]="{width: '450px'}" 
+  styleClass="action-success-dialog">
+  
+  <div class="action-success-content">
+    <div class="success-icon-circle">
+      <i class="pi pi-check"></i>
+    </div>
+    
+    <p class="success-message" [innerHTML]="actionSuccessMessage"></p>
+
+    <button pButton label="Continue" class="continue-outline-btn" (click)="onActionSuccessContinue()"></button>
+  </div>
+</p-dialog>

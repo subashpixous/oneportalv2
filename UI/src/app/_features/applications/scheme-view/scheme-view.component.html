@@ -1,0 +1,26 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col mb-2">
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+            <button pButton pRipple printTitle="Application" styleSheetFile="assets/printcss/printstylesteet.css"
+                [closeWindow]="false" [openNewTab]="true" [style]="{'float': 'right', 'margin-right':'10px'}"
+                [useExistingCss]="true" type="button" label="Print" ngxPrint printSectionId="dwemo"
+                class="p-button-primary"></button>
+        </div>
+    </div>
+    <div class="mb-3">
+       <app-current-user-time *ngIf="memberDetails"
+        [memberID]="memberDetails.memberDetail.memberId !='' ? memberDetails.memberDetail.memberId :memberDetails.memberDetail.firstName+' ' +memberDetails.memberDetail.lastName "></app-current-user-time>
+        <app-mem-scheme-view [schemeDetails]="schemeDetails" [memberDetails]="memberDetails"></app-mem-scheme-view>
+    </div>
+    <div style="display:none;">
+        <div class="mb-3" id="dwemo">
+            <app-mem-scheme-view-print [schemeDetails]="schemeDetails"
+                [memberDetails]="memberDetails"></app-mem-scheme-view-print>
+        </div>
+    </div>
+</div>

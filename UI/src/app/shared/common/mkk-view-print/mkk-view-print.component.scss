@@ -1,0 +1,60 @@
+html, body, h1, h2, h3, h4, p, img { margin: 0;} /* margin reset*/
+h1{font-size: 18pt; font-weight: 500; margin-bottom: 0.5cm;}
+h2{font-size: 16pt; font-weight: 500;}
+p{font-size: 12pt;}
+
+.items-group {
+  border-style: solid;
+  border-color: black;
+  border-width: 1pt 1pt 1pt 1pt;
+  border-radius: 5pt;
+  padding: 3pt 3pt 3pt 3pt;
+  margin: 9pt 0 9pt 0;
+}
+
+.logotipo {
+  width: 6cm;
+  height: 4cm;
+  margin: -0.5cm;
+}
+
+.label { font-weight: 500;}
+
+.disclaimer, .address p {
+  font-size: 10pt;
+  padding: 10px;
+}
+
+.signature-field {
+  padding-bottom: 24pt;
+  border-bottom: solid black 1pt;
+}.imagediv{
+    display:flex; justify-content: center;
+}
+.imgsize{
+    width:75px;height:75px;
+}
+.schenamestyle{
+    font-weight: bold !important;
+    color: #1B729D !important; 
+    font: caption;
+    font-size: x-large;
+}
+@page {
+  margin-bottom: 1cm;
+  margin-top: 1cm;
+}
+
+/*You can add this as an extra for compatibility*/
+@media print {
+  body {
+    margin-top: 1cm !important;
+    margin-bottom: 1cm !important;
+    margin-left: 0.3cm !important;
+    margin-right: 0.3cm !important;
+  }
+  .items-group {
+    page-break-inside: avoid; /* For older browsers */
+    break-inside: avoid; /* For modern browsers */
+  }
+} 

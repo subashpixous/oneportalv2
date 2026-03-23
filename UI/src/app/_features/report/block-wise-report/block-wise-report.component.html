@@ -1,0 +1,65 @@
+<!-- <div class="card noborderRad p-3">
+  <div class="grid formgrid mb-3">
+    <div class="col-12 lg:col-4 md:col-4">
+      <h4>{{ title }}</h4>
+    </div>
+  </div>
+
+  <div class="p-fluid" style="padding: 20px 0">
+    <div class="p-formgrid grid" style="align-items: end">
+      <div class="col-12 lg:col-3 md:col-3">
+        <label>District</label>
+        <p-dropdown
+          [options]="districts"
+          placeholder="Select District"
+          [(ngModel)]="selectedDistrict"
+          [showClear]="true"
+        ></p-dropdown>
+      </div>
+
+      <div class="col-12 lg:col-3 md:col-3">
+        <label>Block</label>
+        <p-dropdown
+          [options]="blocks"
+          placeholder="Select Block"
+          [(ngModel)]="selectedBlock"
+          [showClear]="true"
+        ></p-dropdown>
+      </div>
+
+      <div class="col-6 lg:col-2 md:col-2">
+        <button pButton pRipple class="p-button-primary p-button-sm" icon="pi pi-arrow-right"
+          label="Generate" (click)="generate()"></button>
+      </div>
+      <div class="col-6 lg:col-2 md:col-2">
+        <button pButton pRipple label="Reset" class="p-button-secondary p-button-sm"
+          icon="pi pi-times" (click)="clearFilter()"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 mt-3" *ngIf="filteredReports.length">
+    <app-datatable-pagination
+      [records]="filteredReports"
+      [cols]="cols"
+      [rows]="rows"
+      [fileName]="'Block_Report'"
+      [defaultSortField]="'district'"
+      [defaultSortOrder]="1"
+      [actions]="[]"
+      [searchableColumns]="['district','block']"
+      [hasActiveInactive]="false"
+      [canShowAction]="false"
+    >
+=      <ng-template let-row pTemplate="body" let-i="rowIndex">
+        <tr>
+          <td>{{ row.district }}</td>
+          <td>
+            <a href="#" (click)="showDetails(row)">{{ row.block }}</a>
+          </td>
+          <td>{{ row.total }}</td>
+        </tr>
+      </ng-template>
+    </app-datatable-pagination>
+  </div>
+</div> -->

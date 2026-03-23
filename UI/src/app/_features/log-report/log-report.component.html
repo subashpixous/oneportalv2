@@ -1,0 +1,70 @@
+ <!-- Updated by sivasankar On 11/12/2025 for user log report -->
+<div class="card noborderRad">
+    <div class="col-12 lg:col-4 md:col-4 mb-2">
+      <h4>{{ title }}</h4>
+    </div>
+  <!-- 🔹 Filters Row -->
+  <div class="col-12 mb-3">
+    <div class="filters-row">
+
+
+      <!-- Role -->
+      <p-dropdown
+        [options]="roles"
+        optionLabel="text"
+        optionValue="value"
+        [(ngModel)]="selectedRole"
+        placeholder="Role"
+        [showClear]="true"
+        (onChange)="onRoleChange()"
+          pTooltip="Roles">
+      </p-dropdown>
+    <!-- Event Type -->
+    <p-dropdown
+      [options]="eventTypes"
+      optionLabel="label"
+      optionValue="value"
+      [(ngModel)]="selectedEventType"
+      placeholder="Event Type"
+      [showClear]="true"
+      (onChange)="onEventTypeChange()"
+      pTooltip="Event Types">
+    </p-dropdown>
+
+      <!-- Generate -->
+      <button
+        pButton
+        icon="pi pi-arrow-right"
+        class="p-button-secondary"
+        (click)="loadData()">
+      </button>
+
+      <!-- Reset -->
+      <button
+        pButton
+        icon="pi pi-times"
+        class="p-button-outlined"
+        (click)="reset()">
+      </button>
+
+    </div>
+  </div>
+
+  <!-- 🔹 Table -->
+  <app-datatable-pagination
+    [records]="logs"
+    [cols]="cols"
+    [rows]="rows"
+    [total]="total"
+    [excelExport]="true"
+    [fileName]="'User_Last_Activity'"
+    [normallyExportedData]="true"
+    [canShowAction]="false"
+    (changefilter)="changefilter($event)"
+    (exportRequest)="onExportRequest($event)"
+   >
+  </app-datatable-pagination>
+
+</div>
+
+<p-toast></p-toast>

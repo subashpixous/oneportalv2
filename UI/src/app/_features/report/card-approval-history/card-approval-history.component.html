@@ -1,0 +1,115 @@
+
+
+<div class="card noborderRad">
+  <div class="grid formgrid">
+    <div class="col-12 lg:col-4 md:col-4 mb-2">
+      <h4>{{ title }}</h4>
+    </div>
+    <div class="col-12 lg:col-4 md:col-4 mb-2"></div>
+
+    <div class="col-12 row lg:col-12 md:col-12 flex">
+      <!-- Year filter -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <p-dropdown
+          [options]="datefilter"
+          optionLabel="text"
+          optionValue="value"
+          [style]="{ width: '100%' }"
+          placeholder="Select a Date Range"
+          [(ngModel)]="selecteddatefilter"
+          (onChange)="onYearChange($event.value)"
+          
+        ></p-dropdown>
+      </div>
+
+       <!-- From Date -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <p-calendar
+          [(ngModel)]="fromDate"
+          [maxDate]="toDate!"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+        ></p-calendar>
+      </div>
+
+      <!-- To Date -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <p-calendar
+          [(ngModel)]="toDate"
+          [minDate]="fromDate!"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+        ></p-calendar>
+      </div>
+
+      <!-- Districts -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <p-multiSelect
+          [options]="districts"
+          optionLabel="text"
+          optionValue="value"
+          [style]="{ width: '100%' }"
+          placeholder="Select District"
+          [(ngModel)]="selectedDistricts"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Status -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <p-multiSelect
+          [options]="statuses"
+          optionLabel="text"
+          optionValue="value"
+          [style]="{ width: '100%' }"
+          placeholder="Select Status"
+          [(ngModel)]="selectedStatuses"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Buttons -->
+      <div class="col-12 lg:col-2 md:col-2">
+        <button
+          pButton
+          pRipple
+          class="p-button-secondary"
+          icon="pi pi-arrow-right"
+          (click)="generate()"
+        ></button>
+        <p-button
+          icon="pi pi-times"
+          [outlined]="true"
+          (click)="reset()"
+          [style]="{ 'margin-left': '10px' }"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="mb-3 mt-3">
+    <div class="row">
+      <app-datatable-pagination
+        [records]="configurationList"
+        [defaultSortField]="defaultSortField"
+        [defaultSortOrder]="defaultSortOrder"
+        [cols]="cols"
+        [fileName]="'Applications'"
+        [rows]="rows"
+        [total]="total"
+       [canShowAction]="false"
+        [defaultstatus]="!currentStatus"
+        (changeStatus)="changeStatus($event)"
+        [searchableColumns]="searchableColumns"
+        [hasActiveInactive]="false"
+        (changefilter)="changefilter($event)"
+        [excelExport]="true"
+        (exportRequest)="onExportRequest($event)"
+      >
+      </app-datatable-pagination>
+      <!-- modified by Sivasankar on 06-11-2025 for export functionality -->
+    </div>
+  </div>
+  <p-toast></p-toast>
+</div>
+
+

@@ -1,0 +1,66 @@
+<div class="card p-3">
+   <div>
+      <h4>Find Duplicate Members</h4>
+    </div>
+  <!-- Filters and Delete Button -->
+  <div class="flex justify-content-between align-items-center mb-3 flex-wrap">
+    <!-- Title -->
+   
+
+    <!-- District Filter -->
+    <div class="flex align-items-center gap-2">
+      <p-multiSelect
+        [options]="districts"
+        optionLabel="text"
+        optionValue="value"
+        [(ngModel)]="selectedDistricts"
+        placeholder="Select Districts"
+        (onChange)="onDistrictChange()"
+        [style]="{ width: '200px' }"
+      ></p-multiSelect>
+      <button
+        pButton
+        type="button"
+        label="Clear"
+        class="p-button-secondary"
+        (click)="onClearDistricts()"
+      ></button>
+    </div>
+
+    <!-- Delete Button -->
+    <div>
+      <button
+        pButton
+        type="button"
+        label="Delete Selected"
+        icon="pi pi-times"
+        class="p-button-danger"
+        [disabled]="!selectedRows.length"
+        (click)="deleteSelectedRows()"
+      ></button>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <app-datatable-pagination
+    [records]="configurationList"
+    [cols]="cols"
+    [rows]="rows"
+    [fileName]="'DuplicateMembers'"
+    [total]="total"
+    [actions]="actions"
+    [selectedRows]="selectedRows"
+    [canShowCheckbox]="true"
+    (invokeAction)="actioInvoked($event)"
+    (changefilter)="changefilter($event)"
+    (actionalAction)="actionalAction($event)"
+    (selectedApplications)="onSelectedApplications($event)"
+        [exportedData]="exportedData"
+      (exportRequest)="onExportRequest($event)"
+  >
+  </app-datatable-pagination>
+   <!-- modified by Sivasankar on 31-10-2025 for export functionality -->
+</div>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>

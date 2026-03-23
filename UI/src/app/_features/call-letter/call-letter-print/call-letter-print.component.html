@@ -1,0 +1,109 @@
+<div>
+    <div class="row" style="border-bottom: 4px #1B729D solid;">
+        <div class="col-3 imagediv">
+            <img src="../../../assets/LogoImages/logo_tn_govt.png" class="img-responsive imgsize">
+        </div>
+        <div class="logo_txt col-6">
+            <div style="text-align: center;">
+                <h5 style=" margin-bottom: 2px !important; margin-top: 2px !important;">
+                    முன்னாள் படைவீரர்&nbsp;நலத்துறை, தமிழ்நாடு அரசு</h5>
+                <h6 class=" " style="margin-bottom: 2px !important; margin-top: 2px !important;">
+                    DEPARTMENT OF
+                    EX-SERVICEMEN’S WELFARE</h6>
+                <h6 style="margin-bottom: 2px !important; margin-top: 2px !important;">
+                    GOVERNMENT OF TAMILNADU
+                </h6>
+            </div>
+        </div>
+        <div class="col-3 imagediv"><img src="../../../assets/LogoImages/tncwwblogo.png" class="img-responsive imgsize">
+        </div>
+    </div>
+    <h5>Call Letter Details</h5>
+    <div class="col-12" style="display: flex; flex-wrap: wrap;">
+        <div class="col-6 p-0 p-0">
+            <p>Scheme: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.schemeName
+                    ?this.callLetterDetails.schemeName:"-"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>District: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.districtName
+                    ?this.callLetterDetails.districtName:"-"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Status: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.meetingStatusName
+                    ?this.callLetterDetails.meetingStatusName:"-"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Meeting Date: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.meetingDate
+                    ?dc(this.callLetterDetails.meetingDate) :"-"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Starts From: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.meetingTimeFrom
+                    ?dcwot(this.callLetterDetails.meetingTimeFrom):"-"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Ends at: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.meetingTimeTo
+                    ?dcwot(this.callLetterDetails.meetingTimeTo):"-"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Venue: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.venue
+                    ?this.callLetterDetails.venue:"-"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Call Letter Name: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.callletterName
+                    ?this.callLetterDetails.callletterName:"-"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Call Letter Subject: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.callletterSubject
+                    ?this.callLetterDetails.callletterSubject:"-"}}</span> </p>
+        </div>
+        <div class="col-6 p-0 p-0">
+            <p>Comment: <span style="font-weight: bold;">{{this.callLetterDetails &&
+                    this.callLetterDetails.comments
+                    ?this.callLetterDetails.comments:"-"}}</span> </p>
+        </div>
+    </div>
+    <h5>Applicants
+    </h5>
+    <div class="col-12">
+        <table class="">
+            <thead>
+                <tr>
+                    <th style="width: 10%">S.No
+                    </th>
+                    <th style="width: 10%">Status
+                    </th>
+                    <th style="width: 10%">Name
+                    </th>
+                    <th style="width: 10%">Email
+                    </th>
+                    <th style="width: 10%">Mobile
+                    </th>
+                    <th style="width: 40%">Notes
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="configurationList && configurationList.length>0; else norecwords">
+                <tr *ngFor="let itemrow of configurationList ; let i=index;let l=last">
+                    <td>{{i+1}}</td>
+                    <td>{{itemrow.isSentString}}</td>
+                    <td>{{itemrow.applicantName}}</td>
+                    <td>{{itemrow.email}}</td>
+                    <td>{{itemrow.mobile}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <ng-template #norecwords>
+                <p style="padding-top: 20px;">No records</p>
+            </ng-template>
+        </table>
+    </div>
+</div>

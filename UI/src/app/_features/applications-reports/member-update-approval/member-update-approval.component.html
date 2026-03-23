@@ -1,0 +1,430 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col">
+            <button pButton pRipple label="Back" class="p-button-secondary" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+        </div>
+    </div>
+    <app-current-user-time *ngIf="memberDetail"
+        [memberID]="memberDetail.memberId !='' ? memberDetail.memberId :memberDetail.firstName+' ' +memberDetail.lastName "></app-current-user-time>
+
+    <div class="mb-3" *ngIf="memberDetail">
+
+        <app-mem-personal-detail-view [personalDetail]="memberDetail"></app-mem-personal-detail-view>
+    </div>
+    <div class="mb-3" *ngIf="MemberDiffViewModel && approvalformDetail">
+        <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;">
+            <div class="p-formgrid grid ">
+                <div class="col-12"
+                    *ngIf="(approvalformDetail.changeRequestCode =='MEMBER_WHOLE_DATA' || approvalformDetail.changeRequestCode =='MEMBER_ORGANIZATION') &&(MemberDiffViewModel.organizationalDetail_Temp ||MemberDiffViewModel.organizationalDetail)">
+                    <h5 class="divhighligher" style="width: inherit;">நிறுவன விவரங்கள் மாற்றம் / Organization details
+                        change </h5>
+                    <div class="col-12 row ">
+                        <div class="card">
+                            <p-table [columns]="cols"
+                                [value]="generatePivotTable(MemberDiffViewModel.organizationalDetail,MemberDiffViewModel.organizationalDetail_Temp)"
+                                [ngClass]="'diff-table'" [tableStyle]="{ 'min-width': '50rem' }">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [class.changed]="rowData['hasChanged']" *ngIf="getCanShow(rowData)">
+                                        <td *ngFor="let col of columns">
+                                            <div
+                                                *ngIf="col.field !='Is Temp' || col.field !='Is Submitted'|| col.field !='Is New Member'">
+
+                                                <div *ngIf="col.field=='field' ; else otherfield">
+                                                    {{ splitCamelCaseLabel( rowData[col.field]) }}
+                                                </div>
+                                                <ng-template #otherfield>
+                                                    {{ rowData[col.field] }}
+                                                </ng-template>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12"
+                    *ngIf="(approvalformDetail.changeRequestCode =='MEMBER_WHOLE_DATA' || approvalformDetail.changeRequestCode =='MEMBER_DETAIL') &&(MemberDiffViewModel.memberDetail_Temp || MemberDiffViewModel.memberDetail)">
+                    <h5 class="divhighligher" style="width: inherit;">தனிப்பட்ட விவரங்கள் மாற்றம் / Personal details
+                        change </h5>
+                    <div class="col-12 row ">
+                        <div class="card">
+                            <p-table [columns]="cols"
+                                [value]="generatePivotTable(MemberDiffViewModel.memberDetail,MemberDiffViewModel.memberDetail_Temp)"
+                                [ngClass]="'diff-table'" [tableStyle]="{ 'min-width': '50rem' }">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [class.changed]="rowData['hasChanged']" *ngIf="getCanShow(rowData)">
+                                        <td *ngFor="let col of columns">
+                                            <div
+                                                *ngIf="col.field !='Is Temp' || col.field !='Is Submitted'|| col.field !='Is New Member'|| col.field !='Member Id'">
+
+                                                <div *ngIf="col.field=='field' ; else otherfield">
+                                                    {{ splitCamelCaseLabel( rowData[col.field]) }}
+                                                </div>
+                                                <ng-template #otherfield>
+                                                    {{ rowData[col.field] }}
+                                                </ng-template>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12"
+                    *ngIf="(approvalformDetail.changeRequestCode =='MEMBER_WHOLE_DATA' || approvalformDetail.changeRequestCode =='MEMBER_ADDRESS') &&(MemberDiffViewModel.permanentAddress_Temp || MemberDiffViewModel.permanentAddress)">
+                    <h5 class="divhighligher" style="width: inherit;">நிரந்தர முகவரி மாற்றம் / Permanent Address change
+                    </h5>
+                    <div class="col-12 row ">
+                        <div class="card">
+                            <p-table [columns]="cols"
+                                [value]="generatePivotTable(MemberDiffViewModel.permanentAddress,MemberDiffViewModel.permanentAddress_Temp)"
+                                [ngClass]="'diff-table'" [tableStyle]="{ 'min-width': '50rem' }">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [class.changed]="rowData['hasChanged']" *ngIf="getCanShow(rowData)">
+                                        <td *ngFor="let col of columns">
+                                            <div
+                                                *ngIf="col.field !='Is Temp' || col.field !='Is Submitted'|| col.field !='Is New Member'">
+
+                                                <div *ngIf="col.field=='field' ; else otherfield">
+                                                    {{ splitCamelCaseLabel( rowData[col.field]) }}
+                                                </div>
+                                                <ng-template #otherfield>
+                                                    {{ rowData[col.field] }}
+                                                </ng-template>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12"
+                    *ngIf="(approvalformDetail.changeRequestCode =='MEMBER_WHOLE_DATA' || approvalformDetail.changeRequestCode =='MEMBER_ADDRESS') &&(MemberDiffViewModel.temproraryAddress || MemberDiffViewModel.permanentAddress_Temp)">
+                    <h5 class="divhighligher" style="width: inherit;">தற்காலிக முகவரி மாற்றம் / Temporary Address change
+                    </h5>
+                    <div class="col-12 row ">
+                        <div class="card">
+                            <p-table [columns]="cols"
+                                [value]="generatePivotTable(MemberDiffViewModel.temproraryAddress,MemberDiffViewModel.temproraryAddress_Temp)"
+                                [ngClass]="'diff-table'" [tableStyle]="{ 'min-width': '50rem' }">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [class.changed]="rowData['hasChanged']" *ngIf="getCanShow(rowData)">
+                                        <td *ngFor="let col of columns">
+                                            <div
+                                                *ngIf="col.field !='Is Temp' || col.field !='Is Submitted'|| col.field !='Is New Member'">
+
+                                                <div *ngIf="col.field=='field' ; else otherfield">
+                                                    {{ splitCamelCaseLabel( rowData[col.field]) }}
+                                                </div>
+                                                <ng-template #otherfield>
+                                                    {{ rowData[col.field] }}
+                                                </ng-template>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12"
+                    *ngIf="(approvalformDetail.changeRequestCode =='MEMBER_WHOLE_DATA' || approvalformDetail.changeRequestCode =='MEMBER_BANK') &&(MemberDiffViewModel.bankDetails || MemberDiffViewModel.bankDetails_Temp)">
+                    <h5 class="divhighligher" style="width: inherit;">வங்கி விவரம் மாற்றம் / Bank Detail Change change
+                    </h5>
+                    <div class="col-12 row ">
+                        <div class="card">
+                            <p-table [columns]="cols"
+                                [value]="generatePivotTable(MemberDiffViewModel.bankDetails,MemberDiffViewModel.bankDetails_Temp)"
+                                [ngClass]="'diff-table'" [tableStyle]="{ 'min-width': '50rem' }">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [class.changed]="rowData['hasChanged']" *ngIf="getCanShow(rowData)">
+                                        <td *ngFor="let col of columns">
+                                            <div
+                                                *ngIf="col.field !='Is Temp' || col.field !='Is Submitted'|| col.field !='Is New Member'">
+
+                                                <div *ngIf="col.field=='field' ; else otherfield">
+                                                    {{ splitCamelCaseLabel( rowData[col.field]) }}
+                                                </div>
+                                                <ng-template #otherfield>
+                                                    {{ rowData[col.field] }}
+                                                </ng-template>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12"
+                    *ngIf="(approvalformDetail.changeRequestCode =='MEMBER_WHOLE_DATA' || approvalformDetail.changeRequestCode =='MEMBER_FAMILY') &&(MemberDiffViewModel.familyMembersWithEducation || MemberDiffViewModel.familyMembersWithEducation_Temp)">
+                    <h5 class="divhighligher" style="width: inherit;">குடும்ப உறுப்பினர் மாற்றம் / Family Member Change
+                    </h5>
+                    <div class="col-12 row " *ngFor="let item of MemberDiffViewModel.familyMembersWithEducation_Temp">
+                        <h6>{{item.name}}</h6>
+                        <div class="card">
+                            <p-table [columns]="cols" [value]="generatePivotTableColms(item)" [ngClass]="'diff-table'"
+                                [tableStyle]="{ 'min-width': '50rem' }">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [class.changed]="rowData['hasChanged']" *ngIf="getCanShow(rowData)">
+                                        <td *ngFor="let col of columns">
+                                            <div
+                                                *ngIf="col.field !='Is Temp' || col.field !='Is Submitted'|| col.field !='Is New Member'">
+
+                                                <div *ngIf="col.field=='field' ; else otherfield">
+                                                    {{ splitCamelCaseLabel( rowData[col.field]) }}
+                                                </div>
+                                                <ng-template #otherfield>
+                                                    {{ rowData[col.field] }}
+                                                </ng-template>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12"
+                    *ngIf="(approvalformDetail.changeRequestCode =='MEMBER_WHOLE_DATA' || approvalformDetail.changeRequestCode =='MEMBER_DOCUMENT') && (MemberDiffViewModel.memberDocuments || MemberDiffViewModel.memberDocuments_Temp)">
+                    <h5 class="divhighligher" style="width: inherit;">ஆவணங்கள் மாற்றம் / Document Change
+                    </h5>
+                    <div class="col-12 row " *ngFor="let item of MemberDiffViewModel.memberDocuments_Temp">
+                        <h6>{{item.documentCategory}}</h6>
+                        <div class="card">
+                            <p-table [columns]="cols" [value]="generatePivotTableColmsforDocument(item)"
+                                [ngClass]="'diff-table'" [tableStyle]="{ 'min-width': '50rem' }">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            <div *ngIf="col.field == 'newValue'">
+                                                {{col.header}}
+                                                <button type="button" style="background-color: aliceblue;"
+                                                    *ngIf="item.originalFileName" pButton pRipple icon="pi pi-download"
+                                                    (click)="downloadFile(item.id,item.originalFileName)"
+                                                    class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                    title="Delete"></button>
+                                            </div>
+                                            <div *ngIf="col.field != 'newValue'">
+                                                {{col.header}}
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [class.changed]="rowData['hasChanged']" *ngIf="getCanShow(rowData)">
+                                        <td *ngFor="let col of columns">
+                                            <div
+                                                *ngIf="col.field !='Is Temp' || col.field !='Is Submitted'|| col.field !='Is New Member'">
+
+                                                <div *ngIf="col.field=='field' ; else otherfield">
+                                                    {{ splitCamelCaseLabel( rowData[col.field]) }}
+                                                </div>
+                                                <ng-template #otherfield>
+                                                    {{ rowData[col.field] }}
+                                                </ng-template>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                    <h5 class="divhighligher" style="width: inherit;">கூடுதல் ஆவணங்கள் மாற்றம் / Additional Document
+                        Change
+                    </h5>
+                    <div class="col-12 row " *ngFor="let item of MemberDiffViewModel.memberNonMandatoryDocuments_Temp">
+                        <h6>{{item.documentCategory}}</h6>
+                        <div class="card">
+                            <p-table [columns]="cols" [value]="generatePivotTableColmsforDocumentNM(item)"
+                                [ngClass]="'diff-table'" [tableStyle]="{ 'min-width': '50rem' }">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns">
+                                            <div *ngIf="col.field == 'newValue'">
+                                                {{col.header}}
+                                                <button type="button" style="background-color: aliceblue;"
+                                                    *ngIf="item.originalFileName" pButton pRipple icon="pi pi-download"
+                                                    (click)="downloadFile(item.id,item.originalFileName)"
+                                                    class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                                                    title="Delete"></button>
+                                            </div>
+                                            <div *ngIf="col.field != 'newValue'">
+                                                {{col.header}}
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr [class.changed]="rowData['hasChanged']" *ngIf="getCanShow(rowData)">
+                                        <td *ngFor="let col of columns">
+                                            <div
+                                                *ngIf="col.field !='Is Temp' || col.field !='Is Submitted'|| col.field !='Is New Member'">
+
+                                                <div *ngIf="col.field=='field' ; else otherfield">
+                                                    {{ splitCamelCaseLabel( rowData[col.field]) }}
+                                                </div>
+                                                <ng-template #otherfield>
+                                                    {{ rowData[col.field] }}
+                                                </ng-template>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card p-fluid" style="padding: 20px 20px 20px 20px;background-color: #e6e7ff;"
+        *ngIf="approvalformDetail && approvalformDetail.approvalHistory">
+        <div class="p-formgrid grid ">
+            <div class="col-12">
+                <h5 class="divhighligher">Approval Comments</h5>
+                <div class="col-12  row ">
+                    <div class="card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%">S.No</th>
+                                    <th style="width: 5%">Status</th>
+                                    <th style="width: 10%">Status From </th>
+                                    <th style="width: 10%">Status To</th>
+                                    <th style="width: 10%">Approval Comments</th>
+                                    <th style="width: 15%">Reason</th>
+                                    <th style="width: 15%">Approved By/Date</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="approvalformDetail.approvalHistory.length>0; else norecwords">
+                                <tr *ngFor="let itemrow of approvalformDetail.approvalHistory ; let i=index;let l=last">
+                                    <td>{{i+1}}</td>
+                                    <td>{{itemrow.status}}</td>
+                                    <td>{{itemrow.fromRoleName}}</td>
+                                    <td>{{itemrow.fromRoleName}}</td>
+                                    <td>{{itemrow.toRoleName}}</td>
+                                    <td>{{itemrow.comment}} </td>
+                                    <td>{{itemrow.reason}}</td>
+                                    <td>{{itemrow.approvedByName}}<br /> ({{dcwt(itemrow.createdOn)}})</td>
+                                </tr>
+                            </tbody>
+                            <ng-template #norecwords>
+                                <p style="padding-top: 20px;">No records</p>
+                            </ng-template>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3" *ngIf="MemberDiffViewModel">
+        <div class="card">
+            <h5>Approval Form</h5>
+            <form [formGroup]="approvalForm" (ngSubmit)="submit()" class="col-12">
+                <div class=" p-fluid">
+                    <div class="flex grid formgrid">
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="status">Status</label>
+                            <input pInputText formControlName="status" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('status')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="date">Date</label>
+                            <input pInputText formControlName="date" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('date')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="name">Name</label>
+                            <input pInputText formControlName="name" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('name')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="jobTitle">Role</label>
+                            <input pInputText formControlName="jobTitle" [readOnly]="true" type="text" />
+                            <app-error-msg [control]="approvalForm.get('jobTitle')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="dob">Approve/ Reject Status</label>
+                            <p-dropdown [options]="approvalformDetail.statusList" optionLabel="text" optionValue="value"
+                                (ngModelChange)="changeApproveStatus()" placeholder="Select a status"
+                                formControlName="approvalRejectedstatus" [showClear]="
+                            true"></p-dropdown>
+                            <app-error-msg [control]="approvalForm.get('approvalRejectedstatus')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6" *ngIf="canshowreason">
+                            <label htmlFor="reason">Reason</label>
+                            <p-dropdown [options]="approvalformDetail?.reasonList" optionLabel="text" optionValue="text"
+                                placeholder="Select a reason" formControlName="reason" [showClear]="
+                            true"></p-dropdown>
+                            <app-error-msg [control]="approvalForm.get('reason')"></app-error-msg>
+                        </div>
+                        <div class="field  col-12  md:col-6  lg:col-6">
+                            <label htmlFor="comments">Comments</label>
+                            <input pInputText formControlName="comments" type="text" />
+                            <app-error-msg [control]="approvalForm.get('comments')"></app-error-msg>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="flex gap-3 mt-1" style="justify-content: end;">
+                    <p-button label="Back" icon="pi pi-arrow-left" class="p-button-secondary" severity="secondary"
+                        (onClick)="back()" />
+                    <p-button label="Submit" type="submit" />
+                    <p-button label="Cancel" class="p-button-secondary" />
+                </div>
+            </form>
+        </div>
+        <p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog>
+    </div>
+</div>

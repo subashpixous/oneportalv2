@@ -1,0 +1,55 @@
+::ng-deep .p-fileupload-buttonbar> .p-button
+{
+    width: auto;
+}
+.declarDiv{
+  width: 100%;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  h3{
+    
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+  }
+}
+.divhighligher{
+  
+  background-color: #bec0fd;
+  padding: 10px;
+  border-radius: 5px;
+}.chip {
+  background-color: #f3f3f3;
+  color: #000000;
+  padding: 0px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  color: #ccc;
+}
+.chip-container {
+  display: flex;
+  gap: 10px;
+}
+
+.tableheadererrormsg{
+  font-weight: 400;
+  color: #ff0052;
+}

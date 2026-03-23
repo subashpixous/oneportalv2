@@ -1,0 +1,24 @@
+<div class="card noborderRad">
+    <div class="grid formgrid">
+        <div class="col-12 lg:col-9 md:col-9 ">
+            <h4>{{title}}</h4>
+        </div>
+        <div class=" col mb-2">
+            <button pButton pRipple label="Back" class="back-btn" [style]="{'float': 'right'}"
+                icon="pi pi-arrow-left" (click)="back()"></button>
+            <button pButton pRipple printTitle="Application" [closeWindow]="false" [openNewTab]="true"
+                styleSheetFile="assets/printcss/printstylesteet.css" [style]="{'float': 'right', 'margin-right':'10px'}"
+                [useExistingCss]="true" type="button" label="Print" ngxPrint printSectionId="dwemo"
+                class="print-btn"></button>
+        </div>
+    </div>
+    <div class="mb-3">
+        <app-mem-scheme-view [schemeDetails]="schemeDetails" [memberDetails]="memberDetail"></app-mem-scheme-view>
+    </div>
+    <div style="display:none;">
+        <div class="mb-3" id="dwemo">
+            <app-mem-scheme-view-print [schemeDetails]="schemeDetails"
+                [memberDetails]="memberDetail"></app-mem-scheme-view-print>
+        </div>
+    </div>
+</div>

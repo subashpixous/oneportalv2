@@ -1,0 +1,57 @@
+.card {
+  background-color: #333;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s;
+}
+
+.active-card {
+  background-color: #0066cc !important; // active highlight
+}
+.inactive-card{
+  background-color: rgb(115 186 255) !important;
+  border-radius: 8px;
+}
+.totcntDivIcons i {
+  font-size: 20px;
+}
+
+.totcntDivSmall {
+  font-size: 14px;
+  color: #ddd;
+}
+
+.totcntDiv {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+.active-card {
+  background-color: #0066cc;
+  border-radius: 8px;
+}
+
+.totcntDivIcons i {
+  font-size: 18px;
+  color: white;
+}
+.totcntDivIcons {
+  font-size: 20px;  
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.totcntDivSmall {
+  font-size: 14px;
+  color: white;
+}
+
+.active-card {
+  background-color: #0066cc;
+  border-radius: 8px;
+}
+.cardlist{
+  cursor: pointer; margin-top: 5px;
+}

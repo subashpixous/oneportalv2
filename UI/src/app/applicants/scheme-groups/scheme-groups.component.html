@@ -1,0 +1,57 @@
+<div class="flex justify-content-between" style="background-color: #E5FFFE;padding: 8px;">
+    <div class="flex align-items-center  mr-4">
+        <p class="fw-bold">Scheme Groups</p>
+    </div>
+    <div class="flex align-items-center  mr-4">
+        <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+        <p-button *ngIf="isLoggedin"
+            [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+            label="Logout" (onClick)="Logout()" />
+    </div>
+</div>
+<div class="flex justify-content-center mt-4 mb-4 flex-wrap ">
+    <div class="parentDiv m-3" *ngFor="let item of configurationList">
+        <div class="circle" (click)="movetoSchemeList(item.id)">
+            <img [src]="geturl(item.groupImage)" class="img-responsive imgsize">
+        </div>
+        <div class="groupinfo" (click)="movetoSchemeList(item.id)">
+            <h6 class="text-center ss  fw-bold">{{item.groupNameTamil}}<br /> {{item.groupName}} </h6>
+        </div>
+
+    </div>
+</div>
+<div class="flex mb-2 imagediv justify-content-center">
+    <p-button severity="secondary" styleClass="bcbtn" (onClick)="bckClick()" label="Back" />
+</div>
+<p-dialog header="Schemes" [modal]="true" [(visible)]="visible" [style]="{width: '60vw' }" [maximizable]="true"
+    [draggable]="false">
+    <div class="mb-3  ml-3 mt-4">
+        <div class="row align-items-center" *ngFor="let item of schemeList" [pTooltip]="item.description"
+            [tooltipPosition]="'top'" [tooltipStyleClass]="'primary'">
+            <div class="col-12  md:col-1  lg:col-1 circlew">
+                <img src="../../../assets/bannerImages/genscheme.png" class="img-responsive imgssize">
+            </div>
+            <div class="col-12  md:col-8  lg:col-8">
+                <h5 class="text-left ss  fw-bold">{{item.schemeNameTamil}} / <br /> {{item.schemeNameEnglish}}</h5>
+            </div>
+            <div class="col-12  md:col-3  lg:col-3" *ngIf="isLoggedin">
+                <p-button [disabled]="!item.isApplicable"
+                    [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+                    [label]="item.isApplicable? 'Apply Now':'Not Applicable'" (onClick)="movetosc(item.schemeId)" />
+            </div>
+            <div class="col-12  md:col-3  lg:col-3" *ngIf="!isLoggedin">
+                <p-button
+                    [style]="{ 'border-radius':'18px; !important', 'padding':'5px 15px','margin-left':'10px','background': 'linear-gradient(103.06deg, #034772 22.83%, #2286E3 90.87%)'}"
+                    [label]="'Apply Now'" (onClick)="movetosc(item.schemeId)" />
+            </div>
+        </div>
+    </div>
+</p-dialog>
+<p-confirmDialog [style]="{width: '30vw'}" [rejectVisible]="false" [acceptLabel]="'Ok'"></p-confirmDialog>
+
+<p-dialog header="Login" [modal]="true" [(visible)]="loginvisible" [style]="{width: '30vw' }" [maximizable]="true"
+    [draggable]="false">
+    <app-login-popup (cancelPopup)="loginvisible=!loginvisible" [navigationpage]="navigationpage"
+        [isVisible]="loginvisible"></app-login-popup>
+
+</p-dialog>

@@ -1,0 +1,266 @@
+<!-- <form [formGroup]="memDocumentsForm" class="col-12">
+  <div class="card p-fluid" style="padding-bottom: 10px;">
+    <fieldset [disabled]="false">
+      <div class="p-formgrid grid ">
+        <div class="outlayerdiv" style="width: 100%;">
+          <div class="col-12 flex md:col-12  lg:col-12" style="flex-wrap: wrap;overflow-x: auto;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th> வ.எண் / S.No</th>
+                  <th style="min-width: 200px">
+                    ஆவண வகை / Document Category
+                  </th> -->
+                  <!-- <th style="min-width: 100px">
+                                        ஆவண வகை / Document Type
+                                        <br>
+                                        <span *ngIf="documentTypeErrorMsg"
+                                            class="tableheadererrormsg">{{documentTypeErrorMsg}}</span>
+                                    </th> -->
+                  <!-- <th> கோப்பு பதிவேற்றம் / File Upload
+                    <br>
+                    <span *ngIf="fileUploadErrorMsg" class="tableheadererrormsg">{{fileUploadErrorMsg}}</span>
+                  </th>
+                  <th> செயல் / Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody formArrayName="documents"> -->
+                <!-- <ng-container *ngFor="let itemrow of documentsList; let i = index; let l = last"> -->
+                   <!-- <ng-container *ngFor="let itemrow of documentsFormArray.controls; let i = index"> -->
+
+                  <!-- <tr *ngFor="let itemrow of documentsList; let i=index;let l=last" [formGroupName]="i"> -->
+                  <!-- <tr [formGroupName]="i" *ngIf="!(hideAadhaar && isAadhaarDocument(itemrow))">
+
+                    <td>{{i+1}} </td>
+                    <td>{{itemrow.get('documentCategory')?.value}}<span *ngIf="itemrow.get('isRequired')?.value == true"
+                        class="tableheadererrormsg">*</span>
+                    </td> -->
+                    <!-- <td><p-dropdown [options]="itemrow.get('acceptedDocumentList')?.value"
+                                            optionLabel="text" optionValue="value" appendTo="body"
+                                            formControlName="acceptedDocumentTypeId"
+                                            placeholder="Select a document type" [showClear]="true"></p-dropdown>
+                                    </td> -->
+                    <!-- <td>
+                      <p-fileUpload *ngIf="!itemrow.get('originalFileName')?.value" mode="basic" chooseLabel="Upload"
+                        class="" [disabled]="!itemrow.get('acceptedDocumentTypeId')?.value" chooseIcon="pi pi-upload"
+                        [maxFileSize]="2000000" [auto]="true" [customUpload]="true" accept=".pdf"
+                        (uploadHandler)="onSelectDocumentFile($event, itemrow.get('id')?.value)" />
+                      <p *ngIf="itemrow.get('originalFileName')?.value">
+                        {{itemrow.get('originalFileName')?.value}}
+                      </p>
+                    </td>
+                    <td>
+                      <button type="button" style="background-color: aliceblue;"
+                        *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple icon="pi pi-download"
+                        (click)="downloadFile(itemrow.get('id')?.value,itemrow.get('originalFileName')?.value)"
+                        class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                        title="Download"></button>
+
+                      <button type="button" style="background-color: aliceblue;"
+                        *ngIf="itemrow.get('originalFileName')?.value" pButton pRipple icon="pi pi-times"
+                        (click)="removeFile(itemrow.get('id')?.value)"
+                        class=" mr-2 p-element p-ripple p-button p-button p-button-outlined p-button p-component p-button"
+                        title="Delete"></button>
+                    </td>
+                  </tr>
+                  </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</form> -->
+      <div class="figma-grey-header">
+        ஆவணங்கள் / Documents Details
+      </div>
+<form [formGroup]="memDocumentsForm" class="documents-wrapper">
+<div class="upload-note">
+  <i class="pi pi-book note-icon "></i>
+  <span >
+    <b class="note-text">NOTE:</b>  அதிகபட்சம் 2 MB அளவு கொண்ட ஆவணத்தை பதிவேற்றவும் / Upload the document with a file size up to 2 MB
+  </span>
+</div>
+  <div formArrayName="documents">
+
+    <div
+      class="document-section-container"
+      *ngFor="let itemrow of documentsFormArray.controls; let i = index"
+      [formGroupName]="i"
+    >
+
+      <!-- Grey Header -->
+
+
+      <!-- Content Area -->
+      <div class="figma-doc-content-area">
+
+        <div class="doc-card-wrapper">
+
+          <!-- ================= LEFT SIDE ================= -->
+          <!-- ================= LEFT SIDE ================= -->
+<div class="doc-ref-section">
+
+  <p class="doc-title-text">
+    சான்று ஆவணப் படம் /
+    Reference Document Image
+  </p>
+
+  <div class="ref-image-dashed-box">
+
+    <!-- AFTER UPLOAD -->
+ <!-- AFTER UPLOAD -->
+<ng-container *ngIf="itemrow.get('originalFileName')?.value; else referenceImages">
+
+  <!-- IMAGE -->
+  <!-- <img
+    *ngIf="isImage(itemrow.get('originalFileName')?.value)"
+    [src]="itemrow.get('filePath')?.value"
+    class="doc-img full-preview"
+  /> -->
+<img
+  *ngIf="isImage(itemrow.get('originalFileName')?.value)"
+  [src]="getImageSafeUrl(itemrow.get('savedFileName')?.value)"
+  class="doc-img full-preview clickable"
+(click)="openPreview(itemrow.value)"/>
+
+  <!-- PDF -->
+  <div
+    *ngIf="isPdf(itemrow.get('originalFileName')?.value)"
+    class="pdf-preview-box"
+      class="pdf-preview-box clickable"
+ (click)="openPreview(itemrow.value)"
+>
+    <i class="pi pi-file-pdf pdf-icon"></i>
+    <span>PDF</span>
+  </div>
+
+</ng-container>
+
+    <!-- BEFORE UPLOAD -->
+    <ng-template #referenceImages>
+      <img src="assets/worker-reference-image.png" class="doc-img">
+      <img src="assets/worker-reference-second.jpg" class="doc-img">
+    </ng-template>
+
+  </div>
+</div>
+
+          <!-- ================= RIGHT SIDE ================= -->
+          <div class="doc-upload-section">
+
+            <p class="doc-title-text">
+              {{ itemrow.get('documentCategory')?.value }}
+              <span *ngIf="isRequired"
+                class="required-star">*</span>
+            </p>
+
+            <div class="upload-dashed-box">
+
+              <!-- If NOT Uploaded -->
+              <ng-container *ngIf="!itemrow.get('originalFileName')?.value">
+
+                <i class="pi pi-cloud-upload cloud-icon"></i>
+
+                <p class="drag-drop-text">
+                  Drag & drop files or
+                  <span class="browse-link">
+                    Browse
+
+                    <p-fileUpload
+                     #fileUploadRef 
+                      mode="basic"
+                      chooseLabel=""
+                      class="invisible-upload"
+                      [auto]="true"
+                      [customUpload]="true"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                    
+                      (uploadHandler)="onSelectDocumentFile($event, itemrow.get('id')?.value,fileUploadRef)"
+                    >
+                    </p-fileUpload>
+
+                  </span>
+                </p>
+    <small *ngIf="isInvalid(i, 'originalFileName')" class="error-msg">
+  File is required.
+</small>
+                <p class="supported-formats-text">
+                  Supported formats: JPEG, PNG, PDF
+                </p>
+
+              </ng-container>
+
+              <!-- If Uploaded -->
+              <ng-container *ngIf="itemrow.get('originalFileName')?.value">
+
+                <p class="uploaded-file-name">
+                  {{ itemrow.get('originalFileName')?.value }}
+                </p>
+
+                <div class="upload-actions">
+
+                  <button
+                    pButton
+                    icon="pi pi-download"
+                    class="action-btn success-btn"
+                    (click)="downloadFile(itemrow.get('id')?.value,
+                    itemrow.get('originalFileName')?.value)">
+                  </button>
+
+                  <button
+                    pButton
+                    icon="pi pi-times"
+                    class="action-btn danger-btn"
+                    (click)="removeFile(itemrow.get('id')?.value)">
+                  </button>
+
+                </div>
+
+              </ng-container>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</form>
+
+<p-dialog
+  [(visible)]="showPreview"
+  [modal]="true"
+  [style]="{ width: '70vw' }"
+  header="Document Preview"
+>
+
+
+  <div *ngIf="loadingPreview" style="text-align:center; padding:20px;">
+    <i class="pi pi-spin pi-spinner" style="font-size: 2rem;"></i>
+    <p>Loading document...</p>
+  </div>
+
+  <!-- PDF -->
+  <iframe
+    *ngIf="previewType === 'pdf' && !loadingPreview"
+    [src]="previewUrl"
+    width="100%"
+    height="600px"
+  ></iframe>
+
+  <!-- IMAGE -->
+  <img
+    *ngIf="previewType === 'image'"
+    [src]="previewUrl"
+    style="width: 100%; max-height: 75vh; object-fit: contain;"
+  />
+
+</p-dialog>

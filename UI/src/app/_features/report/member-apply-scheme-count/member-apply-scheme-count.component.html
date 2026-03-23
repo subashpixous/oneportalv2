@@ -1,0 +1,85 @@
+<div class="card noborderRad p-3">
+  <div class="grid formgrid mb-3">
+    <div class="col-12 lg:col-4 md:col-4">
+      <h4>{{ title }}</h4>
+    </div>
+  </div>
+
+  <div class="p-fluid" style="padding: 0">
+    <div class="p-formgrid grid" style="align-items: end">
+      <!-- District Filter -->
+      <div class="col-12 lg:col-3 md:col-3">
+        <p-multiSelect
+          id="district"
+          [options]="districts"
+          optionLabel="label"
+          optionValue="value"
+          [style]="{ width: '100%' }"
+          placeholder="Select District(s)"
+          [showClear]="true"
+          [(ngModel)]="selectedDistricts"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Scheme Name Filter -->
+      <div class="col-12 lg:col-3 md:col-3">
+        <p-multiSelect
+          id="scheme"
+          [options]="schemes"
+          optionLabel="label"
+          optionValue="value"
+          [style]="{ width: '100%' }"
+          placeholder="Select Scheme(s)"
+          [showClear]="true"
+          [(ngModel)]="selectedSchemes"
+        ></p-multiSelect>
+      </div>
+
+      <div class="col-12 lg:col-2 md:col-2">
+        <button
+          pButton
+          pRipple
+          class="p-button-secondary"
+          icon="pi pi-arrow-right"
+          (click)="generate()"
+        ></button>
+        <p-button
+          icon="pi pi-times "
+          [outlined]="true"
+          (click)="clearFilter()"
+          [style]="{ 'margin-left': '10px' }"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 mt-3" *ngIf="filteredReports.length">
+    <app-datatable
+      [records]="filteredReports"
+      [cols]="cols"
+      [rows]="rows"
+      [total]="totalRecords"
+      [fileName]="'Member_Scheme_Report'"
+      [defaultSortField]="defaultSortField"
+      [defaultSortOrder]="defaultSortOrder"
+      [actions]="[]"
+      [searchableColumns]="searchableColumns"
+      [hasActiveInactive]="false"
+      [canShowAction]="false"
+      [canshowExport]="true"
+      (changefilter)="changefilter($event)"
+      (invokeAction)="actionInvoked($event)"
+    >
+      <ng-template let-row="rowData" let-col="col">
+        <span
+          [ngClass]="{
+            'highlight-cell': col.highlight && row[col.field] > 0,
+            'total-row': row.district === 'Total'
+          }"
+        >
+          {{ row[col.field] }}
+        </span>
+      </ng-template>
+    </app-datatable>
+  </div>
+</div>

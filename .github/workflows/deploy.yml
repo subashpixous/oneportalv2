@@ -1,4 +1,4 @@
-name: Deploy
+name: Full CI/CD Pipeline
 
 on:
 push:
@@ -41,3 +41,4 @@ steps:
         docker pull subashpixous/oneportalv2-ui:latest
         docker-compose down
         docker-compose up -d
+

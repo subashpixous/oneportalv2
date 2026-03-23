@@ -21,13 +21,13 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       # 🐳 Build & Push API
-      - name: Build API Image
+      - name: Build & Push API
         run: |
           docker build -t subashpixous/oneportalv2-api:latest ./API
           docker push subashpixous/oneportalv2-api:latest
 
       # 🐳 Build & Push UI
-      - name: Build UI Image
+      - name: Build & Push UI
         run: |
           docker build -t subashpixous/oneportalv2-ui:latest ./UI
           docker push subashpixous/oneportalv2-ui:latest
@@ -49,8 +49,14 @@ jobs:
             echo "🛑 Stop old containers..."
             docker-compose down || true
 
-            echo "🚀 Start new containers..."
-            docker-compose up -d --build
+            echo "🧹 Remove unused images (cleanup)..."
+            docker image prune -af || true
 
-            echo "✅ Deployment completed!"
+            echo "🚀 Start new containers..."
+            docker-compose up -d
+
+            echo "⏳ Waiting for containers..."
+            sleep 10
+
+            echo "🔍 Running containers:"
             docker ps

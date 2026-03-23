@@ -14,7 +14,7 @@ jobs:
 deploy:
 runs-on: ubuntu-latest
 
-```
+
 steps:
 - name: Checkout
   uses: actions/checkout@v4
@@ -47,4 +47,4 @@ steps:
       docker pull $DOCKER_HUB_USERNAME/$UI_IMAGE:latest
       docker-compose down
       docker-compose up -d
-```
+
